@@ -162,26 +162,3 @@ if (!message.author.bot && message.content.toLowerCase().startsWith("flw")) {
 });
 
 bot.login(process.env.token);
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
