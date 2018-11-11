@@ -1,8 +1,7 @@
-var recadopraessesfdps = [
+const recadopraessesfdps = [
     `<a:mention:500823853971537951> ${message.author}, ta me mencionando pq filho da puta?`, 
     `<a:mention:500823853971537951> ${message.author}, porra tava quase dormindo e você me menciona?`
-            ];
-
+];
 
 module.exports.run = function(message) {
     if (message.author.bot || message.channel.type === "dm") return;
