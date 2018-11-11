@@ -1,3 +1,4 @@
+const { RichEmbed } = require('discord.js');
 const botconfig = require("../botconfig.json");
 module.exports.run = function() {
     // this é o atual Object Global
@@ -18,7 +19,7 @@ module.exports.run = function() {
     console.log("Bot iniciado com sucesso!");
     console.log('Status carregado com sucesso!');
 
-    let embed = new Discord.RichEmbed()
+    let embed = new RichEmbed()
         .setColor("#d80abd")
         .setTitle("Inicialização do bot...")
         .setThumbnail(this.user.displayAvatarURL)
