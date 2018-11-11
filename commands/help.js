@@ -2,61 +2,43 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-    let imgBot = bot.user.avatarURL;
-    let embedinicial = new Discord.RichEmbed()
-        .setTitle("Embed inicial")
-        .setDescription("teste2", "teste3")
-        .setThumbnail(imgBot)
-    let embedmoderation = new Discord.RichEmbed()
-        .setTitle("teste moderação")
-        .setDescription("teste2", "teste3")
-        .setThumbnail(imgBot)
-    let embedutilidades = new Discord.RichEmbed()
-        .setTitle("teste utilidades")
-        .setDescription("teste2", "teste3")
-        .setThumbnail(imgBot)
-    let embedentreteni = new Discord.RichEmbed()
-        .setTitle("teste entretenimento")
-        .setDescription("teste2", "teste3")
-        .setThumbnail(imgBot)
-    try {
-        message.react(":correto:505155063963058187");
-    let msg = await message.author.send(embedinicial)
-    message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
-        await msg.react("🕵")
-        await msg.react("🎣")
-        await msg.react("📜")
-        await msg.react("🔙")
+    // criando um Object com todas categorias
+    let categorias = Object.entries(bot.commands).reduce((o, [k, command]) => {
+        if (!o[command.category]) o[command.category] = {};
+        o[command.category][k] = command;
+        return o;
+    }, {});
 
-       const filter = (r, u) => (r.emoji.name === '📜', '🎣', '🔙', '🕵') && (u.id !== bot.user.id && u.id === message.author.id)
-       const collect = message.createReactionCollector(filter, { time: 60000 });
+    /*
+        embed = simples RicheEmbed
+        opcoes = JSON das opçoes das categorias
+    */
+    let embed = new Discord.RichEmbed()
+        .setTitle('Categorias')
+        .setThumbnail(bot.user.avatarURL);
+    let opcoes = require('../categorias.json');
 
-        collect.on("collect", async r => {
-            switch(r.emoji.name) {
-                
-                case '🕵':
-                message.edit(embedmoderation)
-                break;
-                case '🎣':
-                message.edit(embedentreteni)
-                break;
-                case '📜':
-                message.edit(embedutilidades)
-                break;
-                case '🔙':
-                message.edit(embedinicial)
-                break;
-                
-            }
-        })
+    // adicionando todas categorias 
+    embed.setDescription(Object.keys(categorias).map(nome => `${opcoes[nome].emoji} **${nome}** ${opcoes[nome].description}`));
+    
+    // enviando msg no privado
+    let msg = await message.author.send(embed);
+    for (const x in opcoes) 
+        await msg.react(opcoes[x].emoji);
+    
+    // msg avisando q foi enviado no pv
+    await message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
+    
+    const filter = (r, u) => r.me && (u.id === message.author.id)
+    const collect = message.createReactionCollector(filter, { time: 60000 });
 
-    } catch(e) {
-        message.channel.send(`Erro: ${message.author}, por favor ative sua DM para que eu possa enviar meus comandos.`)
-        message.react(':negado:505155029636874250')
-    }
-
+    collect.on("collect", async ({emoji}) => {
+        let categoria = Object.entries(opcoes).find(([nome, opt]) => opt.emoji === emoji.name);
+        if (categoria) {
+            let [nome, opcoes] = categoria;
+            embed.setDescription(opcoes.description);
+            embed.setTitle(nome);
+            embed.addField(Object.entries(categorias[nome]).map(([name, command]) => name + (command.description ? ' ' + command.description : '').join('\n ')));
+        } 
+    });
 }
-module.exports.help = {
-    name: "help"
-}
-
