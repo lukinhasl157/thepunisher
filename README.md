@@ -1,3 +1,3 @@
 # The Punisher
 
-QQ SEIS FIZERAM COM MEU BOT ;-;
+Coloca alguma coisa decente aqui lucas porra
