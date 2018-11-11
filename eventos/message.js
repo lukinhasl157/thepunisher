@@ -8,7 +8,7 @@ module.exports.run = function(message) {
         let command = this.commands.find((cmd, n) => cmd.aliases.includes(nome) || n === nome);
 
         if (command) {
-            commandfile.run(bot, message, args);
+            commandfile.run(this, message, args);
         }
     }
 
@@ -17,7 +17,7 @@ module.exports.run = function(message) {
         `<a:mention:500823853971537951> ${message.author}, porra tava quase dormindo e você me menciona?`
     ];
     
-    if (message.content.includes(`<@${bot.user.id}>`)) {
+    if (message.content.includes(`<@${this.user.id}>`)) {
         let msg = recadopraessesfdps[Math.floor(Math.random() * recadopraessesfdps.length)]
         message.channel.send(msg).then(fdp => fdp.delete(60000));
     }
