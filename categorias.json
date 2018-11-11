@@ -1,0 +1,6 @@
+{
+    "nome da categoria": {
+        "description": "descrição",
+        "emoji": "emoji que vai aparece no help na categoria"
+    }
+}
