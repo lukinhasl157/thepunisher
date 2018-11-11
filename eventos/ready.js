@@ -9,7 +9,7 @@ module.exports.run = function() {
         `Não sabe meus comandos? Digite ${botconfig.prefix}!comandos para receber minha lista de comandos!`
       ];
       
-        function setStatus() {
+        let setStatus = () => {
             let randomStatus = status[Math.floor(Math.random() * status.length)];
             this.user.setPresence({game:  {name: randomStatus, type: 'STREAMING', url: 'http://twitch.tv/thedoomsday27'}});
         }
