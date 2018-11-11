@@ -52,26 +52,3 @@ fs.readdir("./commands", (err, files) => {
 
 
 bot.login(process.env.token);
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
