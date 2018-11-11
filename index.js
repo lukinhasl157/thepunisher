@@ -25,6 +25,7 @@ fs.readdir("./commands", (err, files) => {
 
     jsfile.forEach((f, i) =>{
       let comando = require(`./commands/${f}`);
+      if (!comando.category) comando.category = "general";
       console.log(`${f} carregado com sucesso!`);
       bot.commands.set(f.replace(/.js/g, ''), comando);
     });
