@@ -1,6 +1,6 @@
 {
-    "nome da categoria": {
-        "description": "descrição",
-        "emoji": "emoji que vai aparece no help na categoria"
+    "general": {
+        "description": "comandos sem categorias",
+        "emoji": "<:think:499596179290456074>"
     }
 }

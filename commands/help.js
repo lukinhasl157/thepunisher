@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
     // enviando msg no privado
     let msg = await message.author.send(embed);
     for (const x in opcoes) 
-        await msg.react(opcoes[x].emoji);
+        if (opcoes[x].emoji) await msg.react(opcoes[x].emoji);
     
     // msg avisando q foi enviado no pv
     await message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
