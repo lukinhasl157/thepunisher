@@ -11,7 +11,7 @@ module.exports.run = function() {
       
         function setStatus() {
             let randomStatus = status[Math.floor(Math.random() * status.length)];
-            bothist.user.setPresence({game:  {name: randomStatus, type: 'STREAMING', url: 'http://twitch.tv/thedoomsday27'}});
+            this.user.setPresence({game:  {name: randomStatus, type: 'STREAMING', url: 'http://twitch.tv/thedoomsday27'}});
         }
       
     setInterval(() => setStatus(), 15000);
