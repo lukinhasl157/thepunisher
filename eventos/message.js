@@ -1,8 +1,3 @@
-const recadopraessesfdps = [
-    `<a:mention:500823853971537951> ${message.author}, ta me mencionando pq filho da puta?`, 
-    `<a:mention:500823853971537951> ${message.author}, porra tava quase dormindo e você me menciona?`
-];
-
 module.exports.run = function(message) {
     if (message.author.bot || message.channel.type === "dm") return;
 
@@ -16,7 +11,11 @@ module.exports.run = function(message) {
         }
     }
 
-
+    const recadopraessesfdps = [
+        `<a:mention:500823853971537951> ${message.author}, ta me mencionando pq filho da puta?`, 
+        `<a:mention:500823853971537951> ${message.author}, porra tava quase dormindo e você me menciona?`
+    ];
+    
     if (message.content.includes(`<@${bot.user.id}>`)) {
         let msg = recadopraessesfdps[Math.floor(Math.random() * recadopraessesfdps.length)]
         message.channel.send(msg).then(fdp => fdp.delete(60000));
