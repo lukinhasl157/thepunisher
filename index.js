@@ -14,40 +14,44 @@ let cdTime = 3;
 
 // GET COMMANDS
 fs.readdir("./commands", (err, files) => {
+  try{
+    if(err) console.log(err);
+    // filtrando arquivos com final js
+    let jsfile = files.filter(f => f.split(".").pop() === "js");
 
-  if(err) console.log(err);
-  // filtrando arquivos com final js
-  let jsfile = files.filter(f => f.split(".").pop() === "js");
+    if (jsfile.length === 0) {
+      return console.log("Não existe nenhum arquivo js na pasta commands");
+    }
 
-  if (jsfile.length === 0) {
-    return console.log("Não existe nenhum arquivo js na pasta commands");
+    jsfile.forEach((f, i) =>{
+      let comando = require(`./commands/${f}`);
+      console.log(`${f} carregado com sucesso!`);
+      bot.commands.set(f.replace(/.js/g, ''), comando);
+    });
+  } catch(Err) {
+    console.error(Err);
   }
-
-  jsfile.forEach((f, i) =>{
-    let comando = require(`./commands/${f}`);
-    console.log(`${f} carregado com sucesso!`);
-    bot.commands.set(f.replace(/.js/g, ''), comando);
-  });
-
 });
 
 // GET EVENTOS
 fs.readdir("./eventos", (err, files) => {
-
-  if(err) console.log(err);
+  try {
+    if(err) console.log(err);
   // filtrando arquivos com final js
-  let jsfile = files.filter(f => f.split(".").pop() === "js");
+    let jsfile = files.filter(f => f.split(".").pop() === "js");
 
-  if (jsfile.length === 0) {
-    return console.log("Não existe nenhum arquivo js na pasta eventos");
+    if (jsfile.length === 0) {
+      return console.log("Não existe nenhum arquivo js na pasta eventos");
+    }
+
+    jsfile.forEach((f, i) =>{
+      let evento = require(`./eventos/${f}`);
+      console.log(`${f} carregado com sucesso!`);
+      bot.on(f.replace(/.js/g, ''), evento.run);
+    });
+  } catch(Err) {
+    console.error(Err);
   }
-
-  jsfile.forEach((f, i) =>{
-    let evento = require(`./eventos/${f}`);
-    console.log(`${f} carregado com sucesso!`);
-    bot.on(f.replace(/.js/g, ''), evento.run);
-  });
-
 });
 
 

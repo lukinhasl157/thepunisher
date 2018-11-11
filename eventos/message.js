@@ -5,7 +5,7 @@ module.exports.run = function(message) {
     if (message.content.toLowerCase().startsWith(this.botconfig.prefix)) {
         let args = message.content.split(' ');
         let nome = args[0].slice(this.botconfig.prefix.length).toLowerCase();
-        let command = this.commands.find((cmd, n) => cmd.aliases.includes(nome) || n === nome);
+        let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
 
         if (command) {
             commandfile.run(this, message, args);
