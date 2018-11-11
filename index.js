@@ -32,7 +32,7 @@ fs.readdir("./commands", (err, files) => {
 });
 
 // GET EVENTOS
-fs.readdir("./commands", (err, files) => {
+fs.readdir("./eventos", (err, files) => {
 
   if(err) console.log(err);
   // filtrando arquivos com final js
