@@ -42,7 +42,10 @@ fs.readdir(config.path_commands, (err, arquivos) => {
 
     arquivosJS.forEach((arquivo) =>{
       let comando = require(`${config.path_commands}/${arquivo}`);
+      comando.usersCooldown = new Set();
       if (!comando.category) comando.category = "general";
+      if (!comando.cooldown) comando.cooldown = 3000 // 3s
+
       bot.commands.set(arquivo.replace(/.js/g, ''), comando);
     });
     console.log('-'.repeat(80))
@@ -70,7 +73,7 @@ fs.readdir(config.path_events, (err, arquivos) => {
       bot.on(arquivo.replace(/.js/g, ''), evento.run);
     });
     console.log('-'.repeat(80))
-    
+
   } catch(Err) {
     console.error(Err);
   }
