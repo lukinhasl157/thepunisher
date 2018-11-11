@@ -1,3 +1,4 @@
+const { RichEmbed } = require('discord.js');
 module.exports.run = function(message) {
     if (message.author.bot || message.channel.type === "dm") return;
 
@@ -29,7 +30,7 @@ module.exports.run = function(message) {
     if (message.guild && !message.member.hasPermission("ADMINISTRATOR")) {
         if (message.content.includes('https://discord.gg/')) {
             message.delete();
-            message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Você não pode divulgar link de servidores aqui! <:blockcustom:500306352695148546>`).setTimestamp().setFooter(`${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000"));
+            message.channel.send(new RichEmbed().setDescription(`${message.author} Você não pode divulgar link de servidores aqui! <:blockcustom:500306352695148546>`).setTimestamp().setFooter(`${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000"));
         }
     }
 
