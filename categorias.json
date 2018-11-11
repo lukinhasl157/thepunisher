@@ -1,6 +1,7 @@
 {
     "general": {
         "description": "comandos sem categorias",
-        "emoji": "💿"
+        "emoji": "💿",
+        "color": 15916565
     }
 }

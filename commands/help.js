@@ -3,23 +3,27 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
     try {
         // criando um Object com todas categorias
-        let categorias = Object.entries(bot.commands).reduce((o, [k, command]) => {
-            if (!o[command.category]) o[command.category] = {};
-            o[command.category][k] = command;
+        let categorias = bot.commands.reduce((o, comando, nome) => {
+            if (!o[comando.category]) o[comando.category] = {};
+            o[comando.category][nome] = comando;
             return o;
         }, {});
-
         /*
             embed = simples RicheEmbed
             opcoes = JSON das opçoes das categorias
         */
         let embed = new Discord.RichEmbed()
             .setTitle('Categorias')
-            .setThumbnail(bot.user.avatarURL);
+            .setThumbnail(bot.user.avatarURL)
+            .setColor('RANDOM');
         let opcoes = require('../categorias.json');
-        console.log(opcoes);
+        
         // adicionando todas categorias 
-        embed.setDescription(Object.keys(categorias).map(nome => `${opcoes[nome].emoji} **${nome}** ${opcoes[nome].description}`));
+        embed.setDescription(Object.keys(categorias)
+            .map((nome) =>
+             opcoes[nome] ?
+             (`${opcoes[nome].emoji ? opcoes[nome].emoji : ''} **${nome}** ${opcoes[nome].description ? opcoes[nome].description : ''}`) :
+             nome));
     
         // enviando msg no privado
         let msg = await message.author.send(embed);
@@ -30,15 +34,19 @@ module.exports.run = async (bot, message, args) => {
         await message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
     
         const filter = (r, u) => r.me && (u.id === message.author.id)
-        const collect = message.createReactionCollector(filter, { time: 60000 });
+        const collect = msg.createReactionCollector(filter, { time: 60000 });
 
         collect.on("collect", async ({emoji}) => {
+            
             let categoria = Object.entries(opcoes).find(([nome, opt]) => opt.emoji === emoji.name);
             if (categoria) {
                 let [nome, opcoes] = categoria;
-                embed.setDescription(opcoes.description);
-                embed.setTitle(nome);
-                embed.addField(Object.entries(categorias[nome]).map(([name, command]) => name + (command.description ? ' ' + command.description : '').join('\n ')));
+                let embed = new Discord.RichEmbed()
+                    .setDescription(opcoes.description)
+                    .setTitle(nome)
+                    .setColor(opcoes.color)
+                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => message.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '));
+                await msg.edit(embed);
             } 
         });
     }catch(err){

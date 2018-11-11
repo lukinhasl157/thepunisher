@@ -3,13 +3,14 @@ module.exports.run = function(message) {
     if (message.author.bot || message.channel.type === "dm") return;
 
     if (message.content.toLowerCase().startsWith(this.botconfig.prefix)) {
+        Object.defineProperty(message, 'prefix', { value: this.botconfig.prefix });
         let args = message.content.split(' ');
         let nome = args[0].slice(this.botconfig.prefix.length).toLowerCase();
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
-
+        
         if (command) {            
             Object.defineProperty(message, 'command', { value: command });    
-            command.run(this, message, args);
+            command.run(this, message, args.slice(1));
         }
     }
 
