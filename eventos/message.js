@@ -8,7 +8,7 @@ module.exports.run = function(message) {
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
 
         if (command) {
-            commandfile.run(this, message, args);
+            command.run(this, message, args);
         }
     }
 
