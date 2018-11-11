@@ -43,7 +43,7 @@ fs.readdir("./eventos", (err, files) => {
   }
 
   jsfile.forEach((f, i) =>{
-    let evento = require(`./commands/${f}`);
+    let evento = require(`./eventos/${f}`);
     console.log(`${f} carregado com sucesso!`);
     bot.on(f.replace(/.js/g), evento.run);
   });
