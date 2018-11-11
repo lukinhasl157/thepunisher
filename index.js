@@ -55,5 +55,12 @@ fs.readdir("./eventos", (err, files) => {
   }
 });
 
+let token;
+try {
 const CANARY = require('./token.json');
-bot.login(CANARY.TOKEN || process.env.token);
+token = CANARY.TOKEN;
+} catch (Err) {
+token = process.env.token;
+} finally {
+  bot.login(token);
+}
