@@ -28,7 +28,6 @@ Object.defineProperties(bot, {
 // Zuando o Lukas
 if (!config.path_commands) throw new Error("CARALHO LUKAS QUAL PASTA TA OS COMANDOS?");
 if (!config.path_events) throw new Error("CARALHO LUKAS QUAL PASTA TA OS EVENTOS?");
-
 // GET COMMANDS
 fs.readdir(config.path_commands, (err, arquivos) => {
   try{
@@ -55,7 +54,6 @@ fs.readdir(config.path_commands, (err, arquivos) => {
     console.error(Err);
   }
 });
-
 // GET EVENTOS
 fs.readdir(config.path_events, (err, arquivos) => {
   try {
@@ -78,8 +76,6 @@ fs.readdir(config.path_events, (err, arquivos) => {
     console.error(Err);
   }
 });
-
-
 // Login
 let token;
 try {

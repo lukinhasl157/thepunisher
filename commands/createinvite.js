@@ -1,7 +1,6 @@
+const Discord = require('discord.js');
 
-    const Discord = require('discord.js');
-
-    module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args) => {
 
     try {
     const invite = await message.channel.createInvite({maxAge: 0});

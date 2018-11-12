@@ -1,9 +1,12 @@
 const { RichEmbed } = require('discord.js');
+const botconfig = require("../botconfig.json");
 module.exports.run = function() {
+    // this é o atual Object Global
+    // nesse caso seria o bot pq vc vai chama essa função no evento Ready
     let status = [
         `para ${this.users.size} usuários.`,
-        `Está com dúvidas? Digite ${this.config.prefix}help para receber todas as minhas informações!`,
-        `Não sabe meus comandos? Digite ${this.config.prefix}!comandos para receber minha lista de comandos!`
+        `Está com dúvidas? Digite ${botconfig.prefix}help para receber todas as minhas informações!`,
+        `Não sabe meus comandos? Digite ${botconfig.prefix}comandos para receber minha lista de comandos!`
       ];
       
         let setStatus = () => {
@@ -13,7 +16,7 @@ module.exports.run = function() {
       
     setInterval(() => setStatus(), 15000);
       
-    console.log(this.user.tag + " iniciado com sucesso!");
+    console.log("Bot iniciado com sucesso!");
     console.log('Status carregado com sucesso!');
 
     let embed = new RichEmbed()
