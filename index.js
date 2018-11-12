@@ -1,12 +1,12 @@
 // MODULES
 const Discord = require("discord.js");
 const fs = require("fs");
-const botconfig = require("./botconfig.json");
+const config = require("./config.json");
 
 // BOT 
 const bot = new Discord.Client();
 Object.defineProperty(bot, 'commands', { value: new Discord.Collection() });
-Object.defineProperty(bot, 'botconfig', { value: botconfig });
+Object.defineProperty(bot, 'config', { value: config });
 
 
 
