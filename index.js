@@ -6,8 +6,7 @@ const config = require("./config.json");
 // BOT 
 const bot = new Discord.Client();
 
-// GG LUKAS
-// Definando variaveis dentro do bot
+// Definindo variaveis dentro do bot
 Object.defineProperties(bot, {
   "commands": {
     value: new Discord.Collection()
