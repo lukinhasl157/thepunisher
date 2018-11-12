@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports = {
+    run: async function (bot, message, args) {
     try {
         // criando um Object com todas categorias
         let categorias = bot.commands.reduce((o, comando, nome) => {
@@ -49,30 +50,14 @@ module.exports.run = async (bot, message, args) => {
                 await msg.edit(embed);
             } 
         });
-    }catch(err){
+    } catch(err) {
         message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.")
-    } bot.user.channels.get
-}
-
-module.exports = {
-    name: "ban",
-    aliases: ['banir', 'b'], // outras forma de executa o comando
-    category: "moderação", // categoria
-    description: "Banir um membro"
-}
-
-
-module.exports = {
-    run: async function(bot, message, args) { 
-
-        //code
-
-        return this.name}, // ban
-    aliases: ['banir', 'b'], // outras forma de executa o comando
-    category: "moderação", // categoria
-    description: "Banir um membro"
-
-    
     }
+
+        return this.name},
+        aliases: ['h', 'ajuda'],
+        category: "moderação", 
+        description: "Informações do bot"
+}
 
 
