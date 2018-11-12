@@ -9,7 +9,7 @@ module.exports.run = function(message) {
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
         
         if (command) {
-            if (command.usersCooldown.has(message.author.id)) return message.channel.send("coe caraio quer fude meu processador?").then(msg => msg.delete(30000));           
+            if (command.usersCooldown.has(message.author.id)) return message.channel.send("coe caraio quer fude meu processador?").then(msg => msg.delete(60000));           
             Object.defineProperty(message, 'command', { value: command });    
             command.run(this, message, args.slice(1));
             command.usersCooldown.add(message.author.id);
@@ -18,10 +18,9 @@ module.exports.run = function(message) {
             }, command.cooldown);
         }
     }
-
-    const recadopraessesfdps = [
-        `<a:mention:500823853971537951> ${message.author}, ta me mencionando pq filho da puta?`, 
-        `<a:mention:500823853971537951> ${message.author}, porra tava quase dormindo e você me menciona?`
+const recadopraessesfdps = [
+        `:mention: ${message.author}, ta me mencionando pq filho da puta?`, 
+        `:mention: ${message.author}, porra tava quase dormindo e você me menciona?`
     ];
 
     // açoes que não pode ser executadas junto com algum comando
@@ -40,7 +39,7 @@ module.exports.run = function(message) {
     if (message.guild && !message.member.hasPermission("ADMINISTRATOR")) {
         if (message.content.includes('https://discord.gg/')) {
             message.delete();
-            message.channel.send(new RichEmbed().setDescription(`${message.author} Você não pode divulgar link de servidores aqui! <:blockcustom:500306352695148546>`).setTimestamp().setFooter(`${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000"));
+            message.channel.send(new RichEmbed().setDescription(`${message.author} Você não pode divulgar link de servidores aqui! :blockcustom:`).setTimestamp().setFooter(`${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000"));
         }
     }
 
