@@ -19,8 +19,8 @@ module.exports.run = function(message) {
         }
     }
 const recadopraessesfdps = [
-        `:mention: ${message.author}, ta me mencionando pq filho da puta?`, 
-        `:mention: ${message.author}, porra tava quase dormindo e você me menciona?`
+        `<a:mention:500823853971537951> ${message.author}, ta me mencionando pq filho da puta?`, 
+        `<a:mention:500823853971537951> ${message.author}, porra tava quase dormindo e você me menciona?`
     ];
 
     // açoes que não pode ser executadas junto com algum comando
