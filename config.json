@@ -1,0 +1,5 @@
+{
+    "prefix": "t.",
+    "path_commands": "./commands",
+    "path_events": "./eventos"
+}
