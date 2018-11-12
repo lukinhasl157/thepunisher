@@ -8,9 +8,7 @@ const bot = new Discord.Client();
 Object.defineProperty(bot, 'commands', { value: new Discord.Collection() });
 Object.defineProperty(bot, 'botconfig', { value: botconfig });
 
-// sla praq isso
-let cooldown = new Set();
-let cdTime = 3;
+
 
 // GET COMMANDS
 fs.readdir("./commands", (err, files) => {
@@ -29,6 +27,11 @@ fs.readdir("./commands", (err, files) => {
       console.log(`${f} carregado com sucesso!`);
       bot.commands.set(f.replace(/.js/g, ''), comando);
     });
+
+    comando.usersCooldown = new Set();
+    if (!comando.category) comando.category = "general";
+    if (!comando.cooldown) comando.cooldown = 3000 // 3s
+
   } catch(Err) {
     console.error(Err);
   }

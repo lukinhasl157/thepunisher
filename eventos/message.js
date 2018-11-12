@@ -8,9 +8,14 @@ module.exports.run = function(message) {
         let nome = args[0].slice(this.botconfig.prefix.length).toLowerCase();
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
         
-        if (command) {            
+        if (command) {
+            if (command.usersCooldown.has(message.author.id)) return message.channel.send("coe caraio quer fude meu processador?");            
             Object.defineProperty(message, 'command', { value: command });    
             command.run(this, message, args.slice(1));
+            command.usersCooldown.add(message.author.id);
+            setTimeout(function() {
+                command.usersCooldown.delete(message.author.id);
+            }, command.cooldown);
         }
     }
 

@@ -3,5 +3,11 @@
         "description": "comandos sem categorias",
         "emoji": "💿",
         "color": 15916565
+    },
+
+    "moderation": {
+        "description": "comandos de moderação",
+        "emoji": "💿",
+        "color": 15916565
     }
 }

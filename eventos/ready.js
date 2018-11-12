@@ -6,7 +6,7 @@ module.exports.run = function() {
     let status = [
         `para ${this.users.size} usuários.`,
         `Está com dúvidas? Digite ${botconfig.prefix}help para receber todas as minhas informações!`,
-        `Não sabe meus comandos? Digite ${botconfig.prefix}!comandos para receber minha lista de comandos!`
+        `Não sabe meus comandos? Digite ${botconfig.prefix}comandos para receber minha lista de comandos!`
       ];
       
         let setStatus = () => {

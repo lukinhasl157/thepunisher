@@ -50,6 +50,29 @@ module.exports.run = async (bot, message, args) => {
             } 
         });
     }catch(err){
-        console.error(err);
-    }
+        message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.")
+    } bot.user.channels.get
 }
+
+module.exports = {
+    name: "ban",
+    aliases: ['banir', 'b'], // outras forma de executa o comando
+    category: "moderação", // categoria
+    description: "Banir um membro"
+}
+
+
+module.exports = {
+    run: async function(bot, message, args) { 
+
+        //code
+
+        return this.name}, // ban
+    aliases: ['banir', 'b'], // outras forma de executa o comando
+    category: "moderação", // categoria
+    description: "Banir um membro"
+
+    
+    }
+
+
