@@ -2,7 +2,7 @@ const { RichEmbed } = require('discord.js');
 module.exports.run = function(message) {
     if (message.author.bot || message.channel.type === "dm") return;
 
-    if (message.content.toLowerCase().startsWith(this.config.prefix)) {
+    if (message.content.toLowerCase().startsWith(this.botconfig.prefix)) {
         Object.defineProperty(message, 'prefix', { value: this.config.prefix });
         let args = message.content.split(' ');
         let nome = args[0].slice(this.config.prefix.length).toLowerCase();
