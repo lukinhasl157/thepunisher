@@ -9,7 +9,7 @@ module.exports.run = function(message) {
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
         
         if (command) {
-            if (command.usersCooldown.has(message.author.id)) return message.channel.send("coe caraio quer fude meu processador?");            
+            if (command.usersCooldown.has(message.author.id)) return message.channel.send("coe caraio quer fude meu processador?").then(msg => msg.delete(30000));           
             Object.defineProperty(message, 'command', { value: command });    
             command.run(this, message, args.slice(1));
             command.usersCooldown.add(message.author.id);
