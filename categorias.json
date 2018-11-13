@@ -7,19 +7,19 @@
 
     "Moderação": {
         "description": "Comandos de moderação",
-        "emoji": ":beginner:",
+        "emoji": "🔰",
         "color": 15916563
     },
 
     "Utilidades": {
         "description": "Comandos de utilidades",
-        "emoji": ":tools:",
+        "emoji": "🛠",
         "color": 15916561
     },
 
     "Informações": {
         "description": "Comandos sobre informações do bot",
-        "emoji": ":scroll:",
+        "emoji": "📜",
         "color": 15916562
     }
 }
