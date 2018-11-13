@@ -1,19 +1,25 @@
 {
     "general": {
-        "description": "comandos sem categorias",
+        "description": "Comandos sem categorias",
         "emoji": "💿",
-        "color": 15916565
+        "color": 15916568
     },
 
     "Moderação": {
-        "description": "comandos de moderação",
+        "description": "Comandos de moderação",
         "emoji": ":beginner:",
-        "color": 15916565
+        "color": 15916563
     },
 
     "Utilidades": {
-        "description": "comandos de moderação",
-        "emoji": "tools:",
-        "color": 15916565
+        "description": "Comandos de utilidades",
+        "emoji": ":tools:",
+        "color": 15916561
+    },
+
+    "Informações": {
+        "description": "Comandos sobre informações do bot",
+        "emoji": ":scroll:",
+        "color": 15916562
     }
 }
