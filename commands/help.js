@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 
 module.exports = {
     run: async function (bot, message, args) {
-    try {
         // criando um Object com todas categorias
         let categorias = bot.commands.reduce((o, comando, nome) => {
             if (!o[comando.category]) o[comando.category] = {};
@@ -26,7 +25,7 @@ module.exports = {
              (`${opcoes[nome].emoji ? opcoes[nome].emoji : ''} **${nome}** ${opcoes[nome].description ? opcoes[nome].description : ''}`) :
              nome));
     
-        // enviando msg no privado
+             try {
         let msg = await message.author.send(embed);
         for (const x in opcoes) 
         if (opcoes[x].emoji) await msg.react(opcoes[x].emoji);
