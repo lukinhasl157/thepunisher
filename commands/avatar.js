@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports = {
+  run: (bot, message, args) => {
 
     let member = message.guild.member(message.mentions.users.first() || bot.users.get(args[0]) || message.author);
     let mAvatar = member.user.displayAvatarURL;
@@ -14,8 +15,9 @@ module.exports.run = async (bot, message, args) => {
       .setTimestamp()
       message.channel.send(embed);
   
-    }
-
-    module.exports.help = { 
-      name: "avatar"
+    },
+      
+      aliases: ["av"],
+      category: "avatar",
+      description: "Utilidades"
     }

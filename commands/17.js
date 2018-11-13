@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports = {
+    run: (bot, message, args) => {
     let gifs = ['https://thumbs.gfycat.com/FilthyBrightAzurevase-size_restricted.gif']
     let random = Math.round(Math.random() * gifs.length);
     const embed = new Discord.RichEmbed()
@@ -11,4 +12,8 @@ module.exports.run = async (bot, message, args) => {
         .setColor("RANDOM");
     message.channel.send(embed);
   
+},
+    aliases: ['bolsonaro', 'presidente'],
+    category: "Entreterimento",
+    description: "Gif do bolsonaro"
 }

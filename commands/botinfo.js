@@ -3,7 +3,8 @@ const moment = require("moment");
 require("moment-duration-format");
 moment.locale("pt-BR");
     
-module.exports.run = async (bot, message, args) => {
+module.exports = {
+    run: async function (bot, message, args) {
 
     let duration = moment.duration(bot.uptime).format('D [d], H [h], m [m], s [s]');
     const embed = new Discord.RichEmbed()
@@ -16,8 +17,9 @@ module.exports.run = async (bot, message, args) => {
     .setTimestamp()
     .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
     message.channel.send(embed);
-    }
 
-module.exports.help = {
-        name: "botinfo"
-}
+        return this.name},
+
+        category: "Informações",
+        description: "Informações do bot"
+    }

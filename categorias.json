@@ -5,9 +5,15 @@
         "color": 15916565
     },
 
-    "moderation": {
+    "Moderação": {
         "description": "comandos de moderação",
-        "emoji": "💿",
+        "emoji": ":beginner:",
+        "color": 15916565
+    },
+
+    "Utilidades": {
+        "description": "comandos de moderação",
+        "emoji": "tools:",
         "color": 15916565
     }
 }

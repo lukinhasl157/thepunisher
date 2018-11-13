@@ -19,5 +19,5 @@ module.exports = {
         });
     },
     category: "geral",
-    name: "ascii"
+    descripton: "Entreterimento"
 }
