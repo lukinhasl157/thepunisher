@@ -53,6 +53,7 @@ module.exports = {
 
         } catch(err) {
         await message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.");
+        console.log(err);
     }
 
         return this.name
