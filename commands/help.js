@@ -32,7 +32,7 @@ module.exports = {
         if (opcoes[x].emoji) await msg.react(opcoes[x].emoji);
     
          // msg avisando q foi enviado no pv
-        message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
+        await message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
     
         const filter = (r, u) => r.me && (u.id === message.author.id)
         const collect = msg.createReactionCollector(filter, { time: 60000 });
@@ -52,7 +52,7 @@ module.exports = {
         });
 
         } catch(err) {
-        message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.");
+        await message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.");
     }
 
         return this.name
