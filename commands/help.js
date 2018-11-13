@@ -35,7 +35,7 @@ module.exports = {
         message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
     
         const filter = (r, u) => r.me && (u.id === message.author.id)
-        const collect = msg.createReactionCollector(filter, { time: 120000 });
+        const collect = msg.createReactionCollector(filter, { time: 60000 });
 
         collect.on("collect", async ({emoji}) => {
             
@@ -52,7 +52,7 @@ module.exports = {
         });
 
         } catch(err) {
-        message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.")
+        message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.");
     }
 
         return this.name
