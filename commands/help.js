@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     run: async function (bot, message, args) {
+    try {
         // criando um Object com todas categorias
         let categorias = bot.commands.reduce((o, comando, nome) => {
             if (!o[comando.category]) o[comando.category] = {};
@@ -25,14 +26,13 @@ module.exports = {
              (`${opcoes[nome].emoji ? opcoes[nome].emoji : ''} **${nome}** ${opcoes[nome].description ? opcoes[nome].description : ''}`) :
              nome));
     
-             try {
+        // enviando msg no privado
         let msg = await message.author.send(embed);
         for (const x in opcoes) 
         if (opcoes[x].emoji) await msg.react(opcoes[x].emoji);
     
          // msg avisando q foi enviado no pv
         message.channel.send("Olhe seu privado! Mandei meus comandos lá! 📨");
-        message.react(":correto:505155063963058187");
     
         const filter = (r, u) => r.me && (u.id === message.author.id)
         const collect = msg.createReactionCollector(filter, { time: 120000 });
@@ -50,12 +50,13 @@ module.exports = {
                 await msg.edit(embed);
             } 
         });
-    } catch(err) {
+
+        } catch(err) {
         message.channel.send("Erro: Ative suas mensagens diretas para que possa enviar meus comandos.")
-        message.react(":negado:505155029636874250");
     }
 
-        return this.name},
+        return this.name
+    },
         aliases: ['h', 'ajuda'],
         category: "Informações", 
         description: "Informações do bot"

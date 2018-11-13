@@ -18,6 +18,6 @@ module.exports = {
     },
       
       aliases: ["av"],
-      category: "avatar",
-      description: "Utilidades"
+      category: "Utilidades",
+      description: "Mostrar a foto de perfil do usuário."
     }
