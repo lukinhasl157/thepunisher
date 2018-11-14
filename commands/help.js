@@ -28,12 +28,12 @@ module.exports = {
     
         // enviando msg no privado
         let msg = await message.author.send(embed);
+        message.channel.send("» Olhe seu privado! Mandei meus comandos lá! 📨");
+        message.react(":correto:505155063963058187");
         for (const x in opcoes) 
         if (opcoes[x].emoji) await msg.react(opcoes[x].emoji);
     
          // msg avisando q foi enviado no pv
-        message.channel.send("» Olhe seu privado! Mandei meus comandos lá! 📨");
-        message.react(":correto:505155063963058187");
     
         const filter = (r, u) => r.me && (u.id === message.author.id)
         const collect = msg.createReactionCollector(filter, { time: 60000 });
