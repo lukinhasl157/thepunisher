@@ -24,6 +24,6 @@ module.exports = {
 
   },
     aliases: ["chinfo"],
-    category: "Utilidades",
+    category: "Moderação",
     description: "Informações do canal"
 }

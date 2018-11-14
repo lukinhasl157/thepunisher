@@ -18,6 +18,6 @@ module.exports = {
             });
         });
     },
-    category: "geral",
-    descripton: "Entreterimento"
+    category: "Entreterimento",
+    descripton: "Formatar um texto em ascii"
 }

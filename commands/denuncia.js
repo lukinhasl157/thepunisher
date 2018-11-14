@@ -2,7 +2,8 @@
     const Discord = require("discord.js");
     const cooldown = new Set();
     
-    module.exports.run = async (bot, message, args) => {
+    module.exports = {
+        run: async function (bot, message, args) {
 
 
         if (cooldown.has(message.author.id)) return message.channel.send(`${message.author}, aguarde **2m** para usar outro comando novamente.`).then(msg => msg.delete(7000));{
@@ -14,7 +15,7 @@
                         }, 120000);
                     }
 
-    if (message.mentions.users.size  == 0) return message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Por favor, mencione o usuário que deseja denunciar.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
+    if (message.mentions.users.size === 0) return message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Por favor, mencione o usuário que deseja denunciar.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
 if (!args.slice(1).join(' ')) return message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Diga o motivo da denuncia, digite **j!denuncia (@usuário) (motivo)**`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
 let member = message.guild.member(message.mentions.users.first() || bot.users.get(args[0]));
 
@@ -38,7 +39,7 @@ let embed = new Discord.RichEmbed()
 .setDescription(`**• Usuário:** ${member.user.tag}\n**• ID:** ${member.user.id}`)
 .addField(`:notepad_spiral: Motivo:`, args.slice(1).join(' '))
 .setFooter(`Denuncia enviada por ${message.author.tag}`, message.author.displayAvatarURL)
-.setTimestamp()
+.setTimestamp(new Date())
 await channel.send(embed);
     await message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Obrigado por denunciar o usuário, sua denuncia foi enviada e um staff irá conferir em breve. (O uso incorreto deste comando resultará em **BAN.**)`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#07ed66"));
 } catch(error) {
@@ -46,8 +47,11 @@ await channel.send(embed);
 
 }
 
-}
+    return this.name;
 
-module.exports.help = {
-    name: "denuncia"
+},
+
+    aliases: ["denunciar, report"],
+    category: "Moderação",
+    description: "Denunciar um usuário."
   }
