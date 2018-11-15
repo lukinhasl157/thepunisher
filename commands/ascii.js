@@ -21,3 +21,4 @@ module.exports = {
     category: "Entreterimento",
     descripton: "Formatar um texto em ascii"
 }
+
