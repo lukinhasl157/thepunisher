@@ -19,8 +19,8 @@ module.exports.run = {
       .catch(error => message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel:500147323423424527> Desculpe ${message.author} não consegui banir este membro devido o : ${error}`).setColor("#ff0000")));
     message.channel.send(new Discord.RichEmbed().setDescription(`O usuário ${member.user.tag} foi banido por ${message.author}`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setImage("https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif").setThumbnail(member.user.avatarURL).addField(`Id do usuário:` , `» ${member.user.id}`).addField(`Motivo:` , `» ${reason}`).setTimestamp().setColor("#ff0000"));
 
-    return this.name},
-
+    return this.name
+  },
     aliases: ["banir, punir"],
     category: "Moderação",
     description: "Banir um usuário"

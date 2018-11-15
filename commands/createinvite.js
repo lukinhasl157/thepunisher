@@ -17,7 +17,7 @@ const Discord = require('discord.js');
 
 },
 
-    aliases: ["criarconvite, convite, invite"],
+    aliases: ["criarconvite", "convite", "invite"],
     category: "Utilidades",
     description: "Cria um convite do servior no qual o comando foi executado."
   }
