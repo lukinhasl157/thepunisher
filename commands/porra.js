@@ -1,7 +1,7 @@
 
 module.exports.run = async (bot, message, args) => { 
 
-    if (args[0] === Number) {
+    if (!args[0] === Number) {
         return message.channel.send("O argumento precisa ser um número.")
     }
 
