@@ -3,7 +3,6 @@ module.exports.run = function() {
     let status = [
         `para ${this.users.size} usuários.`,
         `Está com dúvidas? Digite ${this.config.prefix}help para receber todas as minhas informações!`,
-        `Não sabe meus comandos? Digite ${this.config.prefix}comandos para receber minha lista de comandos!`
       ];
       
         let setStatus = () => {

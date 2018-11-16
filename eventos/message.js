@@ -28,12 +28,7 @@ const recadopraessesfdps = [
             let msg = recadopraessesfdps[Math.floor(Math.random() * recadopraessesfdps.length)]
             message.channel.send(msg).then(fdp => fdp.delete(60000));
         }
-        
-        if (!message.command && message.content.toLowerCase().startsWith("flw")) {
-            message.channel.send(`${message.author}, flw viado.`);
-        }
-
-    } 
+    
 
     if (message.guild && !message.member.hasPermission("ADMINISTRATOR")) {
         if (message.content.includes('https://discord.gg/')) {
