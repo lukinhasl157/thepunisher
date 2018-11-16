@@ -43,11 +43,5 @@ module.exports.run = async function(message) {
 
     } 
 
-    if (message.guild && !message.member.hasPermission("ADMINISTRATOR")) {
-        if (message.content.includes('https://discord.gg/')) {
-            message.delete();
-            message.channel.send(new RichEmbed().setDescription(`${message.author} Você não pode divulgar link de servidores aqui! :blockcustom:`).setTimestamp().setFooter(`${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000"));
-        }
-    }
 
 }

@@ -4,8 +4,7 @@ const cooldown = new Set();
 
 module.exports.run = async (bot, message, args) => {
 
-                if (message.channel.name != "teste") return message.reply("Você só pode usar este comando no canal #putaria").then(msg => msg.delete(20000)); 
-
+                if (message.channel.name !== "NSFW") return message.reply("Você só pode usar este comando no canal **NSFW**").then(msg => msg.delete(20000)); 
     var subreddits = [
         'cock',
         'pussy',
