@@ -5,9 +5,6 @@ const Discord = require("discord.js");
 module.exports = {
   run: (bot, message, args) => {
 
-
-  if (!message.member.hasPermission("ADMINISTRATOR")) 
-  return message.channel.send(new Discord.RichEmbed().setDescription("<:cancel1:500150315304091649> Desculpe, você não tem permissão para executar este comando.").setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000"));
   let channel = message.mentions.channels.first();
   if (!channel) 
   return message.channel.send(new Discord.RichEmbed().setDescription("Por favor, mencione o canal que deseja ver as informações.").setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000").setTimestamp());
@@ -19,7 +16,8 @@ module.exports = {
   .addField("Nome:", `${channel.name}`)
   .addField("ID do canal:", `${channel.id}`)
   .addField("Canal criado em:", `${moment(channel.createdAt).format("LLLL")}`)
-  .addField("Permissões:", `${channel.permisisons}`)
+  .addField('Permissões:', `\`\`\`css\n${Object.entries(channel.serialize()).filter(([,has]) => has).map(([perm]) => perm).join(", ")}\`\`\``, false)
+  .addField('Topico:', `\`\`\`css\n${channel.position}\`\`\``, false)
   message.channel.send(embed);
 
   },

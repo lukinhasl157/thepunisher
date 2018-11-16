@@ -42,13 +42,14 @@
     .setTimestamp(new Date())
     await channel.send(embed);
     message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Obrigado por denunciar o usuário, sua denuncia foi enviada e um staff irá conferir em breve. (O uso incorreto deste comando resultará em **BAN.**)`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#07ed66"));
+
 } catch(error) {
     console.log(error);
-
-}
+    message.channel.send("Erro: Eu não tenho a permissão de criar canais.")
+    message.react(":negado:505155029636874250");
+    }
 
     return this.name;
-
 },
 
     aliases: ["denunciar", "report"],
