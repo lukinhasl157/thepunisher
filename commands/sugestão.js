@@ -33,6 +33,8 @@ const Discord = require("discord.js");
     
 } catch(error) {
     console.log(error);
+    message.channel.send("Erro: Eu não tenho a permissão de criar canais.")
+    message.react(":negado:505155029636874250");
     }
 }
 
