@@ -47,7 +47,7 @@ module.exports = {
                     .setDescription(opcoes.description)
                     .setTitle(nome)
                     .setColor(opcoes.color)
-                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => message.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '));
+                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => process.env.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '));
                 await msg.edit(embed);
             } 
         });
