@@ -16,8 +16,8 @@ module.exports = {
   .addField("Nome:", `${channel.name}`)
   .addField("ID do canal:", `${channel.id}`)
   .addField("Canal criado em:", `${moment(channel.createdAt).format("LLLL")}`)
-  .addField('Permissões:', `\`\`\`css\n${Object.entries(channel.serialize()).filter(([,has]) => has).map(([perm]) => perm).join(", ")}\`\`\``, false)
-  .addField('Topico:', `\`\`\`css\n${channel.position}\`\`\``, false)
+  .addField('Permissões:', channel.permissions)
+  .addField('Topico:', `\`\`\`css\n${channel.topic}\`\`\``, false)
   message.channel.send(embed);
 
   },

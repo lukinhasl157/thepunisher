@@ -4,8 +4,7 @@ moment.locale('pt-BR');
 
 module.exports.run = async (bot, message, args) => {
 
-    if (!message.member.hasPermission("ADMINISTRATOR")) 
-      return message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, você não tem permissão para executar este comando!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
+
     let role = message.mentions.roles.first();
     if(!role) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, mencione o cargo que deseja ver as informações.`).setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000").setTimestamp());
     const embed = new Discord.RichEmbed()
