@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = {
+module.exports = {
   run: async function (bot, message, args) {
 
  
@@ -21,7 +21,7 @@ module.exports.run = {
 
     return this.name
   },
-    aliases: ["banir, punir"],
+    aliases: ["banir", "punir"],
     category: "Moderação",
     description: "Banir um usuário"
   }

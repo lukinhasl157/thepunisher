@@ -51,7 +51,7 @@
 
 },
 
-    aliases: ["denunciar, report"],
+    aliases: ["denunciar", "report"],
     category: "Moderação",
     description: "Denunciar um usuário."
   }

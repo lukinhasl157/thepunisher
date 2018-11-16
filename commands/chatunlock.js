@@ -16,7 +16,7 @@ module.exports = {
  
   },
 
-  aliases: ["chunlock, unlock"],
+  aliases: ["chunlock", "unlock"],
   category: "Moderação",
   description: "Reativar o chat."
 }

@@ -19,7 +19,7 @@ module.exports = {
 
 },
 
-    aliases: ["chlock, lock"],
+    aliases: ["chlock", "lock"],
     category: "Moderação",
     description: "Desativar o chat."
 }
