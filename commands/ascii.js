@@ -23,18 +23,3 @@ module.exports = {
 }
 
 
-if (comando === "registro") {
-
-const a = new Discord.RichEmbed()
-.setTitle("ReactRole")
-.setDescription("Clique na reação :white_small_square:  para conseguir a role")
-let msg = message.channel.send(a)
-    msg.react(":white_small_square:")
-
-    bot.on('messageReactionAdd', (reaction, user) => {
-    if(reaction.emoji.name == "nomedoemoji" && user.id !== bot.user.id){
-    message.member.addRole("id")
-    }
-})
-}
-
