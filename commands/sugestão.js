@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 
      let denyPerms = ["SEND_MESSAGES"];
      let allowPerms = ["ADD_REACTIONS"];
-     let channel = message.guild.channels.find(c => c.name == 'sugestões');
+     let channel = message.guild.channels.find(c => c.name === 'sugestões');
         try {
             if (!channel) {
                 channel = await message.guild.createChannel('sugestões', 'text', [{

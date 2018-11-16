@@ -6,8 +6,8 @@ module.exports = {
      if (!message.member.hasPermission("ADMINISTRATOR")) {
      return message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, você não tem permissão para executar este comando!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000")); 
      }
- var da = message.guild.roles.find("name", "@everyone")
- message.channel.overwritePermissions(da, {
+     var lock = message.guild.roles.find(r => r.name === "@everyone");
+ message.channel.overwritePermissions(lock, {
      SEND_MESSAGES: true
      
      
