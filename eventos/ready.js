@@ -2,7 +2,7 @@ const { RichEmbed } = require('discord.js');
 module.exports.run = function() {
     let status = [
         `para ${this.users.size} usuários.`,
-        `Está com dúvidas? Digite ${this.config.prefix}help para receber todas as minhas informações!`,
+        `Está com dúvidas? Digite ${process.env.prefix}help para receber todas as minhas informações!`,
       ];
       
         let setStatus = () => {

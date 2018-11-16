@@ -2,7 +2,7 @@ const { RichEmbed } = require('discord.js');
 module.exports.run = async function(message) {
     if (message.author.bot || message.channel.type === "dm")
         return;
-
+        
     if (message.content.toLowerCase().startsWith(process.env.prefix)) {
 
 
