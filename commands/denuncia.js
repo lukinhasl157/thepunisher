@@ -20,7 +20,7 @@
     let member = message.guild.member(message.mentions.users.first() || bot.users.get(args[0]));
 
     let perms = ["SEND_MESSAGES", "ADD_REACTIONS"];
-    let channel = message.guild.channels.find(c => c.name == 'denuncias');
+    let channel = message.guild.channels.find(c => c.name === 'denuncias');
     try {
     if (!channel) {
         channel = await message.guild.createChannel('denuncias', 'text', [{

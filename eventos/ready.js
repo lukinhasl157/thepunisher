@@ -26,7 +26,7 @@ module.exports.run = function() {
         .setDescription(`Bot iniciado com sucesso!`)
         .setTimestamp();
 
-    let channel = this.channels.find("name", "modlog-the-punisher");
+    let channel = this.channels.find(c => c.name === "modlog-the-punisher");
     if (channel) channel.send(embed);
       
 }
