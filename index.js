@@ -80,4 +80,3 @@ fs.readdir(config.path_events, (err, arquivos) => {
 
 
 bot.login(process.env.token);
-
