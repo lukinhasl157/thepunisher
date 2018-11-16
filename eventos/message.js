@@ -19,7 +19,7 @@ module.exports.run = async function(message) {
             
             Object.defineProperty(message, 'command', { value: command });
 
-            command.run(this, message, args.slice(1));
+            command.run(this, message, args);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {
