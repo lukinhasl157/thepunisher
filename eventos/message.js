@@ -9,7 +9,7 @@ module.exports.run = function(message) {
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
         
         if (command) {
-            if (command.usersCooldown.has(message.author.id)) return message.channel.send("coe caraio quer fude meu processador?").then(msg => msg.delete(60000));           
+            if (command.usersCooldown.has(message.author.id)) return message.channel.send("Desse jeito você vai fuder meu processador, aguarde ``3s.``").then(msg => msg.delete(60000));           
             Object.defineProperty(message, 'command', { value: command });    
             command.run(this, message, args.slice(1));
             command.usersCooldown.add(message.author.id);
@@ -19,8 +19,7 @@ module.exports.run = function(message) {
         }
     }
 const recadopraessesfdps = [
-        `<a:mention:500823853971537951> ${message.author}, ta me mencionando pq filho da puta?`, 
-        `<a:mention:500823853971537951> ${message.author}, porra tava quase dormindo e você me menciona?`
+        `<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`, 
     ];
 
     // açoes que não pode ser executadas junto com algum comando
