@@ -3,11 +3,10 @@ module.exports.run = async function(message) {
     if (message.author.bot || message.channel.type === "dm")
         return;
 
-    if (message.content.toLowerCase().startsWith(this.config.prefix)) {
+    if (message.content.toLowerCase().startsWith(process.env.prefix)) {
 
-        Object.defineProperty(message, 'prefix', { value: this.config.prefix });
 
-        let args = message.content.slice(this.config.prefix.length).split(' ');
+        let args = message.content.slice(process.env.prefix.length).split(' ');
         let nome = args.shift().toLowerCase();
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
         
