@@ -1,28 +1,40 @@
 const { RichEmbed } = require('discord.js');
-module.exports.run = function(message) {
-    if (message.author.bot || message.channel.type === "dm") return;
+module.exports.run = async function(message) {
+    if (message.author.bot || message.channel.type === "dm")
+        return;
 
-    if (message.content.toLowerCase().startsWith(this.config.prefix)) {
-        Object.defineProperty(message, 'prefix', { value: this.config.prefix });
-        let args = message.content.split(' ');
-        let nome = args[0].slice(this.config.prefix.length).toLowerCase();
+    if (message.content.toLowerCase().startsWith(process.env.prefix)) {
+
+
+        let args = message.content.slice(process.env.prefix.length).split(' ');
+        let nome = args.shift().toLowerCase();
         let command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
         
         if (command) {
-            if (command.usersCooldown.has(message.author.id)) return message.channel.send("Desse jeito você vai fuder meu processador, aguarde ``3s.``").then(msg => msg.delete(60000));           
-            Object.defineProperty(message, 'command', { value: command });    
+
+            if (command.usersCooldown.has(message.author.id)) {
+                let m = await message.channel.send("Desse jeito você vai fuder meu processador, aguarde ``3s.``");
+                return m.delete(60000);
+            }           
+            
+            Object.defineProperty(message, 'command', { value: command });
+
             command.run(this, message, args.slice(1));
             command.usersCooldown.add(message.author.id);
+
             setTimeout(function() {
                 command.usersCooldown.delete(message.author.id);
             }, command.cooldown);
+
         }
+
     }
-const recadopraessesfdps = [
+
+    const recadopraessesfdps = [
         `<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`, 
     ];
 
-    // açoes que não pode ser executadas junto com algum comando
+
     if (!message.command) {
         if (message.content.includes(`<@${this.user.id}>`)) {
             let msg = recadopraessesfdps[Math.floor(Math.random() * recadopraessesfdps.length)]

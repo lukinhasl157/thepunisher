@@ -1,4 +1,5 @@
 // MODULES
+require('dotenv').config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
@@ -76,13 +77,7 @@ fs.readdir(config.path_events, (err, arquivos) => {
     console.error(Err);
   }
 });
-// Login
-let token;
-try {
-  const CANARY = require('./token.json');
-  token = CANARY.TOKEN;
-} catch (Err) {
-  token = process.env.token;
-} finally {
-  bot.login(token);
-}
+
+
+bot.login(process.env.token);
+
