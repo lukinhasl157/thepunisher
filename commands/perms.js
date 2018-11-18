@@ -8,7 +8,8 @@ exports.run = async (bot, message, args) => {
     message.channel.permissionsFor(user).toArray().map(p => string += `${p.charAt(0) + p.toLowerCase().replace(/_/g, ' ').slice(1).replace(`vad`, `VAD`)}, `)
     let finalStr = string 
     let embed = new Discord.RichEmbed()
-    .setDescription(`Permissões de **${message.author.username}** em ${message.guild.name}\nLista de Permissões:\n${finalStr}`)
+    .setDescription(`Permissões de **${message.author.username}**`)
+    .addField(`Lista de permissões:`, `\`\`\`js\n${finalStr}\`\`\``)
     .setColor('#ff0000')
     .setTimestamp(new Date())
     .setFooter(message.author.tag, message.author.avatarURL)
