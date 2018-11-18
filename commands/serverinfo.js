@@ -5,6 +5,8 @@ moment.locale("pt-BR");
 module.exports = {
     run: (bot, message, args) => {
 
+        try {
+
     let online = message.guild.members.filter(a => a.presence.status == "online").size;
     let ocupado = message.guild.members.filter(a => a.presence.status == "dnd").size;
     let ausente = message.guild.members.filter(a => a.presence.status == "idle").size;
@@ -18,7 +20,7 @@ module.exports = {
         let embed = new Discord.RichEmbed()
         .setAuthor(message.guild.displayAvatarURL, `:bookmark_tabs: » Informações do servidor: \n${message.guild.name}`)
         .setColor("#FF0000")
-        .addField(':crown: » Dono:', `<@${message.guild.owner.id}>`)
+        .addField(':crown: » Dono:', `<@${message.guild.owner}>`)
         .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLLL'))
         .addField("<:world:500147421641310229> » Região:", message.guild.region)
         .addField(":file_cabinet: » ID do servidor:", message.guild.id)
@@ -30,6 +32,10 @@ module.exports = {
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
         message.channel.send(embed);
+
+    } catch(e) {
+        message.channel.send(e);
+    }
 
   },
      aliases: ["si", "server", "servidor"],
