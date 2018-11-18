@@ -14,7 +14,7 @@
     let totalmembros = message.guild.memberCount;
     let canaistexto = message.guild.channels.filter(a => a.type === "text").size;
     let canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
-    let roles = message.guild.roles.map(a => a.name).join(", ").replace("@", "");
+    let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '')
         let embed = new Discord.RichEmbed()
         .setAuthor(`Informações do servidor ${message.guild.name}`, message.guild.displayAvatarURL)
         .setColor("#FF0000")
