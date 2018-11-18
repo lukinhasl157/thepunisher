@@ -5,8 +5,8 @@ const Discord = require("discord.js");
 module.exports = {
     run: (bot, message, args) => {
 
-        let emoji = message.guild.emojis.map(e => e.name).args.join(" ");
-        
+        let emoji = message.guild.emojis.map(e => e.name === `${args.join(" ")}`);
+
            if (emoji.animated === true) animado = "Sim"
            if (emoji.animated === false) animado = "Não"
 
