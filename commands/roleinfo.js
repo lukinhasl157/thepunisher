@@ -5,7 +5,7 @@ moment.locale('pt-BR');
 module.exports.run = async (bot, message, args) => {
 
 
-    let role = message.guild.roles.find(r => r.name === `${args.join(" ")}`);
+    let role = message.guild.roles.find(r => r.name === `${args.join(" ")}`).replace("@", "");
 
     if(!role) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, digite o nome do cargo que deseja ver as informações.`).setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000").setTimestamp());
 
