@@ -1,10 +1,9 @@
+const Discord = require("discord.js");
+const moment = require("moment");
+moment.locale("pt-BR");
 
-    const Discord = require("discord.js");
-    const moment = require("moment");
-    moment.locale("pt-BR");
-
-    module.exports = {
-        run: (bot, message, args) => {
+module.exports = {
+    run: (bot, message, args) => {
 
     let online = message.guild.members.filter(a => a.presence.status == "online").size;
     let ocupado = message.guild.members.filter(a => a.presence.status == "dnd").size;
@@ -23,7 +22,8 @@
         .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLLL'))
         .addField("<:world:500147421641310229> » Região:", message.guild.region)
         .addField(":file_cabinet: » ID do servidor:", message.guild.id)
-        .addField(`<:user:500109138953633792> » Total de membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}\n :robot: » Bots: \n${bots}`)
+        .addField(`<:user:500109138953633792> » Total de membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}`)
+        .addField(":robot: » Bots:", `${bots}`)
         .addField(`» Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`)
         .addField(`» Total de cargos: [${message.guild.roles.size}]`, roles)
         .addField(`» Total de emojis:`, message.guild.emojis.size)
