@@ -20,7 +20,7 @@
         .setColor("#FF0000")
         .addField('» Dono', `<@${message.guild.owner.id}>`)
         .addField(':calendar: » Criado em:', moment(message.guild.createdAt).format('LLLL'))
-        .addField("<:world:500147421641310229> » Região", message.guild.region).replace("brazil", "Brasil")
+        .addField("<:world:500147421641310229> » Região", message.guild.region)
         .addField("» ID", message.guild.id)
         .addField(`<:user:500109138953633792> » Membros [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}\n Bots: ${bots}`)
         .addField(`» Canais [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`)
