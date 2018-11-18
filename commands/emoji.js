@@ -18,7 +18,6 @@ module.exports = {
         .addField("Animado:", animado)
         .addField("Criado em:", moment(emoji.createdAt).format("LLLL"))
         .addField("ID:", emoji.id)
-        .addField("Gerenciado pela Twitch:", gerenciadotwitch)
         message.channel.send(embed);
     },
 
