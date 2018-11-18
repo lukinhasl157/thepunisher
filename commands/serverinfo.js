@@ -26,6 +26,8 @@
         .addField(`<:user:500109138953633792> » Total de membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}\n :robot: » Bots: \n${bots}`)
         .addField(`» Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`)
         .addField(`» Total de cargos: [${message.guild.roles.size}]`, roles)
+        .addField(`» Total de emojis:`, message.guild.emojis.size)
+        .addField(`» Canal de afk (teste)`, message.guild.voiceChannel.afk.name)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
         message.channel.send(embed);
@@ -34,4 +36,4 @@
      aliases: ["si", "server", "servidor"],
      category: "Moderação",
      description: "Mostrar as informações do servidor."
-  }
+}
