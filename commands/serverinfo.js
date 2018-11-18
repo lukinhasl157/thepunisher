@@ -14,7 +14,7 @@
     let totalmembros = message.guild.memberCount;
     let canaistexto = message.guild.channels.filter(a => a.type === "text").size;
     let canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
-    let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '')
+    let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
 
         let embed = new Discord.RichEmbed()
         .setAuthor(message.guild.displayAvatarURL, `:bookmark_tabs: » Informações do servidor: \n${message.guild.name}`)
@@ -29,13 +29,9 @@
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
         message.channel.send(embed);
-},
 
+  },
      aliases: ["si", "server", "servidor"],
      category: "Moderação",
      description: "Mostrar as informações do servidor."
   }
-
-
-  .setTimeout () => {}
-
