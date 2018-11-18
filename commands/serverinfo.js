@@ -26,7 +26,7 @@ module.exports = {
         .addField(":robot: » Bots:", `${bots}`)
         .addField(`» Total de emojis:`, message.guild.emojis.size)
         .addField(`» Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`)
-        .addField(`» Total de cargos: [${message.guild.roles.size}]`, `\`\`\`\n${roles}\`\`\``)
+        .addField(`» Total de cargos: [${message.guild.roles.size}]`, `\`\`\`js\n${roles}\`\`\``)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
         message.channel.send(embed);
