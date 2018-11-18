@@ -17,7 +17,7 @@
     let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
 
         let embed = new Discord.RichEmbed()
-        .setAuthor(message.guild.displayAvatarURL, `:bookmark_tabs: » Informações do servidor: \n${message.guild.name}`)
+        .setAuthor(`:bookmark_tabs: » Informações do servidor: \n${message.guild.name}`, message.guild.displayAvatarURL)
         .setColor("#FF0000")
         .addField(':crown: » Dono:', `<@${message.guild.owner.id}>`)
         .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLLL'))
