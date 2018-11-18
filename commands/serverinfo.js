@@ -18,7 +18,7 @@ module.exports = {
     let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
 
         let embed = new Discord.RichEmbed()
-        .setAuthor(message.guild.displayAvatarURL, `:bookmark_tabs: » Informações do servidor: \n${message.guild.name}`)
+        .setAuthor(message.guild.displayAvatarURL, `» ${message.guild.name}`)
         .setColor("#FF0000")
         .addField(':crown: » Dono:', `<@${message.guild.ownerID}>`)
         .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLLL'))
@@ -33,8 +33,8 @@ module.exports = {
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
         message.channel.send(embed);
 
-    } catch(e) {
-        message.channel.send(e);
+    } catch(error) {
+        message.channel.send(`Ocorreu um erro: ${error}`);
     }
 
   },
