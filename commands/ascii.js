@@ -10,7 +10,7 @@ module.exports = {
             rendered = rendered.trimRight();
 
             if (texto.length >= 15) {
-                return message.channel.send('Limite de 15 letras atingidas');
+                return message.channel.send('O texto não pode passar de 15 caracteres.');
             }
 
             message.channel.send(rendered, {

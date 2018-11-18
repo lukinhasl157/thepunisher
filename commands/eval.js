@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
     return message.reply("comando exclusivo para desenvolvedores.");
 
   if (message.content.includes('token')) 
-      return message.reply('Ai eu tenho que rir kkkkkkk');
+      return message.reply('kkkkkkkk, tá na disney?');
 
   var code = args.join(' ')
   var embed = new Discord.RichEmbed()
