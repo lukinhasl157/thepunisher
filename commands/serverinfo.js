@@ -27,7 +27,7 @@ module.exports = {
         .addField(`<:user:500109138953633792> » Total de membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}`)
         .addField(":robot: » Bots:", `${bots}`)
         .addField(`» Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`)
-        .addField(`» Total de cargos: [${message.guild.roles.size}]`, `\`\`\``\n${roles}`\`\`\``)
+        .addField(`» Total de cargos: [${message.guild.roles.size}]`, `\`\`\`\n${roles}\`\`\``)
         .addField(`» Total de emojis:`, message.guild.emojis.size)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
