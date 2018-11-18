@@ -16,7 +16,7 @@ module.exports = {
     let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
 
         let embed = new Discord.RichEmbed()
-        .setAuthor(`» ${message.guild.name}` + `${message.guild.iconURL}`)
+        .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
         .setColor("#FF0000")
         .addField(':crown: » Dono:', `<@${message.guild.ownerID}>`)
         .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLLL'))
