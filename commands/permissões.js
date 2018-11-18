@@ -4,7 +4,11 @@
 module.exports = {
     run: (bot, message, args) => {
 
-               let p = {
+    let user = message.mentions.members.first() || message.member;
+    let string = ''
+    message.channel.permissionsFor(user).toArray().map(p => string += `${p.charAt(0) + p.toLowerCase().replace(/_/g, ' ').slice(1).replace(`vad`, `VAD`)}, `)
+    let finalStr = string 
+                   let p = {
             "CREATE_INSTANT_INVITE": "Criar convite instantâneo",
             "KICK_MEMBERS": "Expulsar usuários",
             "BAN_MEMBERS": "Banir usuários",
@@ -38,11 +42,6 @@ module.exports = {
             "MANAGE_WEBHOOKS": "Gerenciar webhooks",
             "MANAGE_EMOJIS": "Gerenciar emojis"
             }
-
-    let user = message.mentions.members.first() || message.member;
-    let string = ''
-    message.channel.permissionsFor(user).toArray().map(p => string += `${p.charAt(0) + p.toLowerCase().replace(/_/g, ' ').slice(1).replace(`vad`, `VAD`)}, `)
-    let finalStr = string 
     let embed = new Discord.RichEmbed()
     .setDescription(`Permissões de **${message.author.username}**`)
     .addField(`Lista de permissões:`, `\`\`\`js\n${p[finalStr]}\`\`\``)
