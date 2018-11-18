@@ -19,5 +19,5 @@ return this.name;
 
     aliases: ["limpar"],
     category: "Moderação",
-    desription: "Deletar mensagens."
+    description: "Deletar mensagens."
 }

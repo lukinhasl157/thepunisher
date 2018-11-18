@@ -10,7 +10,7 @@ module.exports = {
     if(!member)
       return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, mencione o membro que deseja banir.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
     if(!member.bannable)
-      return message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, você não tem as permissões necessárias para banir este usuário!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
+      return message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, eu não tem as permissões necessárias para banir este usuário!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
     let reason = args.join(' ');
     if (!reason) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, diga um motivo para banir este usuário.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
     if(!reason) reason = "Nenhum motivo foi citado.";

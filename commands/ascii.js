@@ -18,8 +18,9 @@ module.exports = {
             });
         });
     },
+    aliases: [""],
     category: "Entreterimento",
-    descripton: "Formatar um texto em ascii"
+    description: "Formatar um texto em ascii"
 }
 
 

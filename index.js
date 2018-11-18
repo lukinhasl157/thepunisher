@@ -76,7 +76,7 @@ fs.readdir(config.path_events, (err, arquivos) => {
   } catch(Err) {
     console.error(Err);
   }
-});
 
+});
 
 bot.login(process.env.token);
