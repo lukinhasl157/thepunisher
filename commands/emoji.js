@@ -15,7 +15,6 @@ module.exports = {
         .setAuthor(`Informações do emoji ${emoji.name}`)
         .setColor("#FF0000")
         .setImage(emoji.url)
-        .addField("Do servidor:", emoji.guild.name)
         .addField("Animado:", animado)
         .addField("Criado em:", moment(emoji.createdAt).format("LLLL"))
         .addField("ID:", emoji.id)
