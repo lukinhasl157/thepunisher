@@ -16,7 +16,7 @@ let canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
 let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
 
     let embed = new Discord.RichEmbed()
-      .setAuthor(`:bookmark_tabs: » Informações do servidor: ${message.guild.name}`, message.guild.iconURL)
+      .setAuthor(`» Informações do servidor: ${message.guild.name}`, message.guild.iconURL)
       .setColor("#FF0000")
       .addField(':crown: » Dono:', `<@${message.guild.owner.id}>`)
       .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLLL'))
