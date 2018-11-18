@@ -20,7 +20,7 @@ module.exports = {
         let embed = new Discord.RichEmbed()
         .setAuthor(message.guild.displayAvatarURL, `:bookmark_tabs: » Informações do servidor: \n${message.guild.name}`)
         .setColor("#FF0000")
-        .addField(':crown: » Dono:', `<@${message.guild.owner}>`)
+        .addField(':crown: » Dono:', `<@${message.guild.ownerID}>`)
         .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLLL'))
         .addField("<:world:500147421641310229> » Região:", message.guild.region)
         .addField(":file_cabinet: » ID do servidor:", message.guild.id)
