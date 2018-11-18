@@ -9,7 +9,7 @@ module.exports = {
            if (emoji.animated === false) animado = "Não"
 
         let animado;
-        const let = new Discord.RichEmbed()
+        let embed = new Discord.RichEmbed()
         .setAuthor(`Informações do emoji ${emoji.name}`)
         .setColor("#FF0000")
         .setImage(emoji.url)
