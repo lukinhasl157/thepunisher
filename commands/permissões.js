@@ -44,7 +44,7 @@ module.exports = {
             }
     let embed = new Discord.RichEmbed()
     .setDescription(`Permissões de **${message.author.username}**`)
-    .addField(`Lista de permissões:`, `\`\`\`js\n${p[finalStr]}\`\`\``)
+    .addField(`Lista de permissões:`, `\`\`\`js\n${finalStr[p]}\`\`\``)
     .setColor('#ff0000')
     .setTimestamp(new Date())
     .setFooter(message.author.tag, message.author.avatarURL)
