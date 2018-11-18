@@ -1,7 +1,8 @@
 
     const Discord = require("discord.js");
 
-exports.run = async (bot, message, args) => {
+module.exports = {
+    run: (bot, message, args) => {
 
     let user = message.mentions.members.first() || message.member;
     let string = ''
@@ -15,8 +16,9 @@ exports.run = async (bot, message, args) => {
     .setFooter(message.author.tag, message.author.avatarURL)
     .setThumbnail(message.author.avatarURL)
     message.channel.send(embed);
-}
+},
 
-module.exports.help = {
-    name: "perms"
+    aliases: ["perms", "permi"],
+    category: "Moderação",
+    description: "Mostrar as permissões do usuário."
 }
