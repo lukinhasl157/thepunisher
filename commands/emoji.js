@@ -1,30 +1,37 @@
+const Discord = require("discord.js");
 const moment = require("moment");
 moment.locale("pt-BR");
-const Discord = require("discord.js");
 
 module.exports = {
     run: (bot, message, args) => {
 
-        let emoji = message.guild.emojis.map(e => e.name === `${args.join(" ")}`);
+        var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find('name', args.join(' '))
 
-           if (emoji.animated === true) animado = "Sim"
-           if (emoji.animated === false) animado = "Não"
+   if (emoji) {
+    let embed = new Discord.RichEmbed()
+    .setTitle("» Informações do emoji")
+    .addField("» Nome do emoji:", emoji.name)
+    .addField("» ID do emoji:", emoji.id)
+    .addField("» Unicode do emoji:", `+'```'+emoji+'```'+`)
+    .addField("» Emoji animado:", emoji.animated.toString().replace('false', 'Nao').replace('true',"Sim"))
+    .addField("» Emoji criado em:", moment(emoji.createdAt).format('LLL'))
+    .addField("» Servidor:", emoji.guild.name)
+    .addField("» Link de download:", [Download](emoji.url))
+    .setColor('#ff0000')
+    .setThumbnail(emoji.url)
 
-        let animado;
-        let embed = new Discord.RichEmbed()
-        .setAuthor(`Informações do emoji ${emoji.name}`)
-        .setColor("#FF0000")
-        .setImage(emoji.url)
-        .addField("Animado:", animado)
-        .addField("Criado em:", moment(emoji.createdAt).format("LLLL"))
-        .addField("ID:", emoji.id)
-        message.channel.send(embed);
+    message.channel.send(embed)
+
+  } else {
+    message.channel.send(`**${message.author.username}**, o emoji ${args.join(" ")} não foi encontrado.`)
+  }
+
     },
-
     aliases: ["emote", "emojiinfo", "emoteinfo"],
     category: "Utilidades",
     description: "Mostrar as informações do emoji."
     }
+
 
 
     
