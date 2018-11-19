@@ -7,7 +7,7 @@ module.exports = {
 
     try {
 
-        var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find('name', args.join(' '))
+        var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`)
 
     if (emoji) {
         let embed = new Discord.RichEmbed()
