@@ -12,13 +12,12 @@ module.exports = {
     if (emoji) {
         let embed = new Discord.RichEmbed()
         .setTitle("» Informações do emoji")
+        .addField("» Servidor:", emoji.guild.name)
         .addField("» Nome do emoji:", emoji.name)
         .addField("» ID do emoji:", emoji.id)
         .addField("» Unicode do emoji:", `\`\`\`\n${emoji}\`\`\``)
         .addField("» Emoji animado:", emoji.animated.toString().replace('false', 'Nao').replace('true',"Sim"))
-        .addField("» Emoji criado em:", moment(emoji.createdAt).format('LLL'))
-        .addField("» Servidor:", emoji.guild.name)
-        .addField("» Link de download:", `${[Download](emoji.url)}`)
+        .addField("» Emoji criado em:", moment(emoji.createdAt).format('LLLL'))
         .setColor('#ff0000')
         .setThumbnail(emoji.url)
 
