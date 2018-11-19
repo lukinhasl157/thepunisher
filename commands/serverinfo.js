@@ -17,7 +17,6 @@ module.exports = {
     let canalAfk = message.guild.afkChannel;
     let tempoAfk = message.guild.afkTimeout;
     let inline = '1';
-    if(usuario.presence.status === "stream") statusmebro = "Transmitindo";
         
       let embed = new Discord.RichEmbed()
         .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
