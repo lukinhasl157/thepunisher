@@ -14,8 +14,8 @@ module.exports = {
     let canaistexto = message.guild.channels.filter(a => a.type === "text").size;
     let canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
     let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
-    let canalAfk = message.guild.afkChannel().replace("null", "Nenhum canal afk.");
-    let canalAfkTempo = message.guild.afkChannel().replace("null", "Nenhum tempo.");
+    let canalAfk = message.guild.afkChannel;
+    let canalAfkTempo = message.guild.afkChannelTimeout;
 
         let embed = new Discord.RichEmbed()
         .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
