@@ -17,6 +17,7 @@ module.exports = {
     let canalAfk = message.guild.afkChannel;
     let tempoAfk = message.guild.afkTimeout;
     let inline = '1';
+    if(usuario.presence.status === "stream") statusmebro = "Transmitindo";
         
       let embed = new Discord.RichEmbed()
         .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
@@ -26,7 +27,7 @@ module.exports = {
         .addField(":file_cabinet: » ID do servidor:", message.guild.id, inline)
         .addField(':calendar: » Criado em:', moment(message.guild.createdAt).format('LLL'), inline)
         .addField(`<:canal:513884866455273494> » Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`, inline)
-        .addField(":zzz: » Canal afk", `${message.guild.afkChannel}`, inline)
+        .addField(":zzz: » Canal afk", `${message.guild.afkChannel ? message.guild.afkChannel.name : "Nenhum canal afk."}`, inline) 
         .addField("<:world:500147421641310229> » Região:", message.guild.region, inline)
         .addField(":joy: » Total de Emojis:", `${message.guild.emojis.size}`, inline)
         .addField(`<:user:500109138953633792> » Membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}\n :robot: Bots: ${bots}`, inline)
