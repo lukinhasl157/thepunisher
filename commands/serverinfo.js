@@ -33,6 +33,7 @@ module.exports = {
         .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, `\`\`\`\n${roles}\`\`\``, inline)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
+        
         message.channel.send(embed);
     
   },
