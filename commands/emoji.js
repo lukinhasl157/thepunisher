@@ -18,7 +18,7 @@ module.exports = {
         .addField("» Emoji animado:", emoji.animated.toString().replace('false', 'Nao').replace('true',"Sim"))
         .addField("» Emoji criado em:", moment(emoji.createdAt).format('LLL'))
         .addField("» Servidor:", emoji.guild.name)
-        .addField("» Link de download:", [Download](emoji.url))
+        .addField("» Link de download:", `${[Download](emoji.url)}`)
         .setColor('#ff0000')
         .setThumbnail(emoji.url)
 
@@ -29,7 +29,7 @@ module.exports = {
     }
 
     } catch(e) {
-        message.channel.send(`Deu merda quando tentei executar o comando **Emoji**, ${e}`)
+        message.channel.send(`**${message.author.username}**, deu merda quando tentei executar o comando **Emoji**, ${e}`)
     }
 
 },
