@@ -18,7 +18,9 @@ module.exports = {
     let tempoAfk = message.guild.afkTimeout;
     let inline = '1';
 
-        let embed = new Discord.RichEmbed()
+    if(canalAfk = "null") {} else {"Nenhum"}
+        
+      let embed = new Discord.RichEmbed()
         .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
         .setColor("#FF0000")
         .addField(':crown: » Dono:', `<@${message.guild.ownerID}>`, inline)
@@ -28,7 +30,7 @@ module.exports = {
         .addField(`<:user:500109138953633792> » Total de membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}`, inline)
         .addField(":robot: » Bots:", `${bots}`, inline)
         .addField("» Canal AFK:", (canalAfk = "null" ? message.guild.afkChannel : "Nenhum") , inline)
-        .addField("» Tempo para AFK:", `${tempoAfk}`, inline)
+        .addField("» Tempo para AFK:", `${tempoAfk} segundos`, inline)
         .addField(`<:pensenisso:513802114657419274> » Total de emojis:`, message.guild.emojis.size, inline)
         .addField(`» Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`, inline)
         .addField(`» Total de cargos: [${message.guild.roles.size}]`, `\`\`\`\n${roles}\`\`\``, inline)
