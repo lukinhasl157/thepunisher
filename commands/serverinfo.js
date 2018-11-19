@@ -25,7 +25,7 @@ module.exports = {
         .addField("<:world:500147421641310229> » Região:", message.guild.region, inline)
         .addField(':calendar: » Servidor criado em:', moment(message.guild.createdAt).format('LLL'), inline)
         .addField(":file_cabinet: » ID do servidor:", message.guild.id, inline)
-        .addField(`<:user:500109138953633792> » Total de membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}`, inline)
+        .addField(`<:user:500109138953633792> » Membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}`, inline)
         .addField(":robot: » Bots:", `${bots}`, inline)
         .addField("» Canal AFK:", message.guild.afkChannel, inline)
         .addField("» Tempo para AFK:", `${tempoAfk} segundos`, inline)
