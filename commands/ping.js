@@ -5,7 +5,7 @@ module.exports = {
 
 		try {
 
-  let msg = await mesage.channel.send("Calculando a latência...");
+  let msg = await message.channel.send("Calculando a latência...");
 
    	setTimeout(() => {
   	msg.edit(`:ping_pong: Pong! **${message.author.username}**, a latência do bot é \`\`${msg.createdTimestamp - message.createdTimestamp}ms.\`\` A lantência da API é \`\`${Math.round(bot.ping)}ms.\`\` <:wifi2:501137858250145810>`);
