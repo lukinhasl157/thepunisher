@@ -3,11 +3,13 @@ const Discord = require("discord.js");
 module.exports = {
 	run: async function(bot, message, args) {
 
-  let msg = await message.channel.send("Calculando a latência...");
+  let msg = await message.channel.startTyping().send("Calculando a latência...");
 
-   setTimeout(() => {
-msg.edit(`:ping_pong: Pong! **${message.author.username}**, a latência do bot é \`\`${msg.createdTimestamp - message.createdTimestamp}ms.\`\` A lantência da API é \`\`${Math.round(bot.ping)}ms.\`\` <:wifi2:501137858250145810>`);
-}, 2000)
+   	setTimeout(() => {
+  	msg.edit(`:ping_pong: Pong! **${message.author.username}**, a latência do bot é \`\`${msg.createdTimestamp - message.createdTimestamp}ms.\`\` A lantência da API é \`\`${Math.round(bot.ping)}ms.\`\` <:wifi2:501137858250145810>`);
+   	message.chnnel.stopTyping();
+	}, 2000)
+
     
    	return this.name;
 
