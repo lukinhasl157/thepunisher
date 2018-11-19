@@ -1,11 +1,21 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports = {
+	run: async function(bot, message, args) {
 
-const m = await message.channel.send("<:think:499596179290456074> Ping?"); 
-    m.edit(new Discord.RichEmbed().setDescription(`:ping_pong: Pong! A latência do bot é **${m.createdTimestamp - message.createdTimestamp}ms.** A lantência da API é **${Math.round(bot.ping)}ms.** <:wifi2:501137858250145810>`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#07ed66"));
+  let msg = await message.channel.send("Calculando a latência...");
+
+   setTimeout(() => {
+msg.edit(`:ping_pong: Pong! **${message.author.username}**, a latência do bot é \`\`${msg.createdTimestamp - message.createdTimestamp}ms.\`\` A lantência da API é \`\`${Math.round(bot.ping)}ms.\`\` <:wifi2:501137858250145810>`);
+}, 4000)
+    
     } 
       
-module.exports.help = {
-   name: "ping"
+return this.name;
+
+},
+	aliases: ["pg", "lantencia", "ms"],
+	category: "Utilidades",
+	description: "Mostrar a lantência do bot."
+
 }

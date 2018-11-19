@@ -18,7 +18,6 @@ module.exports = {
     message.channel.send(embed);
 
  },
-
         category: "Informações",
         description: "Informações do bot"
     }

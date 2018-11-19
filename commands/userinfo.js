@@ -6,7 +6,7 @@
   module.exports.run = async (bot, message, args) => {
   
 
-  let usuario = message.guild.member(message.mentions.users.first() || bot.users.get(args[0]) || message.author);
+  let usuario = message.guild.members.mentions.first() || message.guild.members.get(args[0]) || message.author;
   let administrador;
 if(usuario.hasPermission("ADMINISTRATOR") === true) administrador = "sim";
 if(usuario.hasPermission("ADMINISTRATOR") === false) administrador = "não";
