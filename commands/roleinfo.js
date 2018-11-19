@@ -5,9 +5,9 @@ moment.locale('pt-BR');
 module.exports.run = async (bot, message, args) => {
 
 
-    let role = message.guild.roles.find(r => r.name === `${args.join(" ")}`).replace("@", "");
+    let role = message.guild.roles.find(r => r.name === `${args.join(" ")}`);
 
-    if(!role) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, digite o nome do cargo que deseja ver as informações.`).setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000").setTimestamp());
+    if (!role) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, digite o nome do cargo que deseja ver as informações.`).setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL).setColor("#ff0000").setTimestamp());
 
     const embed = new Discord.RichEmbed()
     .setAuthor(`Informações do cargo ${role.name}`)
@@ -19,6 +19,7 @@ module.exports.run = async (bot, message, args) => {
     .addField('Permissões:', `\`\`\`css\n${Object.entries(role.serialize()).filter(([,has]) => has).map(([perm]) => perm).join(", ")}\`\`\``, false)
     .setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL)
     message.channel.send(embed);
+    
     }
     
     module.exports.help = {
