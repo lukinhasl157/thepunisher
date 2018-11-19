@@ -15,7 +15,7 @@ module.exports = {
     let canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
     let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
     let canalAfk = message.guild.afkChannel;
-    let AfkTempo = message.guild.afkChannelTimeout;
+    let tempoAfk = message.guild.afkChannelTimeout;
     let inline = '1';
 
         let embed = new Discord.RichEmbed()
@@ -28,7 +28,7 @@ module.exports = {
         .addField(`<:user:500109138953633792> » Total de membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}`, inline)
         .addField(":robot: » Bots:", `${bots}`, inline)
         .addField("» Canal AFK:", (canalAfk = "null" ? `${canalAfk}` : "Nenhum") , inline)
-        .addField("» Tempo para AFK:", `${AfkTempo}`, inline)
+        .addField("» Tempo para AFK:", ${tempoAfk}, inline)
         .addField(`<:pensenisso:513802114657419274> » Total de emojis:`, message.guild.emojis.size, inline)
         .addField(`» Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`, inline)
         .addField(`» Total de cargos: [${message.guild.roles.size}]`, `\`\`\`\n${roles}\`\`\``, inline)
