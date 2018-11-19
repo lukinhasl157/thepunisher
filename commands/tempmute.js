@@ -2,7 +2,8 @@
   const Discord = require("discord.js");
   const ms = require("ms");
 
-  module.exports.run = async (bot, message, args) => {
+module.exports = {
+  run: async function (bot, message, args) {
 
  if (!message.member.hasPermission("MUTE_MEMBERS")) 
       return message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, você não tem permissão para executar este comando!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
@@ -30,7 +31,6 @@
     }catch(e){
       console.log(e.stack);
     }
-    return;
   }
   let mutetime = args[1];
   if(!mutetime) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, digite o tempo que deseja mutar este usuário.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
@@ -43,8 +43,9 @@
     message.channel.send(new Discord.RichEmbed().setDescription(`O usuário <@${tomute.id}> que havia sido mutado por **${ms(ms(mutetime))}**, finalizou seu tempo de punição e foi desmutado.`).setAuthor(`Comando automático | DESMUTE`, bot.user.displayAvatarURL).setFooter(`${message.guild.name}`, message.guild.iconURL).setThumbnail(tomute.user.displayAvatarURL).setTimestamp().setColor("#07ed66"));
   }, ms(mutetime));
 
-}
+return this.name;
 
-module.exports.help = {
-  name: "tempmute"
+},
+  category: "Moderação",
+  description: "Mutar um usuário por tempo."
 }
