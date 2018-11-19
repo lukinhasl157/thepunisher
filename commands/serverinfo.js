@@ -25,7 +25,7 @@ module.exports = {
         .addField("<:world:500147421641310229> » Região:", message.guild.region, inline)
         .addField(":file_cabinet: » ID do servidor:", message.guild.id, inline)
         .addField(':calendar: » Criado em:', moment(message.guild.createdAt).format('LLL'))
-        .addField("» Canal/Tempo de AFK:", message.guild.afkChannel / `${tempoAfk} segundos`, inline)
+        .addField("» Canal/Tempo de AFK:", `${message.guild.afkChannel} / ${tempoAfk} segundos`, inline)
         .addField(`<:pensenisso:513802114657419274> » Total de emojis:`, message.guild.emojis.size, inline)
         .addField(`» Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`, inline)
         .addField(`<:user:500109138953633792> » Membros: [${totalmembros}]`, `<:online:513046143572377601> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:513046183699283968> Ocupado: ${ocupado}\n <:offline:513046162731827203> Offline: ${offline}\n :robot: Bots: ${bots}`)
