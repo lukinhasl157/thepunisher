@@ -10,8 +10,9 @@ module.exports = {
         var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`)
 
     if (emoji) {
+        let inline = 2;
         let embed = new Discord.RichEmbed()
-        .setTitle("» Informações do emoji")
+        .setAuthor(message.guild.iconURL, "» Informações do emoji")
         .addField("» Servidor:", emoji.guild.name)
         .addField("» Nome do emoji:", emoji.name)
         .addField("» ID do emoji:", emoji.id)
@@ -19,7 +20,7 @@ module.exports = {
         .addField("» Emoji animado:", emoji.animated.toString().replace('false', 'Nao').replace('true',"Sim"))
         .addField("» Emoji criado em:", moment(emoji.createdAt).format('LLLL'))
         .setColor('#ff0000')
-        .setThumbnail(emoji.url)
+        .setImage(emoji.url)
 
         message.channel.send(embed);
 

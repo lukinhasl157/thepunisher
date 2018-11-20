@@ -8,8 +8,8 @@
 
   let usuario = message.guild.members.mentions.first() || message.guild.members.get(args[0]) || message.author;
   let administrador;
-if(usuario.hasPermission("ADMINISTRATOR") === true) administrador = "sim";
-if(usuario.hasPermission("ADMINISTRATOR") === false) administrador = "não";
+if(usuario.hasPermission("ADMINISTRATOR") === true) administrador = "Sim";
+if(usuario.hasPermission("ADMINISTRATOR") === false) administrador = "Não";
   let statusmebro;
 if(usuario.presence.status === "dnd") statusmebro = "Não pertubar";
 if(usuario.presence.status === "idle") statusmebro = "Ausente";
