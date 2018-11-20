@@ -41,6 +41,7 @@ const Discord = require("discord.js");
     message.channel.send(`Ecorreu um erro ao executar o comando **Sugestão**, ${error}`)
     console.log(error);
     }
+    
 },
   category: "Moderação",
   description: "Enviar uma sugestão."
