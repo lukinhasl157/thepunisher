@@ -15,10 +15,6 @@ const Discord = require("discord.js");
                 allow: allowPerms
     }])
             await message.channel.send(`${message.author}, não encontrei o canal sugestões, então criei o canal automaticamente.`);
-       } else {
-            message.channel.send("Erro: Eu não tenho a permissão de criar canais.")
-            message.react(":negado:505155029636874250");
-        }
      let sMsg = args.join(' ');
         if (!sMsg) {
          message.react(":negado:505155029636874250");
@@ -36,12 +32,17 @@ const Discord = require("discord.js");
       await msg.react(":negado:505155029636874250");
       await message.channel.send('Sua sugestao foi enviada com sucesso');
       message.react(":correto:505155063963058187");
+
+    } else {
+      message.channel.send("Erro: Eu não tenho a permissão de criar canais.")
+      message.react(":negado:505155029636874250");
+        }
     
 } catch(error) {
     message.channel.send(`Ecorreu um erro ao executar o comando **Sugestão**, ${error}`)
     console.log(error);
     }
-    
+
 },
   category: "Moderação",
   description: "Enviar uma sugestão."
