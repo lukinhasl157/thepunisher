@@ -7,7 +7,7 @@ module.exports = {
 
     try {
 
-        var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`)
+        var emoji = bot.user.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`)
 
     if (emoji) {
         let inline = 2;
@@ -15,9 +15,9 @@ module.exports = {
         .setAuthor("» Informações do emoji", message.guild.iconURL)
         .addField("» Servidor:", emoji.guild.name)
         .addField("» Nome do emoji:", emoji.name)
-        .addField("» ID do emoji:", emoji.id)
+        .addField("» ID do emoji:", emoji.id, inline)
         .addField("» Unicode do emoji:", `\`\`\`\n${emoji}\`\`\``)
-        .addField("» Emoji animado:", emoji.animated.toString().replace('false', 'Nao').replace('true',"Sim"))
+        .addField("» Emoji animado:", emoji.animated.toString().replace('false', 'Nao').replace('true',"Sim"), inline)
         .addField("» Emoji criado em:", moment(emoji.createdAt).format('LLLL'))
         .setColor('#ff0000')
         .setImage(emoji.url)
