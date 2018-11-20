@@ -3,23 +3,21 @@ const Discord = require("discord.js");
     module.exports = {
       run: async (bot, message, args) => {
 
+    try {
+
      let denyPerms = ["SEND_MESSAGES"];
      let allowPerms = ["ADD_REACTIONS"];
      let channel = message.guild.channels.find(c => c.name === 'sugestões');
 
-         if (!channel) {
+        if (!channel) {
           channel = await message.guild.createChannel('sugestões', 'text', [{
           id: message.guild.id,
           deny: denyPerms,
           allow: allowPerms
-
-    }]).catch(error => message.channel.send("Erro: Eu não tenho a permissão de criar canais."))
-        message.react(":negado:505155029636874250");
-      }
-
-  try {
-
-         await message.channel.send(`${message.author}, não encontrei o canal sugestões, então criei o canal automaticamente.`);
+    }])
+        }
+          await message.channel.send(`${message.author}, não encontrei o canal sugestões, então criei o canal automaticamente.`);
+          
      let sMsg = args.join(' ');
         if (!sMsg) {
          message.react(":negado:505155029636874250");
@@ -39,6 +37,7 @@ const Discord = require("discord.js");
       message.react(":correto:505155063963058187");
     
 } catch(error) {
+    message.channel.send(`Erro: Eu não tenho a permissão de criar canais.`)
     console.log(error);
     }
 
