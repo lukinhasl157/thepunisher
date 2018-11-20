@@ -19,7 +19,9 @@ const Discord = require("discord.js");
         if (!sMsg) {
          message.react(":negado:505155029636874250");
          return message.reply("por favor, insira sua sugestão!")
-     }
+    } else {
+      
+    }
      
      let embed = new Discord.RichEmbed()
       .addField("Sugestão:", `${sMsg}`)
