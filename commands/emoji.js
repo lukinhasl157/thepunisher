@@ -12,7 +12,7 @@ module.exports = {
     if (emoji) {
         let inline = 2;
         let embed = new Discord.RichEmbed()
-        .setAuthor(message.guild.iconURL, "» Informações do emoji")
+        .setAuthor("» Informações do emoji", message.guild.iconURL)
         .addField("» Servidor:", emoji.guild.name)
         .addField("» Nome do emoji:", emoji.name)
         .addField("» ID do emoji:", emoji.id)
