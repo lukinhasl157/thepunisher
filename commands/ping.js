@@ -9,10 +9,11 @@ module.exports = {
 
    	setTimeout(() => {
   	msg.edit(`:ping_pong: Pong! **${message.author.username}**, a latência do bot é \`\`${msg.createdTimestamp - message.createdTimestamp}ms.\`\` A lantência da API é \`\`${Math.round(bot.ping)}ms.\`\` <:wifi2:501137858250145810>`);
+    message.channel.send("https://cdn.discordapp.com/attachments/425865939691765760/514251837549969420/pingpong.gif")
 	}, 2000)
 
    } catch(e) {
-   		message.channel.send(`Deu merda quando tentei executar o comando ping. Erro: ${e}`)
+   		message.channel.send(`**${message.author.username}**, deu merda quando tentei executar o comando **ping**. ${e}`)
    }
 
    	return this.name;
