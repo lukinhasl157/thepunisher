@@ -1,17 +1,27 @@
+const Discord = require('discord.js'),
+arraySort = require('array-sort');
+table = require('table'); 
 
-    const Discord = require("discord.js");
+module.exports.run = async (bot, message, args,) => {
 
-    module.exports.run = async (bot, message, args) => {
+    let invites = await message.guild.fetchInvites().catch(error => {
+        return message.channel.send('Desculpe, eu não tenho as permissões adequadas para ver os convites!');
+    })
 
-    let MembrosOnline = message.guild.members.filter(a => a.presence.status == "online").size;
-    let MembrosOcupado = message.guild.members.filter(a => a.presence.status == "dnd").size;
-    let MembrosAusente = message.guild.members.filter(a => a.presence.status == "idle").size;
-    let MembrosOffline = message.guild.members.filter(a => a.presence.status == "offline").size;
-
-    let statusembed = new Discord.RichEmbed()
-    .addField('Membros', `**Online:** ${MembrosOnline} | **Ausente:** ${MembrosAusente} | **Ocupado:** ${MembrosOcupado} | **Offline:** ${MembrosOffline} `);
-    message.channel.send(statusembed);
+    invites = invites.array();
+    arraySort(invites, 'uses', { reverse: true });
+    let possibleInvites = [['User', 'Uses']]; 
+    invites.forEach(function(invite) {
+        possibleInvites.push([invite.inviter.username, invite.uses]);
+    })
+    const embed = new Discord.MessageEmbed()
+        .setColor(0xCB5A5E)
+        .addField('Entre os melhores', `\`\`\`${table.table(possibleInvites)}\`\`\``);
+    send(message.channel, embed, {
+        name: 'Convites do servidor',
+        icon: 'https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/trophy-128.png'
+    })
 }
 module.exports.help = {
-    name: "users"
-  }
+  name:"invites"
+}
