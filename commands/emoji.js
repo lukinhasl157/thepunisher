@@ -10,7 +10,7 @@ module.exports = {
         var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`) || bot.emojis.get(args[0]);
 
     if (emoji) {
-        let inline = 2;
+        let inline = 1;
         let embed = new Discord.RichEmbed()
         .setAuthor("» Informações do emoji", message.guild.iconURL)
         .addField("» Servidor:", emoji.guild.name)
