@@ -30,14 +30,9 @@ module.exports.run = async function(message) {
 
     }
 
-    const recadopraessesfdps = [
-        `<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`, 
-    ];
-
     if (!message.command) {
         if (message.content.startsWith(`<@${this.user.id}>`)) {
-            let msg = recadopraessesfdps[Math.floor(Math.random() * recadopraessesfdps.length)]
-            message.channel.send(msg).then(fdp => fdp.delete(60000));
+            return message.channel.send(`<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`).then(fdp => fdp.delete(60000));
         }
 
     } 
