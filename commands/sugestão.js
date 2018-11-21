@@ -25,6 +25,7 @@ const Discord = require("discord.js");
             .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
             .setTimestamp(new(Date))
             .setColor("#07ed66")
+            .setThumbnail(message.author.displayAvatarURL)
         let msg = await channel.send(embed);
             await msg.react(":correto:505155063963058187");
             await msg.react(":negado:505155029636874250");

@@ -7,7 +7,7 @@ module.exports = {
 
     try {
 
-        var emoji = bot.user.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`)
+        var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`)
 
     if (emoji) {
         let inline = 2;
@@ -37,7 +37,6 @@ module.exports = {
     category: "Utilidades",
     description: "Mostrar as informações do emoji."
 }
-
 
 
     
