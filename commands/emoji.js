@@ -7,7 +7,7 @@ module.exports = {
 
     try {
 
-        var emoji = bot.emojis.get(args[0]) || bot.emojis.find(e => e.name === `${args.slice(1).join(' ')}`);
+        let emoji = bot.emojis.get(args[0]) || bot.emojis.find(e => e.name === `${args.join(' ')}`);
 
     if (emoji) {
         let inline = 2;
@@ -25,7 +25,7 @@ module.exports = {
         message.channel.send(embed);
 
     } else {
-    message.channel.send(`**${message.author.username}**, o emoji ${args.join(" ")} não foi encontrado.`);
+    message.channel.send(`**${message.author.username}**, o emoji ${emoji} não foi encontrado.`);
     }
 
     } catch(e) {
