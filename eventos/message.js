@@ -1,10 +1,10 @@
 const { RichEmbed } = require('discord.js');
 module.exports.run = async function(message) {
+
     if (message.author.bot || message.channel.type === "dm")
         return;
         
     if (message.content.toLowerCase().startsWith(process.env.prefix)) {
-
 
         let args = message.content.slice(process.env.prefix.length).split(' ');
         let nome = args.shift().toLowerCase();
@@ -32,7 +32,7 @@ module.exports.run = async function(message) {
 
     if (!message.command) {
         if (message.content.startsWith(`<@${this.user.id}>`)) {
-            return message.channel.send(`<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`).then(fdp => fdp.delete(60000));
+        message.channel.send(`<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`).then(fdp => fdp.delete(60000));
         }
 
     } 
