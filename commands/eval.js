@@ -6,10 +6,10 @@ module.exports.run = async (bot, message, args) => {
   var desenvolvedores = ["289209067963154433", "281561868844269569", "385132696135008259"]
 
   if(!desenvolvedores.includes(message.author.id)) 
-    return message.reply("comando exclusivo para desenvolvedores.");
+    return message.channel.send(message.author.username + "comando exclusivo para desenvolvedores.");
 
   if (message.content.includes('token')) 
-      return message.reply('kkkkkkkk, tá na disney?');
+      return message.channel.send(messa.author.username + 'kkkkkkkk, tá na disney?');
 
   var code = args.join(' ')
   var embed = new Discord.RichEmbed()
