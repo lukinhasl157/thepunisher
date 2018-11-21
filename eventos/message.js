@@ -36,7 +36,7 @@ module.exports.run = async function(message) {
 
 
     if (!message.command) {
-        if (message.content.startsWith(`<@${this.user.id}>`)) {
+        if (message.content.startsWith(`<@${bot.user.id}>`)) {
             let msg = recadopraessesfdps[Math.floor(Math.random() * recadopraessesfdps.length)]
             message.channel.send(msg).then(fdp => fdp.delete(60000));
         }
