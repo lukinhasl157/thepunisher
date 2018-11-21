@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "array-sort": "^1.0.0",
     "ascii-art": "^1.4.4",
     "cooldown": "^0.2.0",
     "cpu-stat": "^2.0.1",
@@ -23,6 +24,7 @@
     "random-puppy": "^1.1.0",
     "reverse-string": "0.0.6",
     "reverse-text": "0.0.1",
+    "table": "^5.1.0",
     "util": "^0.11.0"
   },
   "devDependencies": {},
