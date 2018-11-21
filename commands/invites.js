@@ -14,13 +14,11 @@ module.exports.run = async (bot, message, args,) => {
     invites.forEach(function(invite) {
         possibleInvites.push([invite.inviter.username, invite.uses]);
     })
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.RichEmbed()
         .setColor(0xCB5A5E)
-        .addField('Entre os melhores', `\`\`\`${table.table(possibleInvites)}\`\`\``);
-    send(message.channel, embed, {
-        name: 'Convites do servidor',
-        icon: 'https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/trophy-128.png'
-    })
+        .addField('Entre os melhores', `\`\`\`${table.table(possibleInvites)}\`\`\``)
+        .setImage('https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/trophy-128.png')
+        message.channel.send(embed);
 }
 module.exports.help = {
   name:"invites"
