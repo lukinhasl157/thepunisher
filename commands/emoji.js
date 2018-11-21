@@ -7,7 +7,7 @@ module.exports = {
 
     try {
 
-        let emoji = bot.emojis.get(args[0]) || bot.emojis.find(e => e.name === `${args.join(' ')}`);
+        var emoji = bot.emojis.get(args.join(' ')) || bot.emojis.find(e => e.name === `${args.join(' ')}`) || bot.emojis.get(args[0]);
 
     if (emoji) {
         let inline = 2;
