@@ -10,15 +10,15 @@ module.exports = {
             rendered = rendered.trimRight();
 
             if (texto.length >= 15) {
-                return message.channel.send('O texto não pode passar de 15 caracteres.');
+                return message.channel.send(`**${message.author.username}** | Os argumentos não podem passar de  **15** caracteres.`);
             }
 
             message.channel.send(rendered, {
                 code: 'md'
             });
         });
+            
     },
-    aliases: [""],
     category: "Entreterimento",
     description: "Formatar um texto em ascii"
 }

@@ -18,6 +18,7 @@ module.exports = {
     message.channel.send(embed);
 
  },
-        category: "Informações",
-        description: "Informações do bot"
-    }
+    aliases: ["bi", "info", "bot"],
+    category: "Informações",
+    description: "Informações do bot."
+}

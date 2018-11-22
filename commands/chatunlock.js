@@ -10,6 +10,7 @@ if (!message.member.hasPermission("MANAGE_CHANNELS")) {
      SEND_MESSAGES: true  
 })
    message.channel.send(`» O canal ${message.channel} foi **REATIVADO.** :unlock: por **${message.author.username}**`);
+   
 },
   aliases: ["chunlock", "unlock"],
   category: "Moderação",

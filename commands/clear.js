@@ -13,8 +13,8 @@ module.exports = {
     message.channel.bulkDelete(fetched);
     message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} O chat foi limpo com sucesso <a:sucessogif:499614074129350666>`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#07ed66")).then(msg => msg.delete(10000));
 
-
 return this.name;
+
   },
 
     aliases: ["limpar"],
