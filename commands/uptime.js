@@ -1,7 +1,7 @@
 const moment = require("moment");
 require("moment-duration-format");
 
-	module.export.run = {
+	module.exports = {
 		run: async function (bot, message, args) {
 
     	let duration = moment.duration(bot.uptime).format('D [d], H [h], m [m], s [s]');
