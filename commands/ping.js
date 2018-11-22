@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = {
-	run: async function(bot, message, args) {
+	run: async function (bot, message, args) {
 
 		try {
 

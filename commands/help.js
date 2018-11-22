@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     run: async function (bot, message, args) {
+        
     try {
         // criando um Object com todas categorias
         let categorias = bot.commands.reduce((o, comando, nome) => {

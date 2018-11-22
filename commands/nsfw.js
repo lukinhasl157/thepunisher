@@ -20,7 +20,7 @@ const Discord = require('discord.js');
     randomPuppy(sub)
         .then(url => {
             const embed = new Discord.RichEmbed()
-                .setColor("RANDOM")
+                .setColor("#ff0000")
                 .setImage(url);
             message.channel.send(embed);
         });

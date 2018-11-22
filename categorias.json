@@ -12,7 +12,7 @@
     },
 
     "Utilidades": {
-        "description": "Comandos de utilidades",
+        "description": "Comandos de utilidades.",
         "emoji": "🛠",
         "color": 15916561
     },
@@ -25,6 +25,12 @@
 
     "Entreterimento": {
         "description": "Comandos de entreterimento.",
+        "emoji": "🎲",
+        "color": 15916562
+    },
+
+        "Desenvolvedor": {
+        "description": "Comandos exclusivos para densenvolvedores.",
         "emoji": "🎲",
         "color": 15916562
     }

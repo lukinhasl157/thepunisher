@@ -2,7 +2,9 @@ const Discord = require('discord.js');
 const moment = require('moment');
 moment.locale('pt-BR');
 
-module.exports.run = async (bot, message, args) => {
+  module.exports = {
+    run: async function (bot, message, args) {
+
   var desenvolvedores = ["289209067963154433", "281561868844269569", "385132696135008259"]
 
   if(!desenvolvedores.includes(message.author.id)) 
@@ -37,10 +39,9 @@ module.exports.run = async (bot, message, args) => {
       await message.channel.send(embed);
     }
 
-}
-
-module.exports.help = {
-    name: 'eval'
+},
+  category: "Desenvolvedor",
+  description: "Executar um código."
 }
 
 
