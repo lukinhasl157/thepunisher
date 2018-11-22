@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 
-    module.exports.run = async (bot, message, args) => {
+    module.exports = {
+        run: async function (bot, message, args) {
 
      let denyPerms = ["SEND_MESSAGES"];
      let allowPerms = ["ADD_REACTIONS"];
@@ -12,12 +13,12 @@ const Discord = require("discord.js");
                 deny: denyPerms,
                 allow: allowPerms
     }])
-            await message.channel.send(`${message.author}, não encontrei o canal sugestões, então criei o canal automaticamente.`);
+            await message.channel.send(`» **${message.author.username}** | Não encontrei o canal sugestões, então criei o canal automaticamente.`);
         }
         let sMsg = args.join(' ');
         if (!sMsg) {
          message.react(":negado:505155029636874250");
-         return message.reply("por favor, insira sua sugestão!")
+         return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`)
      }
      
         let embed = new Discord.RichEmbed()
@@ -29,18 +30,16 @@ const Discord = require("discord.js");
         let msg = await channel.send(embed);
             await msg.react(":correto:505155063963058187");
             await msg.react(":negado:505155029636874250");
-            await message.channel.send('Sua sugestao foi enviada com sucesso');
+            await message.channel.send(`» **${message.author.usernmae}** | Sua sugestao foi enviada com sucesso!`);
             message.react(":correto:505155063963058187");
     
 } catch(error) {
-    console.log(error);
-    message.channel.send("Erro: Eu não tenho a permissão de criar canais.")
+    message.channel.send(`» **${message.author.username}** | Erro: Eu não tenho a permissão de criar canais.`)
     message.react(":negado:505155029636874250");
     }
-}
-
-module.exports.help = {
-    name: "sugestão"
+},
+    category: "Utilidades",
+    description: "Enviar uma sugestão."
 }
 
 

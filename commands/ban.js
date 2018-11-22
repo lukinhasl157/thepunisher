@@ -4,16 +4,16 @@ module.exports = {
   run: async function (bot, message, args) {
 
     if (!message.member.hasPermission("BAN_MEMBERS")) 
-      return message.channel.send(`**${message.author.username}** | Você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
+      return message.channel.send(`» **${message.author.username}** | Você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
 
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if (!member)
-      return message.channel.send(`**${message.author.username}** | Por favor, insira o ID ou mencione o usuário que deseja banir.`);
+      return message.channel.send(`» **${message.author.username}** | Por favor, insira o ID ou mencione o usuário que deseja banir.`);
 
     if (!member.bannable)
-      return message.channel.send(`**${message.author.username}** | Desculpe, eu não tem as permissões necessárias para banir este usuário!`);
+      return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
 
-  let reason = args.join(' ');
+  let reason = args.join(" ");
   
     if (!reason) 
       return message.channel.send(`**${message.author.username}** | Por favor, diga um motivo para banir este usuário.`);
