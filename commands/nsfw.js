@@ -23,6 +23,7 @@ const Discord = require('discord.js');
                 .setColor("RANDOM")
                 .setImage(url);
             message.channel.send(embed);
+        });
 },
 
     aliases: ["porno", "putaria", "porn"],
