@@ -30,7 +30,7 @@ const Discord = require("discord.js");
         let msg = await channel.send(embed);
             await msg.react(":correto:505155063963058187");
             await msg.react(":negado:505155029636874250");
-            await message.channel.send(`» **${message.author.usernmae}** | Sua sugestao foi enviada com sucesso!`);
+            await message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
             message.react(":correto:505155063963058187");
     
 } catch(error) {
