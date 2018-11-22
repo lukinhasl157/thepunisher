@@ -2,6 +2,7 @@
 const flip = require("flip-text");
 
 	module.exports = {
+		
 		run: (bot, message, args) => {
 
     if (!args[0]) {
