@@ -4,7 +4,7 @@
   "description": "Coloca alguma coisa decente aqui lucas porra",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^11.4.2",
+    "discord.js": "git+https://github.com/discordjs/discord.js.git#master",
     "dotenv": "^6.1.0"
   },
   "devDependencies": {},
