@@ -7,6 +7,7 @@ module.exports = {
 
 		if (!message.member.hasPermission("BAN_MEMBERS")) {
 			return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
+		}
 		
 		if (message.member.hasPermission("BAN_MEMBERS")) {
       		return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
