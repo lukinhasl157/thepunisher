@@ -2,8 +2,8 @@
 module.exports = {
 	run: async function (bot, message, args) {
 
-		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-		let reason = args.slice(1).join(" ");
+		var member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		var reason = args.slice(1).join(" ");
 
 		if (!message.member.hasPermission("BAN_MEMBERS")) {
 			return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
