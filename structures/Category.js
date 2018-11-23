@@ -16,6 +16,8 @@ class Category {
         this.directory = `${__dirname}/../${this.dir}`;
 
         this.commands = new Collection();
+
+        this.initialize();
     }
 
     initialize() {
@@ -28,7 +30,7 @@ class Category {
             }
         });
     }
-    
+
 }
 
 module.exports = Category;
