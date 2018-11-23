@@ -19,6 +19,6 @@ module.exports = {
 },
 
   aliases: ["recarregar", "reiniciar"],
-  category: "Moderação",
+  category: "Desenvolvedor",
   description: "Reiniciar um comando."
 }

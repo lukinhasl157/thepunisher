@@ -1,25 +1,34 @@
-const Discord = require('discord.js'),
-arraySort = require('array-sort');
-table = require('table'); 
+const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args,) => {
+    module.exports = {
+        run: (bot, message, args) => {
 
-    let invites = await message.guild.fetchInvites().catch(error => {
-        return message.channel.send('Desculpe, eu não tenho as permissões adequadas para ver os convites!');
-    })
+     let user = message.mentions.users.first();
 
-    invites = invites.array();
-    arraySort(invites, 'uses', { reverse: true });
-    let possibleInvites = [['User', 'Uses']]; 
-    invites.forEach(function(invite) {
-        possibleInvites.push([invite.inviter.username, invite.uses]);
-    })
-    const embed = new Discord.RichEmbed()
-        .setColor(0xCB5A5E)
-        .addField('Entre os melhores', `\`\`\`${table.table(possibleInvites)}\`\`\``)
-        .setImage('https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/trophy-128.png')
-        message.channel.send(embed);
+    if (!user) user = message.author;
+
+    var targetInvites = await message.guild.fetchInvites();
+
+    var invitesUses = 0;
+
+    targetInvites.forEach(invite => {
+        if (invite.inviter.id === user.id) {
+            invitesUses += invite.uses;
+        }
+    });
+
+    var embed = new Discord.RichEmbed()
+    .setThumbnail(user.displayAvatarURL)
+    .addField("**• Membros Recrutados •**", `\`\`\`js\n(${invitesUses}) - Membros\`\`\``)
+    .setColor("RANDOM")
+    .setFooter(`${user.tag}`)
+    .setTimestamp();
+
+    message.channel.send(embed);
+
+},
+    aliases: ["convite", "div", "convites"],
+    category: "Moderação",
+    description: "Mostrar quantos usuários o staffer convidou."
 }
-module.exports.help = {
-  name:"invites"
-}
+
