@@ -22,8 +22,8 @@ module.exports = {
       	}
 
 		let msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo: **${reason}** ? Se **SIM**, clique no emoji <:correto:505155063963058187> para bani-lo. Se **NÃO** clique no emoji <:negado:505155029636874250> para cancelar esta ação.`);
-			await msg.react(":correto:505155063963058187");
-            await msg.react(":negado:505155029636874250");
+			await msg.react(":white_check_mark:");
+            await msg.react(":x:");
 
             	const filter = (reaction, member) => reaction.emoji.name === ":white_check_mark:" && member.id === message.author.id;
             	const collector = msg.createReactionCollector(filter, {time: 60000});
