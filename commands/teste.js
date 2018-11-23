@@ -9,10 +9,6 @@ module.exports = {
 			return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
 		}
 		
-		if (!member.bannable) {
-      		return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
-      	}
-
 		if (!member) {
 			return message.channel.send(`» **${message.author.usarname}** | Por favor, insira o id ou mencione o usuário que deseja banir.`);
 		}
@@ -20,6 +16,10 @@ module.exports = {
 		if (!reason) {
 			return message.channel.send(`» **${message.author.username}** | Por favor, insira um motivo para banir este usuário.`);
 		}
+
+		if (!member.bannable) {
+      		return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
+      	}
 
 		let msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo ${reason}? Se sim, clique no emoji ✅ para bani-lo. Se não clique no emoji ❌ para cancelar esta ação.`);
 			await msg.react(":correto:505155063963058187");
