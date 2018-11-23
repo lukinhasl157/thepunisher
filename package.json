@@ -1,36 +1,24 @@
 {
   "name": "thepunisher",
-  "version": "1.0.6",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Coloca alguma coisa decente aqui lucas porra",
   "main": "index.js",
   "dependencies": {
-    "array-sort": "^1.0.0",
-    "ascii-art": "^1.4.4",
-    "cooldown": "^0.2.0",
-    "cpu-stat": "^2.0.1",
     "discord.js": "^11.4.2",
-    "dotenv": "^6.1.0",
-    "express": "^4.16.4",
-    "flip-text": "^1.1.0",
-    "fs": "0.0.1-security",
-    "gif-search": "^2.0.1",
-    "google": "^2.1.0",
-    "hidden": "^1.1.1",
-    "mathjs": "^5.2.3",
-    "moment": "^2.22.2",
-    "moment-duration-format": "^2.2.2",
-    "os": "^0.1.1",
-    "pornhub": "0.0.5",
-    "random-puppy": "^1.1.0",
-    "reverse-string": "0.0.6",
-    "reverse-text": "0.0.1",
-    "table": "^5.1.0",
-    "util": "^0.11.0"
+    "dotenv": "^6.1.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Lukinhas#6744",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukinhasl157/thepunisher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukinhasl157/thepunisher/issues"
+  },
+  "homepage": "https://github.com/lukinhasl157/thepunisher#readme"
 }
