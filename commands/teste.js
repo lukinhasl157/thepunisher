@@ -8,7 +8,7 @@ module.exports = {
 		if (!message.member.hasPermission("BAN_MEMBERS")) {
 			return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
 		
-		} else if (!member.bannable) {
+		} else if (message.member.hasPermission("BAN_MEMBERS")) {
       		return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
       	}
 
@@ -34,7 +34,7 @@ module.exports = {
             			msg.channel.send(`» O usuário **${member.user.username}** ID: \`\`${member.user.id}\`\`| Foi banido com sucesso. :correto:505155063963058187`);
             		})
 
-            	const filter2 = (reacion, member) => reaction.emoji.id === ":negado:505155029636874250" && member.id === message.author.id;
+            	const filter2 = (reaction, member) => reaction.emoji.id === ":negado:505155029636874250" && member.id === message.author.id;
             	const collector2 = msg.createReactionCollector(filter2, {time: 60000});
 
             		collector2.on("collect", r => {
