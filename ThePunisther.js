@@ -1,4 +1,4 @@
-const { Client } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const { Category } = require('./structures/');
 
 class ThePunisther extends Client {
@@ -8,8 +8,8 @@ class ThePunisther extends Client {
         this.config = config;
         this.categories = new Collection();
 
-        for (const name in categories)
-            this.categories.set(name, new Category(name, categories[name]));
+        for (const key in categories)
+            this.categories.set(key, new Category(this, key, categories[key]));
     }
     
 }

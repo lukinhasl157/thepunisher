@@ -1,10 +1,11 @@
 const { Collection } = require('discord.js');
 const fs = require('fs');
 class Category {
-    constructor(client, name, data) {
-        this.name = name;
+    constructor(client, id, data) {
+        this.id = id;
         this.client = client;
 
+        this.name = '';
         this.description = '';
         this.emoji = '';
         this.color = 0;
