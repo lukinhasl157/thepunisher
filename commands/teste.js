@@ -21,9 +21,9 @@ module.exports = {
       		return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
       	}
 
-		let msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo: **${reason}** ? Se **SIM**, clique no emoji <:correto:505155063963058187> para bani-lo. Se **NÃO** clique no emoji <:negado:505155029636874250> para cancelar esta ação.`);
-			await msg.react(":white_check_mark:");
-            await msg.react(":x:");
+		let msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo: **${reason}** ? Se **SIM**, clique no emoji ✅ para bani-lo. Se **NÃO** clique no emoji ❌ para cancelar esta ação.`);
+			await msg.react("✅");
+            await msg.react("❌");	
 
             	const filter = (reaction, member) => reaction.emoji.name === ":white_check_mark:" && member.id === message.author.id;
             	const collector = msg.createReactionCollector(filter, {time: 60000});
@@ -35,7 +35,7 @@ module.exports = {
             			msg.channel.send(`» O usuário **${member.user.username}** ID: \`\`${member.user.id}\`\`| Foi banido com sucesso. :correto:505155063963058187`);
             		})
 
-            	const filter2 = (reaction, member) => reaction.emoji.name === ":x:" && member.id === message.author.id;
+            	const filter2 = (reaction, member) => reaction.emoji.name === "❌" && member.id === message.author.id;
             	const collector2 = msg.createReactionCollector(filter2, {time: 60000});
 
             		collector2.on("collect", r => {
