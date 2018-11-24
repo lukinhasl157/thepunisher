@@ -11,7 +11,7 @@ module.exports = {
 		if (!member)
 			return message.channel.send(`» **${message.author.username}** | Por favor, insira o id ou mencione o usuário que deseja banir.`);
 
-		let reason = args.slice(1).join(" ");
+		let reason = args.join(" ");
 		if (!reason) 
 			return message.channel.send(`» **${message.author.username}** | Por favor, insira um motivo para banir este usuário.`);
 
@@ -22,24 +22,25 @@ module.exports = {
             await msg.react(":correto:505155063963058187");
             await msg.react(":negado:505155029636874250");
 
-            	    const filter = (reaction, member) => reaction.emoji.identifier === "correto:505155063963058187" && member.id === message.author.id;
+            	    const filter = (r, u) => r.me && u.id === message.author.id;
     				const collector = msg.createReactionCollector(filter, {time: 60000 });
 
             		collector.on("collect", r => {
             			r.remove(message.author.id);
-            			member.ban(reason);
             			msg.delete();
-            			msg.channel.send(`» O usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi banido com sucesso. <:correto:505155063963058187>`);
-            		})
+            			switch (r.indentifier) {
+            				case "correto:505155063963058187":
+            					member.ban(reason);
+            					msg.channel.send(`» O usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi banido com sucesso. <:correto:505155063963058187>`);
+            				break;
 
-            	    const filter2 = (reaction, member) => reaction.emoji.identifier === "negado:505155029636874250" && member.id === message.author.id;
-    				const collector2 = msg.createReactionCollector(filter2, {time: 60000 });
+            				case ":negado:505155029636874250":
+            					msg.channel.send(`» A acão de banimento do usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:505155029636874250>`);
+            				break;
 
-            		collector2.on("collect", r => {
-            			r.remove(message.author.id);
-            			msg.delete();
-            			msg.channel.send(`» A acão de banimento do usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:505155029636874250>`) 
-            	})
+            			}
+
+            		});         			
 
   } catch(e) {
         console.log(e);
@@ -49,4 +50,4 @@ module.exports = {
     aliases: ["banir", "punir"],
     category: "Moderação",
     description: "Banir um usuário."
-  }
+ }
