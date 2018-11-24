@@ -2,6 +2,8 @@
 module.exports = {
 	run: async function (bot, message, args) {
 
+		try {
+
 		var member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		var reason = args.slice(1).join(" ");
 
@@ -43,6 +45,10 @@ module.exports = {
             			msg.delete();
             			msg.channel.send(`» A acão de banimento do usuário **${member.user.username}** ID: \`\`${member.user.id}\`\` | Foi cancelada com sucesso. :negado:505155029636874250`) 
             	})
+
+        } catch (e) {
+        	console.log(e.stack);
+        }
 
 	},
 		aliases: [""],
