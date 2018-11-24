@@ -25,8 +25,8 @@ module.exports = {
 			await msg.react("✅");
             await msg.react("❌");	
 
-            	const filter = (reaction, member) => reaction.emoji.name === ":white_check_mark:" && member.id === message.author.id;
-            	const collector = msg.createReactionCollector(filter, {time: 60000});
+            	    const filter = (reaction) => reaction.emoji.name === `✅` && member.id === message.author.id;
+    				const collector = msg.createReactionCollector(filter, {time: 60000 });
 
             		collector.on("collect", r => {
             			r.remove(message.author.id);
@@ -35,8 +35,8 @@ module.exports = {
             			msg.channel.send(`» O usuário **${member.user.username}** ID: \`\`${member.user.id}\`\`| Foi banido com sucesso. :correto:505155063963058187`);
             		})
 
-            	const filter2 = (reaction, member) => reaction.emoji.name === "❌" && member.id === message.author.id;
-            	const collector2 = msg.createReactionCollector(filter2, {time: 60000});
+            	    const filter2 = (reaction) => reaction.emoji.name === `❌` && member.id === message.author.id;
+    				const collector2 = msg.createReactionCollector(filter2, {time: 60000 });
 
             		collector2.on("collect", r => {
             			r.remove(message.author.id);
