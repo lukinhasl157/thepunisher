@@ -16,7 +16,6 @@ const fs = require('fs');
  */
 class Category {
     /**
-     * 
      * @param {ThePunisther} client client do bot 
      * @param {String} id  abreviação do nome da categoria
      * @param {Object} data propriedades da categorias
@@ -27,6 +26,7 @@ class Category {
 
         this.name = '';
         this.description = '';
+        this.options = {};
         this.emoji = '';
         this.color = 0;
         this.dir = '';
@@ -46,9 +46,10 @@ class Category {
         fs.readdirSync(this.directory).forEach((file) => {
             if (file.endsWith('.js')) {
                 let Command = require(this.directory + '/' + file);
-                let command = new Command(this.client);
+                let name = file.replace(/.js/g, '');
+                let command = new Command(name, this);
 
-                this.commands.set(file.replace('.js'), command);
+                this.commands.set(name, command);
             }
         });
     }

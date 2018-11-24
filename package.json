@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "discord.js": "git+https://github.com/discordjs/discord.js.git#master",
-    "dotenv": "^6.1.0"
+    "dotenv": "^6.1.0",
+    "moment": "^2.22.2"
   },
   "devDependencies": {},
   "scripts": {
