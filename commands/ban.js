@@ -1,29 +1,49 @@
-const Discord = require("discord.js");
 
 module.exports = {
-  run: async function (bot, message, args) {
+	run: async function (bot, message, args) {
 
-    if (!message.member.hasPermission("BAN_MEMBERS")) 
-      return message.channel.send(`» **${message.author.username}** | Você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
+	try {
 
-  let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    if (!member)
-      return message.channel.send(`» **${message.author.username}** | Por favor, insira o ID ou mencione o usuário que deseja banir.`);
+		if (!message.member.hasPermission("BAN_MEMBERS"))
+			return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
+		
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		if (!member)
+			return message.channel.send(`» **${message.author.username}** | Por favor, insira o id ou mencione o usuário que deseja banir.`);
 
-    if (!member.bannable)
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
+		let reason = args.slice(1).join(" ");
+		if (!reason) 
+			return message.channel.send(`» **${message.author.username}** | Por favor, insira um motivo para banir este usuário.`);
 
-  let reason = args.join(" ");
-  
-    if (!reason) 
-      return message.channel.send(`**${message.author.username}** | Por favor, diga um motivo para banir este usuário.`);
+		if (!member.bannable) 
+      		return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
 
-     member.send(`» **${member.user.username}** | Você foi banido por **${message.author.username}**. » Motivo: ${reason}.`);
-    await member.ban(reason)
-      .catch(error => message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel:500147323423424527> Desculpe ${message.author} não consegui banir este membro devido o : ${error}`).setColor("#ff0000")));
-    message.channel.send(new Discord.RichEmbed().setDescription(`O usuário ${member.user.tag} foi banido por ${message.author}`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setImage("https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif").setThumbnail(member.user.avatarURL).addField(`Id do usuário:` , `» ${member.user.id}`).addField(`Motivo:` , `» ${reason}`).setTimestamp().setColor("#ff0000"));
+		let msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo: **${reason}** ? Se **SIM**, clique no emoji <:correto:505155063963058187> para bani-lo. Se **NÃO** clique no emoji <:negado:505155029636874250> para cancelar esta ação.`);
+            await msg.react(":correto:505155063963058187");
+            await msg.react(":negado:505155029636874250");
 
-    return this.name;
+            	    const filter = (reaction, member) => reaction.emoji.identifier === "correto:505155063963058187" && member.id === message.author.id;
+    				const collector = msg.createReactionCollector(filter, {time: 60000 });
+
+            		collector.on("collect", r => {
+            			r.remove(message.author.id);
+            			member.ban(reason);
+            			msg.delete();
+            			msg.channel.send(`» O usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi banido com sucesso. <:correto:505155063963058187>`);
+            		})
+
+            	    const filter2 = (reaction, member) => reaction.emoji.identifier === "negado:505155029636874250" && member.id === message.author.id;
+    				const collector2 = msg.createReactionCollector(filter2, {time: 60000 });
+
+            		collector2.on("collect", r => {
+            			r.remove(message.author.id);
+            			msg.delete();
+            			msg.channel.send(`» A acão de banimento do usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:505155029636874250>`) 
+            	})
+
+  } catch(e) {
+        console.log(e);
+    }
 
   },
     aliases: ["banir", "punir"],
