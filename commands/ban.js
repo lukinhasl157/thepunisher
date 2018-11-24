@@ -28,13 +28,13 @@ module.exports = {
             		collector.on("collect", r => {
             			r.remove(message.author.id);
             			msg.delete();
-            			switch (r.emoji.indentifier) {
-            				case "correto:505155063963058187":
+            			switch (r.name) {
+            				case "correto":
             					member.ban(reason);
             					msg.channel.send(`» O usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi banido com sucesso. <:correto:505155063963058187>`);
             				break;
 
-            				case ":negado:505155029636874250":
+            				case "negado":
             					msg.channel.send(`» A acão de banimento do usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:505155029636874250>`);
             				break;
 
