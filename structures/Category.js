@@ -51,6 +51,7 @@ class Category {
             if (file.endsWith('.js')) {
                 let Command = require(this.directory + '/' + file);
                 let name = file.replace(/.js/g, '');
+
                 let command = new Command(name, this);
 
                 this.commands.set(name, command);

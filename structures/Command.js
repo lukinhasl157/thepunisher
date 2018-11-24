@@ -13,18 +13,19 @@ class Command {
         this.subcommands = new Collection();
 
         this.usage = '';
-
-        this.argsRequired = false;
-        this.developerOnlys = false;
-
-        for (const option in this.category.options)
-            if (!this[option]) this[option] = this.category.options[option];
+        
+        this.argsRequired = this.category.options.argsRequired || false;
+        this.developerOnlys = this.category.options.developerOnlys || false;
 
         this.errorMessages = {
             argsRequired: 'argumentos invalidos!',
             developerOnlys: 'Somente meus desenvolvedores tem acesso ao comando'
         };
-    
+
+    }
+
+    get tag() {
+        return `${process.env.prefix+this.name} ${this.usage}`;
     }
 
     process(message, args) {
@@ -48,11 +49,13 @@ class Command {
      * @param {Array} args 
      */
     checkError(message, args) {
+        let errors = this.errorMessages;
+        
         if (this.developerOnlys && !this.bot.config.developerIDs.includes(message.author.id))
-            return this.errorMessages.developerOnlys;
+            return errors.developerOnlys;
 
         if (args.length === 0 && this.argsRequired)
-            return this.errorMessages.argsRequired;
+            return errors.argsRequired;
             
 
         return false;
