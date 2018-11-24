@@ -28,7 +28,7 @@ module.exports = {
             		collector.on("collect", r => {
             			r.remove(message.author.id);
             			msg.delete();
-            			switch (r.name) {
+            			switch (r._emoji.name) {
             				case "correto":
             					member.ban(reason);
             					msg.channel.send(`» O usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi banido com sucesso. <:correto:505155063963058187>`);
