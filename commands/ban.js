@@ -40,6 +40,8 @@ module.exports = {
 
             			}
 
+            			console.log(r.indentifier);
+
             		});         			
 
   } catch(e) {
