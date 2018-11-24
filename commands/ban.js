@@ -40,7 +40,7 @@ module.exports = {
 
             			}
 
-            			console.log(r.indentifier);
+            			console.log(r.emoji);
 
             		});         			
 
