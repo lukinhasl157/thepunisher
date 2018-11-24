@@ -48,11 +48,12 @@ class Command {
      * @param {Array} args 
      */
     checkError(message, args) {
-        if (args.length === 0 && this.argsRequired)
-            return this.errorMessages.argsRequired;
-
         if (this.developerOnlys && !this.bot.config.developerIDs.includes(message.author.id))
             return this.errorMessages.developerOnlys;
+
+        if (args.length === 0 && this.argsRequired)
+            return this.errorMessages.argsRequired;
+            
 
         return false;
     }

@@ -34,6 +34,10 @@ class Category {
         for (const key in data)
             if (!this[key]) this[key] = data[key];
         
+        if (data.options)
+            for (const key in data.options)
+                if (!this.options[key]) this.options[key] = data.options[key];
+            
         this.directory = `${__dirname}/../${this.dir}`;
 
         this.commands = new Collection();
