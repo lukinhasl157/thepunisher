@@ -1,4 +1,5 @@
-{
+{   
+    "developerIDs": ["289209067963154433"],
     "folders": {
         "listeners": "./listeners/"
     },

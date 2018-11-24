@@ -15,9 +15,14 @@ class Command {
         this.usage = '';
 
         this.argsRequired = false;
+        this.developerOnlys = false;
+
+        for (const option in this.category.options)
+            if (!this[option]) this[option] = this.category.options[option];
 
         this.errorMessages = {
-            argsRequired: 'argumentos invalidos!'
+            argsRequired: 'argumentos invalidos!',
+            developerOnlys: 'Somente meus desenvolvedores tem acesso ao comando'
         };
     
     }
@@ -45,6 +50,9 @@ class Command {
     checkError(message, args) {
         if (args.length === 0 && this.argsRequired)
             return this.errorMessages.argsRequired;
+
+        if (this.developerOnlys && !this.bot.config.developerIDs.includes(message.author.id))
+            return this.errorMessages.developerOnlys;
 
         return false;
     }

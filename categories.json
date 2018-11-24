@@ -4,6 +4,9 @@
         "description": "comandos exclusivos para os meus desenvolvedores ❤",
         "emoji": "💻",
         "color": 39847,
-        "dir": "commands/developer/"
+        "dir": "commands/developer/",
+        "options": {
+            "developerOnlys": true
+        }
     }
 }

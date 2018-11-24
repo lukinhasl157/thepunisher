@@ -22,7 +22,7 @@ class Embed extends MessageEmbed {
     }
 
     /**
-     * seta o footer do embed com o nome e o avatar do usuario e a data que ele usou
+     * seta o footer do embed com o nome e o avatar do usuario e a data atual
      * @returns {Embed}
      */
     footerUserUsed() {

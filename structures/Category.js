@@ -23,7 +23,7 @@ class Category {
     constructor(client, id, data) {
         this.id = id;
         this.client = client;
-
+         
         this.name = '';
         this.description = '';
         this.options = {};
@@ -33,7 +33,7 @@ class Category {
 
         for (const key in data)
             if (!this[key]) this[key] = data[key];
-            
+        
         this.directory = `${__dirname}/../${this.dir}`;
 
         this.commands = new Collection();
