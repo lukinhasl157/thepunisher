@@ -11,7 +11,7 @@ module.exports = {
 		if (!member)
 			return message.channel.send(`» **${message.author.username}** | Por favor, insira o id ou mencione o usuário que deseja banir.`);
 
-		let reason = args.join(" ");
+		let reason = args.slice(1).join(" ");
 		if (!reason) 
 			return message.channel.send(`» **${message.author.username}** | Por favor, insira um motivo para banir este usuário.`);
 
