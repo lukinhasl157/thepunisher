@@ -8,7 +8,7 @@ class Ping extends Command {
     }
 
     run(message) {
-        return message.channel.send(new Embed(message).setDescription("Pong!"));
+        return message.channel.send(new Embed(message).setDescription(`Pong! a latencia do bot é ${Math.floor(client.ping)}`));
     } 
 }
 
