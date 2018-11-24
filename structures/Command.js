@@ -47,6 +47,7 @@ class Command {
      * verifica se há algum erro
      * @param {Message} message 
      * @param {Array} args 
+     * @returns {String|Boolean} 
      */
     checkError(message, args) {
         let errors = this.errorMessages;
