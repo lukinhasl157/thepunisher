@@ -4,6 +4,8 @@ module.exports = {
 
 	try {
 
+		//gif ban the puinsher https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif
+
 		if (!message.member.hasPermission("BAN_MEMBERS"))
 			return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
 		
@@ -30,6 +32,7 @@ module.exports = {
             			msg.delete();
             			switch (r._emoji.name) {
             				case "correto":
+            					member.send(`» **${member.user.username}** | Você foi banido por **${message.author.username}**. » Motivo: ${reason}.`);
             					member.ban(reason);
             					msg.channel.send(`» O usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi banido com sucesso. <:correto:505155063963058187>`);
             				break;
@@ -39,8 +42,6 @@ module.exports = {
             				break;
 
             			}
-
-            			console.log(r);
 
             		});         			
 
