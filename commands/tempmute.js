@@ -46,6 +46,7 @@ module.exports = {
 return this.name;
 
 },
+  aliases:: ["mute", "mutar", "silenciar"],
   category: "Moderação",
-  description: "Mutar um usuário por tempo."
+  description: "Mutar um usuário por um determinado tempo."
 }
