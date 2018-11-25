@@ -8,5 +8,12 @@
         "options": {
             "developerOnlys": true
         }
+    },
+    "img": {
+        "name": "Manipulação de imagem",
+        "description": "manipulação de imagem",
+        "emoji": "🖼",
+        "color": 3526,
+        "dir": "commands/image-manipulation/"
     }
 }
