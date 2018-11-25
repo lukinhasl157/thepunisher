@@ -61,6 +61,21 @@ class ThePunisther extends Client {
         return this.commands.find(command => command.name.toLowerCase() === name || command.aliases.includes(name));
     }
 
+    /**
+     * Renomea os nomes dos canais da categoria pelas estatísticas do bot  
+     * @param {Discord.CategoryChannel} category 
+     */
+    editStatusChannels(category) {
+        let keys = ['commands', 'guilds', 'users'];
+        let names = ['Comandos', 'Servidores' , 'Usúarios'];
+
+        category.edit({ name: `STATUS ${this.user.username}` })
+        category.children.array().slice(0, keys.length).forEach((channel, i) => {
+            let key = this[keys[i]];
+            if (key) channel.edit({name: `${names[i]}: ${key.size}` });
+        })
+    }
+
 }
 
 module.exports = ThePunisther;

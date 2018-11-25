@@ -5,5 +5,8 @@
     },
     "emojis": {
         "failed": "❌"
+    },
+    "channelIDs": {
+        "categoryStatus": "515877820358983692"
     }
 }
