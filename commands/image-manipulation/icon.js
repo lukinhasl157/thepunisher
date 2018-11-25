@@ -1,8 +1,6 @@
 const { Command } = require("../../structures");
-const { createCanvas, loadImage, Image } = require("canvas");
-const pixelUtil = require('pixel-util');
+const { createCanvas, loadImage } = require("canvas");
 const { MessageAttachment } = require('discord.js');
-const fs = require("fs");
 
 class Icon extends Command {
     constructor(name, category) {
