@@ -11,9 +11,9 @@ module.exports.run = function() {
       
     setInterval(() => setStatus(), 15000);
       
-    this.channels.get("515877820358983693").setName(`» Servidores: [${this.guilds.size}]`);
-    this.channels.get("516051234168242179").setName(`» Usuários: [${this.users.size}]`);
-    this.channels.get("516051255014195201").setName(`» Canais: [${this.channels.size}]`);
+    this.channels.get("515877820358983693").setName(`» :file_cabinet: Servidores: [${this.guilds.size}]`);
+    this.channels.get("516051234168242179").setName(`» <:user:500109138953633792> Usuários: [${this.users.size}]`);
+    this.channels.get("516051255014195201").setName(`» <:canal:513884866455273494> Canais: [${this.channels.size}]`);
 
     console.log("Bot iniciado com sucesso!");
     console.log('Status carregado com sucesso!');

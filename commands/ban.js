@@ -54,3 +54,5 @@ module.exports = {
     category: "Moderação",
     description: "Banir um usuário."
  }
+
+

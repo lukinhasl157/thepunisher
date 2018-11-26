@@ -35,7 +35,7 @@ module.exports = {
   let mutetime = args[1];
   if(!mutetime) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, digite o tempo que deseja mutar este usuário.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
 
-  await (tomute.addRole(muterole));
+  await tomute.addRole(muterole);
   message.channel.send(new Discord.RichEmbed().setDescription(`O usuário <@${tomute.id}> foi mutado por **${ms(ms(mutetime))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setThumbnail(tomute.user.displayAvatarURL).setTimestamp().setColor("#ff0000"));
 
   setTimeout(function() {
@@ -46,7 +46,7 @@ module.exports = {
 return this.name;
 
 },
-  aliases:: ["mute", "mutar", "silenciar"],
+  aliases: ["mute", "mutar", "silenciar"],
   category: "Moderação",
   description: "Mutar um usuário por um determinado tempo."
 }
