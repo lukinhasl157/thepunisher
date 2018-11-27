@@ -37,7 +37,7 @@ module.exports = {
          // msg avisando q foi enviado no pv
     
         const filter = (r, u) => r.me && (u.id === message.author.id)
-        const collect = msg.createReactionCollector(filter, { time: 60000 });
+        const collect = msg.createReactionCollector(filter, { time: 120000 });
 
         collect.on("collect", async ({emoji}) => {
             
