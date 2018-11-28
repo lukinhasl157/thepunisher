@@ -35,15 +35,15 @@ module.exports = {
           message.channel.send({ file: 'emote.png' });
         } 
 
-      } else {
-      message.channel.send(`**${message.author.username}** | Por favor, insira um emoji válido.`)
-    }
-
             if (emoji) {
             let embed = new Discord.RichEmbed()
             .setImage(emoji.url)
             message.channel.send(embed);
         }
+
+        } else {
+      message.channel.send(`**${message.author.username}** | Por favor, insira um emoji válido.`)
+    }
 
         } catch(e) {
         message.channel.send(`**${message.author.username}**, deu merda quando tentei executar o comando **Emoji**, ${e}`)
