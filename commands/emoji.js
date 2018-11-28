@@ -12,7 +12,13 @@ module.exports = {
 
     if (!reason) {
 
-        const emote = Discord.Util.parseEmoji(args[0]) || bot.emojis.find(e => e.name === `${args.join(" ")}`);
+        let emoji = bot.emojis.find(e => e.name === `${args.join(" ")}`);
+        const emote = Discord.Util.parseEmoji(args[0]);
+
+        if (emoji) {
+            message.channel.send(emoji);
+        }
+        
         if (emote.animated === true) {
 
           const URL = `https://cdn.Discordapp.com/emojis/${emote.id}.gif?size=2048`;
