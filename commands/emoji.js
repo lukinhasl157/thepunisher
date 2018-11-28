@@ -4,7 +4,7 @@ const twemoji = require('twemoji');
 const fs = require('fs');
 
 module.exports = {
-    run: (bot, message, args) => {
+    run: async function (bot, message, args) {
 
       try {
 
