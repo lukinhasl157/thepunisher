@@ -8,11 +8,11 @@ module.exports = {
 
       try {
 
-  let razao = args.slice(0).join(' ');
+  let reason = args.slice(0).join(' ');
 
-    if (!razao.length < 1) {
+    if (!reason) {
 
-        const emote = Discord.Util.parseEmoji(args[0]) || bot.emojis.find(e => e.name === `${razao}`);
+        const emote = Discord.Util.parseEmoji(args[0]) || bot.emojis.find(e => e.name === `${args.join(" ")}`);
         if (emote.animated === true) {
 
           const URL = `https://cdn.Discordapp.com/emojis/${emote.id}.gif?size=2048`;
