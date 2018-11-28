@@ -15,10 +15,6 @@ module.exports = {
         let emoji = bot.emojis.find(e => e.name === `${args.join(" ")}`);
         const emote = Discord.Util.parseEmoji(args[0]);
 
-        if (emoji) {
-            message.channel.send(emoji);
-        }
-        
         if (emote.animated === true) {
 
           const URL = `https://cdn.Discordapp.com/emojis/${emote.id}.gif?size=2048`;
@@ -43,6 +39,11 @@ module.exports = {
       message.channel.send(`**${message.author.username}** | Por favor, insira um emoji válido.`)
     }
 
+            if (emoji) {
+            let embed = new Discord.RichEmbed()
+            .setImage(emoji.url)
+            message.channel.send(embed);
+        }
 
         } catch(e) {
         message.channel.send(`**${message.author.username}**, deu merda quando tentei executar o comando **Emoji**, ${e}`)
