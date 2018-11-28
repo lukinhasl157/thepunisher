@@ -9,11 +9,10 @@ module.exports = {
       try {
 
   let razao = args.slice(0).join(' ');
-  let nomeeapelido = message.guild.member(message.author.id).nickname || message.author.username
 
     if (!razao.length < 1) {
 
-        const emote = Discord.Util.parseEmoji(args[0]);
+        const emote = Discord.Util.parseEmoji(args[0]) || bot.emojis.find(e => e.name === `${razao}`);
         if (emote.animated === true) {
 
           const URL = `https://cdn.Discordapp.com/emojis/${emote.id}.gif?size=2048`;
@@ -35,7 +34,7 @@ module.exports = {
         } 
 
       } else {
-      message.channel.send('**'+ nomeeapelido + '**, Coloque um emoji para eu poder ampliar.')
+      message.channel.send(`**${message.author.username}** | Por favor, insira um emoji válido.`)
     }
 
 
