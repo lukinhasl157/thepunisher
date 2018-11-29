@@ -1,39 +1,33 @@
-const Discord = require('discord.js');
+const { RichEmbed } = require('discord.js');
 const moment = require('moment');
 moment.locale('pt-BR');
 
   module.exports = {
     run: async function (bot, message, args) {
-
-  var desenvolvedores = ["289209067963154433", "281561868844269569", "385132696135008259"]
-
-  if(!desenvolvedores.includes(message.author.id)) 
-    return message.channel.send(`**${message.author.username}**, comando exclusivo para desenvolvedores.`);
-
-  if (message.content.includes('token')) 
-      return message.channel.send(`**${message.author.username}**, kkkkkkkk, tá na disney`);
-
-  var code = args.join(' ')
-  var embed = new Discord.RichEmbed()
-    .setTimestamp(new Date())
-    .setFooter(message.author.username, message.author.displayAvatarURL);
-
-  try {
     
-    let evaled = eval(code);
-    let evaledMsg = `${evaled}`.replace(process.env.token, '*'.repeat(process.env.token.length)).slice(0, 950);
+    const code = args.join(' ');
+    const DEV_IDS = ["289209067963154433", "281561868844269569", "385132696135008259"];
+    const embed = new RichEmbed()
+      .setTimestamp(new Date())
+      .setColor('RANDOM')
 
-    console.log('Resultado do Eval \n', evaled);
+    try {
 
-    embed.setColor("#07ed66")
+      if (!DEV_IDS.includes(message.author.id) || message.content.toLowerCase().includes('token'))
+        return message.react('🖕:skin-tone-1:');
+
+      let evaled = eval(code);
+      let evaledMsg = `${evaled}`.replace(process.env.token, '*'.repeat(process.env.token.length)).slice(0, 950);
+
+      embed.setColor("#07ed66")
       .addField(':inbox_tray: Código:', `\`\`\`js\n${code}\`\`\``, false)
-      .addField(':outbox_tray: Resultado:', `\`\`\`js\n${evaledMsg}\`\`\``, false);  
-       
-  } catch (err) {
-      
-    embed.setColor("#e53030")
-      .addField(':inbox_tray: Código:', `\`\`\`js\n${code}\`\`\``, false)
-      .addField('<:cancel1:500150315304091649> Erro:', `\`\`\`js\n${err}\`\`\``, false);
+      .addField(':outbox_tray: Resultado:', `\`\`\`js\n${evaledMsg}\`\`\``, false); 
+
+    } catch (err) {
+        
+      embed.setColor("#e53030")
+        .addField(':inbox_tray: Código:', `\`\`\`js\n${code}\`\`\``, false)
+        .addField('<:cancel1:500150315304091649> Erro:', `\`\`\`js\n${err}\`\`\``, false);
   
     } finally {
       await message.channel.send(embed);
