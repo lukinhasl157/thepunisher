@@ -36,7 +36,7 @@ class Embed extends MessageEmbed {
     */
     footerHelp(command) {
         command = command || this._command;
-        if (command) this.setFooter(`utilize ${process.env.prefix}help ${command.name} pra mais informações`);
+        if (command) this.setFooter(`utilize ${process.env.PREFIX}help ${command.name} pra mais informações`);
         return this;
     }
 }

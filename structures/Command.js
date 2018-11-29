@@ -1,5 +1,6 @@
 const { Collection } = require("discord.js");
 const Embed = require("./Embed.js");
+const { Constants } = require('../utils');
 
 class Command {
     constructor(name, category) {
@@ -25,7 +26,7 @@ class Command {
     }
 
     get tag() {
-        return `${process.env.prefix+this.name} ${this.usage}`;
+        return `${process.env.PREFIX+this.name} ${this.usage}`;
     }
 
     process(message, args) {
@@ -36,7 +37,7 @@ class Command {
 
         if (error) {
             embed.footerHelp()
-                .setDescription(`${this.bot.config.emojis.failed} ${error}`);
+                .setDescription(`${Constants.EMOJI_FAILED} ${error}`);
             return message.channel.send(embed);
         }
 

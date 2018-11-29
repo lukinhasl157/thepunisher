@@ -7,6 +7,7 @@
     "canvas": "^2.0.1",
     "discord.js": "git+https://github.com/discordjs/discord.js.git#master",
     "dotenv": "^6.1.0",
+    "gif-frames": "^1.0.0",
     "moment": "^2.22.2"
   },
   "devDependencies": {},
