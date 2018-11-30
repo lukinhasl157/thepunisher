@@ -3,7 +3,7 @@ module.exports = {
 
       try {
 
-        let emoji = bot.emojis.find(e => e.name === `${args.join(" ")}`);
+        let emoji = bot.emojis.find(e => e.name === `${args.join(" ")}`) || message.guild.emojis.get(args[0]) || bot.emojis.get(ags[0]);
 
     if (emoji) {
       message.channel.send(emoji.url);
