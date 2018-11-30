@@ -16,7 +16,7 @@ module.exports = {
 
 					message.channel.send(`Xingamento enviado com sucesso.`);
 					message.channel.send(`${member}, o usuário **${message.author.username}**, Xingou você de ${m.content}`);
-					m.stop(message.author.id);
+					msg.stop(message.author.id);
 
 				})
 
