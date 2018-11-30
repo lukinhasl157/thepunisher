@@ -15,13 +15,10 @@ moment.locale('pt-BR');
   if(!desenvolvedores.includes(message.author.id)) 
     return message.channel.send(`**${message.author.username}** | Este comando é exclusivo para desenvolvedores.`);
 
-  if (message.content.includes('token')) 
-      return message.channel.send(`**${message.author.username}**, kkkkkkkk, tá na disney`);
+  if (message.content.toLowerCase().includes('token')) 
+      return message.channel.send(`**${message.author.username}**, kkkkkkkk, tá na disney 🖕`);
 
       try {
-
-      if (!DEV_IDS.includes(message.author.id) || message.content.toLowerCase().includes('token'))
-        return message.react('🖕:skin-tone-1:');
 
       let evaled = eval(code);
       let evaledMsg = `${evaled}`.replace(process.env.token, '*'.repeat(process.env.token.length)).slice(0, 950);
