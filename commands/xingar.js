@@ -1,5 +1,5 @@
 module.exports = {
-	run: (bot, message, args) => {
+	run: async function (bot, message, args) {
 
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
@@ -14,8 +14,13 @@ module.exports = {
 
 				collector.on("collect", m => {
 
-					message.channel.send(`O usuário **${message.author.username}** | Xingou você de ${m.content}`);
+					message.channel.send(`Xingamento enviado com sucesso.`);
 
+				})
+
+				collector.on("end", m => {
+
+					await message.channel.send(`${member}, o usuário **${message.author.username}**, Xingou você de ${m.content}`);
 				})
 
 		})
