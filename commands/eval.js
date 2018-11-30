@@ -6,7 +6,6 @@ moment.locale('pt-BR');
     run: async function (bot, message, args) {
     
     const code = args.join(' ');
-    const DEV_IDS = ["289209067963154433", "281561868844269569", "385132696135008259"];
     const embed = new RichEmbed()
       .setTimestamp(new Date())
       .setColor('RANDOM')
