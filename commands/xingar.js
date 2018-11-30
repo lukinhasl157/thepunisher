@@ -14,7 +14,6 @@ module.exports = {
 
 				collector.on("collect", async m => {
 
-					m.remove(message.author.id);
 					message.channel.send(`Xingamento enviado com sucesso.`);
 					await message.channel.send(`${member}, o usuário **${message.author.username}**, Xingou você de ${m.content}`);
 
