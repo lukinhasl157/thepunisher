@@ -12,15 +12,12 @@ module.exports = {
 			const filter = m => m.author.id === message.author.id;
 			const collector = msg.channel.createMessageCollector(filter, {time: 30000});
 
-				collector.on("collect", m => {
+				collector.on("collect", async m => {
 
+					m.remove(message.author.id);
 					message.channel.send(`Xingamento enviado com sucesso.`);
-
-				})
-
-				collector.on("end", m => {
-
 					await message.channel.send(`${member}, o usuário **${message.author.username}**, Xingou você de ${m.content}`);
+
 				})
 
 		})
