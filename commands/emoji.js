@@ -1,7 +1,7 @@
 module.exports = {
     run: async function (bot, message, args) {
 
-      try {
+    try {
 
         let emoji = bot.emojis.find(e => e.name === `${args.join(" ")}`);
 
@@ -22,6 +22,3 @@ module.exports = {
     category: "Utilidades",
     description: "Mostrar as informações do emoji."
 }
-
-
-    
