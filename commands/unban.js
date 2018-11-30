@@ -25,6 +25,6 @@
   
   }, 
     aliases: ["desbanir", "perdoar", "pardon"],
-    categoy: "Moderação",
+    category: "Moderação",
     description: "Desbanir um usuário."
   }

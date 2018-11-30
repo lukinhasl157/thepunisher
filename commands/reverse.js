@@ -15,6 +15,6 @@ const reverse = require("reverse-text");
     }
 },
 	aliases: ["reverter", "inverter"],
-	categoy: "Entreterimento",
+	category: "Entreterimento",
 	description: "Reverter os argumentos."
 }
