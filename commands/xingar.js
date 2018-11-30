@@ -14,9 +14,9 @@ module.exports = {
 
 				collector.on("collect", async m => {
 
-					m.stop();
 					message.channel.send(`Xingamento enviado com sucesso.`);
-					await message.channel.send(`${member}, o usuário **${message.author.username}**, Xingou você de ${m.content}`);
+					message.channel.send(`${member}, o usuário **${message.author.username}**, Xingou você de ${m.content}`);
+					m.stop(message.author.id);
 
 				})
 
