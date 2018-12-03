@@ -52,7 +52,7 @@ class Command {
     checkError(message, args) {
         let errors = this.errorMessages;
         
-        if (this.developerOnlys && !this.bot.config.developerIDs.includes(message.author.id))
+        if (this.developerOnlys && !this.bot.guild.member(message.author).roles.get(this.process.env.ROLE_DEV_ID))
             return true;
 
         if (args.length === 0 && this.argsRequired)
