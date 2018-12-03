@@ -3,6 +3,8 @@
     module.exports = {
         run: (bot, message, args) => {
 
+            try {
+
     let emojis = message.guild.emojis.map(a => a).join(' ');
     
     let emojiembed = new Discord.RichEmbed()
@@ -13,6 +15,10 @@
     .setFooter(`Comando soliticado por: ${message.author.tag}`, message.author.displayAvatarURL)
     .setTimestamp(new Date())
     message.channel.send(emojiembed);
+
+        } catch (e) {
+            message.channel.send(`**${message.author.username}** | Erro: A lista de emojis excedeu o limite de **2000 caracteres** do Discord.`)
+        }
 
     },
         aliases: ["emojis", "emotes", "emotelist"],
