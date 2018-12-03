@@ -50,8 +50,6 @@ class Command {
      * @returns {String|Boolean} 
      */
     checkError(message, args) {
-        let errors = this.errorMessages;
-        
         if (this.developerOnlys && !this.bot.guild.member(message.author).roles.get(process.env.ROLE_DEV_ID))
             return true;
 
