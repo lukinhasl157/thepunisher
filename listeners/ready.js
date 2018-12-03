@@ -1,11 +1,20 @@
 function Ready() {
-    Object.defineProperty(this, 'defaultChannels', {value: {}});
-    
-    for (const name in this.config.channelIDs)
-        this.defaultChannels[name] = this.channels.get(this.config.channelIDs[name]) || null;
+    Object.defineProperties(this, {
+       'guild': {
+           get: function() { return this.guilds.get(process.env.GUILD_ID)}
+       },
+       'logChannels': {
+           get: function() {
+                return Object.values(this.config.channelIDs)
+                    .map((id) => this.channels.get(id) || null)
+                    .filter(channel => channel);
+           }
+       } 
+    });
 
-    if (this.defaultChannels.categoryStatus) 
-        this.editStatusChannels(this.defaultChannels.categoryStatus);
+    console.log('Hello');
+
+    this.editStatusChannels();
 }
 
 module.exports = Ready;

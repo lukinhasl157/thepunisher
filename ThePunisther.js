@@ -58,21 +58,20 @@ class ThePunisther extends Client {
      */
     fetchCommand(name) {
         name = name.toLowerCase();
-        return this.commands.find(command => command.name.toLowerCase() === name || command.aliases.includes(name));
+        return this.commands.find(({ aliases }, i) => i === name || aliases.includes(name));
     }
 
     // Renomea os nomes dos canais da categoria pelas estatísticas do bot  
     editStatusChannels() {
 
-        let category = this.channels.get(process.env.STATUS_CATEGORY_ID);
-        let keys = ['commands', 'guilds', 'users'];
-        let names = ['Comandos', 'Servidores' , 'Usúarios'];
+        let parent = this.channels.get(process.env.STATUS_CATEGORY_ID);
+        let infos = ['commands', 'guilds', 'users']
+            .map(i => `[${this[i].size}] - ${i.charAt(0).toUpperCase() + i.slice(1)}`);
+            
+        parent.edit({ name: `STATUS ${this.user.username}` });
+        let channels = parent.children.first(3);
+         infos.forEach((info, i) => channels[i].edit({ name: info}));
 
-        category.edit({ name: `STATUS ${this.user.username}` });
-        category.children.array().slice(0, keys.length).forEach((channel, i) => {
-            let key = this[keys[i]];
-            if (key) channel.edit({name: `${names[i]}: ${key.size}` });
-        });
     }
 
 }

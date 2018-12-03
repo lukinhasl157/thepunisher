@@ -1,0 +1,25 @@
+{   
+    "categories": {
+        "dev": {
+            "name": "Desenvolvedor",
+            "description": "comandos exclusivos para os meus desenvolvedores ❤"
+        },
+        "img": {
+            "name": "Manipulação de imagem",
+            "description": "manipulação de imagem"
+        }
+    },
+    "command": {
+        "argsRequired": "argumentos invalidos!",
+        "developerOnlys": "Somente meus desenvolvedores tem acesso ao comando"
+    },
+    "commands": {
+        "ping": {
+            "description": "",
+            "message": "Pong! a latencia do bot é "
+        },
+        "eval": {
+            "argsRequired": "Digite um codigo!"
+        }
+    }
+}

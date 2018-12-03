@@ -1,5 +1,5 @@
 const { Collection } = require('discord.js');
-
+const lang = require('../languages/pt-br.json');
 const fs = require('fs');
 
 /**
@@ -24,8 +24,9 @@ class Category {
         this.id = id;
         this.client = client;
          
-        this.name = '';
-        this.description = '';
+        let l = lang.categories[this.id];
+        this.name = l ? l.name : 'none';
+        this.description = l ? l.description : 'none';
         this.options = {};
         this.emoji = '';
         this.color = 0;

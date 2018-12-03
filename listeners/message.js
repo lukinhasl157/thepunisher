@@ -10,7 +10,7 @@ function Message(message) {
     
     let args = message.content.slice(process.env.PREFIX.length).split(/ +/g);
     let command = this.fetchCommand(args.shift());
-
+    
     if (command) {
         return command.process(message, args);
     }

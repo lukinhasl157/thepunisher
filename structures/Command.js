@@ -1,7 +1,7 @@
 const { Collection } = require("discord.js");
 const Embed = require("./Embed.js");
 const { Constants } = require('../utils');
-
+const lang = require('../languages/pt-br.json');
 class Command {
     constructor(name, category) {
         
@@ -12,21 +12,15 @@ class Command {
         this.aliases = [];
         this.exemples = [];
         this.subcommands = new Collection();
-
-        this.usage = '';
         
         this.argsRequired = this.category.options.argsRequired || false;
         this.developerOnlys = this.category.options.developerOnlys || false;
 
-        this.errorMessages = {
-            argsRequired: 'argumentos invalidos!',
-            developerOnlys: 'Somente meus desenvolvedores tem acesso ao comando'
-        };
 
     }
 
-    get tag() {
-        return `${process.env.PREFIX+this.name} ${this.usage}`;
+    tag(lang) {
+        return `${process.env.PREFIX+this.name} ${lang.commands[this.name].usage}`;
     }
 
     process(message, args) {
@@ -36,12 +30,17 @@ class Command {
         let error = this.checkError(message, args);
 
         if (error) {
+            if (typeof error !== 'string')
+                return;
+
             embed.footerHelp()
                 .setDescription(`${Constants.EMOJI_FAILED} ${error}`);
             return message.channel.send(embed);
         }
 
-        return this.run(message, args);
+        let l = lang;
+        let c = lang.commands[this.name];
+        return this.run(message, {args, l, c});
     }
 
     /**
@@ -54,10 +53,10 @@ class Command {
         let errors = this.errorMessages;
         
         if (this.developerOnlys && !this.bot.config.developerIDs.includes(message.author.id))
-            return errors.developerOnlys;
+            return true;
 
         if (args.length === 0 && this.argsRequired)
-            return errors.argsRequired;
+            return lang.commands[this.name].argsRequired || this.argsRequired;
             
 
         return false;

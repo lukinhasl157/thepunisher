@@ -1,6 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const moment = require("moment");
-moment.locale('pt-BR');
 
 /**
  * @property {Message} _message mensagem de quem usou o comando
@@ -15,6 +13,8 @@ class Embed extends MessageEmbed {
         this._command = message.command;
         this._bot = message.client;
 
+        this.setTimestamp(new Date());
+
         if (this._command)
             this.setColor(this._command.category.color);
 
@@ -26,7 +26,7 @@ class Embed extends MessageEmbed {
      * @returns {Embed}
      */
     footerUserUsed() {
-        this.setFooter(`${this._message.author.tag} • ${moment().format('ll')}`, this._message.author.avatarURL());
+        this.setFooter(this._message.author.tag, this._message.author.displayAvatarURL());
         return this;
     }
 
