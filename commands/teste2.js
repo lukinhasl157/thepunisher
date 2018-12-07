@@ -1,21 +1,34 @@
 const Discord = require("discord.js");
-    module.exports.run = async (bot, message, args) => {
 
-    var rolesEmbed = new Discord.RichEmbed()
-    .setTitle("Escolha uma reação e pegue sua role!")
-    .setColor("RANDOM")
-    .setTimestamp()
-    .setDescription('Roxo : 💜\nAzul :💙 \nCreeper : 💥')
-    let msg = await message.channel.send(rolesEmbed);
-await msg.react('💜');
-await msg.react('💙')
-await msg.react('👽')
+module.exports = {
+    run: async function(bot, message, args) {
 
-const filter = (reaction, user) => reaction.emoji.name === '💜' && user.id === message.author.id;
-const collector = msg.createReactionCollector(filter);
+let embed = new Discord.RichEmbed()
+.setDescription("Clique no emoji para criar o canal")
+await message.channel.send(embed).then(async msg => {
+await msg.react("✅");
 
-  collector.on('collect', r1 => {
-   let role = message.guild.roles.find(role => role.name === "roxo");
-    message.member.addRole(role);
+const filter = (reaction, user) => reaction.emoji.name === "✅" && user.id === message.author.id;
+const collector = msg.createReactionCollector(filter, {time: 30000});
+
+collector.on("collect", async r => {
+
+  let channel = message.guild.channels.find(ch => ch.name === "nomedocanal");
+  let category = message.guild.channels.find(c => c.name === "nomedacategoria");
+
+if (!category || category.type !== "category") {
+category = await message.guild.createChannel("nomedacategoria", "category");
+}
+
+if (!channel) {
+r.remove(message.author.id);
+channel = await message.guild.createChannel("nome do canal", "text");
+await msg.edit("Canal criado com sucesso");
+}
+
 })
+
+})
+
+}
 }
