@@ -7,14 +7,22 @@
             "developerOnlys": true
         }
     },
+    
     "img": {
         "emoji": "🖼",
         "color": 3526,
         "dir": "commands/image-manipulation/"
     },
+
     "bot": {
         "emoji": "🤖",
         "color": 4235,
         "dir": "commands/bot/"
+    },
+
+    "util": {
+        "emoji": "🛠",
+        "color": "0x4286f4",
+        "dir": "commands/util/"
     }
 }
