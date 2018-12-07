@@ -18,12 +18,14 @@ collector.on("collect", async r => {
 
 if (!category || category.type !== "category") {
 category = await message.guild.createChannel("nomedacategoria", "category");
-}
 
-if (!channel) {
+} else if (!channel) {
 r.remove(message.author.id);
 channel = await message.guild.createChannel("nome do canal", "text");
 await msg.edit("Canal criado com sucesso");
+
+} else {
+    message.channel.send("Este canal já existe");
 }
 
 })
