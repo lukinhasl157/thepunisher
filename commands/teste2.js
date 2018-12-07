@@ -16,16 +16,11 @@ collector.on("collect", async r => {
   let channel = message.guild.channels.find(ch => ch.name === "nomedocanal");
   let category = message.guild.channels.find(c => c.name === "nomedacategoria");
 
-if (!category || category.type !== "category") {
-category = await message.guild.createChannel("nomedacategoria", "category");
-
-} else if (!channel) {
+if (!channel || !category || category.type !== "category") {
 r.remove(message.author.id);
+category = await message.guild.createChannel("nomedacategoria", "category");
 channel = await message.guild.createChannel("nome do canal", "text");
-await msg.edit("Canal criado com sucesso");
-
-} else {
-    message.channel.send("Este canal já existe");
+await message.channel.send("Canal criado com sucesso");
 }
 
 })
