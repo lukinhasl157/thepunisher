@@ -54,7 +54,7 @@ module.exports = {
         });
 
         } catch(err) {
-        message.channel.send(`Erro: » **${message.author.username}**, ative suas mensagens diretas para que possa enviar meus comandos.`);
+        message.channel.send(`Erro: » **${message.author.username}**, ative sua **DM** para que eu possa enviar meus comandos.`);
         message.react(":negado:505155029636874250");
         console.log(err);
     }       
