@@ -19,11 +19,11 @@ module.exports = {
 					message.channel.send(`**${message.author.username}**, seu xingamento enviado com sucesso.`);
 					await message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: "${m.content}". Caso queira xingar o usuário de volta clique no emoji "<:velhodoinfarto:517877465750700033>"`);
 					await message.react(":velhodoinfarto:517877465750700033")
-					await msg.stop(message.author.id);
+					await m.stop(message.author.id);
 
 				})
 
-			const filter2 = (r, u) => r.emoji.name === "velhodoinfarto" && u.id === message.author.id;
+			const filter2 = (r, u) => r.emoji.id === ":velhodoinfarto:517877465750700033" && u.id === message.author.id;
 			const collector2 = msg.createReactionCollector(filter2, {time: 60000});
 
 				collector2.on("collect", r => {
