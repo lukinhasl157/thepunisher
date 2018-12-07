@@ -17,9 +17,10 @@ module.exports = {
 				collector.on("collect", async m => {
 
 					message.channel.send(`**${message.author.username}**, seu xingamento enviado com sucesso.`);
-					await message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: "${m.content}". Caso queira xingar o usuário de volta clique no emoji "<:velhodoinfarto:517877465750700033>"`);
-					await message.react(":velhodoinfarto:517877465750700033")
-					await m.stop(message.author.id);
+					await message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: "${m.content}". Caso queira xingar o usuário de volta clique no emoji "<:velhodoinfarto:517877465750700033>"`).then(async porra => {
+					await porra.react(":velhodoinfarto:517877465750700033")
+				})
+					await collector.stop(message.author.id);
 
 				})
 
