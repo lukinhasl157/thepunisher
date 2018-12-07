@@ -21,7 +21,7 @@ module.exports = {
 
 				})
 
-			const filter2 = (r, u) => r.me && u.id = message.author.id;
+			const filter2 = (r, u) => r.emoji.name === "velhodoinfarto" && u.id === message.author.id;
 			const collector2 = msg.createReactionCollector(filter2, {time: 60000});
 
 				collector2.on("collect", r => {
