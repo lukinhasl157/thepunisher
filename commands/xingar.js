@@ -1,6 +1,8 @@
 module.exports = {
 	run: async function (bot, message, args) {
 
+		try {
+
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
 		if (!member)
@@ -32,6 +34,10 @@ module.exports = {
 			})
 
 		})
+
+		} catch(e) {
+			message.channel.send(`Deu merda aqui: ${e}`);
+		}
 
 	}
 }
