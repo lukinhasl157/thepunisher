@@ -20,6 +20,7 @@ if (!channel || !category || category.type !== "category") {
 r.remove(message.author.id);
 category = await message.guild.createChannel("nomedacategoria", "category");
 channel = await message.guild.createChannel("nome do canal", "text");
+await channel.setParent(category.id);
 await message.channel.send("Canal criado com sucesso");
 }
 
