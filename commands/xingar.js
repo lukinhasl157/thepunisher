@@ -16,7 +16,7 @@ module.exports = {
 
 					message.channel.send(`**${message.author.username}**, seu xingamento enviado com sucesso.`);
 					await message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: "${m.content}". Caso queira xingar o usuário de volta clique no emoji "<:velhodoinfarto:517877465750700033>"`);
-					await message.react("<:velhodoinfarto:517877465750700033>")
+					await message.react(":velhodoinfarto:517877465750700033")
 					await msg.stop(message.author.id);
 
 				})
