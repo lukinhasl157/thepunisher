@@ -4,9 +4,9 @@ module.exports = {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
 		if (!member)
-			return message.channel.send(`**${message.author.username}**, | Por favor, insira o id ou mencione o usuário que deseja xingar. Após \`\`30s\`\` mensagem será apagada.`);
+			return message.channel.send(`**${message.author.username}**, | Por favor, insira o id ou mencione o usuário que deseja xingar.`);
 
-		message.channel.send(`**${message.author.username}** | Como deseja xingar o usuário **${member.user.tag}** ?`).then(msg => {
+		message.channel.send(`**${message.author.username}** | Como deseja xingar o usuário **${member.user.tag}** ? (Após \`\`30s\`\` esta mensagem será apagada.)`).then(msg => {
 			msg.delete(30000);
 
 			const filter = m => m.author.id === message.author.id;
@@ -16,7 +16,7 @@ module.exports = {
 
 					message.channel.send(`**${message.author.username}**, seu xingamento enviado com sucesso.`);
 					await message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: "${m.content}"`);
-					await m.stop(message.author.id);
+					await msg.stop(message.author.id);
 
 				})
 
