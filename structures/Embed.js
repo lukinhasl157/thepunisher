@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require('discord.js')
 
 /**
  * @property {Message} _message mensagem de quem usou o comando
@@ -16,18 +16,18 @@ class Embed extends MessageEmbed {
         this.setTimestamp(new Date())
 
         if (this._command)
-            this.setColor(this._command.category.color);
+            this.setColor(this._command.category.color)
 
-        this.footerUserUsed();
+        this.footerUserUsed()
     }
 
     /**
      * seta o footer do embed com o nome e o avatar do usuario e a data atual
      * @returns {Embed}
      */
-    footerUserUsed() {
-        this.setFooter(this._message.author.tag, this._message.author.displayAvatarURL());
-        return this;
+    footerUserUsed () {
+        this.setFooter(this._message.author.tag, this._message.author.displayAvatarURL())
+        return this
     }
 
     /** 
@@ -35,10 +35,10 @@ class Embed extends MessageEmbed {
      * @returns {Embed}
     */
     footerHelp(command) {
-        command = command || this._command;
-        if (command) this.setFooter(`utilize ${process.env.PREFIX}help ${command.name} pra mais informações`);
-        return this;
+        command = command || this._command
+        if (command) this.setFooter(`utilize ${process.env.PREFIX}help ${command.name} pra mais informações`)
+        return this
     }
 }
 
-module.exports = Embed;
+module.exports = Embed

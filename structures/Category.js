@@ -1,6 +1,6 @@
-const { Collection } = require('discord.js');
-const lang = require('../languages/pt-br.json');
-const fs = require('fs');
+const { Collection } = require('discord.js')
+const lang = require('../languages/pt-br.json')
+const fs = require('fs')
 
 /**
  * Estrutura das categorias do bot
@@ -20,46 +20,45 @@ class Category {
      * @param {String} id  abreviação do nome da categoria
      * @param {Object} data propriedades da categorias
      */
-    constructor(client, id, data) {
-        this.id = id;
-        this.client = client;
+    constructor (client, id, data) {
+        this.id = id
+        this.client = client
          
-        let l = lang.categories[this.id];
-        this.name = l ? l.name : 'none';
-        this.description = l ? l.description : 'none';
-        this.options = {};
-        this.emoji = '';
-        this.color = 0;
-        this.dir = '';
+        let l = lang.categories[this.id]
+        this.name = l ? l.name : 'none'
+        this.description = l ? l.description : 'none'
+        this.options = {}
+        this.emoji = ''
+        this.color = 0
+        this.dir = ''
 
         for (const key in data)
-            if (!this[key]) this[key] = data[key];
+            if (!this[key]) this[key] = data[key]
         
         if (data.options)
             for (const key in data.options)
-                if (!this.options[key]) this.options[key] = data.options[key];
+                if (!this.options[key]) this.options[key] = data.options[key]
             
-        this.directory = `${__dirname}/../${this.dir}`;
+        this.directory = `${__dirname}/../${this.dir}`
 
-        this.commands = new Collection();
+        this.commands = new Collection()
 
-        this.initialize();
+        this.initialize()
     }
 
     // adiciona os comandos da pasta no this.commands
-    initialize() {
+    initialize () {
         fs.readdirSync(this.directory).forEach((file) => {
             if (file.endsWith('.js')) {
-                let Command = require(this.directory + '/' + file);
-                let name = file.replace(/.js/g, '');
+                let Command = require(this.directory + '/' + file)
+                let name = file.replace(/.js/g, '')
 
-                let command = new Command(name, this);
+                let command = new Command(name, this)
 
-                this.commands.set(name, command);
+                this.commands.set(name, command)
             }
-        });
+        })
     }
-
 }
 
-module.exports = Category;
+module.exports = Category

@@ -1,6 +1,6 @@
-const { Client, Collection } = require('discord.js');
-const { Category } = require('./structures/');
-const fs = require("fs");
+const { Client, Collection } = require('discord.js')
+const { Category } = require('./structures/')
+const fs = require("fs")
 
 /**
  * Client princial do The Punisther
@@ -16,28 +16,28 @@ class ThePunisther extends Client {
      * @param {Object} options Opções requisitas do Discord.js
      */
     constructor(config = {}, categories = {}, options = {}) {
-        super(options);
+        super(options)
          
-        this.config = config;
-        this.categories = new Collection();
+        this.config = config
+        this.categories = new Collection()
 
         for (const key in categories)
-            this.categories.set(key, new Category(this, key, categories[key]));
+            this.categories.set(key, new Category(this, key, categories[key]))
 
-        this.initializeListeners();
+        this.initializeListeners()
     }
     
     /**
      * Inicializa os eventos
      */
     initializeListeners() {
-        let path = this.config.folders.listeners;
+        let path = this.config.folders.listeners
         fs.readdirSync(path).forEach((file) => {
             if (file.endsWith('.js')) {
-                const Listener = require(path + '/' + file);
-                this.on(file.replace(/.js/g, ''), Listener);
+                const Listener = require(path + '/' + file)
+                this.on(file.replace(/.js/g, ''), Listener)
             }
-        });
+        })
     }
 
     /**
@@ -46,9 +46,9 @@ class ThePunisther extends Client {
      */
     get commands() {
         return this.categories.reduce((commands, category) => {
-            category.commands.forEach((c) => commands.set(c.name, c));
-            return commands;
-        }, new Collection());
+            category.commands.forEach((c) => commands.set(c.name, c))
+            return commands
+        }, new Collection())
     }
 
     /**
@@ -57,23 +57,23 @@ class ThePunisther extends Client {
      * @returns {Command} 
      */
     fetchCommand(name) {
-        name = name.toLowerCase();
-        return this.commands.find(({ aliases }, i) => i === name || aliases.includes(name));
+        name = name.toLowerCase()
+        return this.commands.find(({ aliases }, i) => i === name || aliases.includes(name))
     }
 
     // Renomea os nomes dos canais da categoria pelas estatísticas do bot  
     editStatusChannels() {
 
-        let parent = this.channels.get(process.env.STATUS_CATEGORY_ID);
+        let parent = this.channels.get(process.env.STATUS_CATEGORY_ID)
         let infos = ['commands', 'guilds', 'users']
-            .map(i => `[${this[i].size}] - ${i.charAt(0).toUpperCase() + i.slice(1)}`);
+            .map(i => `[${this[i].size}] - ${i.charAt(0).toUpperCase() + i.slice(1)}`)
             
-        parent.edit({ name: `STATUS ${this.user.username}` });
-        let channels = parent.children.first(3);
-         infos.forEach((info, i) => channels[i].edit({ name: info}));
+        parent.edit({ name: `STATUS ${this.user.username}` })
+        let channels = parent.children.first(3)
+         infos.forEach((info, i) => channels[i].edit({ name: info}))
 
     }
 
 }
 
-module.exports = ThePunisther;
+module.exports = ThePunisther

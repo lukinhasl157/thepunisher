@@ -3,18 +3,16 @@
  * @event
  * @param {Message} message Emitido sempre que uma mensagem é criada.
  */
-function Message(message) {
+function Message (message) {
     if (message.author.bot || !message.content.startsWith(process.env.PREFIX))
-        return;
+        return
     
-    
-    let args = message.content.slice(process.env.PREFIX.length).split(/ +/g);
-    let command = this.fetchCommand(args.shift());
+    let args = message.content.slice(process.env.PREFIX.length).split(/ +/g)
+    let command = this.fetchCommand(args.shift())
     
     if (command) {
-        return command.process(message, args);
-    }
-    
+        return command.process(message, args)
+    }    
 }
 
-module.exports = Message;
+module.exports = Message
