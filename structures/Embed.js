@@ -6,14 +6,14 @@ const { MessageEmbed } = require("discord.js");
  * @property {ThePunisther} _bot cliente do bot
  */
 class Embed extends MessageEmbed {
-    constructor(message, data) {
-        super(data);
+    constructor (message, data) {
+        super(data)
 
-        this._message = message;
-        this._command = message.command;
-        this._bot = message.client;
+        this._message = message
+        this._command = message.command
+        this._bot = message.client
 
-        this.setTimestamp(new Date());
+        this.setTimestamp(new Date())
 
         if (this._command)
             this.setColor(this._command.category.color);
