@@ -1,7 +1,7 @@
 /**
  * Evento Message do Discord.js
- * @event
- * @param {Message} message Emitido sempre que uma mensagem é criada.
+ * @event message Emitido sempre que uma mensagem é criada.
+ * @param {Message} message mensagem criada
  */
 function Message (message) {
     if (message.author.bot || !message.content.startsWith(process.env.PREFIX))
