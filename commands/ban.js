@@ -26,6 +26,7 @@ module.exports = {
 
             		collector.on("collect", r => {
                         if (!message.member.hasPermission("BAN_MEMBERS"))
+                            msg.delete();
                             return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
             			r.remove(message.author.id);
             			msg.delete();
