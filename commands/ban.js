@@ -6,6 +6,14 @@ module.exports = {
 
 		//gif ban the punisher https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif
 
+        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+        if (!member)
+            return message.channel.send(`» **${message.author.username}** | Por favor, insira o id ou mencione o usuário que deseja banir.`);
+
+        let reason = args.slice(1).join(" ");
+        if (!reason) 
+            return message.channel.send(`» **${message.author.username}** | Por favor, insira um motivo para banir este usuário.`);
+
 		let msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo: **${reason}** ? Se **SIM**, clique no emoji <:correto:505155063963058187> para bani-lo. Se **NÃO** clique no emoji <:negado:505155029636874250> para cancelar esta ação.`);
             await msg.react(":correto:505155063963058187");
 			await msg.react(":negado:505155029636874250");
@@ -18,19 +26,11 @@ module.exports = {
                         r.remove(message.author.id);
                         msg.delete();
 
-                        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-                         if (!member)
-                            return message.channel.send(`» **${message.author.username}** | Por favor, insira o id ou mencione o usuário que deseja banir.`);
-
-                        let reason = args.slice(1).join(" ");
-                        if (!reason) 
-                            return message.channel.send(`» **${message.author.username}** | Por favor, insira um motivo para banir este usuário.`);
+                        if (!message.member.hasPermission("BAN_MEMBERS"))
+                            return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
 
                         if (!member.bannable) 
                             return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
-
-                        if (!message.member.hasPermission("BAN_MEMBERS"))
-                            return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
 
             			switch (r._emoji.name) {
             				case "correto":
