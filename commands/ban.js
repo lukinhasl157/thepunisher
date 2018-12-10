@@ -35,7 +35,7 @@ module.exports = {
                             if (!member.bannable) 
                                 return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho as permissões necessárias para banir este usuário!`);
             					member.send(`» **${member.user.username}** | Você foi banido por **${message.author.username}**. » Motivo: ${reason}.`);
-                                
+
             					member.ban(reason);
             					msg.channel.send(`» O usuário **${member.user.username} ID:** \`\`${member.user.id}\`\` | Foi banido com sucesso. <:correto:505155063963058187>`);
             				break;
@@ -49,7 +49,8 @@ module.exports = {
             		});         			
 
   } catch(e) {
-        console.log(e);
+        let channel = message.guild.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
+        channel.send(`Ocorreu um erro ao executar o comando **BAN.JS**. Servidor: ${message.guild.name}. Executor: **${message.author.username}**. Erro: ${e}.`)
     }
 
   },
