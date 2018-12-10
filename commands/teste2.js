@@ -18,7 +18,9 @@ module.exports = {
 
             if (category || channel) {
                 r.remove(message.author.id);
-                return message.channel.send("Este canal já existe");
+                return message.channel.send("Este canal já existe").then(carai => {
+                    carai.delete(15000);
+                })
             }
 
             if (!channel || !category || category.type !== "category") {

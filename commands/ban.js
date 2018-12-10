@@ -5,9 +5,6 @@ module.exports = {
 	try {
 
 		//gif ban the punisher https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif
-
-		if (!message.member.hasPermission("BAN_MEMBERS"))
-			return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
 		
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		if (!member)
@@ -28,6 +25,8 @@ module.exports = {
     				const collector = msg.createReactionCollector(filter, {time: 60000 });
 
             		collector.on("collect", r => {
+                        if (!message.member.hasPermission("BAN_MEMBERS"))
+                            return message.channel.send(`» **${message.author.username}** | Desculpe você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
             			r.remove(message.author.id);
             			msg.delete();
             			switch (r._emoji.name) {
