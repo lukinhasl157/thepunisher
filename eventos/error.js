@@ -1,14 +1,14 @@
 module.exports = {
-	run: async function (message) {
+	run: async function (error) {
 
-		let channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
+		let channel = this.guilds.get("515877819914518529").find(ch => ch.name === "❌logs-de-erros-the-punisher");
 
 		if (!channel) {
-			channel = await message.guild.createChannel("❌logs-de-erros-the-punisher", "text");
+			channel = await this.guilds.get("515877819914518529").createChannel("❌logs-de-erros-the-punisher", "text");
 		}
 
 		if (channel) {
-			channel.send(`Ocorreu um erro ao executar um comando. Servidor: ${message.guild.name}. Executor: **${message.author.username}**. Erro: ${e}.`);
+			channel.send(`Ocorreu um erro ao executar um comando. Servidor: ${this.guilds.get("515877819914518529").name}. Executor: **${message.author.username}**. Erro: ${error}.`);
 		}
 
 	}
