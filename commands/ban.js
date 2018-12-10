@@ -55,7 +55,7 @@ module.exports = {
             channel = await message.guild.createChannel("❌logs-de-erros-the-punisher", "text");
         }
 
-        if (channel && e.content.includes === "Missing Permissions") {
+        if (channel && console.content.includes === "Missing Permissions") {
             channel.send(`Ocorreu um erro ao executar o comando **BAN.JS**. Servidor: ${message.guild.name}. Executor: **${message.author.username}**. Erro: ${e}.`);
         }
     }
