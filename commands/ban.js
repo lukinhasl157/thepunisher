@@ -50,7 +50,14 @@ module.exports = {
 
   } catch(e) {
         let channel = message.guild.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
-        channel.send(`Ocorreu um erro ao executar o comando **BAN.JS**. Servidor: ${message.guild.name}. Executor: **${message.author.username}**. Erro: ${e}.`)
+
+        if (!channel) {
+            channel = await message.guild.createChannel("❌logs-de-erros-the-punisher", "text");
+        }
+
+        if (channel && e.content.includes === "Missing Permissions") {
+            channel.send(`Ocorreu um erro ao executar o comando **BAN.JS**. Servidor: ${message.guild.name}. Executor: **${message.author.username}**. Erro: ${e}.`);
+        }
     }
 
   },
