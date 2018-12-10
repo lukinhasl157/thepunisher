@@ -8,7 +8,7 @@ module.exports = {
 		}
 
 		if (channel) {
-			channel.send(`Ocorreu um erro ao executar um comando. Servidor: ${this.guilds.get("515877819914518529").name}. Executor: **${message.author.username}**. Erro: ${error}.`);
+			channel.send(`Ocorreu um erro: ${error}.`);
 		}
 
 	}
