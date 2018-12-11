@@ -6,8 +6,8 @@ module.exports = {
     let mAvatar = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
 
       let embed = new Discord.RichEmbed()
-      .setColor(member.displayColor)
-      .setAuthor(`» Avatar do usuário: ${member.user.tag}`, member.user.displayAvatarURL)
+      .setColor(mAvatar.displayColor)
+      .setAuthor(`» Avatar do usuário: ${mAvatar.user.tag}`, mAvatar.user.displayAvatarURL)
       .setDescription(`Clique [aqui](${mAvatar}) para fazer o download da imagem.`)
       .setImage(mAvatar)
       .setFooter(`${message.guild.name}`, message.guild.iconURL)
