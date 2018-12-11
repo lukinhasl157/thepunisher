@@ -8,7 +8,7 @@ module.exports = {
 		if (!args[0]) {
 			return message.channel.send(stringReverse);
 		} else {
-			messge.channel.send(reverse)
+			message.channel.send(reverse);
 		}
 
 },
