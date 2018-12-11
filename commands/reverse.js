@@ -1,8 +1,16 @@
 module.exports = {
 	run: (bot, message, args) => {
 
-		let stringReverse = args.join(" ").split("").reverse().join("");
-		message.channel.send(stringReverse);
+		let reverse = args.join(" ").split("").reverse().join("");
+		let string = "Tá troll? Coloca uma mensagem.";
+		let stringReverse = string.split("").reverse().join("");
+
+		if (!args[0]) {
+			return message.channel.send(stringReverse);
+		} else {
+			messge.channel.send(reverse)
+		}
+
 },
 	aliases: ["reverter", "inverter"],
 	category: "Entreterimento",
