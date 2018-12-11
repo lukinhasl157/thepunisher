@@ -1,8 +1,7 @@
 module.exports = {
 	run: (bot, message, args) => {
 
-		let string = args.join(" ");
-		let stringReverse = string.split(" ").reverse().join(" ");
+		let stringReverse = args.join(" ").reverse().join(" ");
 		message.channel.send(stringReverse);
 },
 	aliases: ["reverter", "inverter"],
