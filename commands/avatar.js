@@ -3,8 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
   run: (bot, message, args) => {
 
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
-    let mAvatar = member.user.avatarURL;
+    let mAvatar = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
 
       let embed = new Discord.RichEmbed()
       .setColor(member.displayColor)
