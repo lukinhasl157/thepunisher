@@ -1,18 +1,9 @@
+module.exports = {
+	run: (bot, message, args) => {
 
-const reverse = require("reverse-text");
-
-	module.exports = {
-		run: (bot, message, args) => {
-
-    if (!args[0]) {
-
-    	return message.channel.send(reverse("Ta troll? Coloca uma msg."));
-
-    } else {
-        
-     message.channel.send(reverse(args.join(" ")));
-
-    }
+		let string = args.join(" ");
+		let stringReverse = string.split(" ").reverse().join(" ");
+		message.channel.send(stringReverse);
 },
 	aliases: ["reverter", "inverter"],
 	category: "Entreterimento",
