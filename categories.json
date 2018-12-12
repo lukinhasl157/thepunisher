@@ -23,6 +23,6 @@
     "util": {
         "emoji": "🛠",
         "color": "0x4286f4",
-        "dir": "commands/util/"
+        "dir": "commands/utility/"
     }
 }

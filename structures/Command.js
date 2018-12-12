@@ -38,7 +38,7 @@ class Command {
 
         let l = lang
         let c = lang.commands[this.name]
-        return this.run(message, {args, l, c})
+        return this.run(message, { args, l, c })
     }
 
     /**
@@ -47,18 +47,17 @@ class Command {
      * @param {Array} args 
      * @returns {String|Boolean} 
      */
-    checkError(message, args) {
+    checkError (message, args) {
         if (this.developerOnlys && !this.bot.guild.member(message.author).roles.get(process.env.ROLE_DEV_ID))
             return true
 
         if (args.length === 0 && this.argsRequired)
             return lang.commands[this.name].argsRequired || this.argsRequired
-            
 
         return false
     }
 
-    run() { }
+    run () { }
 }
 
 module.exports = Command

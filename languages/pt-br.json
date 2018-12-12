@@ -7,6 +7,10 @@
         "img": {
             "name": "Manipulação de imagem",
             "description": "manipulação de imagem"
+        },
+        "util": {
+            "name": "Utilidade",
+            "description": "comandos legais"
         }
     },
     "command": {
@@ -20,6 +24,10 @@
         },
         "eval": {
             "argsRequired": "Digite um codigo!"
+        },
+        "avatar": {
+            "author": "» Avatar do usuário:",
+            "message": "Clique [aqui](url) para fazer o download da imagem."
         }
     }
 }
