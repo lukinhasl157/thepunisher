@@ -3,8 +3,6 @@ const Discord = require("discord.js");
 module.exports = {
 	run: async function(member) {
 
-			if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) return;
-
 		try {
 
 		let channel = member.guild.channels.find(ch => ch.name === "🎉bem-vindos");
@@ -47,8 +45,15 @@ module.exports = {
 			}
 
 		} catch(e) {
-			let channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
-			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
+
+			if (e.code === "Missing Permissions") {
+				return;
+
+			} else {
+
+				let channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
+				channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
+			}
 		}	
 
 	}
