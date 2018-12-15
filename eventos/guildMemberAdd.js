@@ -4,7 +4,7 @@ module.exports = {
 	run: async function(member) {
 
 		let channel = member.guild.channels.find(ch => ch.name === "🎉bem-vindos");
-		let category = member.guild.channles.find(c => c.name === "👾entrada/saida");
+		let category = member.guild.channels.find(c => c.name === "👾entrada/saida");
 
 		let embed = new Discord.RichEmbed()
       	.setColor("#3fdb20")
