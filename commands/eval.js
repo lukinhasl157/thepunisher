@@ -10,7 +10,7 @@ moment.locale('pt-BR');
       .setTimestamp(new Date())
       .setColor('RANDOM')
 
-  var desenvolvedores = ["289209067963154433", "281561868844269569", "385132696135008259"]
+  var desenvolvedores = ["289209067963154433", "281561868844269569", "385132696135008259", "501370728474476545"];
 
   if(!desenvolvedores.includes(message.author.id)) 
     return message.channel.send(`**${message.author.username}** | Este comando é exclusivo para desenvolvedores.`);
