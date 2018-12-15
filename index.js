@@ -1,7 +1,7 @@
 require('dotenv').config()
-const ThePunisther = require('./ThePunisther.js')
+const ThePunisher = require('./ThePunisher.js')
 const config = require('./config.json')
 const categories = require('./categories.json')
-const punisther = new ThePunisther(config, categories)
+const punisther = new ThePunisher(config, categories)
 
 punisther.login(process.env.TOKEN)

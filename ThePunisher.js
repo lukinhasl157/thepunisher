@@ -1,6 +1,6 @@
 const { Client, Collection } = require('discord.js')
-const { Category } = require('./structures/')
-const fs = require("fs")
+const { Category } = require('./structures')
+const fs = require('fs')
 
 /**
  * Client princial do The Punisther
@@ -8,14 +8,14 @@ const fs = require("fs")
  * @prop {Object} config arquivo config.json
  * @prop {Collection<Category>} categories As categorias do bot
  */
-class ThePunisther extends Client {
+class ThePunisher extends Client {
     /**
      *  Cria o Bot
      * @param {Object} config arquivo config.json
      * @param {Object} categories arquivo categories.json
      * @param {Object} options Opções requisitas do Discord.js
      */
-    constructor(config = {}, categories = {}, options = {}) {
+    constructor (config = {}, categories = {}, options = {}) {
         super(options)
          
         this.config = config
@@ -30,7 +30,7 @@ class ThePunisther extends Client {
     /**
      * Inicializa os eventos
      */
-    initializeListeners() {
+    initializeListeners () {
         let path = this.config.folders.listeners
         fs.readdirSync(path).forEach((file) => {
             if (file.endsWith('.js')) {
@@ -44,7 +44,7 @@ class ThePunisther extends Client {
      * Todos comandos do bot
      * @returns {Collection<Command>} 
      */
-    get commands() {
+    get commands () {
         return this.categories.reduce((commands, category) => {
             category.commands.forEach((c) => commands.set(c.name, c))
             return commands
@@ -56,24 +56,21 @@ class ThePunisther extends Client {
      * @param {String} name nome ou alias do comando 
      * @returns {Command} 
      */
-    fetchCommand(name) {
+    fetchCommand (name) {
         name = name.toLowerCase()
         return this.commands.find(({ aliases }, i) => i === name || aliases.includes(name))
     }
 
     // Renomea os nomes dos canais da categoria pelas estatísticas do bot  
-    editStatusChannels() {
-
+    editStatusChannels () {
         let parent = this.channels.get(process.env.STATUS_CATEGORY_ID)
         let infos = ['commands', 'guilds', 'users']
             .map(i => `[${this[i].size}] - ${i.charAt(0).toUpperCase() + i.slice(1)}`)
             
         parent.edit({ name: `STATUS ${this.user.username}` })
         let channels = parent.children.first(3)
-         infos.forEach((info, i) => channels[i].edit({ name: info}))
-
+        infos.forEach((info, i) => channels[i].edit({ name: info }))
     }
-
 }
 
-module.exports = ThePunisther
+module.exports = ThePunisher
