@@ -19,8 +19,8 @@
     },
     "commands": {
         "ping": {
-            "description": "",
-            "message": "Pong! a latencia do bot é "
+            "description": "Lantência do bot",
+            "message": ":ping_pong: Pong! A latencia do bot é "
         },
         "eval": {
             "argsRequired": "Digite um codigo!"
