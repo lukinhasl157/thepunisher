@@ -1,5 +1,4 @@
 const { Command, Embed } = require('../../structures')
-const Package = require('../../package.json')
 const moment = require('moment')
 require('moment-duration-format')
 moment.locale('pt-BR')
@@ -15,7 +14,7 @@ class BotInfo extends Command {
 
         let infos = [
             'Javascript',
-            Package.dependencies['discord.js'],
+            require('discord.js').version,
             process.version
         ]
 
