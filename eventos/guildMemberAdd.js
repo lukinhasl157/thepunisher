@@ -3,9 +3,9 @@ const Discord = require("discord.js");
 module.exports = {
 	run: async function(member) {
 
-		try {
-
 			if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) return;
+
+		try {
 
 		let channel = member.guild.channels.find(ch => ch.name === "🎉bem-vindos");
 		let category = member.guild.channels.find(c => c.name === "👾entrada/saida");
