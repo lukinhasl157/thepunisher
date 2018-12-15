@@ -24,7 +24,7 @@ class Eval extends Command {
 
             embed.addField('Resultado', value('js', toEval))
             embed.addField('Codigo', value('js', code))
-            embed.addField('Tipo', value('css', typeof toEval))
+            embed.addField('Tipo', value('css', typeof resultEval))
         } catch (error) {
             console.error('result eval:', error)
             embed.addField('Error', value('js', error))
