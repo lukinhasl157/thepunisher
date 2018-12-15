@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
 	run: async function(member) {
 
-			if (!message.member.guild.me.hasPermission("MANAGE_CHANNELS")) {
+			if (!member.guild.me.hasPermission("MANAGE_CHANNELS")) {
 				return;
 			}
 
@@ -20,27 +20,19 @@ module.exports = {
       	.setTimestamp(new Date())
       	.setFooter(member.guild.name, member.guild.iconURL)
     	
-    	let embed2 = new Discord.RichEmbed()
-    	.setColor("#3fdb20")
-      	.setThumbnail(member.user.avatarURL)
-      	.setDescription(`${member}, bem vindo(a)! ao servidor :tada:`)
-      	.addField('Você é o membro de número:', member.guild.memberCount)
-      	.setTimestamp(new Date())
-      	.setFooter(member.guild.name, member.guild.iconURL)
-
 			if (!channel || !category || category.type !== "category") {
 
 				category = await member.guild.createChannel("👾entrada/saida", "category");
 				channel = await member.guild.createChannel("🎉bem-vindos", "text");
 				await channel.setParent(category.id);
-				await member.send(embed2)
+				await member.send(embed)
 				let carai = await channel.send(embed);
 				await carai.react("🎉");
 				await carai.react(":bemvindo:523560019841515520");
 
 			} else {
 
-				member.send(embed2);
+				member.send(embed);
 				channel.send(embed).then(async porra => {
 				await porra.react("🎉");
 				await porra.react(":bemvindo:523560019841515520");
