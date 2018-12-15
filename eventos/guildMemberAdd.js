@@ -36,8 +36,10 @@ module.exports = {
 			} else {
 
 				member.send(embed2);
-				let carai2 = channel.send(embed);
-				carai2.react("🎉");
+				channel.send(embed).then(async porra => {
+				await porra.react("🎉");
+
+				})
 			}
 
 		} catch(e) {
