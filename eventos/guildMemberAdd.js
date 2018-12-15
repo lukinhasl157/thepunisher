@@ -3,6 +3,8 @@ const Discord = require("discord.js");
 module.exports = {
 	run: async function(member) {
 
+		try {
+
 		let channel = member.guild.channels.find(ch => ch.name === "🎉bem-vindos");
 		let category = member.guild.channels.find(c => c.name === "👾entrada/saida");
 
@@ -37,6 +39,11 @@ module.exports = {
 				let carai2 = channel.send(embed);
 				carai2.react("🎉");
 			}
+
+		} catch(e) {
+			let channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
+			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
+		}	
 
 	}
 }
