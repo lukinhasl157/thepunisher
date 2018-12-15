@@ -34,7 +34,7 @@ class Embed extends MessageEmbed {
      * @param {Command} command comando que será colocado no footer
      * @returns {Embed}
     */
-    footerHelp(command) {
+    footerHelp (command) {
         command = command || this._command
         if (command) this.setFooter(`utilize ${process.env.PREFIX}help ${command.name} pra mais informações`)
         return this

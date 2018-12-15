@@ -28,6 +28,28 @@
         "avatar": {
             "author": "» Avatar do usuário:",
             "message": "Clique [aqui](url) para fazer o download da imagem."
+        },
+        "botinfo": {
+            "description": "Informações do bot.",
+            "message": "**The Punisher** é um bot para Discord inspirado na série The Punisher da Netflix junto com a Marvel. A função do bot é a focada na parte de Moderação e entreterimento, o bot possui varias funções, das mais básicas até as mais complexas.",
+            "fieldOne": ":pager: » Sistema do bot",
+            "fieldTwo": "📊 » Estatísticas do bot",
+            "fieldTree": "Tempo que estou online",
+            "infos": [
+                "Lang",
+                "Lib",
+                "Node.js"
+            ],
+            "statistics": [
+                "Servidores",
+                "Usuários",
+                "Canais",
+                "Memoria"
+            ]
+        },
+        "uptime": {
+            "description": "Mostrar a quanto tempo o bot está online.",
+            "message": "» Estou online há: "
         }
     }
 }
