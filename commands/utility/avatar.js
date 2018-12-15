@@ -10,7 +10,7 @@ class Avatar extends Command {
         let user = message.mentions.users.first() || (await this.bot.users.get(id)) || message.author
         let avatar = user.displayAvatarURL({ format: 'png', size: 2048 })
         let embed = new Embed(message)
-            .setAuthor(c.author + user.username, avatar)
+            .setAuthor(c.author + ' ' + user.tag, avatar)
             .setDescription(c.message.replace(/url/g, avatar))
             .setImage(avatar)
 
