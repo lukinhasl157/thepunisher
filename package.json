@@ -19,6 +19,8 @@
     "mathjs": "^5.2.3",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
+    "node-opus": "^0.3.1",
+    "opusscript": "0.0.6",
     "os": "^0.1.1",
     "pornhub": "0.0.5",
     "random-puppy": "^1.1.0",
@@ -27,7 +29,8 @@
     "snekfetch": "^4.0.4",
     "table": "^5.1.0",
     "twemoji": "^11.2.0",
-    "util": "^0.11.0"
+    "util": "^0.11.0",
+    "ytdl-core": "^0.28.2"
   },
   "devDependencies": {},
   "scripts": {
