@@ -6,7 +6,7 @@
       try {
 
     if (!message.member.hasPermission("KICK_MEMBERS"))
-        return message.channel.send(`**${message.author.username}** | Desculpe, você não permissão para executar este comando! Permissão requirida: **KICK_MEMBERS**.`);
+        return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão requirida: **KICK_MEMBERS**.`);
       
       let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if (!member)
