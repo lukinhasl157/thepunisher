@@ -5,6 +5,8 @@ module.exports = {
 
 		try {
 
+			if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) return;
+
 		let channel = member.guild.channels.find(ch => ch.name === "🎉bem-vindos");
 		let category = member.guild.channels.find(c => c.name === "👾entrada/saida");
 
