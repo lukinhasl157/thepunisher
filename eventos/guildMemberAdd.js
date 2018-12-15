@@ -32,12 +32,14 @@ module.exports = {
 				await member.send(embed2)
 				let carai = await channel.send(embed);
 				await carai.react("🎉");
+				await carai.react(":bemvindo:523560019841515520");
 
 			} else {
 
 				member.send(embed2);
 				channel.send(embed).then(async porra => {
 				await porra.react("🎉");
+				await porra.react(":bemvindo:523560019841515520");
 
 				})
 			}
