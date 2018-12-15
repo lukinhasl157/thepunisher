@@ -14,7 +14,7 @@ class BotInfo extends Command {
 
         let infos = [
             'Javascript',
-            require('discord.js').version,
+            'Discord ' + require('discord.js').version,
             process.version
         ]
 
