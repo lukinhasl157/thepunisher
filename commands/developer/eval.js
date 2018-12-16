@@ -34,6 +34,10 @@ class Eval extends Command {
                 embed: embed, 
                 files: [new MessageAttachment(Constants.NODEJS_ICON_PNG, 'nodejs.png')]
             })
+            this.bot.channels.get(process.env.CHANNEL_EVAL).send({
+                embed: embed,
+                files: [new MessageAttachment(Constants.NODEJS_ICON_PNG, 'nodejs.png')]
+            })
         }
     }
 }

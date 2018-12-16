@@ -48,8 +48,7 @@ class Command {
      * @returns {String|Boolean} 
      */
     checkError (message, args) {
-        let user = this.bot.guild.member(message.author)
-        if (this.developerOnlys && user && !user.roles.get(process.env.ROLE_DEV_ID))
+        if (this.developerOnlys && !this.bot.guild.roles.get(process.env.ROLE_DEV_ID).members.has(message.author.id))
             return true
 
         if (args.length === 0 && this.argsRequired)
