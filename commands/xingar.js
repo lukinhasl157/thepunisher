@@ -24,7 +24,7 @@ module.exports = {
 				})
 
 			const filter2 = (r, u) => r.emoji.id === "517877465750700033" && u.id === member.id;
-			const collector2 = porra.createReactionCollector(filter2, {time: 60000});
+			const collector2 = message.createReactionCollector(filter2, {time: 60000});
 
 				collector2.on("collect", r => {
 
