@@ -28,8 +28,8 @@ module.exports = {
 
 				collector2.on("collect", r => {
 
-					r.remove(message.author.id);
-					message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: "${m.content}".`);
+					r.remove(member.id);
+					porra.edit(`${member}, o usuário **${message.author.username}**, xingou você de: "${m.content}".`);
 
 			})
 
