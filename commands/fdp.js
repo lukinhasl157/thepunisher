@@ -3,6 +3,10 @@ module.exports = {
 
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.get(args.join(" "));
 
+		if (args.length === 0) {
+			return message.channel.send(`» **${message.author.username}** | Por favor, insira o id, nome ou mencione o usuário que deseja banir.`);
+		}
+
 		if (member) {
 			message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:\n https://www.tenor.co/VKuX.gif`);
 		} else {
