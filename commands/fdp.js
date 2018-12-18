@@ -10,7 +10,7 @@ module.exports = {
 		}
 
 		if (member) {
-			const attachment = new Discord.attachment()
+			const attachment = new Discord.Attachment()
 			.setAttachment("./filhodaputa.gif")
 			message.channel.send({
 			text: `${member}, o usuário **${message.author.username}** xingou você de:`,
