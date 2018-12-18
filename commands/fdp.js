@@ -1,5 +1,3 @@
-const { attachment } = new attachment();
-
 module.exports = {
 	run: (bot, message, args) => {
 
@@ -10,7 +8,9 @@ module.exports = {
 		}
 
 		if (member) {
-			message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:\n attachment://filhodaputa.gif`);
+			const attachment = new Discord.Attachment()
+			.setAttachment("./filhodaputa.gif")
+			message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:\n${attachment}`);
 		} else {
 			message.channel.send(`**${message.author.username}** | O usuário **${args.join(" ")}** não foi encontrado.`);
 		}
