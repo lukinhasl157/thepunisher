@@ -14,7 +14,7 @@ module.exports = {
 			.setAttachment("./filhodaputa.gif")
 			message.channel.send({
 			text: `${member}, o usuário **${message.author.username}** xingou você de:`,
-			attachment: ["./filhodaputa.gif"]
+			files: ["attachment//./filhodaputa.gif"]
 		});
 
 		} else {
