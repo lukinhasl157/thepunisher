@@ -1,3 +1,5 @@
+const { attachment } = new attachment();
+
 module.exports = {
 	run: (bot, message, args) => {
 
@@ -8,7 +10,7 @@ module.exports = {
 		}
 
 		if (member) {
-			message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:\n https://www.tenor.co/VKuX.gif`);
+			message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:\n attachment://filhodaputa.gif`);
 		} else {
 			message.channel.send(`**${message.author.username}** | O usuário **${args.join(" ")}** não foi encontrado.`);
 		}
