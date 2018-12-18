@@ -11,7 +11,7 @@ module.exports = {
 
 		if (member) {
 			const attachment = new Discord.Attachment()
-			.setAttachment("./filhodaputa.gif")
+			.setAttachment("https://media1.tenor.com/images/d1a859a5f30ffae77b2359aa10c8a76a/tenor.gif?itemid=11341089")
 			message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:\n${attachment}`);
 		} else {
 			message.channel.send(`**${message.author.username}** | O usuário **${args.join(" ")}** não foi encontrado.`);
