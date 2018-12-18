@@ -10,10 +10,12 @@ module.exports = {
 		}
 
 		if (member) {
-			message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:`);
-			const attachment = new Discord.Attachment()
+			const attachment = new Discord.attachment()
 			.setAttachment("./filhodaputa.gif")
-			message.channel.send(attachment);
+			message.channel.send({
+			text: `${member}, o usuário **${message.author.username}** xingou você de:`,
+			attachment: ["./filhodaputa.gif"]
+		});
 
 		} else {
 			message.channel.send(`**${message.author.username}** | O usuário **${args.join(" ")}** não foi encontrado.`);
