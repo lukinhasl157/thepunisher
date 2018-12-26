@@ -30,7 +30,9 @@ module.exports = {
 				await carai.react("🎉");
 				await carai.react(":bemvindo:523560019841515520");
 
-			} else {
+			} 
+
+			if (channel || category || category.type === "category") {
 
 				channel.send(embed);
 				
