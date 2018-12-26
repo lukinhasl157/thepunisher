@@ -9,7 +9,7 @@ module.exports = {
 		try {
 
 		const filter = msg => msg.content.startsWith(numberRandom);
-		const collector = channel.awaitMessages(filter, { time: 300 * 1000, errors: ["time"] });
+		const collector = channel.awaitMessages(filter, { max: 1, time: 300 * 1000, errors: ["time"] });
 
 			message.channel.send(`${collected.first()} venceu o evento loteria. O número correto era ${collected.first().content}`);
 
