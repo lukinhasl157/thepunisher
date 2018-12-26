@@ -11,7 +11,7 @@ module.exports = {
 
 			collector.on("collect", msg => {
 
-				message.channel.send(`${collector.first()} venceu o evento loteria. O número correto era ${numberRandom}`);
+				message.channel.send(`${msg.content.first()} venceu o evento loteria. O número correto era ${numberRandom}`);
 
 			});
 			
