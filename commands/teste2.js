@@ -5,12 +5,8 @@ module.exports = {
     await msg.react('👦')
     await msg.react('👧')
 
-    const filter = (reaction, user) => reaction.emoji.name === '👦' && user.id === message.author.id;
-    const collector = msg.createReactionCollector(filter, { time: 60000 });
-
-    const filter1 = (reaction, user) => reaction.emoji.name === '👧' && user.id === message.author.id;
-    const collector1 = msg.createReactionCollector(filter1, { time: 60000 });
-
+    const filter = (reaction) => reaction.emoji.name === ['👦', '👧'];
+    const collector = msg.createReactionCollector(filter);
     
     collector.on('collect', r => {
     let role = message.guild.roles.find(r => r.name === "xupador de rola");
