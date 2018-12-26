@@ -6,16 +6,19 @@ module.exports = {
 
 		message.channel.send("Evento loteria iniciado!");
 
-		try {
+		const filter = msg => msg.content.startsWith(numberRandom);
+		const collector = message.channel.createMessageCollector(filter, { time: 300000 });
 
-		const filter = message.content.startsWith(numberRandom);
-		const collector = message.channel.awaitMessages(filter, { max: 1, time: 300000, errors: ["time"] });
+			collector.on("collect", msg => {
 
-			return message.channel.send(`${collector.first()} venceu o evento loteria. O número correto era ${numberRandom}`);
+				message.channel.send(`${collector.first()} venceu o evento loteria. O número correto era ${numberRandom}`);
 
-		} catch (time) {
-			return message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era ${numberRandom} ${time}`);
-		}
+			});
+			
+			collector.on("end", collected => {
+
+				message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era ${numberRandom}`);
+			})
 
 	}
 }
