@@ -13,12 +13,12 @@ module.exports = {
 
     
     collector.on('collect', r => {
-    let role = message.guild.roles.find(r => r.name === "nome do cargo");
+    let role = message.guild.roles.find(r => r.name === "xupador de rola");
         message.member.addRole(role);
   });
    
        collector1.on('collect', r1 => {
-    let role2 = message.guild.roles.find(r => r.name === "nome do cargo");
+    let role2 = message.guild.roles.find(r => r.name === "filmao lendario");
         message.member.addRole(role2);
   });
        
