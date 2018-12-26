@@ -15,6 +15,7 @@ module.exports = {
 
 		} catch(e) {
 			return message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era ${numberRandom}`);
+			console.log(e);
 		}
 
 	}
