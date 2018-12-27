@@ -9,7 +9,7 @@ module.exports = {
 			const filter = msg => msg.content.startsWith(numberRandom);
 			const collected = await message.channel.awaitMessages(filter, { max: 1, time: 300000, erros: ["time"] }).then(collected => {
 
-				message.channel.send(`${collected.first().author} venceu o evento loteria. O número correto era ${numberRandom}`);
+				message.channel.send(`${collected.first().author} venceu o evento loteria. O número correto era ${numberRandom}. Tentativas ${collected.size}`);
 
 			}).catch(collected => message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era ${numberRandom}. Tentativas ${collected.size}`));
 
