@@ -11,7 +11,7 @@ module.exports = {
 
 				message.channel.send(`${collected.first().author} venceu o evento loteria. O número correto era ${numberRandom}`);
 
-			}).catch(e => message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era ${numberRandom} ${e}`));
+			}).catch(collected => message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era ${numberRandom}. Tentativas ${collected.size}`));
 
 	}
 }
