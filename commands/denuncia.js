@@ -1,58 +1,74 @@
+module.exports = {
+    run: async function (bot, message, args) {
 
-    const Discord = require("discord.js");
-    const cooldown = new Set();
-    
-    module.exports = {
-        run: async function (bot, message, args) {
+        message.author.send("1º Passo: Qual o nome do usuário que deseja denunciar?\nExemplo: ``The Punisher#4581``").catch(e => message.channel.send(`${message.author.username} | Por favor, ative suas mensagens diretas para que possa enviar meus comandos.`));
+        message.channel.send(`${message.author.username} | Verifique suas mensagens.`).then(msg => {
+            msg.delete(60 * 1000)
+        });
 
+        const collector1 = channel.createMessageCollector({time: 300 * 1000});
 
-        if (cooldown.has(message.author.id)) return message.channel.send(`${message.author}, aguarde **2m** para usar outro comando novamente.`).then(msg => msg.delete(7000));{
-            cooldown.add(message.author.id);
-             message.delete(120000);
-        
-                        setTimeout(() => {
-                            cooldown.delete(message.author.id);
-                        }, 120000);
+        collector1.on("collect", m1 => {
+
+            let msg1 = m.content.toLowerCase().includes();
+            m1.stop();
+            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${msg1}**`);
+
+        });
+
+        const collector2 = channel.createMessageCollector({time: 300 * 1000});
+
+        collector2.on("collect", m2 => {
+
+            let msg2 = m.content.toLowerCase().includes();
+            m2.stop();
+            message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${msg1}** pelo motivo \`\`${msg2} ?\`\`\nSe deseja enviar a denuncia digite **SIM**, caso não queira enviar a denuncia digite **NÃO**`);
+
+        })
+
+        const collector3 = channel.createMessageCollector({time: 300 * 1000});
+
+        collector3.on("collect", m3 => {
+
+            let msgYes = m3.content.toLowerCase().includes("sim");
+            let msgNo = m3.content.toLowerCase().includes("não" || "nao");
+
+                if (msgYes) {
+                    let channel = message.guild.channel.find(ch => ch.name === "Denuncias");
+
+                    if (!channel) {
+                        channel = await message.guild.createChannel("Denuncias", "text", [{
+
+                            id: message.guild.id,
+                            deny: ["SEND_MESSAGES"],
+                            allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
+
+                        }])
+
+                        message.author.send("Sua denuncia foi enviada com sucesso. A nossa equipe irá analisar sua denuncia em breve.")
+                        await channel.send(`teste\nUsuário: ${msg1}\nMotivo: ${msg2}`);
+
+                    } else {
+
+                        channel.send(`teste\nUsuário: ${msg1}\nMotivo: ${msg2}`);
+
                     }
 
-        if (message.mentions.users.size === 0) return message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Por favor, mencione o usuário que deseja denunciar.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-    if (!args.slice(1).join(' ')) return message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Diga o motivo da denuncia, digite **j!denuncia (@usuário) (motivo)**`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-    let member = message.guild.member(message.mentions.users.first() || bot.users.get(args[0]));
+                } else if (msgNo) {
 
-    let perms = ["SEND_MESSAGES", "ADD_REACTIONS"];
-    let channel = message.guild.channels.find(c => c.name === 'denuncias');
-    try {
-    if (!channel) {
-        channel = await message.guild.createChannel('denuncias', 'text', [{
-            id: message.guild.id,
-            deny: perms,
-            allow: []
-    }])
-    await message.channel.send(`${message.author}, não encontrei o canal denuncias, então criei o canal automaticamente.`);
-    }
+                    message.author.send("Sua denuncia foi cancelada com sucesso.");
 
-    let embed = new Discord.RichEmbed()
-    .setColor(message.member.displayColor)
-    .setTitle("<:notification:500453518918811659> Denuncias")
-    .setAuthor(`${bot.user.tag}`, bot.user.displayAvatarURL)
-    .setThumbnail(message.mentions.users.first().avatarURL)
-    .setDescription(`**• Usuário:** ${member.user.tag}\n**• ID:** ${member.user.id}`)
-    .addField(`:notepad_spiral: Motivo:`, args.slice(1).join(' '))
-    .setFooter(`Denuncia enviada por ${message.author.tag}`, message.author.displayAvatarURL)
-    .setTimestamp(new Date())
-    await channel.send(embed);
-    message.channel.send(new Discord.RichEmbed().setDescription(`${message.author} Obrigado por denunciar o usuário, sua denuncia foi enviada e um staff irá conferir em breve. (O uso incorreto deste comando resultará em **BAN.**)`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#07ed66"));
+                } else {
+                    message.author.send("Este argumento não é uma resposta válida, digite **SIM** para enviar a denuncia ou digite **NÃO** para cancelar a denuncia.")
+                }
 
-} catch(error) {
-    console.log(error);
-    message.channel.send("Erro: Eu não tenho a permissão de criar canais.")
-    message.react(":negado:505155029636874250");
-    }
+        })
 
-    return this.name;
+
+
 },
 
-    aliases: ["denunciar", "report"],
+    aliases: ["denunciar", "report", "repotar", "denuncia"],
     category: "Moderação",
     description: "Denunciar um usuário."
   }

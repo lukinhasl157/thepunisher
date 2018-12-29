@@ -5,10 +5,14 @@ module.exports = {
 		let string = "Tá troll? Coloca uma mensagem.";
 		let stringReverse = string.split("").reverse().join("");
 
-		if (!args[0]) {
+		if (args.lenght === 0) {
+
 			return message.channel.send(stringReverse);
+
 		} else {
+
 			message.channel.send(reverse);
+			
 		}
 
 },
