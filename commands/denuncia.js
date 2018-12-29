@@ -1,10 +1,16 @@
 module.exports = {
     run: async function (bot, message, args) {
 
-        message.author.send("1º Passo: Qual o nome do usuário que deseja denunciar?\nExemplo: ``The Punisher#4581``").catch(e => message.channel.send(`${message.author.username} | Por favor, ative suas mensagens diretas para que possa enviar meus comandos.`));
-        message.channel.send(`${message.author.username} | Verifique suas mensagens.`).then(msg => {
-            msg.delete(60 * 1000)
+        try {
+
+            message.author.send("1º Passo: Qual o nome do usuário que deseja denunciar?\nExemplo: ``The Punisher#4581``")
+            message.channel.send(`**${message.author.username}** | Verifique suas mensagens diretas.`).then(msg => {
+                msg.delete(60 * 1000)
         });
+
+        } catch(e) {
+            message.channel.send(`**${message.author.username}** | Por favor, ative suas mensagens diretas para que eu possa enviar meus comandos.`);
+        }
 
         const collector1 = message.channel.createMessageCollector({time: 300 * 1000});
 
