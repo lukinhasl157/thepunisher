@@ -6,7 +6,7 @@ module.exports = {
             msg.delete(60 * 1000)
         });
 
-        const collector1 = channel.createMessageCollector({time: 300 * 1000});
+        const collector1 = message.channel.createMessageCollector({time: 300 * 1000});
 
         collector1.on("collect", m1 => {
 
@@ -16,7 +16,7 @@ module.exports = {
 
         });
 
-        const collector2 = channel.createMessageCollector({time: 300 * 1000});
+        const collector2 = message.channel.createMessageCollector({time: 300 * 1000});
 
         collector2.on("collect", m2 => {
 
@@ -26,7 +26,7 @@ module.exports = {
 
         });
 
-        const collector3 = channel.createMessageCollector({time: 300 * 1000});
+        const collector3 = message.channel.createMessageCollector({time: 300 * 1000});
 
         collector3.on("collect", async m3 => {
 
