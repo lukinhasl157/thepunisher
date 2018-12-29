@@ -24,11 +24,11 @@ module.exports = {
             m2.stop();
             message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${msg1}** pelo motivo \`\`${msg2} ?\`\`\nSe deseja enviar a denuncia digite **SIM**, caso não queira enviar a denuncia digite **NÃO**`);
 
-        })
+        });
 
         const collector3 = channel.createMessageCollector({time: 300 * 1000});
 
-        collector3.on("collect", m3 => {
+        collector3.on("collect", async m3 => {
 
             let msgYes = m3.content.toLowerCase().includes("sim");
             let msgNo = m3.content.toLowerCase().includes("não" || "nao");
@@ -62,8 +62,7 @@ module.exports = {
                     message.author.send("Este argumento não é uma resposta válida, digite **SIM** para enviar a denuncia ou digite **NÃO** para cancelar a denuncia.")
                 }
 
-        })
-
+        });
 
 
 },
