@@ -10,7 +10,7 @@ module.exports = {
 
         collector1.on("collect", m1 => {
 
-            let msg1 = m.content.toLowerCase().includes();
+            let msg1 = m1.content.toLowerCase().includes();
             m1.stop();
             message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${msg1}**`);
 
@@ -20,7 +20,7 @@ module.exports = {
 
         collector2.on("collect", m2 => {
 
-            let msg2 = m.content.toLowerCase().includes();
+            let msg2 = m2.content.toLowerCase().includes();
             m2.stop();
             message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${msg1}** pelo motivo \`\`${msg2} ?\`\`\nSe deseja enviar a denuncia digite **SIM**, caso não queira enviar a denuncia digite **NÃO**`);
 
