@@ -25,7 +25,7 @@ module.exports = {
 
         collector2.on("collect", m2 => {
             collector2.stop();
-            message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${m1.content.toLowerCase().includes()}** pelo motivo \`${m2.content.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
+            message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${m.content.toLowerCase().includes()}** pelo motivo \`${m2.content.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
         });
 
         const filter3 = m3 => m3.author.id = message.author.id;       
@@ -45,7 +45,7 @@ module.exports = {
                     message.author.send("Sua denuncia foi enviada com sucesso. A nossa equipe irá analisar sua denuncia em breve.")
                     await channel.send(`teste\nUsuário: ${m.content.toLowerCase().includes()}\nMotivo: ${m2.content.toLowerCase().includes()}`);
                 } else {
-                    channel.send(`teste\nUsuário: ${m1.content.toLowerCase().includes()}\nMotivo: ${m2.content.toLowerCase().includes()}`);
+                    channel.send(`teste\nUsuário: ${m.content.toLowerCase().includes()}\nMotivo: ${m2.content.toLowerCase().includes()}`);
                 };
             } else if (m3.content.toLowerCase().includes("não" || "nao")) {
                 collector3.stop();
