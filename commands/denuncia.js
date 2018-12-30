@@ -12,21 +12,23 @@ module.exports = {
                 msg.delete(60 * 1000)
             });
 
-        const collector = message.channel.createMessageCollector({time: 300 * 1000, max: 1});
+        const filter = m => m.author.id = message.author.id; 
+        const collector = message.channel.createMessageCollector(filter, {time: 300 * 1000, max: 1});
 
         collector.on("collect", m => {
-            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.content}**`);
+            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.content.toLowerCase().includes()}**`);
         });
 
-            
-        const collector2 = message.channel.createMessageCollector({time: 300 * 1000, max: 1});
+        const filter2 = m2 => m2.author.id = message.author.id;
+        const collector2 = message.channel.createMessageCollector(filter2, {time: 300 * 1000, max: 1});
 
         collector2.on("collect", m2 => {
             m2.stop();
             message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${m1.content.toLowerCase().includes()}** pelo motivo \`${m2.content.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
         });
 
-        const collector3 = message.author.dmChannel.createMessageCollector({time: 300 * 1000, max: 1});
+        const filter3 = m3 => m3.author.id = message.author.id;       
+        const collector3 = message.channel.createMessageCollector(filter3, {time: 300 * 1000, max: 1});
 
         collector3.on("collect", async m3 => {
 
