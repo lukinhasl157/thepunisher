@@ -19,14 +19,14 @@ module.exports = {
             message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.content.toLowerCase().includes()}**`);
         });
 
-        const collector2 = message.author.dmChannel.createMessageCollector(m2 => m.author.id === message.author.id, {time: 300 * 1000, max: 1});
+        const collector2 = message.author.dmChannel.createMessageCollector(m2 => m2.author.id === message.author.id, {time: 300 * 1000, max: 1});
 
         collector2.on("collect", m2 => {
             m2.stop();
             message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${m1.content.toLowerCase().includes()}** pelo motivo \`${m2.content.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
         });
 
-        const collector3 = message.author.dmChannel.createMessageCollector(m3 => m.author.id === message.author.id, {time: 300 * 1000, max: 1});
+        const collector3 = message.author.dmChannel.createMessageCollector(m3 => m3.author.id === message.author.id, {time: 300 * 1000, max: 1});
 
         collector3.on("collect", async m3 => {
 
