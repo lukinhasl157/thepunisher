@@ -18,7 +18,6 @@ module.exports = {
         collector.on("collect", m => {
             collector.stop();
             message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.content.toLowerCase().includes()}**`);
-        });
 
         const filter2 = m2 => m2.author.id = message.author.id;
         const collector2 = message.channel.createMessageCollector(filter2, {time: 300 * 1000, max: 1});
@@ -26,7 +25,6 @@ module.exports = {
         collector2.on("collect", m2 => {
             collector2.stop();
             message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${m.content.toLowerCase().includes()}** pelo motivo \`${m2.content.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
-        });
 
         const filter3 = m3 => m3.author.id = message.author.id;       
         const collector3 = message.channel.createMessageCollector(filter3, {time: 300 * 1000, max: 1});
@@ -53,6 +51,9 @@ module.exports = {
             } else {
                 message.author.send("Este argumento não é uma resposta válida, digite **SIM** para enviar a denuncia ou digite **NÃO** para cancelar a denuncia.");
             };
+
+                });
+            });            
         });
     },
     aliases: ["denunciar", "report", "repotar", "denuncia"],
