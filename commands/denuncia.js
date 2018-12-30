@@ -16,7 +16,7 @@ module.exports = {
         const collector = message.channel.createMessageCollector(filter, {time: 300 * 1000, max: 1});
 
         collector.on("collect", m => {
-            let msg1 = m.content;
+            var msg1 = m.content;
             message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${msg1.toLowerCase().includes()}**`);
 
         });
@@ -25,7 +25,7 @@ module.exports = {
         const collector2 = message.channel.createMessageCollector(filter2, {time: 300 * 1000, max: 1});
 
         collector2.on("collect", m2 => {
-            let msg2 = m2.content;
+            var msg2 = m2.content;
             message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${msg1.toLowerCase().includes()}** pelo motivo \`${msg2.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
 
         });
@@ -35,7 +35,7 @@ module.exports = {
 
         collector3.on("collect", async m3 => {
 
-            let msg3 = m3.content;
+            var msg3 = m3.content;
             if (msg3.toLowerCase().includes("sim")) {
                 let channel = message.guild.channel.find(ch => ch.name === "Denuncias");
                 if (!channel) {
