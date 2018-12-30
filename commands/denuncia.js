@@ -17,7 +17,7 @@ module.exports = {
 
         collector.on("collect", m => {
             let msg1 = m.content;
-            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.toLowerCase().includes()}**`);
+            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${msg1.toLowerCase().includes()}**`);
 
         const filter2 = m2 => m2.author.id = message.author.id;
         const collector2 = message.channel.createMessageCollector(filter2, {time: 300 * 1000, max: 1});
