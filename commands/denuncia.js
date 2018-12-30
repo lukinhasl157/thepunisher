@@ -12,12 +12,11 @@ module.exports = {
                 msg.delete(60 * 1000)
             });
 
-        const filter = m => m.content.toLowerCase().includes();
+        const filter = m => m.content.toLowerCase().includes("porra");
         const collector = message.channel.createMessageCollector(filter, {time: 300 * 1000, max: 1});
 
         collector.on("collect", m => {
-            m.stop();
-            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.content.toLowerCase().includes()}**`);
+            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.content}**`);
         });
 
             
