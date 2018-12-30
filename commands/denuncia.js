@@ -12,6 +12,7 @@ module.exports = {
                 msg.delete(60 * 1000)
             });
 
+        message.author.createDM()
         const collector = message.author.dmChannel.createMessageCollector(m => m.author.id === message.author.id, {time: 300 * 1000, max: 1});
 
         collector.on("collect", m => {
