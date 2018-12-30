@@ -13,7 +13,7 @@ module.exports = {
             });
 
         const filter = m => m.content.toLowerCase().includes();
-        const collector = message.author.createMessageCollector(filter, {time: 300 * 1000, max: 1});
+        const collector = message.channel.createMessageCollector(filter, {time: 300 * 1000, max: 1});
 
         collector.on("collect", m => {
             m.stop();
