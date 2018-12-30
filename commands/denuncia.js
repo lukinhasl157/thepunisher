@@ -13,7 +13,7 @@ module.exports = {
             });
 
         const filter = m => m.content.toLowerCase().includes();
-        const collector1 = message.channel.createMessageCollector(filter, {time: 300 * 1000});
+        const collector1 = message.author.dmChannel.createMessageCollector(filter, {time: 300 * 1000});
 
         collector1.on("collect", m => {
             m.stop();
@@ -21,14 +21,14 @@ module.exports = {
         });
 
         const filter2 = m2 => m2.content.toLowerCase().includes();
-        const collector2 = message.channel.createMessageCollector(filter2, {time: 300 * 1000});
+        const collector2 = message.author.dmChannel.createMessageCollector(filter2, {time: 300 * 1000});
 
         collector2.on("collect", m2 => {
             m2.stop();
             message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${msg1}** pelo motivo \`${msg2}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
         });
 
-        const collector3 = message.channel.createMessageCollector({time: 300 * 1000});
+        const collector3 = message.author.dmChannel.createMessageCollector({time: 300 * 1000});
 
         collector3.on("collect", async m3 => {
 
