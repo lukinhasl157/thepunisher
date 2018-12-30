@@ -16,23 +16,23 @@ module.exports = {
         const collector = message.channel.createMessageCollector(filter, {time: 300 * 1000, max: 1});
 
         collector.on("collect", m => {
-            collector.stop();
-            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.content.toLowerCase().includes()}**`);
+            let m = m.content;
+            message.author.send(`2º Passo: Qual o motivo que deseja denunciar o usuário **${m.toLowerCase().includes()}**`);
 
         const filter2 = m2 => m2.author.id = message.author.id;
         const collector2 = message.channel.createMessageCollector(filter2, {time: 300 * 1000, max: 1});
 
         collector2.on("collect", m2 => {
-            collector2.stop();
-            message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${m.content.toLowerCase().includes()}** pelo motivo \`${m2.content.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
+            let m2 = m2.content;
+            message.author.send(`3º Passo: Tem certeza que deseja denunciar o usuário **${m.toLowerCase().includes()}** pelo motivo \`${m2.toLowerCase().includes()}\`?\nSe deseja enviar a denuncia digite **sim**, caso não queira enviar a denuncia digite **não**`);
 
         const filter3 = m3 => m3.author.id = message.author.id;       
         const collector3 = message.channel.createMessageCollector(filter3, {time: 300 * 1000, max: 1});
 
         collector3.on("collect", async m3 => {
 
-            if (m3.content.toLowerCase().includes("sim")) {
-                collector3.stop();
+            let m3 = m3.content;
+            if (m3.toLowerCase().includes("sim")) {
                 let channel = message.guild.channel.find(ch => ch.name === "Denuncias");
                 if (!channel) {
                     channel = await message.guild.createChannel("Denuncias", "text", [{
@@ -41,12 +41,11 @@ module.exports = {
                         allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
                     }])
                     message.author.send("Sua denuncia foi enviada com sucesso. A nossa equipe irá analisar sua denuncia em breve.")
-                    await channel.send(`teste\nUsuário: ${m.content.toLowerCase().includes()}\nMotivo: ${m2.content.toLowerCase().includes()}`);
+                    await channel.send(`teste\nUsuário: ${m.toLowerCase().includes()}\nMotivo: ${m2.toLowerCase().includes()}`);
                 } else {
-                    channel.send(`teste\nUsuário: ${m.content.toLowerCase().includes()}\nMotivo: ${m2.content.toLowerCase().includes()}`);
+                    channel.send(`teste\nUsuário: ${m.toLowerCase().includes()}\nMotivo: ${m2.toLowerCase().includes()}`);
                 };
-            } else if (m3.content.toLowerCase().includes("não" || "nao")) {
-                collector3.stop();
+            } else if (m3.toLowerCase().includes("não" || "nao")) {
                 message.author.send("Sua denuncia foi cancelada com sucesso.");
             } else {
                 message.author.send("Este argumento não é uma resposta válida, digite **SIM** para enviar a denuncia ou digite **NÃO** para cancelar a denuncia.");
