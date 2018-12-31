@@ -23,19 +23,23 @@ module.exports = {
 			if (!channel || !category || category.type !== "category") {
 
 				category = await member.guild.createChannel("👾entrada/saida", "category");
-				channel = await member.guild.createChannel("🎊saida", "text");
+				channel = await member.guild.createChannel("🎊saida", "text" [{
+					id: member.guild.id;
+					deny: ["SEND_MESSAGES"],
+					allow: ["VIEW_CHANNEL", "ADD_REACTIONS"]
+				}])
 				await channel.setParent(category.id);
-				await member.send(embed)
+				await member.send(embed);
 				let carai = await channel.send(embed);
 				await carai.react("🎉");
 				await carai.react(":bemvindo:523560019841515520");
+			} else if (channel || category || category.type === "category" || category.name === "👾entrada/saida") {
 
-			} 
-
-			if (channel || category || category.type === "category") {
+				channel.setParent(category.id);
+				channel.send(embed);
+			} else {
 
 				channel.send(embed);
-				
 			}
 
 		} catch(e) {

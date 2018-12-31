@@ -23,7 +23,12 @@ module.exports = {
 			if (!channel || !category || category.type !== "category") {
 
 				category = await member.guild.createChannel("👾entrada/saida", "category");
-				channel = await member.guild.createChannel("🎉bem-vindos", "text");
+				channel = await member.guild.createChannel("🎉bem-vindos", "text" [{
+					id: member.guild.id,
+					deny: ["SEND_MESSAGES"],
+					allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
+				}])
+
 				await channel.setParent(category.id);
 				await member.send(embed)
 				let carai = await channel.send(embed);
