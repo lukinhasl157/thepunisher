@@ -24,7 +24,7 @@ module.exports = {
 
 				category = await member.guild.createChannel("👾entrada/saida", "category");
 				channel = await member.guild.createChannel("🎊saida", "text" [{
-					id: member.guild.id;
+					id: member.guild.id,
 					deny: ["SEND_MESSAGES"],
 					allow: ["VIEW_CHANNEL", "ADD_REACTIONS"]
 				}])
