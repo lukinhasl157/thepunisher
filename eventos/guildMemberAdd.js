@@ -53,15 +53,3 @@ module.exports = {
 
 	}
 }
-				await channel.setParent(category.id);
-				await member.send(embed).catch(e => {
-					if (e.code === "Cannot send messages to this user") {
-						return;
-					} else {
-						console.log(e);
-					}
-				});
-
-								let msg = await channel.send(embed);
-				await msg.react("🎉");
-				await msg.react(":bemvindo:523560019841515520");
