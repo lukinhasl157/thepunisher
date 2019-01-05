@@ -29,17 +29,18 @@ module.exports = {
 				}])
 				await channel.setParent(category.id);
 				await member.send(embed);
-				let carai = await channel.send(embed);
-				await carai.react("🎉");
-				await carai.react(":bemvindo:523560019841515520");
+				let msg = await channel.send(embed);
+				await msg.react("🎉");
+				await msg.react(":bemvindo:523560019841515520");
 
-			} else if (channel || category || category.type === "category" || category.name === "👾entrada/saida") {
+			} else {
 				await channel.setParent(category.id);
 				await member.send(embed);
 				let m = await channel.send(embed);
 				await m.react("🎉");
 				await m.react(":bemvindo:523560019841515520");
 			}
+
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
 			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)

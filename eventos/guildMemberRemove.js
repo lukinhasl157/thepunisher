@@ -20,7 +20,7 @@ module.exports = {
       	.setTimestamp(new Date())
       	.setFooter(member.guild.name, member.guild.iconURL)
     	
-			if (!channel || !category || category.type !== "category") {
+			if (!channel || !category || category.type !== "category" || category.name !== "👾entrada/saida") {
 				category = await member.guild.createChannel("👾entrada/saida", "category");
 				channel = await member.guild.createChannel("🎊saida", "text" [{
 					id: member.guild.id,
@@ -29,14 +29,14 @@ module.exports = {
 				}]);
 				await channel.setParent(category.id);
 				await member.send(embed);
-				let carai = await channel.send(embed);
-				await carai.react("🎉");
-				await carai.react(":bemvindo:523560019841515520");
-			} else if (channel || category || category.type === "category" || category.name === "👾entrada/saida") {
+				let msg = await channel.send(embed);
+				await msg.react("🎉");
+				await msg.react(":bemvindo:523560019841515520");
+			} else {
 				channel.setParent(category.id);
 				channel.send(embed);
 			}
-			
+
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
 			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
