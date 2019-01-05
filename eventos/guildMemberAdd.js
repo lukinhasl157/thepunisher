@@ -30,20 +30,19 @@ module.exports = {
 				}]);
 				await channel.setParent(category.id);
 				await member.send(embed).catch(e => {
-					if (e.code === "Cannot send messages to this user") {
-						return;
-					} else {
-						console.log(e);
-					}
+					return;
 				});
 				let msg = await channel.send(embed);
 				await msg.react("🎉");
 				await msg.react(":bemvindo:523560019841515520");
 			} else {
+				channel.setParent(category.id);
 				let m = await channel.send(embed);
 				await m.react("🎉");
 				await m.react(":bemvindo:523560019841515520");
-				member.send(embed);
+				member.send(embed).catch(e => {
+					return;
+				})
 			}
 
 		} catch(e) {

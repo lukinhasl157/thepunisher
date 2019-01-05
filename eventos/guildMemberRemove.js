@@ -28,23 +28,17 @@ module.exports = {
 					deny: ["SEND_MESSAGES"],
 					allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
 				}]);
-				await channel.setParent(category.id);
+				channel.setParent(category.id);
+				await channel.send(embed);
 				await member.send(embed).catch(e => {
-					if (e.code === "Cannot send messages to this user") {
 						return;
-					} else {
-						console.log(e);
-					}
 				});
-				let msg = await channel.send(embed);
-				await msg.react("🎉");
-				await msg.react(":bemvindo:523560019841515520");
 			} else {
 				channel.setParent(category.id);
-				let m = await channel.send(embed);
-				await m.react("🎉");
-				await m.react(":bemvindo:523560019841515520");
-				member.send(embed);
+				channel.send(embed);
+				member.send(embed).catch(e => {
+					return;
+				});
 			}
 
 		} catch(e) {
