@@ -23,7 +23,7 @@ module.exports = {
 			if (!category || category.type !== "category" || category.name !== "👾ENTRADA/SAIDA") {
 				category = await member.guild.createChannel("👾ENTRADA/SAIDA", "category");
 			} else if (!channel || channel.name !== "🎉saiu") {
-				channel = await member.guild.createChannel("🎉bem-vindos", "text" [{
+				channel = await member.guild.createChannel("🎉saiu", "text" [{
 					id: member.guild.id,
 					deny: ["SEND_MESSAGES"],
 					allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
