@@ -9,8 +9,8 @@ module.exports = {
 
 		try {
 
-		let channel = member.guild.channels.find(ch => ch.name === "🎉bem-vindos");
-		let category = member.guild.channels.find(ch => ch.name === "👾entrada/saida");
+		let channel = member.guild.channels.find(ch => ch.name === "🎉entrou");
+		let category = member.guild.channels.find(ch => ch.name === "👾ENTRADA/SAIDA");
 
 		const embed = new Discord.RichEmbed()
       	.setColor("#3fdb20")
@@ -20,25 +20,30 @@ module.exports = {
       	.setTimestamp(new Date())
       	.setFooter(member.guild.name, member.guild.iconURL)
     	
-			if (!channel || !category || category.type !== "category" || category.name === "👾entrada/saida", "category") {
-				category = await member.guild.createChannel("👾entrada/saida", "category");
+			if (!category || category.type !== "category" || category.name !== "👾ENTRADA/SAIDA") {
+				category = await member.guild.createChannel("👾ENTRADA/SAIDA", "category");
+			} else if (!channel || channel.name !== "🎉entrou") {
 				channel = await member.guild.createChannel("🎉bem-vindos", "text" [{
 					id: member.guild.id,
 					deny: ["SEND_MESSAGES"],
 					allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
-				}])
+				}]);
 				await channel.setParent(category.id);
-				await member.send(embed);
+				await member.send(embed).catch(e => {
+					if (e.code === "Cannot send messages to this user") {
+						return;
+					} else {
+						console.log(e);
+					}
+				});
 				let msg = await channel.send(embed);
 				await msg.react("🎉");
 				await msg.react(":bemvindo:523560019841515520");
-
 			} else {
-				await channel.setParent(category.id);
-				await member.send(embed);
 				let m = await channel.send(embed);
 				await m.react("🎉");
 				await m.react(":bemvindo:523560019841515520");
+				member.send(embed);
 			}
 
 		} catch(e) {
@@ -48,3 +53,15 @@ module.exports = {
 
 	}
 }
+				await channel.setParent(category.id);
+				await member.send(embed).catch(e => {
+					if (e.code === "Cannot send messages to this user") {
+						return;
+					} else {
+						console.log(e);
+					}
+				});
+
+								let msg = await channel.send(embed);
+				await msg.react("🎉");
+				await msg.react(":bemvindo:523560019841515520");
