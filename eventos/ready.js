@@ -9,7 +9,7 @@ module.exports.run = function() {
             this.user.setPresence({game:  {name: randomStatus, type: 'STREAMING', url: 'http://twitch.tv/thedoomsday27'}});
         }
       
-    setInterval(() => setStatus(), 15000);
+    setInterval(() => setStatus(), 60 * 1000);
       
     this.channels.get("515877820358983693").setName(`» Servidores: [${this.guilds.size}]`);
     this.channels.get("516051234168242179").setName(`» Usuários: [${this.users.size}]`);
