@@ -13,7 +13,7 @@ module.exports = {
     const totalmembros = message.guild.memberCount;
     const canaistexto = message.guild.channels.filter(a => a.type === "text").size;
     const canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
-    const roles = message.guild.roles.map(r => r.name).join(", ").replace("@everyone, ", "");
+    const roles = message.guild.roles.map(r => r).join("\n").toString().replace("@everyone, ", "");
     const inline = '1';
         
       let embed = new Discord.RichEmbed()
@@ -59,7 +59,7 @@ module.exports = {
                 break;
             }
         } catch (e) {
-            return message.channel.send("**ERRO**: A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.\nPara voltar a página inicial clique no emoji <a:arrowLeft:531247468260622353>")
+            return message.channel.send("**ERRO**: A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.")
             .then(m => {
                 m.delete(120 * 1000)
             });
