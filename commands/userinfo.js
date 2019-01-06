@@ -1,32 +1,28 @@
-
-  const Discord = require("discord.js");
-  const moment = require("moment");
-  moment.locale('pt-BR'); 
+const Discord = require("discord.js");
+const moment = require("moment");
+moment.locale("pt-BR"); 
   
-  module.exports.run = async (bot, message, args) => {
+module.exports = {
+  run: (bot, message, args) => {
   
+  const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
+  const administrator = member.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
+  const status = {
+    "online": "Disponível",
+    "offline": "Invisível",
+    "idle": "Ausente",
+    "dnd": "Não perturbar"
+  }
 
-  let usuario = message.guild.members.mentions.first() || message.guild.members.get(args[0]) || message.author;
-  let administrador;
-if(usuario.hasPermission("ADMINISTRATOR") === true) administrador = "Sim";
-if(usuario.hasPermission("ADMINISTRATOR") === false) administrador = "Não";
-  let statusmebro;
-if(usuario.presence.status === "dnd") statusmebro = "Não pertubar";
-if(usuario.presence.status === "idle") statusmebro = "Ausente";
-if(usuario.presence.status === "stream") statusmebro = "Transmitindo";
-if(usuario.presence.status === "offline") statusmebro = "Invisível";
-if(usuario.presence.status === "online") statusmebro = "Disponível";
-  let userinfoembed = new Discord.RichEmbed()
-  .setThumbnail(usuario.user.displayAvatarURL)
+  const embed = new Discord.RichEmbed()
+  .setThumbnail(member.user.displayAvatarURL)
   .setTimestamp()
-  .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
-  .addField(`ℹ Informações principais:`, `:white_small_square:Usuário: ${usuario.user.tag}\n:white_small_square:Id: ${usuario.user.id}\n:white_small_square:Status: ${statusmebro}\n:white_small_square:Jogando: ${usuario.user.presence.game ? usuario.user.presence.game.name : 'O usuário não está jogando nada no momento.'}\n:white_small_square:Criada em: ${moment(usuario.user.createdAt).format("LLL")}`)
-  .addField(`📑 Informações no servidor:`, `:white_small_square:Apelido: ${usuario.user.nickname || "Sem apelido."}\n:white_small_square:Entrou: ${moment(usuario.user.joinedAt).format('LLL')}\n:white_small_square:Cargos: ${usuario.roles.size || "Sem cargos."}\n:white_small_square:Administrador: ${administrador}`)
-  .setAuthor(`Informações do usuário: ${usuario.user.username}`, usuario.user.displayAvatarURL)
-  .setColor(usuario.displayColor)
-    message.channel.send(userinfoembed);
+  .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
+  .addField(`» ℹ Informações principais:`, `» Usuário: ${member.user.tag}\n» ID: ${member.user.id}\n» Status: ${status[member.user.presence.status]}\n» Jogando: ${member.user.presence.game ? member.user.presece.game : "O usuário não está jogando nada no momento."}\n» Conta criada em: ${moment(member.user.createdAt).format("LLL")}`)
+  .addField(`» 📑 Informações no servidor:`, `» Apelido: ${member.user.nickname? member.user.nickname : "Sem apelido"}\n» Entrou em: ${moment(member.user.joinedAt).format("LLLL")}\n» Cargos: ${member.roles.size? member.roles.size : "Sem cargos."}\n» Administrador: ${administrator}`)
+  .setAuthor(`» Informações do usuário: ${member.user.tag}`, member.user.displayAvatarURL)
+  .setColor(member.hexColor)
+  message.channel.send(embed);
 
   }
-  module.exports.help = {
-    name: "userinfo"
-  }
+}
