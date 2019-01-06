@@ -13,7 +13,7 @@ module.exports = {
     const totalmembros = message.guild.memberCount;
     const canaistexto = message.guild.channels.filter(a => a.type === "text").size;
     const canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
-    const roles = message.guild.roles.map(r => r).join("\n").toString().replace("@everyone, ", "");
+    const roles = message.guild.roles.map(r => r).join("\n").replace("@everyone, ", "");
     const inline = '1';
         
       let embed = new Discord.RichEmbed()
