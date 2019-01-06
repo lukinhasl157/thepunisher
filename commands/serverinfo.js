@@ -46,7 +46,7 @@ module.exports = {
                 case "531248395411521566":
                     const embed2 = new Discord.RichEmbed()
                     .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
-                    .addField(":beginner: » Total de cargos: [${message.guild.roles.size}]", `\`\`\`\njs${roles}\`\`\`\n\nPara voltar a página inicial clique no emoji <a:arrowLeft:531247468260622353>`)
+                    .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, `\`\`\`\njs${roles}\`\`\``)
                     .setThumbnail(message.guild.iconURL)
                     .setTimestamp(new Date())
                     .setColor("#FF0000")
