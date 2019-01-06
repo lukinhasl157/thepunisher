@@ -36,7 +36,7 @@ module.exports = {
         await msg.react("a:arrowLeft:531247468260622353");
         await msg.react("a:arrowRight:531248395411521566");
 
-        const filter = (reaction, user) => && user.id === message.author.id;
+        const filter = (reaction, user) => reaction.me && user.id === message.author.id;
         const collector = msg.createReactionCollector(filter, {time: 60 * 1000});
 
         collector.on("collect", reaction => {
