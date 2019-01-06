@@ -9,7 +9,7 @@ module.exports = {
         	return message.channel.send(`**${message.author.username}** | Por favor, insira um nome para este emoji.`);
         } else {
             const link = args[0];
-       		const emojiName = args.split(" ").join("-");
+       		const emojiName = args.slice(1).split(" ").join("-");
             message.guild.emojis.create(link, emojiName);
             message.channel.send(`Emoji ${emojiName} criado com sucesso!`);
         }
