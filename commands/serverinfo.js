@@ -42,7 +42,7 @@ module.exports = {
         collector.on("collect", reaction => {
 
             switch(r.emoji.id) {
-                case: "531248395411521566":
+                case "531248395411521566":
                     const embed2 = new Discord.RichEmbed()
                     .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
                     .addField(":beginner: » Total de cargos:", `[${message.guild.roles.size}]`)
@@ -53,7 +53,7 @@ module.exports = {
                     msg.edit(embed2);
                 break;
 
-                case: "531247468260622353":
+                case "531247468260622353":
                     msg.edit(embed);
                 break;
             }
