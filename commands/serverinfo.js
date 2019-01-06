@@ -41,6 +41,7 @@ module.exports = {
 
         collector.on("collect", reaction => {
 
+        try {
             switch(reaction.emoji.id) {
                 case "531248395411521566":
                     const embed2 = new Discord.RichEmbed()
@@ -57,6 +58,10 @@ module.exports = {
                     msg.edit(embed);
                 break;
             }
+        } catch (e) {
+            return message.channel.send("A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.");
+        }
+        
         });
     
   },
