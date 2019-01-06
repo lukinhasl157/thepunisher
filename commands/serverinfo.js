@@ -3,18 +3,18 @@ const moment = require("moment");
 moment.locale("pt-BR");
 
 module.exports = {
-    run: (bot, message, args) => {
+    run: async function (bot, message, args) {
 
-    let online = message.guild.members.filter(a => a.presence.status == "online").size;
-    let ocupado = message.guild.members.filter(a => a.presence.status == "dnd").size;
-    let ausente = message.guild.members.filter(a => a.presence.status == "idle").size;
-    let offline = message.guild.members.filter(a => a.presence.status == "offline").size;
-    let bots = message.guild.members.filter(a => a.user.bot).size;
-    let totalmembros = message.guild.memberCount;
-    let canaistexto = message.guild.channels.filter(a => a.type === "text").size;
-    let canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
-    let roles = message.guild.roles.map(a => a.name).join(", ").replace('@everyone, ', '');
-    let inline = '1';
+    const online = message.guild.members.filter(a => a.presence.status == "online").size;
+    const ocupado = message.guild.members.filter(a => a.presence.status == "dnd").size;
+    const ausente = message.guild.members.filter(a => a.presence.status == "idle").size;
+    const offline = message.guild.members.filter(a => a.presence.status == "offline").size;
+    const bots = message.guild.members.filter(a => a.user.bot).size;
+    const totalmembros = message.guild.memberCount;
+    const canaistexto = message.guild.channels.filter(a => a.type === "text").size;
+    const canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
+    const roles = message.guild.roles.map(r => r.name).join(", ").replace("@everyone, ", "");
+    const inline = '1';
         
       let embed = new Discord.RichEmbed()
         .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
@@ -29,11 +29,35 @@ module.exports = {
         .addField("<:fast:500147391945768981> » Tempo afk", `${message.guild.afkTimeout} segundos`, inline)
         .addField(`<:user:500109138953633792> » Membros: [${totalmembros}]`, `<:online:529179015865434132> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:529178886647578626> Ocupado: ${ocupado}\n <:offline:529178943882788866> Offline: ${offline}\n <:bot:529180656090087424> Bots: ${bots}`, inline)
         .addField(`🛡 » Nivel de verificação:`, message.guild.verificationLevel.toString().replace("0", "Nenhum (sem restrições)").replace("1", "Baixo: Precisa tem um e-mail verificado em sua conta do Discord.").replace("2", "Médio: Também precisa ser registrado no Discord por pelo menos 5 minutos.").replace("3", "Alto: Também precisa ser um membro deste servidor por pelo menos 10 minutos.").replace("4", "Muito alto: Precisa ter um telefone verificado em sua conta do Discord."), inline)
-        .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`)
+        .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, `Para ver todos os cargos do servidor clique no emoji <a:arrowRight:531248395411521566> para voltar a página inicial clique no emoji <a:arrowLeft:531247468260622353>`)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
+        let msg = await message.channel.send(embed);
+        await msg.react("a:arrowLeft:531247468260622353");
+        await msg.react("a:arrowRight:531248395411521566");
 
-        message.channel.send(embed);
+        const filter = (reaction, user) => && user.id === message.author.id;
+        const collector = msg.createReactionCollector(filter, {time: 60 * 1000});
+
+        collector.on("collect", reaction => {
+
+            switch(r.emoji.id) {
+                case: "531248395411521566":
+                    const embed2 = new Discord.RichEmbed()
+                    .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
+                    .addField(":beginner: » Total de cargos:", `[${message.guild.roles.size}]`)
+                    .setDescription(`\`\`\`\njs${roles}\`\`\``)
+                    .setThumbnail(message.guild.iconURL)
+                    .setTimestamp(new Date())
+                    .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
+                    msg.edit(embed2);
+                break;
+
+                case: "531247468260622353":
+                    msg.edit(embed);
+                break;
+            }
+        });
     
   },
      aliases: ["si", "server", "servidor"],
