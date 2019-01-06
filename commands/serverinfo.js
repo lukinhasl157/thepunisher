@@ -46,10 +46,11 @@ module.exports = {
                 case "531248395411521566":
                     const embed2 = new Discord.RichEmbed()
                     .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
-                    .addField(":beginner: » Total de cargos:", `[${message.guild.roles.size}]`)
+                    .addField(":beginner: » Total de cargos: [${message.guild.roles.size}]", `\`\`\`\njs${roles}\`\`\``)
                     .setDescription(`\`\`\`\njs${roles}\`\`\``)
                     .setThumbnail(message.guild.iconURL)
                     .setTimestamp(new Date())
+                    .setColor("#FF0000")
                     .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
                     msg.edit(embed2);
                 break;
@@ -61,7 +62,7 @@ module.exports = {
         } catch (e) {
             return message.channel.send("A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.");
         }
-        
+
         });
     
   },
