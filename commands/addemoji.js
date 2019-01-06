@@ -17,6 +17,7 @@ module.exports = {
         }
 
         } catch(e) {
+            console.log(e);
             return message.channel.send(`**ERRO**: O servidor excedeu o limite de **50** emojis do Discord.`);
         }
     }
