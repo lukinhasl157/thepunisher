@@ -5,8 +5,8 @@ moment.locale("pt-BR");
 module.exports = {
   run: (bot, message, args) => {
   
-  const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.author;
-  const administrator = member.user.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
+  const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
+  const administrator = member.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
   const status = {
     "online": "Disponível",
     "offline": "Invisível",
