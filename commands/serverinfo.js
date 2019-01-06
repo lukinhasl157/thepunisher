@@ -59,7 +59,10 @@ module.exports = {
                 break;
             }
         } catch (e) {
-            return msg.edit("**ERRO**: A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.\nPara voltar a página inicial clique no emoji <a:arrowLeft:531247468260622353>");
+            return message.channel.send("**ERRO**: A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.\nPara voltar a página inicial clique no emoji <a:arrowLeft:531247468260622353>")
+            .then(m => {
+                m.delete(120 * 1000)
+            });
         }
 
         });
