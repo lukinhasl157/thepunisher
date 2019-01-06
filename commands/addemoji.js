@@ -13,7 +13,7 @@ module.exports = {
         } else {
             message.guild.createEmoji(link, emojiName);
             const emoji = bot.emojis.find(e => e.name === `${args.join("-")}`);
-            message.channel.send(`Emoji ${emoji} foi adicionado com sucesso!`);
+            message.channel.send(`Emoji ${emoji.name} foi adicionado com sucesso!`);
         }
 
         } catch(e) {
