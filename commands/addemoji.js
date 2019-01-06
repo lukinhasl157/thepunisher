@@ -6,8 +6,6 @@ module.exports = {
 
         if (!link) {
             return message.channel.send(`**${message.author.username}** | Por favor, insira o link do emoji que deseja adicionar.`);
-        } else if (!link.endsWith(".png" || ".png?v=1")) {
-            return message.channel.send(`**${message.author.username}** | Desculpe, o link deste emoji é inválido.`);
         } else if (!emojiName) {
         	return message.channel.send(`**${message.author.username}** | Por favor, insira um nome para este emoji.`);
         } else {
