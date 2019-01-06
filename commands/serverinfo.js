@@ -41,7 +41,7 @@ module.exports = {
 
         collector.on("collect", reaction => {
 
-            switch(r.emoji.id) {
+            switch(reaction.emoji.id) {
                 case "531248395411521566":
                     const embed2 = new Discord.RichEmbed()
                     .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
