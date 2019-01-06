@@ -1,7 +1,7 @@
 module.exports = {
     run: (bot, message, args) => {
 
-        const link = args[0].shift();
+        const link = args.shift();
         const emojiName = args.join("-");
 
         if (!link) {
