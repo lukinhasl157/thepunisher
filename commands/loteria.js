@@ -2,7 +2,7 @@ module.exports = {
 	run: async function(bot, message, args) {
 
 	function numbersRandom () {
-		Math.floor(Math.random() * 50);
+		return Math.floor(Math.random() * 50);
 	}
 
 		message.channel.send(`Evento loteria iniciado! Um número aleátorio foi gerado entre 0 e 50. Para participar digite t.loteria "número". Boa sorte aos participantes!`);
