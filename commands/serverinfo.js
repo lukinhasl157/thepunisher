@@ -5,14 +5,22 @@ moment.locale("pt-BR");
 module.exports = {
     run: async function (bot, message, args) {
 
-    const online = message.guild.members.filter(a => a.presence.status == "online").size;
-    const ocupado = message.guild.members.filter(a => a.presence.status == "dnd").size;
-    const ausente = message.guild.members.filter(a => a.presence.status == "idle").size;
-    const offline = message.guild.members.filter(a => a.presence.status == "offline").size;
-    const bots = message.guild.members.filter(a => a.user.bot).size;
+    const verificationGuild = {
+        "0": "Nenhum (sem restrições)",
+        "1": "Baixo: Precisa tem um e-mail verificado em sua conta do Discord.",
+        "2": "Médio: Também precisa ser registrado no Discord por pelo menos 5 minutos.",
+        "3": "Alto: Também precisa ser um membro deste servidor por pelo menos 10 minutos.",
+        "4": "Muito alto: Precisa ter um telefone verificado em sua conta do Discord."
+    }
+
+    const online = message.guild.members.filter(m => m.presence.status == "online").size;
+    const ocupado = message.guild.members.filter(m => m.presence.status == "dnd").size;
+    const ausente = message.guild.members.filter(m => m.presence.status == "idle").size;
+    const offline = message.guild.members.filter(m => m.presence.status == "offline").size;
+    const bots = message.guild.members.filter(b => b.user.bot).size;
     const totalmembros = message.guild.memberCount;
-    const canaistexto = message.guild.channels.filter(a => a.type === "text").size;
-    const canaisvoz = message.guild.channels.filter(a => a.type === "voice").size;
+    const canaistexto = message.guild.channels.filter(t => t.type === "text").size;
+    const canaisvoz = message.guild.channels.filter(v => v.type === "voice").size;
     const roles = message.guild.roles.map(r => r).join("\n").replace("@everyone, ", "");
     const inline = '1';
         
@@ -28,7 +36,7 @@ module.exports = {
         .addField("<:world:500147421641310229> » Região:", message.guild.region.toString().replace("brazil", ":flag_br: Brasil"), inline)
         .addField("<:fast:500147391945768981> » Tempo afk", `${message.guild.afkTimeout} segundos`, inline)
         .addField(`<:user:500109138953633792> » Membros: [${totalmembros}]`, `<:online:529179015865434132> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:529178886647578626> Ocupado: ${ocupado}\n <:offline:529178943882788866> Offline: ${offline}\n <:bot:529180656090087424> Bots: ${bots}`, inline)
-        .addField(`🛡 » Nivel de verificação:`, message.guild.verificationLevel.toString().replace("0", "Nenhum (sem restrições)").replace("1", "Baixo: Precisa tem um e-mail verificado em sua conta do Discord.").replace("2", "Médio: Também precisa ser registrado no Discord por pelo menos 5 minutos.").replace("3", "Alto: Também precisa ser um membro deste servidor por pelo menos 10 minutos.").replace("4", "Muito alto: Precisa ter um telefone verificado em sua conta do Discord."), inline)
+        .addField(`🛡 » Nivel de verificação:`, verificationGuild[message.guild.verificationLevel], inline)
         .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, `Para ver todos os cargos do servidor clique no emoji <a:arrowRight:531248395411521566>`)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
@@ -68,7 +76,7 @@ module.exports = {
         });
     
   },
-     aliases: ["si", "server", "servidor"],
-     category: "Moderação",
-     description: "Mostrar as informações do servidor."
+    aliases: ["si", "server", "servidor"],
+    category: "Moderação",
+    description: "Mostrar as informações do servidor."
 }
