@@ -4,11 +4,8 @@
 module.exports = {
     run: (bot, message, args) => {
 
-    let user = message.mentions.members.first() || message.member;
-    let string = ''
-    message.channel.permissionsFor(user).toArray().map(p => string += `${p.charAt(0) + p.toLowerCase().replace(/_/g, ' ').slice(1).replace(`vad`, `VAD`)}, `)
-    let finalStr = string 
-                   let p = {
+    let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
+                   let permissions = {
             "CREATE_INSTANT_INVITE": "Criar convite instantâneo",
             "KICK_MEMBERS": "Expulsar usuários",
             "BAN_MEMBERS": "Banir usuários",
@@ -43,12 +40,12 @@ module.exports = {
             "MANAGE_EMOJIS": "Gerenciar emojis"
             }
     let embed = new Discord.RichEmbed()
-    .setDescription(`Permissões de **${message.author.username}**`)
-    .addField(`Lista de permissões:`, `\`\`\`js\n${p[finalStr]}\`\`\``)
+    .setDescription(`Permissões de **${member.user.username}**`)
+    .addField(`Lista de permissões:`, `\`\`\`js\n${permissions[message.channel.permissionsFor(member).toArray()]}\`\`\``)
     .setColor('#ff0000')
     .setTimestamp(new Date())
-    .setFooter(message.author.tag, message.author.avatarURL)
-    .setThumbnail(message.author.avatarURL)
+    .setFooter(member.user.tag, member.user.avatarURL)
+    .setThumbnail(member.user.avatarURL)
     message.channel.send(embed);
 },
 
