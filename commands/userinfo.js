@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
   run: (bot, message, args) => {
   
-  const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.find(m => m.user.username.startsWith(args.join(" "))) || message.member;
+  const member = message.mentions.members.first() || message.author; || message.guild.members.get(args[0]) || message.guild.members.find(m => m.user.username.startsWith(args.join(" ")));
   const administrator = member.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
   const status = {
     "online": "<:online:529179015865434132> Disponível",
