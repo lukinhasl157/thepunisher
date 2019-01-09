@@ -19,5 +19,8 @@ module.exports = {
             console.log(e);
             return message.channel.send(`**ERRO**: O servidor excedeu o limite de **100** emojis do Discord.`);
         }
-    }
+    },
+    aliases: ["adicionaremoji", "emojiad"],
+    category: "Utilidades",
+    description: "Adicionar um emoji ao servidor."
 }

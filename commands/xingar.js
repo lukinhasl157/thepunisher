@@ -41,7 +41,7 @@ module.exports = {
 
 	},
 	aliases: [],
-	category: "entretenimento",
+	category: "Entretenimento",
 	description: "Xingar um usuário."
 }
 
