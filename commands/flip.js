@@ -17,6 +17,6 @@ const flip = require("flip-text");
 
 },
 	aliases: ["girar"],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Girar os argumentos de ponta cabeça."
 }

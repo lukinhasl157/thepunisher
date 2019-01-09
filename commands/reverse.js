@@ -17,6 +17,6 @@ module.exports = {
 
 },
 	aliases: ["reverter", "inverter"],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Reverter os argumentos."
 }

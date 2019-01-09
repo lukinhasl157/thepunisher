@@ -20,6 +20,6 @@ module.exports = {
             })
         })  
     },
-    category: 'Entreterimento',
+    category: 'Entretenimento',
     description: 'Formatar um texto em ascii'
 }

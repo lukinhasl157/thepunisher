@@ -13,8 +13,6 @@ module.exports = {
     message.channel.bulkDelete(fetched);
     message.channel.send(`**${message.author.username}** | O chat foi limpo com sucesso <a:sucessogif:499614074129350666>`).then(msg => msg.delete(10000));
 
-return this.name;
-
   },
 
     aliases: ["limpar"],

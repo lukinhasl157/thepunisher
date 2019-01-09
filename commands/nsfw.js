@@ -27,6 +27,6 @@ const Discord = require('discord.js');
 },
 
     aliases: ["porno", "putaria", "porn"],
-    category: "Entreterimento",
+    category: "Entretenimento",
     description: "Conteúdo NSFW **+18**"
 }

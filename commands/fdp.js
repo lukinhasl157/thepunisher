@@ -20,6 +20,6 @@ module.exports = {
 		}
 
 	}, aliases: ["filho da puta", "filhodaputa"],
-	   category: "Entreterimento",
+	   category: "Entretenimento",
 	   description: "Xingar um usuário de filho da puta."
 }

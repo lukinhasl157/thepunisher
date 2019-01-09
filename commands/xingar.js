@@ -39,7 +39,10 @@ module.exports = {
 			message.channel.send(`Deu merda aqui: ${e}`);
 		}
 
-	}
+	},
+	aliases: [],
+	category: "entretenimento",
+	description: "Xingar um usuário."
 }
 
 

@@ -6,6 +6,6 @@ module.exports = {
     	message.channel.send(sayMessage);
   },
 	aliases: ["falar", "dizer"],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Dizer uma mensagem pelo bot"
 	}	

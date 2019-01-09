@@ -14,6 +14,6 @@ module.exports = {
 
 },
 	aliases: ["searchgif", "procurargif"],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Pesquisar um gif."
 }
