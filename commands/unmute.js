@@ -5,13 +5,12 @@ module.exports = {
   
   const role = message.guild.roles.find(r => r.name === "The Punisher | 🔇 Muted");
   const member = message.mentions.members.first() || message.guild.members.get(args[0]);
-  const roleMember = member.roles.find(r => r.name === "The Punisher | 🔇 Muted");
 
     if (!member) {
       return message.channel.send(`**${message.author.username}** | Por favor, insira o id ou mencione que deseja desmutar.`);
     } else if (args.length === 0) {
       return message.channel.send(`**${message.author.username}** | Por favor, insira um motivo para desmutar este usuário.`);
-    } else if (!roleMember) {
+    } else if (member.roles.has(role.id)) {
       return message.channel.send(`**${message.author.username}** | Desculpe, este usuário não está mutado.`);
     } else {
       member.removeRole(role).catch(e => {
