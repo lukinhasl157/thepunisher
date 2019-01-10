@@ -34,6 +34,8 @@ module.exports = {
 
     } catch(e) {
       console.log(e);
+    }
+    
     } else {
       await member.addRole(role);
       const embed = new Discord.RichEmbed()
