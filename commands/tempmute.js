@@ -4,58 +4,58 @@ const ms = require("ms");
 module.exports = {
   run: async function (bot, message, args) {
 
-  if (!message.member.hasPermission("MUTE_MEMBERS")) 
-    return message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, você não tem permissão para executar este comando!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-    
-    let tomute = message.guild.member(message.mentions.users.first() || bot.users.get(args[0]) || message.guild.members.get(args[0]));
-  if (!tomute) 
-    return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, mencione o usuário que deseja mutar.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-    
-    let reason = args[2];
-  if (!reason) 
-    return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, diga um motivo para mutar este usuário.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-    let muterole = message.guild.roles.find(role => role.name === 'The punisher | Muted');
-  
+    const member = message.mentions.members.first() || message.guil.members.get(args[0]);
+    const role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
+    const time = args[2];
 
-  if (!muterole) {
+    if (!message.member.hasPermission("MUTE_MEMBERS")) {
+      return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão requirida: **MUTE_MEMBERS**`)
+    } else if (!member) {
+      return message.channel.send(`**${message.author.username}** | Por favor insira o id ou mencione o usuário que deseja banir.`);
+    } else if (!args[1]) {
+      return messsage.channel.send(`**${message.author.username}** | Por favor insira um tempo para banir este usuário. Exemplo: t.tempute @usuário 30s motivo`)
+    } else if (args.length === 0) {
+      return message.channel.send(`**${message.author.username}** | Por favor insira um motivo para mutar este usuário.`);
+    } else if (!role) {
+          try {
 
-    try {
-
-      muterole = await message.guild.createRole({
-        name: "The Punisher | Muted",
+      role = await message.guild.createRole({
+        name: "The punisher | 🔇 Muted",
         color: "#ff0000",
         permissions:[]
-
-      })
-
+      });
       message.guild.channels.forEach(async (channel, id) => {
-        await channel.overwritePermissions(muterole, {
+        await channel.overwritePermissions(role, {
           SEND_MESSAGES: false,
           SPEAK: false,
           ADD_REACTIONS: false
-
         });
-
       });
 
     } catch(e) {
-      console.log(e.stack);
+      console.log(e);
+    } else {
+      await member.addRole(role);
+      const embed = new Discord.RichEmbed()
+      .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
+      .setThumbnail(member.user.displayAvatarURL)
+      .setColor("#ff0000")
+      .setTimestamp(new Date())
+      .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
+      message.channel.send(embed);
+
+      setTimeout(function() {
+      member.removeRole(role);
+      const embed = new Discord.RichEmbed()
+      .setAuthor(`Comando automático | DESMUTE`, bot.user.displayAvatarURL)
+      .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
+      .setThumbnail(member.user.displayAvatarURL)
+      .setColor("#ff0000")
+      .setTimestamp(new Date())
+      .setFooter(message.guild.name, message.guild.iconURL)
+      message.channel.send(embed);
+      }, ms(time));
     }
-  }
-
-  let mutetime = args[1];
-  if(!mutetime) return message.channel.send(new Discord.RichEmbed().setDescription(`Por favor, digite o tempo que deseja mutar este usuário.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-
-  await tomute.addRole(muterole);
-  message.channel.send(new Discord.RichEmbed().setDescription(`O usuário <@${tomute.id}> foi mutado por **${ms(ms(mutetime))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setThumbnail(tomute.user.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-
-  setTimeout(function() {
-    tomute.removeRole(muterole);
-    message.channel.send(new Discord.RichEmbed().setDescription(`O usuário <@${tomute.id}> que havia sido mutado por **${ms(ms(mutetime))}**, finalizou seu tempo de punição e foi desmutado.`).setAuthor(`Comando automático | DESMUTE`, bot.user.displayAvatarURL).setFooter(`${message.guild.name}`, message.guild.iconURL).setThumbnail(tomute.user.displayAvatarURL).setTimestamp().setColor("#07ed66"));
-  }, ms(mutetime));
-
-return this.name;
-
 },
   aliases: ["mute", "mutar", "silenciar"],
   category: "Moderação",

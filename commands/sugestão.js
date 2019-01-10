@@ -38,6 +38,7 @@ const Discord = require("discord.js");
     message.react(":negado:505155029636874250");
     }
 },
+    aliases: ["sugestao"],
     category: "Utilidades",
     description: "Enviar uma sugestão."
 }
