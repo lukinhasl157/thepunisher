@@ -7,7 +7,7 @@ module.exports = {
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
     const time = args[1];
-    const reason = args[2]
+    const reason = args.slice(2).join(" ");
 
     if (!message.member.hasPermission("MUTE_MEMBERS")) {
       return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão requirida: **MUTE_MEMBERS**`)
