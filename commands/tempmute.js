@@ -12,7 +12,7 @@ module.exports = {
       return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão requirida: **MUTE_MEMBERS**`)
     } else if (!member) {
       return message.channel.send(`**${message.author.username}** | Por favor insira o id ou mencione o usuário que deseja banir.`);
-    } else if (!args[1]) {
+    } else if (!time) {
       return message.channel.send(`**${message.author.username}** | Por favor insira um tempo para banir este usuário. Exemplo: t.tempute @usuário 30s motivo`)
     } else if (args.length === 0) {
       return message.channel.send(`**${message.author.username}** | Por favor insira um motivo para mutar este usuário.`);
@@ -39,7 +39,7 @@ module.exports = {
     } else {
       await member.addRole(role);
       const embed = new Discord.RichEmbed()
-      .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
+      .setDescription(`O usuário ${member} foi mutado por **${ms(time)}.**\n \n**• Motivo:** » ${args.join(" ")}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
       .setThumbnail(member.user.displayAvatarURL)
       .setColor("#ff0000")
       .setTimestamp(new Date())
@@ -50,7 +50,7 @@ module.exports = {
       member.removeRole(role);
       const embed = new Discord.RichEmbed()
       .setAuthor(`Comando automático | DESMUTE`, bot.user.displayAvatarURL)
-      .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
+      .setDescription(`O usuário ${member} que havia sido mutado por **${ms(time)}**, finalizou seu tempo de punição e foi desmutado.`)
       .setThumbnail(member.user.displayAvatarURL)
       .setColor("#ff0000")
       .setTimestamp(new Date())
