@@ -5,7 +5,7 @@ module.exports = {
   run: async function (bot, message, args) {
 
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    const role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
+    let role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
     const time = args[2];
 
     if (!message.member.hasPermission("MUTE_MEMBERS")) {
@@ -13,7 +13,7 @@ module.exports = {
     } else if (!member) {
       return message.channel.send(`**${message.author.username}** | Por favor insira o id ou mencione o usuário que deseja banir.`);
     } else if (!args[1]) {
-      return messsage.channel.send(`**${message.author.username}** | Por favor insira um tempo para banir este usuário. Exemplo: t.tempute @usuário 30s motivo`)
+      return message.channel.send(`**${message.author.username}** | Por favor insira um tempo para banir este usuário. Exemplo: t.tempute @usuário 30s motivo`)
     } else if (args.length === 0) {
       return message.channel.send(`**${message.author.username}** | Por favor insira um motivo para mutar este usuário.`);
     } else if (!role) {
