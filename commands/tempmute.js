@@ -4,7 +4,7 @@ const ms = require("ms");
 module.exports = {
   run: async function (bot, message, args) {
 
-    const member = message.mentions.members.first() || message.guil.members.get(args[0]);
+    const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     const role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
     const time = args[2];
 
@@ -35,7 +35,7 @@ module.exports = {
     } catch(e) {
       console.log(e);
     }
-    
+
     } else {
       await member.addRole(role);
       const embed = new Discord.RichEmbed()
