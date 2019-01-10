@@ -1,9 +1,11 @@
 const Discord = require("discord.js");
+const moment = require("moment");
+moment.locale("pt-BR"); 
 
 module.exports = {
   run: (bot, message, args) => {
   
-  const member = message.mentions.members.first() || message.author || message.guild.members.get(args[0]) || message.guild.members.find(m => m.user.username.startsWith(args.join(" ")));
+  const member = message.mentions.members.first() || message.member || message.guild.members.get(args[0]) || message.guild.members.find(m => m.user.username.startsWith(args.join(" ")));
   const administrator = member.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
   const status = {
     "online": "<:online:529179015865434132> Disponível",
@@ -11,9 +13,6 @@ module.exports = {
     "idle": "<:ausente:529179085402931212> Ausente",
     "dnd": "<:ocupado:529178886647578626> Não perturbar"
   }
-
-  const moment = require("moment");
-  moment.locale("pt-BR"); 
 
   const embed = new Discord.RichEmbed()
   .setAuthor(`» 📚 Informações do usuário: ${member.user.tag}`, member.user.displayAvatarURL)
