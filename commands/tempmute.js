@@ -39,7 +39,7 @@ module.exports = {
     } else {
       await member.addRole(role);
       const embed = new Discord.RichEmbed()
-      .setDescription(`O usuário ${member} foi mutado por **${ms(time)}.**\n \n**• Motivo:** » ${args.join(" ")}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
+      .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${args.join(" ")}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
       .setThumbnail(member.user.displayAvatarURL)
       .setColor("#ff0000")
       .setTimestamp(new Date())
@@ -50,7 +50,7 @@ module.exports = {
       member.removeRole(role);
       const embed = new Discord.RichEmbed()
       .setAuthor(`Comando automático | DESMUTE`, bot.user.displayAvatarURL)
-      .setDescription(`O usuário ${member} que havia sido mutado por **${ms(time)}**, finalizou seu tempo de punição e foi desmutado.`)
+      .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
       .setThumbnail(member.user.displayAvatarURL)
       .setColor("#ff0000")
       .setTimestamp(new Date())
