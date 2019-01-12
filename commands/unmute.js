@@ -5,6 +5,7 @@ module.exports = {
   
   const role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
   const member = message.mentions.members.first() || message.guild.members.get(args[0]);
+  const reason = args.slice(1).join(" ");
 
     if (!member) {
       return message.channel.send(`**${message.author.username}** | Por favor, insira o id ou mencione que deseja desmutar.`);
@@ -17,7 +18,7 @@ module.exports = {
         console.log(e);
       });
       const embed = new Discord.RichEmbed()
-      .setDescription(`O usuáro ${member} foi desmutado.\n \n• **Motivo**:\n \n» ${args.slice(1).join(" ")}`)
+      .setDescription(`O usuáro ${member} foi desmutado.\n \n• **Motivo**:\n \n» ${reason}`)
       .setColor("#ff0000")
       .setTimestamp(new Date())
       .setThumbnail(member.user.displayAvatarURL)
