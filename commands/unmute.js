@@ -10,7 +10,7 @@ module.exports = {
       return message.channel.send(`**${message.author.username}** | Por favor, insira o id ou mencione que deseja desmutar.`);
     } else if (args.length === 0) {
       return message.channel.send(`**${message.author.username}** | Por favor, insira um motivo para desmutar este usuário.`);
-    } else if (member.roles.has(role.id)) {
+    } else if (member.user.roles.has(role.id)) {
       return message.channel.send(`**${message.author.username}** | Desculpe, este usuário não está mutado.`);
     } else {
       member.removeRole(role).catch(e => {
