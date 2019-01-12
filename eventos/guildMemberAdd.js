@@ -20,9 +20,9 @@ module.exports = {
       	.setTimestamp(new Date())
       	.setFooter(member.guild.name, member.guild.iconURL)
     	
-			if (!category || category.type !== "category" || category.name !== "👾ENTRADA/SAIDA") {
+			if (!category) {
 				category = await member.guild.createChannel("👾ENTRADA/SAIDA", "category");
-			} else if (!channel || channel.name !== "🎉entrou") {
+			} else if (!channel) {
 				channel = await member.guild.createChannel("🎉entrou", "text" [{
 					id: member.guild.id,
 					deny: ["SEND_MESSAGES"],
