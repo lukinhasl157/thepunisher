@@ -17,7 +17,7 @@ module.exports = {
         console.log(e);
       });
       const embed = new Discord.RichEmbed()
-      .setDescription(`O usuáro ${member} foi desmutado.\n• **Motivo**:\n» ${args.join(" ")}`)
+      .setDescription(`O usuáro ${member} foi desmutado.\n• **Motivo**:\n» ${args.join(" ").slice(1)}`)
       .setColor("#ff0000")
       .setTimestamp(new Date())
       .setThumbnail(member.user.displayAvatarURL)
