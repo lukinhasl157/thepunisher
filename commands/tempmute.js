@@ -5,7 +5,7 @@ module.exports = {
   run: async function (bot, message, args) {
 
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    let role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
+    let role = message.guild.roles.find(r => r.name === "The Punisher | 🔇 Muted");
     const time = args[1];
     const reason = args.slice(2).join(" ");
 
@@ -21,7 +21,7 @@ module.exports = {
           try {
 
       role = await message.guild.createRole({
-        name: "The punisher | 🔇 Muted",
+        name: "The Punisher | 🔇 Muted",
         color: "#ff0000",
         permissions:[]
       });

@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
   run: (bot, message, args) => {
   
-  const role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
+  const role = message.guild.roles.find(r => r.name === "The Punisher | 🔇 Muted");
   const member = message.mentions.members.first() || message.guild.members.get(args[0]);
   const reason = args.slice(1).join(" ");
 
@@ -18,7 +18,8 @@ module.exports = {
         console.log(e);
       });
       const embed = new Discord.RichEmbed()
-      .setDescription(`O usuáro ${member} foi desmutado.\n \n• **Motivo**:\n \n» ${reason}`)
+      .setTile("**DESMUTE**")
+      .setDescription(`O usuáro ${member} foi desmutado.\n \n• **• Motivo**: » ${reason}`)
       .setColor("#ff0000")
       .setTimestamp(new Date())
       .setThumbnail(member.user.displayAvatarURL)
