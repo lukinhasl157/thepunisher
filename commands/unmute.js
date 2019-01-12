@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
   run: (bot, message, args) => {
   
-  const role = message.guild.roles.find(r => r.name === "The Punisher | 🔇 Muted");
+  const role = message.guild.roles.find(r => r.name === "The punisher | 🔇 Muted");
   const member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
     if (!member) {
