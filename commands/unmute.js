@@ -18,7 +18,7 @@ module.exports = {
         console.log(e);
       });
       const embed = new Discord.RichEmbed()
-      .setTile("**DESMUTE**")
+      .setTitle("**DESMUTE**")
       .setDescription(`O usuáro ${member} foi desmutado.\n \n• **• Motivo**: » ${reason}`)
       .setColor("#ff0000")
       .setTimestamp(new Date())
