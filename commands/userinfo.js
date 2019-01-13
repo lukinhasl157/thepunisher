@@ -19,7 +19,7 @@ module.exports = {
   .setThumbnail(member.user.displayAvatarURL)
   .addField("» 👤 Usuário:", member.user.tag, true)
   .addField("» 🗂 ID:", member.user.id, true)
-  .addField("» 🏷 Apelido:", `${member.user.nickname? member.user.nickname : "Sem apelido", true)
+  .addField("» 🏷 Apelido:", member.user.nickname? member.user.nickname : "Sem apelido", true)
   .addField("» 🚦 Status:", status[member.user.presence.status], true)
   .addField("» 🎮 Jogando:", member.user.presence.game ? member.user.presence.game : "O usuário não está jogando nada no momento.", false)
   .addField("» 📆 Entrou em:", moment(member.joinedAt).format("LLLL"), true)
