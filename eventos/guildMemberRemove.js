@@ -3,10 +3,6 @@ const Discord = require("discord.js");
 module.exports = {
 	run: async function(member) {
 
-			if (!member.guild.me.hasPermission("MANAGE_CHANNELS")) {
-				return;
-			}
-
 		try {
 
 		let channel = member.guild.channels.find(ch => ch.name === "🎉saiu");
@@ -20,7 +16,9 @@ module.exports = {
       	.setTimestamp(new Date())
       	.setFooter(member.guild.name, member.guild.iconURL)
     	
-			if (!category) {
+    		if (!member.guild.me.hasPermission("MANAGE_CHANNELS")) {
+    			return;
+			} else if (!category) {
 				category = await member.guild.createChannel("👾ENTRADA/SAIDA", "category");
 			} else if (!channel) {
 				channel = await member.guild.createChannel("🎉saiu", "text" [{
