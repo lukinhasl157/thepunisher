@@ -1,16 +1,14 @@
 const Discord = require('discord.js');
 
-    module.exports = {
-        run: async function (bot, message, args) {
+module.exports = {
+    run: async function (bot, message, args) {
 
-    try {
-    const invite = await message.channel.createInvite({maxAge: 0});
-    message.channel.send(`:incoming_envelope: Convite criado com sucesso.\n ${invite}`);
+        if (!message.member.hasPermission("ADMINISTRATOR")) {
+            return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão necessária: **ADMINISTRATOR**.`)
+        }
 
-        } catch (err) {
-            message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, você não tem permissão para criar convites!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-    }
-
+        const invite = await message.channel.createInvite({maxAge: 0});
+        message.channel.send(`:incoming_envelope: Convite criado com sucesso.\n ${invite}`);
 },
 
     aliases: ["criarconvite", "convite", "invite"],
