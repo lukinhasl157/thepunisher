@@ -22,22 +22,21 @@ module.exports = {
     const canaistexto = message.guild.channels.filter(t => t.type === "text").size;
     const canaisvoz = message.guild.channels.filter(v => v.type === "voice").size;
     const roles = message.guild.roles.map(r => r).join("\n").replace("@everyone, ", "");
-    const inline = '1';
         
-      let embed = new Discord.RichEmbed()
+        const embed = new Discord.RichEmbed()
         .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
         .setColor("#FF0000")
-        .addField(':crown: » Dono:', `<@${message.guild.ownerID}>`, inline)
-        .addField(":joy: » Total de Emojis:", `${message.guild.emojis.size}`, inline)
-        .addField(":file_cabinet: » ID do servidor:", message.guild.id, inline)
-        .addField(':calendar: » Criado em:', moment(message.guild.createdAt).format('LLL'), inline)
-        .addField(`<:canal:513884866455273494> » Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`, inline)
-        .addField(":zzz: » Canal afk", `${message.guild.afkChannel ? message.guild.afkChannel.name : "Nenhum canal afk."}`, inline) 
-        .addField("<:world:500147421641310229> » Região:", message.guild.region.toString().replace("brazil", ":flag_br: Brasil"), inline)
-        .addField("<:fast:500147391945768981> » Tempo afk", `${message.guild.afkTimeout} segundos`, inline)
-        .addField(`<:user:500109138953633792> » Membros: [${totalmembros}]`, `<:online:529179015865434132> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:529178886647578626> Ocupado: ${ocupado}\n <:offline:529178943882788866> Offline: ${offline}\n <:bot:529180656090087424> Bots: ${bots}`, inline)
-        .addField(`🛡 » Nivel de verificação:`, verificationGuild[message.guild.verificationLevel], inline)
-        .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, `Para ver todos os cargos do servidor clique no emoji <a:arrowRight:531248395411521566>`)
+        .addField(':crown: » Dono:', `<@${message.guild.ownerID}>`, false)
+        .addField(":joy: » Total de Emojis:", `${message.guild.emojis.size}`, true)
+        .addField(":file_cabinet: » ID do servidor:", message.guild.id, false)
+        .addField(':calendar: » Criado em:', moment(message.guild.createdAt).format('LLL'), true)
+        .addField(`<:canal:513884866455273494> » Total de canais: [${canaistexto+canaisvoz}]`, `Texto: ${canaistexto}\n Voz: ${canaisvoz}`, false)
+        .addField(":zzz: » Canal afk", `${message.guild.afkChannel ? message.guild.afkChannel.name : "Nenhum canal afk."}`, true) 
+        .addField("<:world:500147421641310229> » Região:", message.guild.region.toString().replace("brazil", ":flag_br: Brasil"), false)
+        .addField("<:fast:500147391945768981> » Tempo afk", `${message.guild.afkTimeout} segundos`, true)
+        .addField(`<:user:500109138953633792> » Membros: [${totalmembros}]`, `<:online:529179015865434132> Online: ${online}\n<:ausente:513046210672590848> Ausente: ${ausente}\n <:ocupado:529178886647578626> Ocupado: ${ocupado}\n <:offline:529178943882788866> Offline: ${offline}\n <:bot:529180656090087424> Bots: ${bots}`, false)
+        .addField(`🛡 » Nivel de verificação:`, verificationGuild[message.guild.verificationLevel], false)
+        .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, `Para ver todos os cargos do servidor clique no emoji <a:arrowRight:531248395411521566>`, false)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
         let msg = await message.channel.send(embed);
@@ -80,3 +79,6 @@ module.exports = {
     category: "Moderação",
     description: "Mostrar as informações do servidor."
 }
+
+
+        
