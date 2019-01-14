@@ -23,12 +23,11 @@ module.exports = {
       role = await message.guild.createRole({
         name: "The Punisher | 🔇 Muted",
         color: "#ff0000",
-        permissions:[]
+        permissions:[0]
       });
       message.guild.channels.forEach(async (channel, id) => {
         await channel.overwritePermissions(role, {
           SEND_MESSAGES: false,
-          READ_MESSAGES: true,
           CONNECT: false,
           SPEAK: false,
           ADD_REACTIONS: false
