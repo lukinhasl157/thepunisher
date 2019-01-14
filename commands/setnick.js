@@ -1,6 +1,7 @@
 
 module.exports = {
   run: async function (bot, message, args) {
+  	
       const member = message.mentions.members.first() || message.guild.members.get(args[0]);
       const nickName = args.slice(1).join(" ");
       
