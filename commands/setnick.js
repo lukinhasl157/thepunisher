@@ -8,8 +8,8 @@ module.exports = {
     		return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão necessária: **MANAGE_NICKNAMES**.`);
     	} else if (!member) {
     		return message.channel.send(`**${message.author.username}** | Por favor, insira o id ou mencione o usuário que deseja alterar o nick.`);
-    	} else if (member.highestRole > message.member.highestRole) {
-    		return message.channel.send(`**${message.author.username}** | Desculpe, o cargo deste usuário é maior que o seu.`);
+    	} else if (message.member.highestRole <= member.highestRole) {
+    		return message.channel.send(`**${message.author.username}** | Desculpe, o cargo deste usuário é igual ou maior que o seu.`);
     	} else if (!nickName) {
     		return message.channel.send(`**${message.author.username}** | Por favor, insira um novo nickname para este usuário.`);
     	} else if (nickName.length > 32) {
