@@ -7,7 +7,7 @@ module.exports = {
 			return message.channel.send("Insira um link de musica.");
 		} else {
 			message.member.voiceChannel.join().then(m => {
-				m.playStream(args.join(" "))
+				m.playStream(`${args.join(" ")}`)
 			});
 		}
 	}
