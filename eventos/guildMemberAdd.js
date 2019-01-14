@@ -18,9 +18,8 @@ module.exports = {
 
     		if (!member.guild.me.hasPermission("MANAGE_CHANNELS")) {
 				return;
-			} else if (!category) {
+			} else if (!category && !channel) {
 				category = await member.guild.createChannel("👾ENTRADA/SAIDA", "category");
-			} else if (!channel) {
 				channel = await member.guild.createChannel("🎉entrou", "text" [{
 					id: member.guild.id,
 					deny: ["SEND_MESSAGES"],
@@ -46,7 +45,7 @@ module.exports = {
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
 			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
-		}	
+		}
 
 	}
 }

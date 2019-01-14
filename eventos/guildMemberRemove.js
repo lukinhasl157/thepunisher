@@ -18,9 +18,8 @@ module.exports = {
     	
     		if (!member.guild.me.hasPermission("MANAGE_CHANNELS")) {
     			return;
-			} else if (!category) {
+			} else if (!category && !channel) {
 				category = await member.guild.createChannel("👾ENTRADA/SAIDA", "category");
-			} else if (!channel) {
 				channel = await member.guild.createChannel("🎉saiu", "text" [{
 					id: member.guild.id,
 					deny: ["SEND_MESSAGES"],
@@ -29,7 +28,7 @@ module.exports = {
 				channel.setParent(category.id);
 				await channel.send(embed);
 				await member.send(embed).catch(e => {
-						return;
+					return;
 				});
 			} else {
 				channel.setParent(category.id);
