@@ -2,7 +2,7 @@ module.exports = {
     run: (bot, message, args) => {
 
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    const nickName = args.join(" ");
+    const nickName = args.slice(1).join(" ");
 
     	if (!message.member.hasPermission("MANAGE_NICKNAMES")) {
     		return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão necessária: **MANAGE_NICKNAMES**.`);
@@ -16,7 +16,7 @@ module.exports = {
     		member.setNickname(nickName).catch(e => {
     			message.channel.send(`Ocorreu um erro: ${e}`);
     		});
-    			message.channel.send(`<a:sucessogif:499614074129350666> | Nick alterado com sucesso. O novo nickname do usuário é **${nick}**`);
+    			message.channel.send(`<a:sucessogif:499614074129350666> | Nick alterado com sucesso. O novo nickname do usuário é **${nickName}**`);
     	}
 },
 
