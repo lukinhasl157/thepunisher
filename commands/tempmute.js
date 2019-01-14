@@ -18,7 +18,7 @@ module.exports = {
     } else if (!reason) {
       return message.channel.send(`**${message.author.username}** | Por favor insira um motivo para mutar este usuário.`);
     } else if (!role) {
-          try {
+      try {
 
       role = await message.guild.createRole({
         name: "The Punisher | 🔇 Muted",
@@ -28,14 +28,16 @@ module.exports = {
       message.guild.channels.forEach(async (channel, id) => {
         await channel.overwritePermissions(role, {
           SEND_MESSAGES: false,
+          READ_MESSAGES: true,
+          CONNECT: false,
           SPEAK: false,
           ADD_REACTIONS: false
         });
       });
 
-    } catch(e) {
+      } catch(e) {
       console.log(e);
-    }
+      }
 
     } else {
       await member.addRole(role);
