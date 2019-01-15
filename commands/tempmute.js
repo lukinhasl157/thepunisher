@@ -33,6 +33,9 @@ module.exports = {
         });
       });
       await member.addRole(role);
+      role.setPosition(10).catch(e => {
+        return;
+      });
       const embed = new Discord.RichEmbed()
       .setAuthor("**MUTE**")
       .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
@@ -48,6 +51,9 @@ module.exports = {
 
     } else {
       await member.addRole(role);
+      role.setPosition(10).catch(e => {
+        return;
+      });
       message.channel.send(embed);
 
       setTimeout(function() {
