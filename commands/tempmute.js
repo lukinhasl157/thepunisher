@@ -32,6 +32,7 @@ module.exports = {
           CONNECT: true
         });
       });
+      member.addRole(role);
 
       } catch(e) {
       console.log(e);
