@@ -33,6 +33,7 @@ module.exports = {
         });
       });
       member.addRole(role);
+      message.channel.send(embed);
 
       } catch(e) {
       console.log(e);
