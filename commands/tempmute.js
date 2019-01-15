@@ -28,8 +28,8 @@ module.exports = {
       message.guild.channels.forEach(async (channel, id) => {
         await channel.overwritePermissions(role, {
           SEND_MESSAGES: false,
-          CONNECT: false,
           SPEAK: false,
+          CONNECT: true
         });
       });
 
