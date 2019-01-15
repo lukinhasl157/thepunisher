@@ -32,8 +32,8 @@ module.exports = {
           CONNECT: true
         });
       });
-      member.addRole(role);
-      message.channel.send(embed);
+      await member.addRole(role);
+      await message.channel.send(embed);
 
       } catch(e) {
       console.log(e);
