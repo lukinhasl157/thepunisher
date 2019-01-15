@@ -51,9 +51,6 @@ module.exports = {
 
     } else {
       await member.addRole(role);
-      role.setPosition(10).catch(e => {
-        return;
-      });
       message.channel.send(embed);
 
       setTimeout(function() {
