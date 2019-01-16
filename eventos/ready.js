@@ -10,11 +10,6 @@ module.exports.run = function() {
         }
       
     setInterval(() => setStatus(), 60 * 1000);
-      
-    this.channels.get("515877820358983693").setName(`» Servidores: [${this.guilds.size}]`);
-    this.channels.get("516051234168242179").setName(`» Usuários: [${this.users.size}]`);
-    this.channels.get("516051255014195201").setName(`» Canais: [${this.channels.size}]`);
-
     console.log("Bot iniciado com sucesso!");
     console.log('Status carregado com sucesso!');
       
