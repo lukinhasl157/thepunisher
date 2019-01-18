@@ -12,7 +12,6 @@ module.exports = {
         "3": "Alto: Também precisa ser um membro deste servidor por pelo menos 10 minutos.",
         "4": "Muito alto: Precisa ter um telefone verificado em sua conta do Discord."
     }
-
     const online = message.guild.members.filter(m => m.presence.status == "online").size;
     const ocupado = message.guild.members.filter(m => m.presence.status == "dnd").size;
     const ausente = message.guild.members.filter(m => m.presence.status == "idle").size;
@@ -45,35 +44,30 @@ module.exports = {
 
         const filter = (reaction, user) => reaction.me && user.id === message.author.id;
         const collector = msg.createReactionCollector(filter, {time: 60 * 1000});
-
         collector.on("collect", reaction => {
-
-        try {
-            switch(reaction.emoji.id) {
-                case "531248395411521566":
-                    const embed2 = new Discord.RichEmbed()
-                    .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
-                    .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, roles)
-                    .setThumbnail(message.guild.iconURL)
-                    .setTimestamp(new Date())
-                    .setColor("#FF0000")
-                    .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
-                    msg.edit(embed2);
-                break;
-
-                case "531247468260622353":
-                    msg.edit(embed);
-                break;
+            try {
+                switch(reaction.emoji.id) {
+                    case "531248395411521566":
+                        const embed2 = new Discord.RichEmbed()
+                        .setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
+                        .addField(`:beginner: » Total de cargos: [${message.guild.roles.size}]`, roles)
+                        .setThumbnail(message.guild.iconURL)
+                        .setTimestamp(new Date())
+                        .setColor("#FF0000")
+                        .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.avatarURL)
+                        msg.edit(embed2);
+                    break;
+                    case "531247468260622353":
+                        msg.edit(embed);
+                    break;
+                }
+            } catch (e) {
+                return message.channel.send("**ERRO**: A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.")
+                    .then(m => {
+                        m.delete(120 * 1000)
+                });
             }
-        } catch (e) {
-            return message.channel.send("**ERRO**: A mensangem excedeu o limite de **2048** caracteres do Discord. Provavelmente o servidor possui muitos cargos.")
-            .then(m => {
-                m.delete(120 * 1000)
-            });
-        }
-
         });
-    
   },
     aliases: ["si", "server", "servidor"],
     category: "Moderação",

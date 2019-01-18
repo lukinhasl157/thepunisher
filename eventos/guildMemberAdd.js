@@ -4,7 +4,6 @@ module.exports = {
 	run: async function(member) {
 
 		try {
-
 		let channel = member.guild.channels.find(ch => ch.name === "🎉entrou");
 		let category = member.guild.channels.find(ch => ch.name === "👾ENTRADA/SAIDA");
 
@@ -41,11 +40,9 @@ module.exports = {
 					return;
 				});
 			}
-
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
 			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
 		}
-
 	}
 }
