@@ -23,9 +23,9 @@ module.exports = {
                                     return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão **BAN_MEMBERS** para executar este comando.`);
                                 } else if (!message.member.hasPermission("BAN_MEMBERS")) {
                                     return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão requirida: **BAN_MEMBERS**.`);
-                                } else if (message.guild.me.highestRole <= member.highestRole) {
+                                } else if (message.guild.me.highestRole.position <= member.highestRole.position) {
                                     return message.channel.send(`» **${message.author.username}** | Desculpe, o meu cargo é menor ou igual ao usuário a ser banido.`);
-                                } else if (member.highestRole >= message.member.highestRole) {
+                                } else if (member.highestRole.position >= message.member.highestRole.position) {
                                     return message.channel.send(`» **${message.author.username}** | Desculpe, o cargo do usuário a ser banido é maior ou igual ao seu.`);
                                 } else {
                                     member.send(`» **${member.user.username}** | Você foi banido por **${message.author.username}**. » Motivo: ${reason}.`);
