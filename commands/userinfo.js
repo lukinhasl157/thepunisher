@@ -29,7 +29,7 @@ module.exports = {
     .addField("» 📆 Dias no servidor:", moment().diff(member.joinedAt, "days"), true)
     .addField("» 👾 Total de Cargos:", member.roles.size? member.roles.size : "Sem cargos.", true)
     .addField("» 🛡 Administrador:", administrator, true)
-    .addField("» 🎮 Jogando:", gamePresence[member.user.presence.game.name] ? member.user.presence.game.name : "O usuário não está jogando nada no momento.", false)
+    .addField("» 🎮 Jogando:", member.user.presence.game.name ? gamePresence[member.user.presence.game.name] : "O usuário não está jogando nada no momento.", false)
     .setColor(member.displayColor)
     .setTimestamp(new Date())
     .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
