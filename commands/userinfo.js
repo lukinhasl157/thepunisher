@@ -20,8 +20,8 @@ module.exports = {
       "Sublime Text": "<:SublimeText:536606178323726387> Sublime Text",
       "Counter-Strike: Global Offensive": "<:CSGO:536606981192941568> Counter-Strike: Global Offensive",
       "Netflix": "<:Netflix:536605205916155904> Netflix",
-      "Adobe Photoshop CC 2016": "<:AdobePhotoshop:536607935909068800> Abode Photoshop CC 2016",
-      "<:Adobe_Illustrator:536607785581019163>": "Adobe Illustrator",
+      "Adobe Photoshop": "<:AdobePhotoshop:536607935909068800> Adobe Photoshop",
+      "Adobe Illustrator": "<:Adobe_Illustrator:536607785581019163> Adobe Illustrator",
       "League of Legends": "<:LeagueOfLegends:536606575947808779> League of Legends"
     }
     const embed = new Discord.RichEmbed()
@@ -37,7 +37,7 @@ module.exports = {
     .addField("» 📆 Dias no servidor:", moment().diff(member.joinedAt, "days"), true)
     .addField("» 👾 Total de Cargos:", member.roles.size? member.roles.size : "Sem cargos.", true)
     .addField("» 🛡 Administrador:", administrator, true)
-    .addField("» 🎮 Jogando:", member.user.presence.game.name ? gamePresence[member.user.presence.game.name] || member.user.presence.game.name : "O usuário não está jogando nada no momento.", false)
+    .addField("» 🎮 Jogando:", member.user.presence.game ? gamePresence[member.user.presence.game] || member.user.presence.game : "O usuário não está jogando nada no momento.", false)
     .setColor(member.displayColor)
     .setTimestamp(new Date())
     .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
