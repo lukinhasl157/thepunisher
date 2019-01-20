@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 module.exports = {
-	run: async function(message) {
+	run: async function(bot, message, args) {
 
 		const embed = new Discord.RichEmbed()
 		.setDescription("Categorias\n \nDiversao\nAdministração etc...")
