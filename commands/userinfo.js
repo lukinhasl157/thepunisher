@@ -14,7 +14,15 @@ module.exports = {
       "dnd": "<:ocupado:529178886647578626> Não perturbar"
     }
     const gamePresence = {
-      "Visual Studio Code": "<:vsc:536600505099616267> Visual Studio Code"
+      "Visual Studio Code": "<:vsc:536600505099616267> Visual Studio Code",
+      "Youtube": "<:Youtube:536605153759985665> Youtube",
+      "Spotify": "<:Spotify:536607195949694977> Spotify",
+      "Sublime Text": "<:SublimeText:536606178323726387> Sublime Text",
+      "Counter-Strike: Global Offensive": "<:CSGO:536606981192941568> Counter-Strike: Global Offensive",
+      "Netflix": "<:Netflix:536605205916155904> Netflix",
+      "Adobe Photoshop CC 2016": "<:AdobePhotoshop:536607935909068800> Abode Photoshop CC 2016",
+      "<:Adobe_Illustrator:536607785581019163>": "Adobe Illustrator",
+      "League of Legends": "<:LeagueOfLegends:536606575947808779> League of Legends"
     }
     const embed = new Discord.RichEmbed()
     .setAuthor(`» 📚 Informações do usuário: ${member.user.username}`, member.user.displayAvatarURL)
