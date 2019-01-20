@@ -12,7 +12,7 @@ module.exports = {
 				collector.on('collect', r => {
 					const embed2 = new Discord.RichEmbed()
 					.setDescription("Moderação\n \nban\nkick\nclear etc...")
-					msg.edit(embed2);
+					await msg.edit(embed2);
 				});
 	}
 }
