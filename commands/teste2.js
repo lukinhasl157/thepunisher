@@ -9,7 +9,7 @@ module.exports = {
 
 			const filter = (reaction, user) => reaction.emoji.name === '👌' && user.id === 'someID'
 			const collector = message.createReactionCollector(filter, { time: 60 * 1000 });
-				collector.on('collect', r => {
+				collector.on('collect', async r => {
 					const embed2 = new Discord.RichEmbed()
 					.setDescription("Moderação\n \nban\nkick\nclear etc...")
 					await msg.edit(embed2);
