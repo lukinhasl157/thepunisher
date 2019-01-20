@@ -1,30 +1,25 @@
+module.exports = {
+  run: async function (bot, message, args) {
 
-  const Discord = require("discord.js");
-
-  module.exports = {
-    run: async function (bot, message, args) {
- 
-      if (!message.member.hasPermission("DEAFEN_MEMBERS")) 
-      return message.channel.send(new Discord.RichEmbed().setDescription(`<:cancel1:500150315304091649> Desculpe, você não tem permissão para executar este comando!`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-      
-      let bans = await message.guild.fetchBans();
-      let user = args[0];
-      let reason = args.slice(1).join(' ');
-      
-      if (!bans.has(user))
-      return message.channel.send(new Discord.RichEmbed().setDescription("<:cancel1:500150315304091649> Este usuário não está banido!").setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-      
-      if (!user)
-      return message.channel.send(new Discord.RichEmbed().setDescription("<:cancel1:500150315304091649> Por favor, digite o id do usuário que deseja desbanir.").setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).setTimestamp().setColor("#ff0000"));
-      
-      if(!reason)
-        return message.channel.send(message.author.username + "| Por favor, diga um motivo para desbanir este usuário.")
-      
-      await message.guild.unban(user, reason);
-      message.channel.send(new Discord.RichEmbed().setDescription(`O usuário <@${user}> foi desbanido com sucesso <a:sucessogif:499614074129350666>`).setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL).addField(`Motivo:` , `» ${reason}`).setTimestamp().setColor("#07ed66"));
-  
+    const bans = await message.guild.fetchBans();
+    const user = args[0];
+    const reason = args.slice(1).join(" ");
+      if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
+        return message.channel.send(`**${message.author.username}** | Desculpe, eu não tenho permissão para executar este comando.`)
+      } else if (!message.member.hasPermission("BAN_MEMBERS")) {
+        return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando.`);
+      } else if (!user) {
+        return message.channel.send(`**${message.author.username}** | Por favor, insira o id do usuário que deseja desbanir.`)
+      } else if (!reason) {
+        return message.channel.send(`**${message.author.username}** | Por favor, insira um motivo para desbanir este usuário.`);
+      } else if (!bans.has(user)) {
+        return message.channel.send((`**${message.author.username}** | Desculpe, este usuário não está banido.`);
+      } else {
+        await message.guild.unban(user, reason);
+        message.channel.send(`O usuário <@${user}> foi desbanido com sucesso! <a:sucessogif:499614074129350666>`);
+      }
   }, 
     aliases: ["desbanir", "perdoar", "pardon"],
     category: "Moderação",
     description: "Desbanir um usuário."
-  }
+}
