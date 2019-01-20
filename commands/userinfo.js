@@ -5,13 +5,16 @@ moment.locale("pt-BR");
 module.exports = {
   run: (bot, message, args) => {
   
-    const member = message.mentions.members.first() || message.member || message.guild.members.get(args[0]) || message.guild.members.find(m => m.user.username.startsWith(args.join(" ")));
+    const member = message.mentions.members.first() || message.member || message.guild.members.get(args[0]) || message.guild.members.find(m => m.user.username.toLowerCase().startsWith(args.join(" ")));
     const administrator = member.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
     const status = {
       "online": "<:online:529179015865434132> Disponível",
       "offline": "<:offline:529178943882788866> Invisível",
       "idle": "<:ausente:529179085402931212> Ausente",
       "dnd": "<:ocupado:529178886647578626> Não perturbar"
+    }
+    const gamePresence = {
+      "Visual Studio Code": "<:vsc:536600505099616267> Visual Studio Code"
     }
     const embed = new Discord.RichEmbed()
     .setAuthor(`» 📚 Informações do usuário: ${member.user.username}`, member.user.displayAvatarURL)
@@ -26,7 +29,7 @@ module.exports = {
     .addField("» 📆 Dias no servidor:", moment().diff(member.joinedAt, "days"), true)
     .addField("» 👾 Total de Cargos:", member.roles.size? member.roles.size : "Sem cargos.", true)
     .addField("» 🛡 Administrador:", administrator, true)
-    .addField("» 🎮 Jogando:", member.user.presence.game ? member.user.presence.game : "O usuário não está jogando nada no momento.", false)
+    .addField("» 🎮 Jogando:", gamePresence[member.user.presence.game] ? member.user.presence.game : "O usuário não está jogando nada no momento.", false)
     .setColor(member.displayColor)
     .setTimestamp(new Date())
     .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
