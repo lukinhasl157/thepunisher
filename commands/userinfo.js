@@ -22,7 +22,8 @@ module.exports = {
       "Netflix": "<:Netflix:536605205916155904> Netflix",
       "Adobe Photoshop": "<:AdobePhotoshop:536607935909068800> Adobe Photoshop",
       "Adobe Illustrator": "<:Adobe_Illustrator:536607785581019163> Adobe Illustrator",
-      "League of Legends": "<:LeagueOfLegends:536606575947808779> League of Legends"
+      "League of Legends": "<:LeagueOfLegends:536606575947808779> League of Legends",
+      "World of Warcraft": "<:WoW:536608041056075786> World of Warcraft"
     }
     const embed = new Discord.RichEmbed()
     .setAuthor(`» 📚 Informações do usuário: ${member.user.username}`, member.user.displayAvatarURL)
