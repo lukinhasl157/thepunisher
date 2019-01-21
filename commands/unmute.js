@@ -14,9 +14,9 @@ module.exports = {
     } else if (!member.roles.has(role.id)) {
       return message.channel.send(`**${message.author.username}** | Desculpe, este usuário não está mutado.`);
     } else {
-      member.removeRole(role).catch(e => {
-        console.log(e);
-      });
+      member.removeRole(role)
+      .catch(console.error);
+      
       const embed = new Discord.RichEmbed()
       .setTitle("**DESMUTE**")
       .setDescription(`O usuáro ${member} foi desmutado.\n \n• **• Motivo**: » ${reason}`)
