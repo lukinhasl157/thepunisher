@@ -16,7 +16,7 @@ module.exports = {
                 const collector = msg.createReactionCollector(filter, {time: 60 * 1000 });
                     collector.on("collect", r => {
                         r.remove(message.author.id);
-                        msg.delete();
+                        message.delete();
                         switch (r._emoji.name) {
                             case "correto":
                                 if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
@@ -34,7 +34,7 @@ module.exports = {
                                 }
                             break;
                             case "negado":
-                                msg.channel.send(`» A acão de banimento do usuário **${member.user.tag} ID:** \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:505155029636874250>`);
+                                message.channel.send(`» A acão de banimento do usuário **${member.user.tag} ID:** \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:505155029636874250>`);
                             break;
                         }
                     });
