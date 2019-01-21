@@ -13,10 +13,10 @@ module.exports = {
             .setTimestamp(new Date())
             message.channel.send(embed);
         } catch (e) {
-            message.channel.send(`**${message.author.username}** | Erro: A lista de emojis excedeu o limite de **2000 caracteres** do Discord.`)/
+            message.channel.send(`**${message.author.username}** | Erro: A lista de emojis excedeu o limite de **2000 caracteres** do Discord.`);
         }
     },
-aliases: ["emojis", "emotes", "emotelist"],
-category: "Utilidades",
-description: "Mostar a lista de emojis do servidor."
+    aliases: ["emojis", "emotes", "emotelist"],
+    category: "Utilidades",
+    description: "Mostar a lista de emojis do servidor."
 }
