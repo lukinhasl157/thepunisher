@@ -3,7 +3,7 @@ module.exports = {
     run: (bot, message, args) => {
 
         try {
-            const emojis = message.guild.emojis.map(e => e).join("\n");
+            const emojis = message.guild.emojis.map(e => e).join(" ");
             const embed = new Discord.RichEmbed()
             .setColor("#ff0000")
             .setAuthor(`Lista de emojis ${message.guild.name}`)
