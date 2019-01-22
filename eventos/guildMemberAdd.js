@@ -6,7 +6,6 @@ module.exports = {
 		try {
 		let channel = member.guild.channels.find(ch => ch.name === "🎉entrou");
 		let category = member.guild.channels.find(ch => ch.name === "👾ENTRADA/SAIDA");
-
 		const embed = new Discord.RichEmbed()
       	.setColor("#3fdb20")
       	.setThumbnail(member.user.avatarURL)
@@ -25,7 +24,8 @@ module.exports = {
 					allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
 				}]);
 				await channel.setParent(category.id);
-				await member.send(embed).catch(e => {
+				await member.send(embed)
+				.catch(() => {
 					return;
 				});
 				let msg = await channel.send(embed);
@@ -36,7 +36,8 @@ module.exports = {
 				let m = await channel.send(embed);
 				await m.react("🎉");
 				await m.react(":bemvindo:523560019841515520");
-				member.send(embed).catch(e => {
+				member.send(embed)
+				.catch(e => {
 					return;
 				});
 			}
