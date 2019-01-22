@@ -13,10 +13,9 @@ module.exports = {
                 await msg.react(":negado:505155029636874250");
 
                 const filter = (r, u) => r.me && u.id === message.author.id;
-                const collector = msg.createReactionCollector(filter, {time: 60 * 1000 });
+                const collector = msg.createReactionCollector(filter, {max: 1, time: 60 * 1000 });
                     collector.on("collect", r => {
-                        r.remove(message.author.id);
-                        message.delete();
+                        msg.delete();
                         switch (r._emoji.name) {
                             case "correto":
                                 if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
