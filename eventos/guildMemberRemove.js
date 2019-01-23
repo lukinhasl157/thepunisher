@@ -30,12 +30,14 @@ module.exports = {
 					return;
 				});
 			} else {
-				channel.setParent(category.id);
-				channel.send(embed);
-				member.send(embed)
-				.catch(() => {
-					return;
-				});
+				if (channel && category) {
+					channel.setParent(category.id);
+					channel.send(embed);
+					member.send(embed)
+					.catch(() => {
+						return;
+					});
+				}
 			}
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
