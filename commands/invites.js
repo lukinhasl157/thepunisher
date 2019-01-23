@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 module.exports = {
     run: async function (bot, message, args) {
 
-        const member = message.mentions.members.first() || message.member || message.guild.members.get(args[0]);
+        const user = message.mentions.users.first() || message.author || bot.users.get(args[0]);
         const targetInvites = await message.guild.fetchInvites();
         let invitesUses = 0;
 
@@ -16,7 +16,7 @@ module.exports = {
             .setThumbnail(user.displayAvatarURL)
             .addField("**• Membros Recrutados •**", `\`\`\`js\n(${invitesUses}) - Membros\`\`\``)
             .setColor("RANDOM")
-            .setFooter(member.user.tag, member.user.displayAvatarURL)
+            .setFooter(user.tag, user.displayAvatarURL)
             .setTimestamp(new Date());
             message.channel.send(embed);
 },
