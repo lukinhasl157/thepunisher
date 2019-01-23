@@ -13,7 +13,7 @@ module.exports = {
         "ADMINISTRATOR": "Administrador",
         "MANAGE_CHANNELS": "Gerenciar canais",
         "MANAGE_GUILD": "Gerenciar servidor",
-        "ADD_REACTIONS": "Adicionar reação",
+        "ADD_REACTIONS": "Adicionar reações",
         "VIEW_AUDIT_LOG": "Ver registro de auditoria",
         "VIEW_CHANNEL": "Ver canais",
         "READ_MESSAGES": "Ver mensagens",

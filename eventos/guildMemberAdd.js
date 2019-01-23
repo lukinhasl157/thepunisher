@@ -37,12 +37,13 @@ module.exports = {
 				await m.react("🎉");
 				await m.react(":bemvindo:523560019841515520");
 				member.send(embed)
-				.catch(e => {
+				.catch(() => {
 					return;
 				});
 			}
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
+			console.log(e)
 			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
 		}
 	}

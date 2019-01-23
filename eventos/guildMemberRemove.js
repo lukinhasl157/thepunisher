@@ -39,6 +39,7 @@ module.exports = {
 			}
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
+			console.log(e);
 			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
 		}	
 	}
