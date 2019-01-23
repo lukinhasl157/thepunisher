@@ -28,18 +28,19 @@ module.exports = {
 				.catch(() => {
 					return;
 				});
-				let msg = await channel.send(embed);
+				const msg = await channel.send(embed);
 				await msg.react("🎉");
 				await msg.react(":bemvindo:523560019841515520");
 			} else {
-				channel.setParent(category.id);
-				let m = await channel.send(embed);
-				await m.react("🎉");
-				await m.react(":bemvindo:523560019841515520");
-				member.send(embed)
-				.catch(() => {
-					return;
-				});
+				if (channel && category) {
+					const m = await channel.send(embed);
+					await m.react("🎉");
+					await m.react(":bemvindo:523560019841515520");
+					member.send(embed)
+					.catch(() => {
+						return;
+					});
+				}
 			}
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");

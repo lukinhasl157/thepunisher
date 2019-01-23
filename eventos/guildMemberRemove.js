@@ -31,7 +31,6 @@ module.exports = {
 				});
 			} else {
 				if (channel && category) {
-					channel.setParent(category.id);
 					channel.send(embed);
 					member.send(embed)
 					.catch(() => {
