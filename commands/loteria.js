@@ -12,7 +12,6 @@ module.exports = {
 			message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era **${random}**.`);
 		});
 	},
-
 	aliases: ["lotery"],
 	category: "Entretenimento",
 	description: "Inicia o evento loteria gerando um número aleátorio entre 0 e 50"
