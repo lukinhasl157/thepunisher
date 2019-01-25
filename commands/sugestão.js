@@ -3,18 +3,21 @@ module.exports = {
     run: async function (bot, message, args) {
 
         const channel = message.guild.channels.find(c => c.name === 'sugestões');
-        try {
-            if (!channel) {
-                channel = await message.guild.createChannel('sugestões', 'text', [{
-                id: message.guild.id,
-                deny: ["SEND_MESSAGES"],
-                allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
-                }]);
-                await message.channel.send(`» **${message.author.username}** | Não encontrei o canal sugestões, então criei o canal automaticamente.`);
-            } else if (args.length === 0) {
-                message.react(":negado:505155029636874250");
-                return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`)
-            } else {
+        if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+            message.react(":negado:505155029636874250");
+            return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão **MANAGE_CHANNELS** para executar este comando.`);
+        } else if (!channel) {
+            channel = await message.guild.createChannel('sugestões', 'text', [{
+            id: message.guild.id,
+            deny: ["SEND_MESSAGES"],
+            allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
+            }]);
+            await message.channel.send(`» **${message.author.username}** | Não encontrei o canal sugestões, então criei o canal automaticamente.`);
+        } else if (args.length === 0) {
+            message.react(":negado:505155029636874250");
+            return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`)
+        } else {
+            if (channel) {
                 const embed = new Discord.RichEmbed()
                 .addField("**Sugestão**", args.join(" "))
                 .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
@@ -27,11 +30,8 @@ module.exports = {
                 await message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
                 message.react(":correto:505155063963058187");
             }
-        } catch(e) {
-            message.channel.send(`» **${message.author.username}** | Erro: Eu não tenho a permissão de criar canais.`)
-            message.react(":negado:505155029636874250");
-    }
-},
+        }
+    },
     aliases: ["sugestao"],
     category: "Utilidades",
     description: "Enviar uma sugestão."
