@@ -1,11 +1,11 @@
 module.exports.run = function() {
-    let status = [
+    const status = [
         `para ${this.users.size} usuários.`,
         `Está com dúvidas? Digite ${process.env.prefix}help para receber todas as minhas informações!`,
       ];
       
-        let setStatus = () => {
-            let randomStatus = status[Math.floor(Math.random() * status.length)];
+        const setStatus = () => {
+            const randomStatus = status[Math.floor(Math.random() * status.length)];
             this.user.setPresence({game:  {name: randomStatus, type: 'STREAMING', url: 'http://twitch.tv/thedoomsday27'}});
         }
       

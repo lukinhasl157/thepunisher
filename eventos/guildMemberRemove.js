@@ -1,19 +1,17 @@
 const Discord = require("discord.js");
-
 module.exports = {
 	run: async function(member) {
 
 		try {
-		let channel = member.guild.channels.find(ch => ch.name === "🎉saiu");
-		let category = member.guild.channels.find(ch => ch.name === "👾ENTRADA/SAIDA")
-		const embed = new Discord.RichEmbed()
-      	.setColor("#3fdb20")
-      	.setThumbnail(member.user.avatarURL)
-      	.setDescription(`${member}, saiu do servidor.`)
-      	.addField('Atualmente temos:', member.guild.memberCount)
-      	.setTimestamp(new Date())
-      	.setFooter(member.guild.name, member.guild.iconURL)
-    	
+			let channel = member.guild.channels.find(ch => ch.name === "🎉saiu");
+			let category = member.guild.channels.find(ch => ch.name === "👾ENTRADA/SAIDA")
+			const embed = new Discord.RichEmbed()
+      		.setColor("#3fdb20")
+      		.setThumbnail(member.user.avatarURL)
+      		.setDescription(`${member}, saiu do servidor.`)
+      		.addField('Atualmente temos:', member.guild.memberCount)
+      		.setTimestamp(new Date())
+      		.setFooter(member.guild.name, member.guild.iconURL)
     		if (!member.guild.me.hasPermission("MANAGE_CHANNELS")) {
     			return;
 			} else if (!category && !channel) {
