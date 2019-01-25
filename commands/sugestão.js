@@ -2,32 +2,38 @@ const Discord = require("discord.js");
 module.exports = {
     run: async function (bot, message, args) {
 
-        const channel = message.guild.channels.find(c => c.name === 'sugestões');
+        let channel = message.guild.channels.find(c => c.name === "sugestões");
+        const embed = new Discord.RichEmbed()
+        .addField("**Sugestão**", args.join(" "))
+        .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
+        .setTimestamp(new(Date))
+        .setColor("#07ed66")
+        .setThumbnail(message.author.displayAvatarURL)
+
         if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
             message.react(":negado:505155029636874250");
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão **MANAGE_CHANNELS** para executar este comando.`);
+        } else if (args.length === 0) {
+            message.react(":negado:505155029636874250");
+            return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`);
         } else if (!channel) {
-            channel = await message.guild.createChannel('sugestões', 'text', [{
+            channel = await message.guild.createChannel("sugestões", "text", [{
             id: message.guild.id,
             deny: ["SEND_MESSAGES"],
             allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
             }]);
+            const m = await channel.send(embed);
+            await m.react(":correto:505155063963058187");
+            await m.react(":negado:505155029636874250");
+            message.react(":correto:505155063963058187");
             await message.channel.send(`» **${message.author.username}** | Não encontrei o canal sugestões, então criei o canal automaticamente.`);
-        } else if (args.length === 0) {
-            message.react(":negado:505155029636874250");
-            return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`)
+            await message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
         } else {
             if (channel) {
-                const embed = new Discord.RichEmbed()
-                .addField("**Sugestão**", args.join(" "))
-                .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
-                .setTimestamp(new(Date))
-                .setColor("#07ed66")
-                .setThumbnail(message.author.displayAvatarURL)
                 const msg = await channel.send(embed);
                 await msg.react(":correto:505155063963058187");
                 await msg.react(":negado:505155029636874250");
-                await message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
+                message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
                 message.react(":correto:505155063963058187");
             }
         }
