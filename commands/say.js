@@ -7,7 +7,7 @@ module.exports = {
 			message.delete();
     		message.channel.send(args.join(" "));
 		}
- },
+	},
 	aliases: ["falar", "dizer"],
 	category: "Entretenimento",
 	description: "Dizer uma mensagem pelo bot"

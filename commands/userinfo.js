@@ -45,7 +45,7 @@ module.exports = {
     .setTimestamp(new Date())
     .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
       message.channel.send(embed);
-},
+  },
   aliases: ["perfil", "info"],
   category: "Moderação",
   description: "Mostrar as informações do usuário."

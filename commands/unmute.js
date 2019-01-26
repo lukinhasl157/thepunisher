@@ -29,7 +29,7 @@ module.exports = {
       .setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL)
       message.channel.send(embed);
     }
-},
+  },
   aliases: ["desmute", "desmutar"],
   category: "Moderação",
   description: "Desmutar um usuário."

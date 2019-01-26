@@ -68,7 +68,7 @@ module.exports = {
                 });
             }
         });
-  },
+    },
     aliases: ["si", "server", "servidor"],
     category: "Moderação",
     description: "Mostrar as informações do servidor."
