@@ -9,6 +9,7 @@ module.exports = {
 		.setImage("https://cdn.discordapp.com/attachments/507638961447895050/510135398501187604/pingpong.gif")
 		.setFooter(message.author.tag, message.author.displayAvatarURL)
 		.setTimestamp(new Date())
+		.setColor("#ff0000")
 		msg.edit(embed);
 	    }, 2000)
     },
