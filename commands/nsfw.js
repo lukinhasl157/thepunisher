@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 module.exports = {
     run: (bot, message, args) => {
 
-        const sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
         const subreddits = [
             "cock",
             "pussy",
@@ -12,6 +11,7 @@ module.exports = {
             "boobs",
             "ass"
         ];
+        const sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
         if (message.channel.name !== "nsfw" || message.channel.nsfw !== true) {
             return message.channel.send(`**${message.author.username}** | Você só pode usar este comando em um canal **NSFW**`)
             .then(msg => {
