@@ -7,7 +7,7 @@ module.exports = {
         } else if (args.length >= 15) {
             return message.channel.send(`» **${message.author.username}** | Os argumentos não podem passar de  **15** caracteres.`)
         } else {
-            ascii.font(text, 'Doom', function (rendered) {
+            ascii.font(args.join(" "), 'Doom', function (rendered) {
                 rendered = rendered.trimRight()
                 message.channel.send(rendered, {
                     code: 'md'
