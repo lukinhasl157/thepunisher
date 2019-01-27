@@ -5,7 +5,7 @@ module.exports = {
         let channel = message.guild.channels.find(c => c.name === "sugestões");
         if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
             message.react(":negado:505155029636874250");
-            return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão **MANAGE_CHANNELS** para executar este comando.`);
+            return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`MANAGE_CHANNELS\`\` para executar este comando.`);
         } else if (args.length === 0) {
             message.react(":negado:505155029636874250");
             return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`);

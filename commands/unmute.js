@@ -8,9 +8,9 @@ module.exports = {
   const reason = args.slice(1).join(" ");
 
     if (!message.guild.me.hasPermission("MUTE_MEMBERS")) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão **MUTE_MEMBERS** para executar este comando.`);
+      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`MUTE_MEMBERS\`\` para executar este comando.`);
     } else if (!message.member.hasPermission("MUTE_MEMBERS")) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão necessária: **MUTE_MEMBERS**.`);
+      return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão necessária: \`\`MUTE_MEMBERS.\`\``);
     } else if (!member) {
       return message.channel.send(`**${message.author.username}** | Por favor, insira o id ou mencione que deseja desmutar.`);
     } else if (!reason) {
