@@ -19,7 +19,7 @@ module.exports = {
                         switch (r._emoji.name) {
                             case "correto":
                                 if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
-                                    return message.channel.send(`» **${messagemessage.author.username}** | Desculpe, eu preciso da permissão \`\`BAN_MEMBERS\`\` para executar este comando.`);
+                                    return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`BAN_MEMBERS\`\` para executar este comando.`);
                                 } else if (!member.hasPermission("BAN_MEMBERS")) {
                                     return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão requirida: \`\`BAN_MEMBERS\`\`.`);
                                 } else if (message.guild.me.highestRole.position <= member.highestRole.position) {
