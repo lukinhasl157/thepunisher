@@ -14,7 +14,7 @@ module.exports = {
     } else if (!message.member.hasPermission("MUTE_MEMBERS")) {
       return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando. Permissão necessária: \`\`MUTE_MEMBERS\`\``)
     } else if (!member) {
-      return message.channel.send(`**${message.author.username}** | Por favor insira o id ou mencione o usuário que deseja banir.`);
+      return message.channel.send(`**${message.author.username}** | Por favor insira o id ou mencione o usuário que deseja mutar.`);
     } else if (!time) {
       return message.channel.send(`**${message.author.username}** | Por favor insira um tempo para mutar este usuário. Exemplo: t.tempute @usuário 30s motivo`)
     } else if (!reason) {
