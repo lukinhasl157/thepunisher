@@ -8,7 +8,7 @@ module.exports = {
             } else if (!reason) {
                 return message.channel.send(`» **${message.author.username}** | Por favor, insira um motivo para banir este usuário.`);
             } else {
-                const msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo: **${reason}** ? Se **SIM**, clique no emoji <:correto:505155063963058187> para bani-lo. Se **NÃO** clique no emoji <:negado:505155029636874250> para cancelar esta ação.`);
+                const msg = await message.channel.send(`» **${message.author.username}** | Você tem certeza de banir o usuário ${member} pelo motivo: \`\`${reason}\`\` ? Se **SIM**, clique no emoji <:correto:505155063963058187> para bani-lo. Se **NÃO** clique no emoji <:negado:505155029636874250> para cancelar esta ação.`);
                 await msg.react(":correto:505155063963058187");
                 await msg.react(":negado:505155029636874250");
 
@@ -19,8 +19,8 @@ module.exports = {
                         switch (r._emoji.name) {
                             case "correto":
                                 if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
-                                    return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`BAN_MEMBERS\`\` para executar este comando.`);
-                                } else if (!message.member.hasPermission("BAN_MEMBERS")) {
+                                    return message.channel.send(`» **${messagemessage.author.username}** | Desculpe, eu preciso da permissão \`\`BAN_MEMBERS\`\` para executar este comando.`);
+                                } else if (!member.hasPermission("BAN_MEMBERS")) {
                                     return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão requirida: \`\`BAN_MEMBERS\`\`.`);
                                 } else if (message.guild.me.highestRole.position <= member.highestRole.position) {
                                     return message.channel.send(`» **${message.author.username}** | Desculpe, o meu cargo é menor ou igual ao usuário a ser banido.`);
