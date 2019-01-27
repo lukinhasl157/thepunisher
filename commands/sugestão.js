@@ -3,13 +3,6 @@ module.exports = {
     run: async function (bot, message, args) {
 
         let channel = message.guild.channels.find(c => c.name === "sugestões");
-        const embed = new Discord.RichEmbed()
-        .addField("**Sugestão**", args.join(" "))
-        .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
-        .setTimestamp(new(Date))
-        .setColor("#07ed66")
-        .setThumbnail(message.author.displayAvatarURL)
-
         if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
             message.react(":negado:505155029636874250");
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão **MANAGE_CHANNELS** para executar este comando.`);
@@ -22,6 +15,12 @@ module.exports = {
             deny: ["SEND_MESSAGES"],
             allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
             }]);
+            const embed = new Discord.RichEmbed()
+            .addField("**Sugestão**", args.join(" "))
+            .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
+            .setTimestamp(new(Date))
+            .setColor("#07ed66")
+            .setThumbnail(message.author.displayAvatarURL)
             const m = await channel.send(embed);
             await m.react(":correto:505155063963058187");
             await m.react(":negado:505155029636874250");
