@@ -11,7 +11,7 @@ module.exports = {
         deny: ["SEND_MESSAGES"], //definindo as permissões do canal.
         allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
       }]);
-      await message.channel.send(`${message.author}, não encontrei o canal 🚨denuncias, então criei o canal automaticamente.`);
+      await message.channel.send(`${message.author}, não encontrei o canal \`\`🚨denuncias\`\`, então criei o canal automaticamente.`);
       await message.channel.send(`${message.author}, sua denuncia foi enviado com sucesso.`)
       const embed = new Discord.RichEmbed()
         .addField("**Sugestão**", args.join(" "))
@@ -24,7 +24,7 @@ module.exports = {
       await msg.react(":negado:505155029636874250");//troque o emoji se não vai dar erro.
     } else {
       if (channel) {// se tiver o canal ele manda a msg normal.
-        const m = await message.channel.send(embed);
+        const m = await channel.send(embed);
         await m.react(":correto:505155063963058187");//troque o emoji se não vai dar erro.
         await m.react(":negado:505155029636874250");//troque o emoji se não vai dar erro.
       }
