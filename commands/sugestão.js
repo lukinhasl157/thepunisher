@@ -30,12 +30,18 @@ module.exports = {
             await message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
         } else {
             if (channel) {
-                channel.send(embed).then(async (m) => {
+                const embed2 = new Discord.RichEmbed()
+                .addField("**Sugestão**", args.join(" "))
+                .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
+                .setTimestamp(new(Date))
+                .setColor("#07ed66")
+                .setThumbnail(message.author.displayAvatarURL)
+                channel.send(embed2).then(async (m) => {
                     await m.react(":correto:505155063963058187");
                     await m.react(":negado:505155029636874250");
                 });
-                message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
                 message.react(":correto:505155063963058187");
+                message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
             }
         }
     },
