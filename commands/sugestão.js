@@ -41,8 +41,3 @@ module.exports = {
     category: "Utilidades",
     description: "Enviar uma sugestão."
 }
-
-
-
-
-

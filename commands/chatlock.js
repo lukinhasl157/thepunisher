@@ -17,4 +17,3 @@ module.exports = {
     category: "Moderação",
     description: "Desativar o chat."
 }
-
