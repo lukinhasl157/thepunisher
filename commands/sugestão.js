@@ -21,17 +21,19 @@ module.exports = {
             .setTimestamp(new(Date))
             .setColor("#07ed66")
             .setThumbnail(message.author.displayAvatarURL)
-            const m = await channel.send(embed);
-            await m.react(":correto:505155063963058187");
-            await m.react(":negado:505155029636874250");
+            await channel.send(embed).then(async (msg) => {
+                await m.react(":correto:505155063963058187");
+                await m.react(":negado:505155029636874250");
+            });
             message.react(":correto:505155063963058187");
             await message.channel.send(`» **${message.author.username}** | Não encontrei o canal sugestões, então criei o canal automaticamente.`);
             await message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
         } else {
             if (channel) {
-                const msg = await channel.send(embed);
-                await msg.react(":correto:505155063963058187");
-                await msg.react(":negado:505155029636874250");
+                channel.send(embed).then(async (msg) => {
+                    await msg.react(":correto:505155063963058187");
+                    await msg.react(":negado:505155029636874250");
+                });
                 message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
                 message.react(":correto:505155063963058187");
             }
