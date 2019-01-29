@@ -15,7 +15,6 @@ module.exports = {
             deny: ["SEND_MESSAGES"],
             allow: ["ADD_REACTIONS", "VIEW_CHANNEL"]
             }]);
-
             await channel.send(new Discord.RichEmbed()
                 .addField("**Sugestão**", args.join(" "))
                 .setFooter(`Sugestão enviada por: ${message.author.tag}`, message.author.displayAvatarURL)
