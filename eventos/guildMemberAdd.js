@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-
 module.exports = {
 	run: async function(member) {
 
@@ -7,12 +6,12 @@ module.exports = {
 			let channel = member.guild.channels.find(ch => ch.name === "🎉entrou");
 			let category = member.guild.channels.find(ch => ch.name === "👾ENTRADA/SAIDA");
 			const embed = new Discord.RichEmbed()
-      		.setColor("#3fdb20")
-      		.setThumbnail(member.user.avatarURL)
-      		.setDescription(`${member}, bem vindo(a)! ao servidor :tada:`)
-      		.addField('Você é o membro de número:', member.guild.memberCount)
-      		.setTimestamp(new Date())
-      		.setFooter(member.guild.name, member.guild.iconURL)
+      			.setColor("#3fdb20")
+      			.setThumbnail(member.user.avatarURL)
+      			.setDescription(`${member}, bem vindo(a)! ao servidor :tada:`)
+      			.addField('Você é o membro de número:', member.guild.memberCount)
+      			.setTimestamp(new Date())
+      			.setFooter(member.guild.name, member.guild.iconURL)
     		if (!member.guild.me.hasPermission("MANAGE_CHANNELS")) {
 				return;
 			} else if (!category && !channel) {
@@ -43,8 +42,8 @@ module.exports = {
 			}
 		} catch(e) {
 			const channel = this.channels.find(ch => ch.name === "❌logs-de-erros-the-punisher");
-			console.log(e)
-			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`)
+			console.log(e);
+			channel.send(`Ocorreu um erro no evento **guildMemberAdd** | Servidor ${member.guild.name}. Erro: ${e}`);
 		}
 	}
 }
