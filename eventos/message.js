@@ -25,16 +25,15 @@ module.exports.run = async function(message) {
             setTimeout(function() {
                 command.usersCooldown.delete(message.author.id);
             }, command.cooldown);
-
         }
-
     }
 
     if (!message.command) {
-        if (message.content.startsWith(`<@${this.user.id}>`)) {
-        message.channel.send(`<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`).then(fdp => fdp.delete(60000));
+        if (message.content.includes(`<@${this.user.id}>`)) {
+            message.channel.send(`<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`)
+            .then((msg) => {
+                msg.delete(60 * 1000);
+            });
         }
-
     } 
-
 }
