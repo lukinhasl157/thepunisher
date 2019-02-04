@@ -27,24 +27,24 @@ module.exports = {
       "Fortnite": "<:fortnite:537665269464825866> Fortnite",
       "PLAYERUNKNOWN'S BATTLEGROUNDS": "<:PUBG:537667392029982744> PLAYERUNKNOWN'S BATTLEGROUNDS"
     }
-    const embed = new Discord.RichEmbed()
-    .setAuthor(`» 📚 Informações do usuário: ${member.user.username}`, member.user.displayAvatarURL)
-    .setThumbnail(member.user.displayAvatarURL)
-    .addField("» 👤 Usuário:", member.user.tag, true)
-    .addField("» 🗂 ID:", member.user.id, true)
-    .addField("» 🏷 Apelido:", member.user.nickname? member.user.nickname : "Sem apelido", true)
-    .addField("» 🚦 Status:", status[member.user.presence.status], true)
-    .addField("» 📆 Entrou em:", moment(member.joinedAt).format("LL"), true)
-    .addField("» 📆 Dias no Discord:", moment().diff(member.user.createdAt, "days"), true)
-    .addField("» 📆 Conta criada em:", moment(member.user.createdAt).format("LL"), true)
-    .addField("» 📆 Dias no servidor:", moment().diff(member.joinedAt, "days"), true)
-    .addField("» 👾 Total de Cargos:", member.roles.size? member.roles.size : "Sem cargos.", true)
-    .addField("» 🛡 Administrador:", administrator, true)
-    .addField("» 🎮 Jogando:", member.user.presence.game ? gamePresence[member.user.presence.game] || member.user.presence.game : "O usuário não está jogando nada no momento.", false)
-    .setColor(member.displayColor)
-    .setTimestamp(new Date())
-    .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
-      message.channel.send(embed);
+    message.channel.send(new Discord.RichEmbed()
+      .setAuthor(`» 📚 Informações do usuário: ${member.user.username}`, member.user.displayAvatarURL)
+      .setThumbnail(member.user.displayAvatarURL)
+      .addField("» 👤 Usuário:", member.user.tag, true)
+      .addField("» 🗂 ID:", member.user.id, true)
+      .addField("» 🏷 Apelido:", member.user.nickname? member.user.nickname : "Sem apelido", true)
+      .addField("» 🚦 Status:", status[member.user.presence.status], true)
+      .addField("» 📆 Entrou em:", moment(member.joinedAt).format("LL"), true)
+      .addField("» 📆 Dias no Discord:", moment().diff(member.user.createdAt, "days"), true)
+      .addField("» 📆 Conta criada em:", moment(member.user.createdAt).format("LL"), true)
+      .addField("» 📆 Dias no servidor:", moment().diff(member.joinedAt, "days"), true)
+      .addField("» 👾 Total de Cargos:", member.roles.size? member.roles.size : "Sem cargos.", true)
+      .addField("» 🛡 Administrador:", administrator, true)
+      .addField("» 🎮 Jogando:", member.user.presence.game ? gamePresence[member.user.presence.game] || member.user.presence.game : "O usuário não está jogando nada no momento.", false)
+      .setColor(member.displayColor)
+      .setTimestamp(new Date())
+      .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
+    );
   },
   aliases: ["perfil", "info"],
   category: "Moderação",

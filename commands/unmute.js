@@ -20,14 +20,14 @@ module.exports = {
     } else {
       member.removeRole(role)
       .catch(console.error);
-      const embed = new Discord.RichEmbed()
-      .setTitle("**DESMUTE**")
-      .setDescription(`O usuáro ${member} foi desmutado.\n \n• **• Motivo**: » ${reason}`)
-      .setColor("#ff0000")
-      .setTimestamp(new Date())
-      .setThumbnail(member.user.displayAvatarURL)
-      .setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL)
-      message.channel.send(embed);
+      message.channel.send(new Discord.RichEmbed()
+        .setTitle("**DESMUTE**")
+        .setDescription(`O usuáro ${member} foi desmutado.\n \n• **• Motivo**: » ${reason}`)
+        .setColor("#ff0000")
+        .setTimestamp(new Date())
+        .setThumbnail(member.user.displayAvatarURL)
+        .setFooter(`Comando solicitado por ${message.author.tag}`, message.author.displayAvatarURL)
+      );
     }
   },
   aliases: ["desmute", "desmutar"],

@@ -23,17 +23,9 @@ module.exports = {
 				}]);
 				channel.setParent(category.id);
 				await channel.send(embed);
-				await member.send(embed)
-				.catch(() => {
-					return;
-				});
 			} else {
 				if (channel && category) {
 					channel.send(embed);
-					member.send(embed)
-					.catch(() => {
-						return;
-					});
 				}
 			}
 		} catch(e) {

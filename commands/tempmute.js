@@ -33,14 +33,14 @@ module.exports = {
           });
         });
         await member.addRole(role);
-        const embed = new Discord.RichEmbed()
-        .setAuthor("**MUTE**")
-        .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
-        .setThumbnail(member.user.displayAvatarURL)
-        .setColor("#ff0000")
-        .setTimestamp(new Date())
-        .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
-        message.channel.send(embed);
+        message.channel.send(new Discord.RichEmbed()
+          .setAuthor("**MUTE**")
+          .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
+          .setThumbnail(member.user.displayAvatarURL)
+          .setColor("#ff0000")
+          .setTimestamp(new Date())
+          .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
+        );
       } catch(e) {
         console.log(e);
       }
@@ -50,14 +50,14 @@ module.exports = {
 
       setTimeout(function() {
       member.removeRole(role);
-      const embed2 = new Discord.RichEmbed()
-      .setAuthor(`**DESMUTE**`, bot.user.displayAvatarURL)
-      .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
-      .setThumbnail(member.user.displayAvatarURL)
-      .setColor("#ff0000")
-      .setTimestamp(new Date())
-      .setFooter(message.guild.name, message.guild.iconURL)
-      message.channel.send(embed2);
+      message.channel.send(new Discord.RichEmbed()
+        .setAuthor(`**DESMUTE**`, bot.user.displayAvatarURL)
+        .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
+        .setThumbnail(member.user.displayAvatarURL)
+        .setColor("#ff0000")
+        .setTimestamp(new Date())
+        .setFooter(message.guild.name, message.guild.iconURL)
+      );
       }, ms(time));
     }
 },
