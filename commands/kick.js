@@ -39,7 +39,10 @@ module.exports = {
             }
           });
       }
-  }
+  },
+    aliases: ["expulsar", "kickar"],
+    category: "Moderação",
+    description: "Expulsar um usuário do servidor."
 }
     
     
