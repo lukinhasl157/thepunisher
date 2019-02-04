@@ -5,7 +5,7 @@ module.exports = {
         
     try {
         // criando um Object com todas categorias
-        let categorias = bot.commands.reduce((o, comando, nome) => {
+        const categorias = bot.commands.reduce((o, comando, nome) => {
             if (!o[comando.category]) o[comando.category] = {};
             o[comando.category][nome] = comando;
             return o;
@@ -14,11 +14,11 @@ module.exports = {
             embed = simples RicheEmbed
             opcoes = JSON das opçoes das categorias
         */
-        let embed = new Discord.RichEmbed()
+        const embed = new Discord.RichEmbed()
             .setTitle('Categorias')
             .setThumbnail(bot.user.avatarURL)
             .setColor('RANDOM');
-        let opcoes = require('../categorias.json');
+        const opcoes = require('../categorias.json');
         
         // adicionando todas categorias 
         embed.setDescription(Object.keys(categorias)
@@ -28,7 +28,7 @@ module.exports = {
              nome));
     
         // enviando msg no privado
-        let msg = await message.author.send(embed);
+        const msg = await message.author.send(embed);
         message.channel.send(`» **${message.author.username}**, olhe seu privado! Mandei meus comandos lá! 📨`);
         message.react(":correto:505155063963058187");
         for (const x in opcoes) 
@@ -44,12 +44,12 @@ module.exports = {
             let categoria = Object.entries(opcoes).find(([nome, opt]) => opt.emoji === emoji.name);
             if (categoria) {
                 let [nome, opcoes] = categoria;
-                let embed = new Discord.RichEmbed()
+                await msg.edit(new Discord.RichEmbed()
                     .setDescription(opcoes.description)
                     .setTitle(nome)
                     .setColor(opcoes.color)
-                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => process.env.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '));
-                await msg.edit(embed);
+                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => process.env.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '))
+                );
             } 
         });
 

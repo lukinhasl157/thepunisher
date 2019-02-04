@@ -20,10 +20,10 @@ module.exports = {
         } else {
             randomPuppy(sub)
             .then(url => {
-                const embed = new Discord.RichEmbed()
-                .setColor("#ff0000")
-                .setImage(url);
-                message.channel.send(embed);
+                message.channel.send(new Discord.RichEmbed()
+                    .setColor("#ff0000")
+                    .setImage(url)
+                );
             });
         }
     },

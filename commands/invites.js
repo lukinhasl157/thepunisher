@@ -11,14 +11,13 @@ module.exports = {
                     invitesUses += invite.uses;
                 }
             });
-
-            const embed = new Discord.RichEmbed()
-            .setThumbnail(user.displayAvatarURL)
-            .addField("**• Membros Recrutados •**", `\`\`\`js\n(${invitesUses}) - Membros\`\`\``)
-            .setColor("RANDOM")
-            .setFooter(user.tag, user.displayAvatarURL)
-            .setTimestamp(new Date());
-            message.channel.send(embed);
+            message.channel.send(new Discord.RichEmbed()
+                .setThumbnail(user.displayAvatarURL)
+                .addField("**• Membros Recrutados •**", `\`\`\`js\n(${invitesUses}) - Membros\`\`\``)
+                .setColor("RANDOM")
+                .setFooter(user.tag, user.displayAvatarURL)
+                .setTimestamp(new Date())
+            );
 },
     aliases: ["convite", "div", "convites"],
     category: "Moderação",
