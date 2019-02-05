@@ -3,6 +3,7 @@ require('dotenv').config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
+const firebase = require("firebase");
 
 const configDB = {
   apiKey: "AIzaSyAm7-59iWOiOWHQdGrmeYQHrFEpakz0iE0",
