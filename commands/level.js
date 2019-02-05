@@ -2,7 +2,7 @@ module.exports = {
     run: async function (bot, message, args, database) {
         if (message.guild.id !== "445077312589791253") {
             return;
-        }
+        } else {
             global.xp = "";
             global.nextLevel = "";
             const points = Math.floor(Math.random() * 7) + 8;
@@ -33,5 +33,6 @@ module.exports = {
                         }
                     }
                 });
+        }
     }
 }
