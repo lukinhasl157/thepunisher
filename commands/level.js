@@ -1,5 +1,5 @@
 module.exports = {
-    run: (bot, message, args, database) => {
+    run: async function (bot, message, args, database) {
         if (message.guild.id !== "445077312589791253") {
             return;
         } else {
