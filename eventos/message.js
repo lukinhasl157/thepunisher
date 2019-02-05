@@ -1,4 +1,5 @@
 const { RichEmbed } = require('discord.js');
+const database = firebase.database();
 module.exports.run = async function(message) {
 
     if (message.author.bot || message.channel.type === "dm")
@@ -19,7 +20,7 @@ module.exports.run = async function(message) {
             
             Object.defineProperty(message, 'command', { value: command });
 
-            command.run(this, message, args);
+            command.run(this, message, args, database);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {
