@@ -21,6 +21,13 @@ module.exports.run = async function(message) {
             
             Object.defineProperty(message, 'command', { value: command });
 
+            const ref = await database.ref(`Configs/Comandos`)
+            const data = await ref.once('value')
+
+            data.forEach((value, key) => {
+                console(value, key)
+            })
+
             command.run(this, message, args, database);
             command.usersCooldown.add(message.author.id);
 
@@ -37,12 +44,12 @@ module.exports.run = async function(message) {
                 msg.delete(60 * 1000);
             });
         }
-
-        if (message.guild.id !== "445077312589791253") {
+        const guildsID = ["445077312589791253", "463182372259627018"];
+        if (!guildsID.includes(message.guild.id)) {
             return;
         } else {
             const GiveXp = new(require('../utils/GIveXp'))(database, `Servidores/Levels/${message.guild.id}/${message.author.id}`, message)
-            await GiveXp.giveXp() //pronto god
+            await GiveXp.giveXp();
         }
     } 
 }
