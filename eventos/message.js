@@ -41,8 +41,8 @@ module.exports.run = async function(message) {
         if (message.guild.id !== "445077312589791253") {
             return;
         } else {
-            let xp;
-            let nextLevel;
+            global.xp = "";
+            global.nextLevel = "";
             const points = Math.floor(Math.random() * 7) + 8;
     
             database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`)
