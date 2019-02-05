@@ -37,13 +37,13 @@ module.exports.run = async function(message) {
                 msg.delete(60 * 1000);
             });
         }
-        global.xp = "";
-        global.nextLevel = "";
-        
+
         if (message.guild.id !== "445077312589791253") {
             return;
         } else {
-            const points = Math.floor(Math.random() * 7) + 8;
+            global.xp = "";
+            global.nextLevel = "";
+            let points = Math.floor(Math.random() * 7) + 8;
             database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`)
                 .once("value").then(async function(snap) {
                     if (snap.val == null) {
