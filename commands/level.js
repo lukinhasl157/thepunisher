@@ -8,7 +8,7 @@ module.exports = {
             const points = Math.floor(Math.random() * 7) + 8;
     
             database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`)
-                .once("value").then(function(snap) {
+                .once("value").then(async function(snap) {
                     if (snap.val == null) {
                         database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`)
                             .set({

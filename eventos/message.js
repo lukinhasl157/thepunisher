@@ -1,4 +1,5 @@
 const { RichEmbed } = require('discord.js');
+const firebase = require("firebase");
 const database = firebase.database();
 module.exports.run = async function(message) {
 
