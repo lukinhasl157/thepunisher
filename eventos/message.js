@@ -44,7 +44,7 @@ module.exports.run = async function(message) {
                 msg.delete(60 * 1000);
             });
         }
-        if (message.guild.id !== "445077312589791253" || "463182372259627018") {
+        if (message.guild.id !== "515877819914518529") {
             return;
         } else {
             const GiveXp = new(require('../utils/GIveXp'))(database, `Servidores/Levels/${message.guild.id}/${message.author.id}`, message)
