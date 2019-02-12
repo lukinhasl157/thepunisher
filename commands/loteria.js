@@ -6,11 +6,11 @@ module.exports = {
 
 		const filter = msg => msg.content.startsWith(random);
 		const collected = await message.channel.awaitMessages(filter, { max: 1, time: 300000, erros: ["time"] })
-		.then(collected => {
-			message.channel.send(`${collected.first().author} venceu o evento loteria. O número correto era **${random}**.`);
-		}).catch(() => {
-			message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era **${random}**.`);
-		});
+			.then(collected => {
+				message.channel.send(`${collected.first().author} venceu o evento loteria. O número correto era **${random}**.`);
+			}).catch(() => {
+				message.channel.send(`O evento loteria acabou, nenhum usuário venceu. O número correto era **${random}**.`);
+			});
 	},
 	aliases: ["lotery"],
 	category: "Entretenimento",
