@@ -47,7 +47,7 @@ module.exports.run = async function(message) {
         if (message.guild.id !== "515877819914518529") {
             return;
         } else {
-            const GiveXp = new(require('../utils/GIveXp'))(database, `Servidores/Levels/${message.guild.id}/${message.author.id}`, message)
+            const GiveXp = new(require('../utils/xp'))(database, `Servidores/Levels/${message.guild.id}/${message.author.id}`, message)
             await GiveXp.giveXp();
         }
     } 

@@ -31,7 +31,7 @@ module.exports = class GiveXp {
                     level: nextLevel
                 })
 
-                await this.message.channel.send(`Parabéns **${this.message.author.tag}** você subiu de nível!`)
+                await this.message.channel.send(`Parabéns **${this.message.author.tag}** você subiu de nível! Nível atual: ${data.val().level}`);
             }
         }
 
