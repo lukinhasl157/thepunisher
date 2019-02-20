@@ -10,8 +10,8 @@ module.exports = class GiveXp {
         let nextLevel = ''
         let points = Math.floor(Math.random() * 7) + 8
 
-        const ref = await this.database.ref(this.ref)
-        const data = await ref.once('value')
+        const ref = await this.database.ref(this.ref);
+        const data = await ref.once('value');
 
         if (data.val() === null) {
             ref.set({
