@@ -1,6 +1,8 @@
 const { RichEmbed } = require('discord.js');
 const firebase = require("firebase");
 const database = firebase.database();
+const Database = require("../utils/Database")
+
 module.exports.run = async function(message) {
 
     if (message.author.bot || message.channel.type === "dm")
@@ -44,11 +46,9 @@ module.exports.run = async function(message) {
                 msg.delete(60 * 1000);
             });
         }
-        if (message.guild.id !== "515877819914518529") {
-            return;
-        } else {
-            const GiveXp = new(require('../utils/xp'))(database, `Servidores/Levels/${message.guild.id}/${message.author.id}`, message);
-            await GiveXp.giveXp();
-        }
-    } 
+        if (message.guild.id !== "515877819914518529") return
+        const dataUser = await Database.user(message.author.id, message.guild.id)
+        const LevelUp = await dataUser.addXp()
+        if (LevelUp) message.channel.send(`Parabéns **${this.message.author.tag}** você subiu de nível! Nível atual: ${LevelUp}`)
+    }
 }
