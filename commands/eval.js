@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const inspect = require('util');
+const { inspect } = require('util');
 module.exports = {
   run: (bot, message, args) => {
       const devs = ["289209067963154433", "385132696135008259", "281561868844269569"];
