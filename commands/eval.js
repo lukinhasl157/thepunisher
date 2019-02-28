@@ -15,11 +15,12 @@ module.exports = {
         let resultEval = eval(code);
         let toEval = typeof resultEval === 'string' ? resultEval : inspect(resultEval, { depth: 1 });
           embed.addField('Resultado', value('js', toEval))
-          embed.addField("Código", value('js', resultEval))
+          embed.addField("Código", value('js', code))
           embed.addField('Tipo', value('css', typeof resultEval))
           embed.setColor("GREEN")
       } catch (error) {
         embed.addField('Erro', value('js', error))
+        embed.addField("Código", value('js', code))
         embed.setColor("RED")
       } finally {
         message.channel.send(embed);
