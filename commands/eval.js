@@ -11,7 +11,6 @@ module.exports = {
       let code = args.join(' ').replace(/^```(js|javascript ?\n)?|```$/g, '')
       let value = (l, c) => `\`\`\`${l}\n${String(c).slice(0, 1000) + (c.length >= 1000 ? '...' : '')}\n\`\`\``.replace(process.env.token, () => '*'.repeat(process.env.token.length))
       let embed = new Discord.RichEmbed()
-        .setColor('#36393F')
       try {
         let resultEval = eval(code);
         let toEval = typeof resultEval === 'string' ? resultEval : inspect(resultEval, { depth: 1 });
@@ -20,7 +19,6 @@ module.exports = {
           embed.addField('Tipo', value('css', typeof resultEval))
           embed.setColor("GREEN")
       } catch (error) {
-        embed.addField("Código", value('js', resultEval))
         embed.addField('Erro', value('js', error))
         embed.setColor("RED")
       } finally {
