@@ -10,7 +10,7 @@ module.exports = {
     } else {
       const code = args.join(' ').replace(/^```(js|javascript ?\n)?|```$/g, '')
       const value = (l, c) => `\`\`\`${l}\n${String(c).slice(0, 1000) + (c.length >= 1000 ? '...' : '')}\n\`\`\``.replace(process.env.token, () => '*'.repeat(process.env.token.length))
-      const embed = new Discord.RichEmbed()
+      let embed = new Discord.RichEmbed()
         .setColor('#36393F')
       try {
         const resultEval = eval(code);
