@@ -11,6 +11,5 @@ module.exports.run = function() {
       
     setInterval(() => setStatus(), 60 * 1000);
     console.log("Bot iniciado com sucesso!");
-    console.log('Status carregado com sucesso!');
-      
+    console.log('Status carregado com sucesso!');    
 }
