@@ -14,11 +14,15 @@ module.exports = {
         .setColor('#36393F')
       try {
         const resultEval = eval(code);
-        let toEval = typeof resultEval === 'string' ? resultEval : inspect(resultEval, { depth: 1 })
+        let toEval = typeof resultEval === 'string' ? resultEval : inspect(resultEval, { depth: 1 });
           embed.addField('Resultado', value('js', toEval))
+          embed.addField("Código", value('js', resultEval))
           embed.addField('Tipo', value('css', typeof resultEval))
+          embed.setColor("GREEN")
       } catch (error) {
+        embed.addField("Código", value('js', resultEval))
         embed.addField('Erro', value('js', error))
+        embed.setColor("RED")
       } finally {
         message.channel.send(embed);
       }
