@@ -5,7 +5,8 @@ module.exports = {
 		if (!member) {
 			return message.channel.send(`**${message.author.username}**, | Por favor, insira o id ou mencione o usuário que deseja xingar.`);
 		} else {
-			message.author.send(`**${message.author.username}** | Como deseja xingar o usuário **${member.user.tag}** ? (Após \`\`30s\`\` esta mensagem será apagada.)`)
+			message.channel.send(message.author.username + " | Por favor, olhe sua **DM**");
+			await message.author.send(`**${message.author.username}** | Como deseja xingar o usuário **${member.user.tag}** ? (Após \`\`30s\`\` esta mensagem será apagada.)`)
 			.then((msg) => {
 			msg.delete(30000)
 			const filter = m => m.author.id === message.author.id;
