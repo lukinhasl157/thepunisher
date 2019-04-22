@@ -10,6 +10,7 @@ module.exports = {
                 xp: 0,
                 level: 1
             });
+            
             await message.channel.send(`Nível atual: ${memberRef.val().level}`);
         } else {
             memberRef.once("value").then(async function(DBlevel, DBxp) {
