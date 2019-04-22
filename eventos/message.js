@@ -45,6 +45,13 @@ module.exports.run = async function(message) {
                 msg.delete(60 * 1000);
             });
         }
+        const letters = ["a", "e", "i", "o"];
+        const channels = message.guild.channels.some((ch) => ["commands", "general", "logic-js"].includes(ch.name));
+
+        if (channels && message.content.toLowerCase().includes(letters)) {
+            message.delete();
+            message.channel.send("blocked");
+        }
         if (message.guild.id !== "515877819914518529") {
             return;
         } else {
