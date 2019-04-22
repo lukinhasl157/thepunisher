@@ -2,7 +2,7 @@ module.exports = {
     run: async function(bot, message, args, database) {
 
         const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
-        const memberRef = await database.ref(`${message.guild.id}/${message.author.id}`);
+        const memberRef = await database.ref(`Servidores/levels/${message.guild.id}/${message.author.id}`);
         const data = await memberRef.once('value');
         
         if (data.val() === null) {
@@ -16,7 +16,6 @@ module.exports = {
             memberRef.once("value").then(async function(DBlevel, DBxp) {
                 const level = DBlevel.val().level;
                 const xp = DBxp().val().xp;
-                console.log(xp, level)
                 await message.channel.send(`Level atual: ${level}, xp: ${xp}`);
             });
         }
