@@ -5,7 +5,6 @@ module.exports = {
         const memberRef = await database.ref(`${message.guild.id}/${message.author.id}`);
         const data = await memberRef.once('value');
         
-        console.log(database);
         if (data.val() === null) {
             memberRef.set({
                 xp: 0,
