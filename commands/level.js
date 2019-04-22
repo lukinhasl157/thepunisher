@@ -1,5 +1,5 @@
 module.exports = {
-    run: async function(message, args, database) {
+    run: async function(bot, message, args, database) {
 
         const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
         const memberRef = await database.ref(`${message.guild.id}/${message.author.id}`);
