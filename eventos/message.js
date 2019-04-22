@@ -28,7 +28,7 @@ module.exports.run = async function(message) {
                 console(value, key)
             })
 
-            command.run(message, args, database);
+            command.run(bot, message, args, database);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {
