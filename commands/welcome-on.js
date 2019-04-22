@@ -4,7 +4,7 @@ module.exports = {
 
         eventRef.once("value").then(async function() {
             eventRef.update({
-                guildMemberAdd: false
+                guildMemberAdd: true
             });
         });
     }
