@@ -46,7 +46,7 @@ module.exports.run = async function(message) {
             });
         }
         const letters = ["a", "e", "i", "o"];
-        const channels = message.guild.channels.some((ch) => ["commands", "general", "logic-js"].includes(ch.name));
+        const channels = ["commands", "general", "logic-js"].includes(message.channel.name)
 
         if (channels && letters.includes(message.content.toLowerCase())) {
             message.delete();
