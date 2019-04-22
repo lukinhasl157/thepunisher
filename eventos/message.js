@@ -1,4 +1,4 @@
-const { RichEmbed, Discord } = require('discord.js');
+const Discord = require('discord.js');
 const firebase = require("firebase");
 const database = firebase.database();
 const bot = new Discord.Client({ disableEveryone: true });
