@@ -4,6 +4,7 @@ module.exports = {
         const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
         const memberRef = await database.ref(`${message.guild.id}/${message.author.id}`);
         
+        console.log(database);
         if (memberRef.val() === null) {
             memberRef.set({
                 xp: 0,
