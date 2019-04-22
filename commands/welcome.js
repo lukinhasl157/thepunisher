@@ -11,7 +11,7 @@ module.exports = {
             }
         });
 
-        eventRef.once("value").then(async function(event) {
+        eventRefi.once("value").then(async function(event) {
             if (event.val() == true) {
                 message.channel.send("O evento de bem-vindo está ativado.");
             } else {
