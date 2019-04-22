@@ -12,7 +12,7 @@ module.exports = {
                         xp: 0,
                         level: 1
                     });
-                    await message.channel.send(`Perfil criado na database comn sucesso.\nNível atual: ${db.val().level}, xp: ${db.val().xp}`);
+                    await message.channel.send(`Perfil criado na database comn sucesso.\nNível atual: ${memberRef.val().level}, xp: ${memberRef.val().xp}`);
                 } else {
                     await message.channel.send(`Level atual: ${db.val().level}, xp: ${db.val().xp}`);
                 }
