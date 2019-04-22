@@ -1,6 +1,7 @@
-const { RichEmbed } = require('discord.js');
+const { RichEmbed, Discord } = require('discord.js');
 const firebase = require("firebase");
 const database = firebase.database();
+const bot = new Discord.Client({ disableEveryone: true });
 module.exports.run = async function(message) {
 
     if (message.author.bot || message.channel.type === "dm")
