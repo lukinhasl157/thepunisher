@@ -6,15 +6,17 @@ module.exports = {
             return message.channel.send("Este comando se encontra em fase de testes e só está disponível para uso no servidor oficial do bot. Para receber o convite do servidor digite \`\`t.suporte\`\`")
         } else {
             const memberRef = database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`);
-            memberRef.once("value").then(async function(level) {
-                if (level.val() == null) {
+            memberRef.once("value").then(async function(db) {
+                if (db.val() == null) {
                     memberRef.set({
                         xp: 0,
                         level: 1
                     });
-                    await message.channel.send(`Perfil criado na database comn sucesso.\nNível atual: ${memberRef.val().level}, xp: ${memberRef.val().xp}`);
+                    await message.channel.send(`Perfil criado na database comn sucesso.\nNível atual: ${db.val().level}, xp: ${db.val().xp}`);
                 } else {
-                    await message.channel.send(`Level atual: ${level.val().level}, xp: ${level.val().xp}`);
+                    if (db.val().level > 1) {
+                        await message.channel.send(`Level atual: ${db.val().level}, xp: ${db.val().xp}`);
+                    }
                 }
             });
         }
