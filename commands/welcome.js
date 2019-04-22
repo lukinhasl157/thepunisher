@@ -8,6 +8,7 @@ module.exports = {
                 eventRef.set({
                     guildMemberAdd: true
                 });
+                await message.channel.send("Evento criado na database com sucesso. Digite o comando novamente.")
             }
         });
 
