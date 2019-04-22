@@ -2,22 +2,17 @@ module.exports = {
     run: async function(bot, message, args, database) {
 
         const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
-        const memberRef = await database.ref(`Servidores/levels/${message.guild.id}/${message.author.id}`);
-        const data = await memberRef.once('value');
-        
-        if (data.val() === null) {
-            memberRef.set({
-                xp: 0,
-                level: 1
-            });
-            
-            await message.channel.send(`Nível atual: ${memberRef.val().level}`);
-        } else {
-            memberRef.once("value").then(async function(DBlevel, DBxp) {
-                const level = DBlevel.val().level;
-                const xp = DBxp().val().xp;
-                await message.channel.send(`Level atual: ${level}, xp: ${xp}`);
-            });
-        }
+        const memberRef = database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`);
+        memberRef.once("value").then(async function(level) {
+            if (level.val == null) {
+                memberRef.set({
+                    xp: 0,
+                    level: 1
+                });
+                await message.channel.send(`Nível atual: ${level.val().level}, xp: ${level.val().xp}`);
+            } else {
+                await message.channel.send(`Level atual: ${level.val().level}, xp: ${level.val().xp}`);
+            }
+        });
     }
 }
