@@ -14,9 +14,7 @@ module.exports = {
                     });
                     await message.channel.send(`Perfil criado na database comn sucesso.\nNível atual: ${db.val().level}, xp: ${db.val().xp}`);
                 } else {
-                    if (db.val().level > 1) {
-                        await message.channel.send(`Level atual: ${db.val().level}, xp: ${db.val().xp}`);
-                    }
+                    await message.channel.send(`Level atual: ${db.val().level}, xp: ${db.val().xp}`);
                 }
             });
         }
