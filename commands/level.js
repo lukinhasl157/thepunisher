@@ -4,7 +4,7 @@ module.exports = {
         const member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member;
         const memberRef = database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`);
         memberRef.once("value").then(async function(level) {
-            if (level.val == null) {
+            if (memberRef.val == null) {
                 memberRef.set({
                     xp: 0,
                     level: 1
