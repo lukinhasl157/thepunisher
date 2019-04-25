@@ -1,7 +1,7 @@
 module.exports = {
 	run: async function (bot, message, args) {
 
-		const random = Math.floor(Math.random() * 100);
+		const random = Math.floor(Math.random() * 10);
 		message.channel.send(`Evento loteria iniciado! Um número aleátorio foi gerado entre \`\`0 e 100.\`\` Para participar digite um **número**. Boa sorte aos participantes!`);
 
 		const filter = msg => msg.content.startsWith(random);
