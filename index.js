@@ -3,17 +3,6 @@ require('dotenv').config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
-const firebase = require("firebase");
-
-const configDB = {
-  apiKey: "AIzaSyAm7-59iWOiOWHQdGrmeYQHrFEpakz0iE0",
-  authDomain: "the-punisher-36c23.firebaseapp.com",
-  databaseURL: "https://the-punisher-36c23.firebaseio.com",
-  projectId: "the-punisher-36c23",
-  storageBucket: "the-punisher-36c23.appspot.com",
-  messagingSenderId: "14185882236"
-};
-firebase.initializeApp(configDB);
 
 // BOT 
 const bot = new Discord.Client();

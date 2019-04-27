@@ -1,6 +1,4 @@
 const Discord = require('discord.js');
-const firebase = require("firebase");
-const database = firebase.database();
 const bot = new Discord.Client({ disableEveryone: true });
 module.exports.run = async function(message) {
 
@@ -21,15 +19,7 @@ module.exports.run = async function(message) {
             }           
             
             Object.defineProperty(message, 'command', { value: command });
-
-            const ref = await database.ref(`Configs/Comandos`)
-            const data = await ref.once('value')
-
-            data.forEach((value, key) => {
-                console(value, key)
-            })
-
-            command.run(bot, message, args, database);
+            command.run(bot, message, args);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {
@@ -44,12 +34,6 @@ module.exports.run = async function(message) {
             .then((msg) => {
                 msg.delete(60 * 1000);
             });
-        }
-        if (message.guild.id !== "515877819914518529") {
-            return;
-        } else {
-            const GiveXp = new(require('../utils/xp'))(database, `Servidores/Levels/${message.guild.id}/${message.author.id}`, message);
-            await GiveXp.giveXp();
         }
     } 
 }
