@@ -17,7 +17,7 @@ Object.defineProperties(bot, {
   },
   "categories": {
     get: function () {
-      return this.commands.reduce((o, comando, nome) => {
+      return bot.commands.reduce((o, comando, nome) => {
         if (!o.get(comando.category)) o.set(comando.category, new Discord.Collection());
         o.get(comando.category).set(nome, comando);
         return o;
