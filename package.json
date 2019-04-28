@@ -34,7 +34,7 @@
     "table": "^5.1.0",
     "twemoji": "^11.2.0",
     "util": "^0.11.0",
-    "ytdl-core": "^0.28.2"
+    "ytdl-core": "^0.28.3"
   },
   "devDependencies": {
     "eslint-config-standard": "^12.0.0",
