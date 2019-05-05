@@ -3,8 +3,7 @@ require('dotenv').config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
-const dbs = require("./utils/mongoose.js");
-dbs();
+const db = require("./utils/mongoose.js")();
 
 // BOT 
 const bot = new Discord.Client();
