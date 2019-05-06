@@ -2,20 +2,15 @@ const Discord = require("discord.js");
 const ms = require("ms");
 module.exports = {
   run: async function (bot, message, args) {
-    if (!args || !args.length) return message.reply('vai se fuder filho da puta')
+
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find((r) => r.name === "The Punisher | 🔇 Muted");
-    const time = ms(args[1]);
-    
-    if (isNaN(parseInt(time)) || parseInt(time) === 0 || parseInt(time) >= 86400000 || parseInt(time) <= 300000) 
-      return message.reply('O TEMPO TÁ ERRADO')
-    
+    const time = ms(ms(args[1]));
     const reason = args.slice(2).join(" ");
-    const url = bot.user.displayAvatarURL;
 
     const embed = new Discord.RichEmbed()
       .setAuthor("**MUTE**")
-      .setDescription(`O usuário ${member} foi mutado por **${ms(time)}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
+      .setDescription(`O usuário ${member} foi mutado por **${time}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
       .setThumbnail(member.user.displayAvatarURL)
       .setColor("#ff0000")
       .setTimestamp(new Date())
@@ -29,7 +24,9 @@ module.exports = {
       return message.channel.send(`**${message.author.username}** | Por favor insira o id ou mencione o usuário que deseja mutar.`);
     } else if (!time) {
       return message.channel.send(`**${message.author.username}** | Por favor insira um tempo para mutar este usuário. Exemplo: t.tempute @usuário 30s motivo`)
-    } else if (!reason) {
+    } else if (isNaN(parseInt(time)) || parseInt(time) === 0 || parseInt(time) >= 86400000 || parseInt(time) < 300000) {
+      return message.channel.send(`**${message.author.username}** | O tempo está errado.`);
+    } else if (!reason || !args || !args.length) {
       return message.channel.send(`**${message.author.username}** | Por favor insira um motivo para mutar este usuário.`);
     } else if (!role) {
       try {
@@ -46,12 +43,8 @@ module.exports = {
           });
         });
         await member.addRole(role);
-        await member.setDeaf(true, reason).catch(() => {
-          return false;
-        });
-        await member.setMute(true, reason).catch(() => {
-          return false;
-        });
+        await member.setDeaf(true, reason).catch(() => {return false;});
+        await member.setMute(true, reason).catch(() => {return false;});
         await message.channel.send(embed);
       } catch(e) {
         console.log(e);
@@ -59,25 +52,17 @@ module.exports = {
     } else {
       if (role) {
         await member.addRole(role);
-        await member.setDeaf(true, reason).catch(() => {
-          return false;
-        });
-        await member.setMute(true, reason).catch(() => {
-          return false;
-        });
+        await member.setDeaf(true, reason).catch(() => {return false;});
+        await member.setMute(true, reason).catch(() => {return false;});
         await message.channel.send(embed);
 
         setTimeout(function() {
           member.removeRole(role);
-          member.setDeaf(false).catch(() => {
-            return false;
-          });
-          member.setMute(false).catch(() => {
-            return false;
-          });
+          member.setDeaf(false).catch(() => {return false;});
+          member.setMute(false).catch(() => {return false;});
           message.channel.send(new Discord.RichEmbed()
             .setAuthor("**DESMUTE**", url)
-            .setDescription(`O usuário ${member} que havia sido mutado por **${ms(time)}**, finalizou seu tempo de punição e foi desmutado.`)
+            .setDescription(`O usuário ${member} que havia sido mutado por **${time}**, finalizou seu tempo de punição e foi desmutado.`)
             .setThumbnail(member.user.displayAvatarURL)
             .setColor("#ff0000")
             .setTimestamp(new Date())
