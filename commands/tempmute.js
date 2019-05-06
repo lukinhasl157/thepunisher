@@ -41,8 +41,12 @@ module.exports = {
           });
         });
         await member.addRole(role);
-        await member.setDeaf(true, reason);
-        await member.setMute(true, reason)
+        await member.setDeaf(true, reason).catch(() => {
+          return false;
+        });
+        await member.setMute(true, reason).catch(() => {
+          return false;
+        });
         await message.channel.send(embed);
       } catch(e) {
         console.log(e);
@@ -50,8 +54,12 @@ module.exports = {
     } else {
       if (role) {
         await member.addRole(role);
-        await member.setDeaf(true, reason);
-        await member.setMute(true, reason)
+        await member.setDeaf(true, reason).catch(() => {
+          return false;
+        });
+        await member.setMute(true, reason).catch(() => {
+          return false;
+        });
         await message.channel.send(embed);
 
         setTimeout(function() {
