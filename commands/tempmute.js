@@ -5,7 +5,7 @@ module.exports = {
     if (!args || !args.length) return message.reply('vai se fuder filho da puta')
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find((r) => r.name === "The Punisher | 🔇 Muted");
-    const time = args[1];
+    const time = ms(args[1]);
     
     if (isNaN(parseInt(time)) || parseInt(time) === 0 || parseInt(time) >= 86400000 || parseInt(time) <= 300000) 
       return message.reply('O TEMPO TÁ ERRADO')
@@ -15,7 +15,7 @@ module.exports = {
 
     const embed = new Discord.RichEmbed()
       .setAuthor("**MUTE**")
-      .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
+      .setDescription(`O usuário ${member} foi mutado por **${ms(time)}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
       .setThumbnail(member.user.displayAvatarURL)
       .setColor("#ff0000")
       .setTimestamp(new Date())
@@ -77,13 +77,13 @@ module.exports = {
           });
           message.channel.send(new Discord.RichEmbed()
             .setAuthor("**DESMUTE**", url)
-            .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
+            .setDescription(`O usuário ${member} que havia sido mutado por **${ms(time)}**, finalizou seu tempo de punição e foi desmutado.`)
             .setThumbnail(member.user.displayAvatarURL)
             .setColor("#ff0000")
             .setTimestamp(new Date())
             .setFooter(message.guild.name, message.guild.iconURL)
           );
-        }, ms(time));
+        }, time);
       }
     }
 },
