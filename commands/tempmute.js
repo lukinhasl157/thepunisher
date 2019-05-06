@@ -62,7 +62,7 @@ module.exports = {
         });
         await message.channel.send(embed);
 
-        setTimeout(() => {
+        setTimeout((bot) => {
           member.removeRole(role);
           member.setDeaf(false);
           member.setMute(false);
