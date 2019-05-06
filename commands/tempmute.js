@@ -8,6 +8,14 @@ module.exports = {
     const time = args[1];
     const reason = args.slice(2).join(" ");
 
+    const embed = new Discord.RichEmbed()
+      .setAuthor("**MUTE**")
+      .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
+      .setThumbnail(member.user.displayAvatarURL)
+      .setColor("#ff0000")
+      .setTimestamp(new Date())
+      .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
+
     if (!message.guild.me.hasPermission("MUTE_MEMBERS")) {
       return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`MUTE_MEMBERS\`\` para executar este comando.`)
     } else if (!message.member.hasPermission("MUTE_MEMBERS")) {
@@ -33,14 +41,7 @@ module.exports = {
           });
         });
         await member.addRole(role);
-        message.channel.send(new Discord.RichEmbed()
-          .setAuthor("**MUTE**")
-          .setDescription(`O usuário ${member} foi mutado por **${ms(ms(time))}.**\n \n**• Motivo:** » ${reason}\n \nApós o termino da punição o usuário será desmutado automaticamente.`)
-          .setThumbnail(member.user.displayAvatarURL)
-          .setColor("#ff0000")
-          .setTimestamp(new Date())
-          .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL)
-        );
+        message.channel.send(embed)
       } catch(e) {
         console.log(e);
       }
