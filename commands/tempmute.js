@@ -62,12 +62,12 @@ module.exports = {
         });
         await message.channel.send(embed);
 
-        setTimeout(function() {
+        setTimeout(() => {
           member.removeRole(role);
           member.setDeaf(false);
           member.setMute(false);
           message.channel.send(new Discord.RichEmbed()
-            .setAuthor(bot.user.displayAvatarURL, `**DESMUTE**`)
+            .setAuthor("**DESMUTE**", bot.user.avatarURL)
             .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
             .setThumbnail(member.user.displayAvatarURL)
             .setColor("#ff0000")
