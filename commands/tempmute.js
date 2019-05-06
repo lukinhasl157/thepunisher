@@ -5,7 +5,7 @@ module.exports = {
 
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find(r => r.name === "The Punisher | 🔇 Muted");
-    const time = ms(args[1]);
+    const time = args[1];
     const reason = args.slice(2).join(" ");
 
     const embed = new Discord.RichEmbed()
@@ -67,7 +67,7 @@ module.exports = {
           member.setDeaf(false);
           member.setMute(false);
           message.channel.send(new Discord.RichEmbed()
-            .setAuthor(`**DESMUTE**`, bot.user.displayAvatarURL)
+            .setAuthor(bot.user.displayAvatarURL, `**DESMUTE**`)
             .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
             .setThumbnail(member.user.displayAvatarURL)
             .setColor("#ff0000")
