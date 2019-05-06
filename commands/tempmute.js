@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const ms = require("ms");
 module.exports = {
   run: async function (bot, message, args) {
-
+    if (!args || !args.length) return message.reply('vai se fuder filho da puta')
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find((r) => r.name === "The Punisher | 🔇 Muted");
     const time = args[1];
