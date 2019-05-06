@@ -6,6 +6,10 @@ module.exports = {
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find((r) => r.name === "The Punisher | 🔇 Muted");
     const time = args[1];
+    
+    if (isNaN(parseInt(time)) || parseInt(time) === 0 || parseInt(time) >= 86400000 || parseInt(time) <= 300000) 
+      return message.reply('O TEMPO TÁ ERRADO')
+    
     const reason = args.slice(2).join(" ");
     const url = bot.user.displayAvatarURL;
 
