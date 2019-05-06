@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client({ disableEveryone: true });
 module.exports.run = async function(message) {
 
     if (message.author.bot || message.channel.type === "dm")
@@ -19,7 +18,7 @@ module.exports.run = async function(message) {
             }           
             
             Object.defineProperty(message, 'command', { value: command });
-            command.run(bot, message, args);
+            command.run(this, message, args);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {
