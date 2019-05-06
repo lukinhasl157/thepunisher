@@ -5,7 +5,7 @@ module.exports = {
 
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find(r => r.name === "The Punisher | 🔇 Muted");
-    const time = args[1];
+    const time = ms(args[1]);
     const reason = args.slice(2).join(" ");
 
     const embed = new Discord.RichEmbed()
@@ -41,25 +41,33 @@ module.exports = {
           });
         });
         await member.addRole(role);
-        message.channel.send(embed)
+        await member.setDeaf(true, reason);
+        await member.setMute(true, reason)
+        await message.channel.send(embed);
       } catch(e) {
         console.log(e);
       }
     } else {
-      await member.addRole(role);
-      message.channel.send(embed);
+      if (role) {
+        await member.addRole(role);
+        await member.setDeaf(true, reason);
+        await member.setMute(true, reason)
+        await message.channel.send(embed);
 
-      setTimeout(function() {
-      member.removeRole(role);
-      message.channel.send(new Discord.RichEmbed()
-        .setAuthor(`**DESMUTE**`, bot.user.displayAvatarURL)
-        .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
-        .setThumbnail(member.user.displayAvatarURL)
-        .setColor("#ff0000")
-        .setTimestamp(new Date())
-        .setFooter(message.guild.name, message.guild.iconURL)
-      );
-      }, ms(time));
+        setTimeout(function() {
+          member.removeRole(role);
+          member.setDeaf(false);
+          member.setMute(false);
+          message.channel.send(new Discord.RichEmbed()
+            .setAuthor(`**DESMUTE**`, bot.user.displayAvatarURL)
+            .setDescription(`O usuário ${member} que havia sido mutado por **${ms(ms(time))}**, finalizou seu tempo de punição e foi desmutado.`)
+            .setThumbnail(member.user.displayAvatarURL)
+            .setColor("#ff0000")
+            .setTimestamp(new Date())
+            .setFooter(message.guild.name, message.guild.iconURL)
+          );
+        }, ms(time));
+      }
     }
 },
   aliases: ["mute", "mutar", "silenciar"],
