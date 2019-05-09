@@ -3,11 +3,18 @@ module.exports = {
     run: (bot, message, args) => {
 
       function sendEmoji () {
-        const emojiSlice = args[0].slice(-19, -1) || bot.emojis.find((e) => e.name === `${args[0]}`);
-        message.channel.send(new Discord.RichEmbed()
-          .setImage(`https://cdn.discordapp.com/emojis/${emojiSlice}.png?v=1`)
-          .setColor("RANDOM")
-        );
+        const emojiSlice = args[0].slice(-19, -1);
+
+        if (!emojiSlice) {
+          return message.channel.send("Insira um emoji");
+        } else if (emojiSlice == null || emojiSlice == undefined) {
+          return message.channel.send("Insira um emoji válido");
+        } else {
+          message.channel.send(new Discord.RichEmbed()
+            .setImage(`https://cdn.discordapp.com/emojis/${emojiSlice}.png?v=1`)
+            .setColor("RANDOM")
+          );
+        }
       }
       sendEmoji();
 },
