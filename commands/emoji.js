@@ -7,7 +7,7 @@ module.exports = {
 
         if (!emojiSlice) {
           return message.channel.send("Insira um emoji");
-        } else if (emojiSlice == null || emojiSlice == undefined) {
+        } else if (emojiSlice ===  "") {
           return message.channel.send("Insira um emoji válido");
         } else {
           message.channel.send(new Discord.RichEmbed()
