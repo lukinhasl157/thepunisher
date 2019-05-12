@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const ytdl = require("ytdl-core-discord");
 const getInfo = require("ytdl-getinfo");
 module.exports = {
@@ -11,7 +10,7 @@ module.exports = {
         } else {
             message.member.voiceChannel.join().then(async function(connection) {
                 const stream = connection.playOpusStream(await ytdl(args.join(" ")));
-                getInfo(args.join(" ")).then(function(info) {
+                getInfo(args.join(" ")).then((info) => {
                     message.channel.send(`Tocando a música \`\`${info.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`)
                     stream.on('end', async () => {
                         await message.member.voiceChannel.leave();
