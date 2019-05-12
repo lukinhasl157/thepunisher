@@ -22,9 +22,9 @@ module.exports = {
             } else {
                 message.member.voiceChannel.join().then(async function(connection) {
                     getInfo(args.join(" ")).then(async function(search) {
-                        const result = search.items[0].url;
+                        const result = await search.items[0].url;
                         const stream2 = connection.playOpusStream(await ytdl(result));
-                        message.channel.send(`Tocando a música \`\`${info.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`);
+                        message.channel.send(`Tocando a música \`\`${search.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`);
                         stream2.on('end', async () => {
                             await message.member.voiceChannel.leave();
                             await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
