@@ -8,14 +8,9 @@ module.exports = {
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube!");
         } else {
-            let url
-            try {
-                new URL(args[0]);
-                url = args[0];
-            } catch (_) {
-                return message.channel.send('url invalido')
-            }
-            if (url) {
+            if (!new URL(args.join(" "))) {
+                return message.channel.send("URL inválido");
+            } else if (new URL(args.join(" "))) {
                 message.member.voiceChannel.join().then(async function(connection) {
                     const stream = connection.playOpusStream(await ytdl(args.join(" ")));
                     getInfo(args.join(" ")).then((info) => {
