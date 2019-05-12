@@ -5,8 +5,8 @@ module.exports = {
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por-favor, entre em um canal de voz primeiro!");
-        } else if (message.guild.me.voiceChannel) {
-            return message.channel.send("Desculpe, já estou em um canal de voz aqui!");
+        } else if (message.guild.me.voiceChannel !== message.member.voiceChannel) {
+            return message.channel.send("Desculpe, já estou em um canal de voz");
         } else if (args.length === 0) {
             return message.channel.send("Desculpe, coloque uma URL do youtube!");
         } else {
