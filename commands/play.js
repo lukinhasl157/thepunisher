@@ -2,22 +2,18 @@ const ytdl = require("ytdl-core-discord");
 const { getInfo } = require("ytdl-getinfo");
 module.exports = {
     run: async function (bot, message, args) {
-        let url;
-        try {
-            new URL(args[0])
-            url = args[0];
-        } catch (_) { 
-            return message.channel.send("URL inválida");
-        }
+        const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
+        const checkUrl = (url) => REGEX_URL.test(url)
+
         if (!message.member.voiceChannel) {
             return message.channel.send("Por-favor, entre em um canal de voz primeiro!");
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube!");
         } else {
-            if (url) {
+            if (checkUrl(args.join(" "))) {
                 message.member.voiceChannel.join().then(async function(connection) {
-                    const stream = connection.playOpusStream(await ytdl(url));
-                    getInfo(url).then((info) => {
+                    const stream = connection.playOpusStream(await ytdl(args.join(" ")));
+                    getInfo(args.join(" ")).then((info) => {
                         message.channel.send(`Tocando a música \`\`${info.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`);
                         stream.on('end', async () => {
                             await message.member.voiceChannel.leave();
