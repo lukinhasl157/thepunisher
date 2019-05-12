@@ -2,19 +2,18 @@ const ytdl = require("ytdl-core-discord");
 const { getInfo } = require("ytdl-getinfo");
 module.exports = {
     run: async function (bot, message, args) {
-
+        let url;
+        try {
+            new URL(args[0])
+            url = args[0];
+        } catch (_) { 
+            return message.channel.send("URL inválida");
+        }
         if (!message.member.voiceChannel) {
             return message.channel.send("Por-favor, entre em um canal de voz primeiro!");
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube!");
         } else {
-            let url;
-            try {
-                new URL(args[0])
-                url = args[0];
-            } catch (_) { 
-                return message.channel.send("URL inválida");
-            }
             if (url) {
                 message.member.voiceChannel.join().then(async function(connection) {
                     const stream = connection.playOpusStream(await ytdl(url));
