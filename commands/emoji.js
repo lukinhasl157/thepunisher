@@ -4,16 +4,18 @@ module.exports = {
 
       function sendEmoji () {
         const emojiSlice = args[0].slice(-19, -1);
+        let embed = new Discord.RichEmbed()
 
         if (!emojiSlice) {
           return message.channel.send("Insira um emoji");
-        } else if (emojiSlice ===  "") {
-          return message.channel.send("Insira um emoji válido");
+        } else if (args[0].startsWith("<a")) {
+          embed.setImage(`https://cdn.discordapp.com/emojis/${emoji}.gif`);
+          embed.setColor("RANDOM")
+          message.channel.send(embed);
         } else {
-          message.channel.send(new Discord.RichEmbed()
-            .setImage(`https://cdn.discordapp.com/emojis/${emojiSlice}.png?v=1`)
-            .setColor("RANDOM")
-          );
+          embed.setImage(`https://cdn.discordapp.com/emojis/${emojiSlice}.png?v=1`)
+          embed.setColor("RANDOM");
+          message.channel.send(embed);
         }
       }
       sendEmoji();
