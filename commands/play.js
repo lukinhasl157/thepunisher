@@ -12,18 +12,17 @@ module.exports = {
         } else {
             message.member.voiceChannel.join().then(async function(connection) {
                 const stream = connection.playOpusStream(await ytdl(args.join(" ")));
-                const info = await ytdl.getInfo(args.join(" "));
                 const embed = new Discord.RichEmbed()
-                    .setDescription(`Tocando: **${info.title}** no canal **${message.member.voiceChannel.name}**`)
+                    .setDescription(`Tocando no canal **${message.member.voiceChannel.name}**`)
                     .setColor('#ff4040')
-                message.channel.send(embed);
-            });  
-            stream.on('end', async () => {
-                await message.member.voiceChannel.leave();
-                const embed2 = new Discord.RichEmbed()
-                    .setDescription(` A Música terminou, **saindo do canal ${message.guild.me.voiceChannel.name}**...`)
-                    .setColor("RANDOM")
-                await message.channel.send(embed2);
+                message.channel.send(embed);  
+                stream.on('end', async () => {
+                    await message.member.voiceChannel.leave();
+                    const embed2 = new Discord.RichEmbed()
+                        .setDescription(` A Música terminou, **saindo do canal ${message.guild.me.voiceChannel.name}**...`)
+                        .setColor("RANDOM")
+                    await message.channel.send(embed2);
+                });
             });
         }
     }
