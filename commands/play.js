@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const ytdl = require("ytdl-core");
+const ytdl = require("ytdl-core-discord");
+const ytdl2 = require("ytdl-core");
 module.exports = {
     run: async function (bot, message, args) {
 
@@ -10,7 +11,7 @@ module.exports = {
         } else {
             message.member.voiceChannel.join().then(async function(connection) {
                 const stream = connection.playOpusStream(await ytdl(args.join(" ")));
-                const info = ytdl.getInfo(args.join(" "));
+                const info = ytdl2.getInfo(args.join(" "));
                 const embed = new Discord.RichEmbed()
                     .setDescription(`Tocando a música \`\`${info.title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`)
                     .setColor('#ff4040')
