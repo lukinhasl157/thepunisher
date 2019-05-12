@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const ytdl = require("ytdl-core-discord");
+const ytdl = require("ytdl-core");
+const ytdl
 module.exports = {
     run: async function (bot, message, args) {
 
