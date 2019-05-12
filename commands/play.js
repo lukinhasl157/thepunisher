@@ -11,11 +11,12 @@ module.exports = {
         } else {
             message.member.voiceChannel.join().then(async function(connection) {
                 const stream = connection.playOpusStream(await ytdl(args.join(" ")));
-                const info = getInfo(args.join(" "))
-                message.channel.send(`Tocando a música \`\`${info.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`)
-                stream.on('end', async () => {
-                    await message.member.voiceChannel.leave();
-                    await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``)
+                getInfo(args.join(" ")).then(function(info) {
+                    message.channel.send(`Tocando a música \`\`${info.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`)
+                    stream.on('end', async () => {
+                        await message.member.voiceChannel.leave();
+                        await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``)
+                    });
                 });
             });
         }
