@@ -39,7 +39,7 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.searchVideos(args.join(" ")).then(async function(search) {
                         if (search) {
-                            const stream2 = connection.playOpusStream(await ytdl(search.url));
+                            const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                             message.channel.send(new Discord.RichEmbed()
                                 .addField("Nome da música:", search.title)
                                 .addField("Nome do canal:", search.channel.title)
