@@ -8,7 +8,7 @@ module.exports = {
         const checkUrl = (url) => REGEX_URL.test(url)
 
         if (!message.member.voiceChannel) {
-            return message.channel.send("Por-favor, entre em um canal de voz primeiro!");
+            return message.channel.send("Por favor, entre em um canal de voz primeiro!");
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube!");
         } else {
@@ -19,7 +19,7 @@ module.exports = {
                         if (video) {
                             message.channel.send(new Discord.RichEmbed()
                                 .addField("Nome da música:", video.title)
-                                .addField("Canal:", video[0].channel.title)
+                                .addField("Canal:", video.channel.title)
                                 .addField("Descrição do vídeo:", video.description)
                                 .setImage(video[0].thumbnails.high.url)
                                 .setTimestamp(new Date())
