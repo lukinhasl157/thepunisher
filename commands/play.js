@@ -1,6 +1,7 @@
 const ytdl = require("ytdl-core-discord");
 const Youtube = require("simple-youtube-api");
 const youtube = new Youtube(process.env.google_api_key);
+const Discord = require("discord.js");
 module.exports = {
     run: async function (bot, message, args) {
         const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
