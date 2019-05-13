@@ -19,7 +19,7 @@ module.exports = {
                         if (video) {
                             message.channel.send(new Discord.RichEmbed()
                                 .addField("Nome da música:", video.title)
-                                .addField("Canal:", video.channel.title)
+                                .addField("Nome do canal:", video.channel.title)
                                 .addField("Descrição do vídeo:", video.description)
                                 .setImage(thumbnails.high.url)
                                 .setTimestamp(new Date())
@@ -39,10 +39,10 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.searchVideos(args.join(" ")).then(async function(search) {
                         if (search) {
-                            const stream2 = connection.playOpusStream(await ytdl(search[0].url));
+                            const stream2 = connection.playOpusStream(await ytdl(search.url));
                             message.channel.send(new Discord.RichEmbed()
                                 .addField("Nome da música:", search.title)
-                                .addField("Canal:", search.channel.title)
+                                .addField("Nome do canal:", search.channel.title)
                                 .addField("Descrição do vídeo:", search.description)
                                 .setImage(search.thumbnails.high.url)
                                 .setTimestamp(new Date())
