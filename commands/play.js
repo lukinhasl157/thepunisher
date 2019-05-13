@@ -15,9 +15,9 @@ module.exports = {
             if (checkUrl(args.join(" "))) {
                 message.member.voiceChannel.join().then(async function(connection) {
                     const stream = connection.playOpusStream(await ytdl(args.join(" ")));
-                    youtube.getVideo(args.join(" ")).then((video) => {
+                    youtube.getVideo(args.join(" ")).then(async function(video) {
                         if (video) {
-                            await message.channel.send(new Discord.RichEmbed()
+                            message.channel.send(new Discord.RichEmbed()
                                 .addField("Nome da música:", video[0].title)
                                 .addField("Canal:", video[0].channel.title)
                                 .addField("Descrição do vídeo:", video[0].description)
