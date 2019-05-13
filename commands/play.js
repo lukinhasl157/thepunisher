@@ -14,8 +14,18 @@ module.exports = {
             if (checkUrl(args.join(" "))) {
                 message.member.voiceChannel.join().then(async function(connection) {
                     const stream = connection.playOpusStream(await ytdl(args.join(" ")));
-                    getInfo(args.join(" ")).then((info) => {
-                        message.channel.send(`Tocando a música \`\`${info.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`);
+                    youtube.getVideo(args.join(" ")).then((video) => {
+                        message.channel.send(new Discord.RichEmbed()
+                            .addField("Nome da música:", video[0].title)
+                            .addField("Canal:", video[0].channel.tile)
+                            .addField("Descrição do vídeo:", video[0].description)
+                            .addField("Duração da música:", video[0].duration)
+                            .setThumbnail(video[0].channel.medium.url)
+                            .setImage(video[0].thumbnails.high)
+                            .setTimestamp(new Date())
+                            .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                            .setColor("RANDOM")
+                        );
                         stream.on('end', async () => {
                             await message.member.voiceChannel.leave();
                             await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
@@ -24,10 +34,20 @@ module.exports = {
                 });
             } else {
                 message.member.voiceChannel.join().then(async function(connection) {
-                    getInfo(args.join(" ")).then(async function(search) {
-                        const result = await search.items[0].url;
+                    youtube.searchVideos(args.join(" ")).then(async function(search) {
+                        const result = await search[0].url;
                         const stream2 = connection.playOpusStream(await ytdl(result));
-                        message.channel.send(`Tocando a música \`\`${search.items[0].title}\`\` no canal \`\`${message.member.voiceChannel.name}\`\`...`);
+                        message.channel.send(new Discord.RichEmbed()
+                            .addField("Nome da música:", search[0].title)
+                            .addField("Canal:", search[0].channel.tile)
+                            .addField("Descrição do vídeo:", search[0].description)
+                            .addField("Duração da música:", search[0].duration)
+                            .setThumbnail(search[0].channel.medium.url)
+                            .setImage(search[0].thumbnails.high)
+                            .setTimestamp(new Date())
+                            .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                            .setColor("RANDOM")
+                        );
                         stream2.on('end', async () => {
                             await message.member.voiceChannel.leave();
                             await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
@@ -38,4 +58,3 @@ module.exports = {
         }
     }
 }
-
