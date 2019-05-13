@@ -16,43 +16,50 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     const stream = connection.playOpusStream(await ytdl(args.join(" ")));
                     youtube.getVideo(args.join(" ")).then((video) => {
-                        message.channel.send(new Discord.RichEmbed()
-                            .addField("Nome da música:", video[0].title)
-                            .addField("Canal:", video[0].channel.tile)
-                            .addField("Descrição do vídeo:", video[0].description)
-                            .addField("Duração da música:", video[0].duration)
-                            .setThumbnail(video[0].channel.medium.url)
-                            .setImage(video[0].thumbnails.high)
-                            .setTimestamp(new Date())
-                            .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                            .setColor("RANDOM")
-                        );
-                        stream.on('end', async () => {
-                            await message.member.voiceChannel.leave();
-                            await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                        });
+                        if (video) {
+                            await message.channel.send(new Discord.RichEmbed()
+                                .addField("Nome da música:", video[0].title)
+                                .addField("Canal:", video[0].channel.title)
+                                .addField("Descrição do vídeo:", video[0].description)
+                                .addField("Duração da música:", video[0].duration)
+                                .setThumbnail(video[0].channel.medium.url)
+                                .setImage(video[0].thumbnails.high)
+                                .setTimestamp(new Date())
+                                .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                .setColor("RANDOM")
+                            );
+                            stream.on('end', async () => {
+                                await message.member.voiceChannel.leave();
+                                await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                            });
+                        } else {
+                            return message.channel.send("A URL que você inseriu está inválida.")
+                        }
                     });
                 });
             } else {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.searchVideos(args.join(" ")).then(async function(search) {
-                        const result = await search[0].url;
-                        const stream2 = connection.playOpusStream(await ytdl(result));
-                        message.channel.send(new Discord.RichEmbed()
-                            .addField("Nome da música:", search[0].title)
-                            .addField("Canal:", search[0].channel.tile)
-                            .addField("Descrição do vídeo:", search[0].description)
-                            .addField("Duração da música:", search[0].duration)
-                            .setThumbnail(search[0].channel.medium.url)
-                            .setImage(search[0].thumbnails.high)
-                            .setTimestamp(new Date())
-                            .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                            .setColor("RANDOM")
-                        );
-                        stream2.on('end', async () => {
-                            await message.member.voiceChannel.leave();
-                            await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                        });
+                        if (search) {
+                            const stream2 = connection.playOpusStream(await ytdl(search[0].url));
+                            message.channel.send(new Discord.RichEmbed()
+                                .addField("Nome da música:", search[0].title)
+                                .addField("Canal:", search[0].channel.title)
+                                .addField("Descrição do vídeo:", search[0].description)
+                                .addField("Duração da música:", search[0].duration)
+                                .setThumbnail(search[0].channel.medium.url)
+                                .setImage(search[0].thumbnails.high)
+                                .setTimestamp(new Date())
+                                .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                .setColor("RANDOM")
+                            );
+                            stream2.on('end', async () => {
+                                await message.member.voiceChannel.leave();
+                                await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                            });
+                        } else {
+                            return message.channel.send(`Nenhuma música foi encontrada com o argumento \`\`${args.join(" ")}\`\``);
+                        }
                     });
                 });
             }
