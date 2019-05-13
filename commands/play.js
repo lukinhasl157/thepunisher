@@ -41,10 +41,10 @@ module.exports = {
                         if (search) {
                             const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                             message.channel.send(new Discord.RichEmbed()
-                                .addField("Nome da música:", search[0].title)
-                                .addField("Canal:", search[0].channel.title)
-                                .addField("Descrição do vídeo:", search[0].description)
-                                .setImage(search[0].thumbnails.high.url)
+                                .addField("Nome da música:", search.title)
+                                .addField("Canal:", search.channel.title)
+                                .addField("Descrição do vídeo:", search.description)
+                                .setImage(search.thumbnails.high.url)
                                 .setTimestamp(new Date())
                                 .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                 .setColor("RANDOM")
