@@ -21,7 +21,7 @@ module.exports = {
                                 .addField("Nome da música:", video.title)
                                 .addField("Canal:", video.channel.title)
                                 .addField("Descrição do vídeo:", video.description)
-                                .setImage(video[0].thumbnails.high.url)
+                                .setImage(thumbnails.high.url)
                                 .setTimestamp(new Date())
                                 .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                 .setColor("RANDOM")
