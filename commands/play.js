@@ -62,7 +62,7 @@ module.exports = {
 
                         collector.on("collect", async (r) => {
                             msg.delete();
-                            switch (r._emoji.name) {
+                            switch (r.emoji.name) {
                                 case "one":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
