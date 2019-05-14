@@ -47,7 +47,7 @@ module.exports = {
             } else {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.searchVideos(args[0]).then(async function(search) {
-                        ytb.fetchVideoInfo(search[0].id).then(async function(videoInfo) {
+                        fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                             if (search) {
                                 const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                                 message.channel.send(embed);
