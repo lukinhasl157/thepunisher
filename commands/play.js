@@ -7,20 +7,6 @@ module.exports = {
     run: async function (bot, message, args) {
         const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
         const checkUrl = (url) => REGEX_URL.test(url)
-        const embed = new Discord.RichEmbed()
-            .addField("Nome da música:", videoInfo.title, true)
-            .addField("Nome do canal:", videoInfo.owner, true)
-            .addField("Duração da Música", videoInfo.duration)
-            .addField("Visualizações", videoInfo.views, true)
-            .addField("Comentários", videoInfo.commentCount, true)
-            .addField("Likes", videoInfo.likeCount, true)
-            .addField("Dislikes", videoInfo.dislikeCount, true)
-            .addField("Gênero", videoInfo.genre)
-            .setImage(videoInfo.thumbnailUrl)
-            .setThumbnail(videoInfo.channelThumbnailUrl)
-            .setTimestamp(new Date())
-            .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-            .setColor("RANDOM")
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
@@ -32,6 +18,20 @@ module.exports = {
                     const stream = connection.playOpusStream(await ytdl(args[0]));
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
+                            const embed = new Discord.RichEmbed()
+                                .addField("Nome da música:", videoInfo.title, true)
+                                .addField("Nome do canal:", videoInfo.owner, true)
+                                .addField("Duração da Música", videoInfo.duration)
+                                .addField("Visualizações", videoInfo.views, true)
+                                .addField("Comentários", videoInfo.commentCount, true)
+                                .addField("Likes", videoInfo.likeCount, true)
+                                .addField("Dislikes", videoInfo.dislikeCount, true)
+                                .addField("Gênero", videoInfo.genre)
+                                .setImage(videoInfo.thumbnailUrl)
+                                .setThumbnail(videoInfo.channelThumbnailUrl)
+                                .setTimestamp(new Date())
+                                .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                .setColor("RANDOM")
                             if (video) {
                                 message.channel.send(embed);
                                 stream.on('end', async () => {
