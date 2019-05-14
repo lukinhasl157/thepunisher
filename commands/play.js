@@ -51,11 +51,11 @@ module.exports = {
                         .addField("Você tem 60s para escolher um número entre 1 e 5 para selecionar a música correspondente a pesquisa", `1: ${search[0].title}\n2: ${search[1].title}\n3: ${search[2].title}\n4: ${search[3].title}\n5: ${search[4].title}`)
                         .setColor("RANDOM")
                     ).then(async (msg) => {
-                        await msg.react(":one:");
-                        await msg.react(":two:");
-                        await msg.react(":three:");
-                        await msg.react(":four:");
-                        await msg.react(":five:");
+                        await msg.react("1⃣");
+                        await msg.react("2⃣");
+                        await msg.react("3⃣");
+                        await msg.react("4⃣");
+                        await msg.react("5⃣");
 
                         const filter = (r, u) => r.me && u.id === message.author.id;
                         const collector = msg.createReactionCollector(filter, {max: 1, time: 60 * 1000 });
