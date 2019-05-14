@@ -47,7 +47,7 @@ module.exports = {
             } else {
                 youtube.searchVideos(args.join(" "), 5).then(async function(search) {
                     message.channel.send(new Discord.RichEmbed()
-                        .addField("Resultados da pesquisa por", args.jon(" "))
+                        .addField("Resultados da pesquisa por", args.join(" "))
                         .addField("Você tem 60s para escolher um número entre 1 e 5 para selecionar a música correspondente a pesquisa", `1: ${search[0].title}\n2: ${search[1].title}\n3: ${search[2].title}\n4: ${search[3].title}\n5: ${search[4].title}`)
                     ).then(async (msg) => {
                         await msg.react(":one:");
