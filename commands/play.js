@@ -21,7 +21,7 @@ module.exports = {
                                 .addField("Nome da música:", video.title)
                                 .addField("Nome do canal:", video.channel.title)
                                 .addField("Descrição do vídeo:", video.description)
-                                .setImage(thumbnails.high.url)
+                                .setImage(video.thumbnails.medium.url)
                                 .setTimestamp(new Date())
                                 .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                 .setColor("RANDOM")
@@ -37,14 +37,14 @@ module.exports = {
                 });
             } else {
                 message.member.voiceChannel.join().then(async function(connection) {
-                    youtube.searchVideos(args.join(" ")).then(async function(search) {
+                    youtube.searchVideos(args[0]).then(async function(search) {
                         if (search) {
                             const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                             message.channel.send(new Discord.RichEmbed()
-                                .addField("Nome da música:", search.title)
-                                .addField("Nome do canal:", search.channel.title)
-                                .addField("Descrição do vídeo:", search.description)
-                                .setImage(search.thumbnails.high.url)
+                                .addField("Nome da música:", search[0].title)
+                                .addField("Nome do canal:", search[0].channel.title)
+                                .addField("Descrição do vídeo:", search[0].description)
+                                .setImage(search[0].thumbnails.medium.url)
                                 .setTimestamp(new Date())
                                 .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                 .setColor("RANDOM")
