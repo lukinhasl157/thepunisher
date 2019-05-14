@@ -18,22 +18,22 @@ module.exports = {
                     const stream = connection.playOpusStream(await ytdl(args[0]));
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
-                            const embed = new Discord.RichEmbed()
-                                .addField("Nome da música:", videoInfo.title, true)
-                                .addField("Nome do canal:", videoInfo.owner, true)
-                                .addField("Duração da Música", videoInfo.duration)
-                                .addField("Visualizações", videoInfo.views, true)
-                                .addField("Comentários", videoInfo.commentCount, true)
-                                .addField("Likes", videoInfo.likeCount, true)
-                                .addField("Dislikes", videoInfo.dislikeCount, true)
-                                .addField("Gênero", videoInfo.genre)
-                                .setImage(videoInfo.thumbnailUrl)
-                                .setThumbnail(videoInfo.channelThumbnailUrl)
-                                .setTimestamp(new Date())
-                                .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                                .setColor("RANDOM")
                             if (video) {
-                                message.channel.send(embed);
+                                message.channel.send(new Discord.RichEmbed()
+                                    .addField("Nome da música:", videoInfo.title, true)
+                                    .addField("Nome do canal:", videoInfo.owner, true)
+                                    .addField("Duração da Música", videoInfo.duration)
+                                    .addField("Visualizações", videoInfo.views, true)
+                                    .addField("Comentários", videoInfo.commentCount, true)
+                                    .addField("Likes", videoInfo.likeCount, true)
+                                    .addField("Dislikes", videoInfo.dislikeCount, true)
+                                    .addField("Gênero", videoInfo.genre)
+                                    .setImage(videoInfo.thumbnailUrl)
+                                    .setThumbnail(videoInfo.channelThumbnailUrl)
+                                    .setTimestamp(new Date())
+                                    .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                    .setColor("RANDOM")
+                                );
                                 stream.on('end', async () => {
                                     await message.member.voiceChannel.leave();
                                     await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
@@ -50,7 +50,21 @@ module.exports = {
                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                             if (search) {
                                 const stream2 = connection.playOpusStream(await ytdl(search[0].url));
-                                message.channel.send(embed);
+                                message.channel.send(new Discord.RichEmbed()
+                                    .addField("Nome da música:", videoInfo.title, true)
+                                    .addField("Nome do canal:", videoInfo.owner, true)
+                                    .addField("Duração da Música", videoInfo.duration)
+                                    .addField("Visualizações", videoInfo.views, true)
+                                    .addField("Comentários", videoInfo.commentCount, true)
+                                    .addField("Likes", videoInfo.likeCount, true)
+                                    .addField("Dislikes", videoInfo.dislikeCount, true)
+                                    .addField("Gênero", videoInfo.genre)
+                                    .setImage(videoInfo.thumbnailUrl)
+                                    .setThumbnail(videoInfo.channelThumbnailUrl)
+                                    .setTimestamp(new Date())
+                                    .setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                    .setColor("RANDOM")
+                                );
                                 stream2.on('end', async () => {
                                     await message.member.voiceChannel.leave();
                                     await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
