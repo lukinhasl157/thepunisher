@@ -63,7 +63,7 @@ module.exports = {
                         collector.on("collect", async (r) => {
                             msg.delete();
                             switch (r.emoji.name) {
-                                case "one":
+                                case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                                             const stream2 = connection.playOpusStream(await ytdl(search[0].url));
@@ -89,7 +89,7 @@ module.exports = {
                                         });
                                     });
                                 break;
-                                case "two":
+                                case "2⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[1].id).then(async function(videoInfo) {
                                             const stream2 = connection.playOpusStream(await ytdl(search[1].url));
@@ -115,7 +115,7 @@ module.exports = {
                                         });
                                     });
                                 break;
-                                case "three":
+                                case "3⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[2].id).then(async function(videoInfo) {
                                             const stream2 = connection.playOpusStream(await ytdl(search[2].url));
@@ -140,7 +140,7 @@ module.exports = {
                                         });
                                     });
                                 break;
-                                case "four":
+                                case "4⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[3].id).then(async function(videoInfo) {
                                             const stream2 = connection.playOpusStream(await ytdl(search[3].url));
@@ -165,7 +165,7 @@ module.exports = {
                                         });
                                     });
                                 break;
-                                case "five":
+                                case "5⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[4].id).then(async function(videoInfo) {
                                             const stream2 = connection.playOpusStream(await ytdl(search[4].url));
