@@ -1,7 +1,7 @@
 const ytdl = require("ytdl-core-discord");
 const Youtube = require("simple-youtube-api");
 const youtube = new Youtube(process.env.google_api_key);
-const ytb = require("youtube-info");
+let fetchVideoInfo = require("youtube-info");
 const Discord = require("discord.js");
 module.exports = {
     run: async function (bot, message, args) {
@@ -17,7 +17,7 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     const stream = connection.playOpusStream(await ytdl(args[0]));
                     youtube.getVideo(args[0]).then(async function(video) {
-                        ytb.fetchVideoInfo(video.url).then(async function(videoInfo) {
+                        fetchVideoInfo(video.url).then(async function(videoInfo) {
                             if (video) {
                                 message.channel.send(new Discord.RichEmbed()
                                     .addField("Nome da música:", videoInfo.title, true)
