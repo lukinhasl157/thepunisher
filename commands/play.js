@@ -17,7 +17,7 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     const stream = connection.playOpusStream(await ytdl(args[0]));
                     youtube.getVideo(args[0]).then(async function(video) {
-                        fetchVideoInfo(video.url).then(async function(videoInfo) {
+                        fetchVideoInfo(video.id).then(async function(videoInfo) {
                             if (video) {
                                 message.channel.send(new Discord.RichEmbed()
                                     .addField("Nome da música:", videoInfo.title, true)
@@ -48,7 +48,7 @@ module.exports = {
             } else {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.searchVideos(args[0]).then(async function(search) {
-                        ytb.fetchVideoInfo(search[0].url).then(async function(videoInfo) {
+                        ytb.fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                             if (search) {
                                 const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                                 message.channel.send(new Discord.RichEmbed()
