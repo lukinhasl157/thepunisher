@@ -26,12 +26,12 @@ module.exports = {
                             if (video) {
                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                embed.addField("⏰Duração da música", videoInfo.duration)
                                 embed.addField("📈Visualizações", videoInfo.views, true)
                                 embed.addField("📝Comentários", videoInfo.commentCount, true)
                                 embed.addField("👍Likes", videoInfo.likeCount, true)
                                 embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                embed.addField("🎭Gênero", videoInfo.genre)
+                                embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                embed.addField("🎭Gênero", videoInfo.genre, true)
                                 embed.setThumbnail(videoInfo.thumbnailUrl)
                                 embed.setTimestamp(new Date())
                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
@@ -49,11 +49,7 @@ module.exports = {
                 });
             } else {
                 youtube.searchVideos(args.join(" "), 5).then(async function(search) {
-                    message.channel.send(new Discord.RichEmbed()
-                        .addField("Resultados da pesquisa por", args.join(" "))
-                        .addField("Você tem 60s para escolher um número entre 1 e 5 para selecionar a música correspondente a pesquisa", `1: ${search[0].title}\n2: ${search[1].title}\n3: ${search[2].title}\n4: ${search[3].title}\n5: ${search[4].title}`)
-                        .setColor("#e83127")
-                    ).then(async (msg) => {
+                    message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${search[0].title}\n[2] - ${search[1].title}\n[3] - ${search[2].title}\n[4] - ${search[3].title}\n[5] - ${search[4].title}`).then(async (msg) => {
                         await msg.react("1⃣");
                         await msg.react("2⃣");
                         await msg.react("3⃣");
@@ -72,12 +68,12 @@ module.exports = {
                                             const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                            embed.addField("⏰Duração da música", videoInfo.duration)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
                                             embed.addField("📝Comentários", videoInfo.commentCount, true)
                                             embed.addField("👍Likes", videoInfo.likeCount, true)
                                             embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                            embed.addField("🎭Gênero", videoInfo.genre)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
                                             embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
@@ -96,12 +92,12 @@ module.exports = {
                                             const stream3 = connection.playOpusStream(await ytdl(search[0].url));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                            embed.addField("⏰Duração da música", videoInfo.duration)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
                                             embed.addField("📝Comentários", videoInfo.commentCount, true)
                                             embed.addField("👍Likes", videoInfo.likeCount, true)
                                             embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                            embed.addField("🎭Gênero", videoInfo.genre)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
                                             embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
@@ -120,12 +116,12 @@ module.exports = {
                                             const stream4 = connection.playOpusStream(await ytdl(search[2].url));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                            embed.addField("⏰Duração da música", videoInfo.duration)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
                                             embed.addField("📝Comentários", videoInfo.commentCount, true)
                                             embed.addField("👍Likes", videoInfo.likeCount, true)
                                             embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                            embed.addField("🎭Gênero", videoInfo.genre)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
                                             embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
@@ -144,12 +140,12 @@ module.exports = {
                                             const stream5 = connection.playOpusStream(await ytdl(search[3].url));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                            embed.addField("⏰Duração da música", videoInfo.duration)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
                                             embed.addField("📝Comentários", videoInfo.commentCount, true)
                                             embed.addField("👍Likes", videoInfo.likeCount, true)
                                             embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                            embed.addField("🎭Gênero", videoInfo.genre)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
                                             embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
@@ -168,12 +164,12 @@ module.exports = {
                                             const stream6 = connection.playOpusStream(await ytdl(search[4].url));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                            embed.addField("⏰Duração da música", videoInfo.duration)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
                                             embed.addField("📝Comentários", videoInfo.commentCount, true)
                                             embed.addField("👍Likes", videoInfo.likeCount, true)
                                             embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                            embed.addField("🎭Gênero", videoInfo.genre)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
                                             embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
@@ -192,5 +188,8 @@ module.exports = {
                 });
             }
         }
-    }
+    },
+    aliases: ["tocar"],
+    category: "Música",
+    description: "Tocar uma música"
 }
