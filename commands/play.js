@@ -20,7 +20,7 @@ module.exports = {
         } else {
             if (checkUrl(args[0])) {
                 message.member.voiceChannel.join().then(async function(connection) {
-                    const stream = connection.playOpusStream(await ytdl(args[0]));
+                    const stream = connection.playStream(await ytdl(args[0]));
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
                             if (video) {
