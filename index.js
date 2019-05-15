@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
 const db = require("./utils/mongoose.js")();
+const Command = require('./structures/command/Command.js')
 
 // BOT 
 const bot = new Discord.Client();
@@ -35,19 +36,19 @@ fs.readdir(config.path_commands, (err, arquivos) => {
   try {
     if (err) console.log(err);
 
-    let arquivosJS = arquivos.filter(arquivo => arquivo.split(".").pop() === "js");
+    const arquivosJS = arquivos.filter(arquivo => arquivo.split(".").pop() === "js");
 
     if (arquivosJS.length === 0) {
       return console.log("Não existe nenhum arquivo js na pasta commands");
     }
 
     arquivosJS.forEach((arquivo) => {
-      let comando = require(`${config.path_commands}/${arquivo}`);
+      const comando = require(`${config.path_commands}/${arquivo}`);
       comando.usersCooldown = new Set();
       if (!comando.category) comando.category = "general";
       if (!comando.cooldown) comando.cooldown = 3000 // 3s
 
-      bot.commands.set(arquivo.replace(/.js/g, ''), comando);
+      bot.commands.set(arquivo.replace(/.js/g, ''), new Command(comando));
     });
     console.log('-'.repeat(80))
     console.log(bot.categories.map((c, i) => `Categoria ${i} com ${c.size} comandos`).join('\n'));
@@ -61,14 +62,14 @@ fs.readdir(config.path_events, (err, arquivos) => {
   try {
     if (err) console.log(err);
     // filtrando arquivos com final js
-    let arquivosJS = arquivos.filter(f => f.split(".").pop() === "js");
+    const arquivosJS = arquivos.filter(f => f.split(".").pop() === "js");
 
     if (arquivosJS.length === 0) {
       return console.log("Não existe nenhum arquivo js na pasta eventos");
     }
 
     arquivosJS.forEach((arquivo) => {
-      let evento = require(`${config.path_events}/${arquivo}`);
+      const evento = require(`${config.path_events}/${arquivo}`);
       console.log(`${arquivo} carregado com sucesso!`);
       bot.on(arquivo.replace(/.js/g, ''), evento.run);
     });

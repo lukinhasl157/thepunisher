@@ -26,7 +26,7 @@ class CommandRequirements {
       const permissions = Object.keys(this.clientPermissions)
       const permission = permissions.find(p => !message.guild.me.hasPermission(p))
       if (permission) {
-        throw new CommandError(stringOrFunc(this.responses.clientPermissions[permission], permission, message, args, bot))
+        throw new CommandError(stringOrFunc(this.responses.clientPermissions[permission] || this.responses.clientPermissions.OR, permission, message, args, bot))
       }
     }
 
