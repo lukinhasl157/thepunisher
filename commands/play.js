@@ -4,10 +4,10 @@ const youtube = new Youtube(process.env.google_api_key);
 const fetchVideoInfo = require("youtube-info");
 const Discord = require("discord.js");
 const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
+const checkUrl = (url) => REGEX_URL.test(url)
 
 module.exports = {
     run: async function (_, message, args) {
-        const checkUrl = (url) => REGEX_URL.test(url)
         const embed = new Discord.RichEmbed()
 
         if (!message.member.voiceChannel) {
