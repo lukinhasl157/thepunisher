@@ -11,10 +11,10 @@ module.exports = {
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
-        } else if (!message.guild.me.hasPermission("CONNECT")) {
+        /*} else if (!message.guild.me.hasPermission("CONNECT")) {
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para entrar neste canal! Permissão requirida: \`\`CONNECT\`\`.`);
         } else if (!message.guild.me.hasPermission("SPEAK")) {
-            return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);
+            return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);*/
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
         } else {
@@ -24,16 +24,15 @@ module.exports = {
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
                             if (video) {
-                                embed.addField("Nome da música:", videoInfo.title, true)
-                                embed.addField("Nome do canal:", videoInfo.owner, true)
+                                embed.addField("Nome da música:", `[${videoInfo.title}](${videoInfo.url})`)
+                                embed.addField("Nome do canal:", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                 embed.addField("Duração da Música", videoInfo.duration)
                                 embed.addField("Visualizações", videoInfo.views, true)
                                 embed.addField("Comentários", videoInfo.commentCount, true)
                                 embed.addField("Likes", videoInfo.likeCount, true)
                                 embed.addField("Dislikes", videoInfo.dislikeCount, true)
                                 embed.addField("Gênero", videoInfo.genre)
-                                embed.setImage(videoInfo.thumbnailUrl)
-                                embed.setThumbnail(videoInfo.channelThumbnailUrl)
+                                embed.setThumbnail(videoInfo.thumbnailUrl)
                                 embed.setTimestamp(new Date())
                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                 embed.setColor("RANDOM")
@@ -71,16 +70,15 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                                             const stream2 = connection.playOpusStream(await ytdl(search[0].url));
-                                            embed.addField("Nome da música:", videoInfo.title, true)
-                                            embed.addField("Nome do canal:", videoInfo.owner, true)
+                                            embed.addField("Nome da música:", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("Nome do canal:", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("Duração da Música", videoInfo.duration)
                                             embed.addField("Visualizações", videoInfo.views, true)
                                             embed.addField("Comentários", videoInfo.commentCount, true)
                                             embed.addField("Likes", videoInfo.likeCount, true)
                                             embed.addField("Dislikes", videoInfo.dislikeCount, true)
                                             embed.addField("Gênero", videoInfo.genre)
-                                            embed.setImage(videoInfo.thumbnailUrl)
-                                            embed.setThumbnail(videoInfo.channelThumbnailUrl)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                             embed.setColor("RANDOM")
@@ -96,16 +94,15 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[1].id).then(async function(videoInfo) {
                                             const stream3 = connection.playOpusStream(await ytdl(search[0].url));
-                                            embed.addField("Nome da música:", videoInfo.title, true)
-                                            embed.addField("Nome do canal:", videoInfo.owner, true)
+                                            embed.addField("Nome da música:", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("Nome do canal:", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("Duração da Música", videoInfo.duration)
                                             embed.addField("Visualizações", videoInfo.views, true)
                                             embed.addField("Comentários", videoInfo.commentCount, true)
                                             embed.addField("Likes", videoInfo.likeCount, true)
                                             embed.addField("Dislikes", videoInfo.dislikeCount, true)
                                             embed.addField("Gênero", videoInfo.genre)
-                                            embed.setImage(videoInfo.thumbnailUrl)
-                                            embed.setThumbnail(videoInfo.channelThumbnailUrl)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                             embed.setColor("RANDOM")
@@ -121,16 +118,15 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[2].id).then(async function(videoInfo) {
                                             const stream4 = connection.playOpusStream(await ytdl(search[2].url));
-                                            embed.addField("Nome da música:", videoInfo.title, true)
-                                            embed.addField("Nome do canal:", videoInfo.owner, true)
+                                            embed.addField("Nome da música:", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("Nome do canal:", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("Duração da Música", videoInfo.duration)
                                             embed.addField("Visualizações", videoInfo.views, true)
                                             embed.addField("Comentários", videoInfo.commentCount, true)
                                             embed.addField("Likes", videoInfo.likeCount, true)
                                             embed.addField("Dislikes", videoInfo.dislikeCount, true)
                                             embed.addField("Gênero", videoInfo.genre)
-                                            embed.setImage(videoInfo.thumbnailUrl)
-                                            embed.setThumbnail(videoInfo.channelThumbnailUrl)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                             embed.setColor("RANDOM")
@@ -146,16 +142,15 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[3].id).then(async function(videoInfo) {
                                             const stream5 = connection.playOpusStream(await ytdl(search[3].url));
-                                            embed.addField("Nome da música:", videoInfo.title, true)
-                                            embed.addField("Nome do canal:", videoInfo.owner, true)
+                                            embed.addField("Nome da música:", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("Nome do canal:", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("Duração da Música", videoInfo.duration)
                                             embed.addField("Visualizações", videoInfo.views, true)
                                             embed.addField("Comentários", videoInfo.commentCount, true)
                                             embed.addField("Likes", videoInfo.likeCount, true)
                                             embed.addField("Dislikes", videoInfo.dislikeCount, true)
                                             embed.addField("Gênero", videoInfo.genre)
-                                            embed.setImage(videoInfo.thumbnailUrl)
-                                            embed.setThumbnail(videoInfo.channelThumbnailUrl)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                             embed.setColor("RANDOM")
@@ -171,16 +166,15 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[4].id).then(async function(videoInfo) {
                                             const stream6 = connection.playOpusStream(await ytdl(search[4].url));
-                                            embed.addField("Nome da música:", videoInfo.title, true)
-                                            embed.addField("Nome do canal:", videoInfo.owner, true)
+                                            embed.addField("Nome da música:", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("Nome do canal:", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("Duração da Música", videoInfo.duration)
                                             embed.addField("Visualizações", videoInfo.views, true)
                                             embed.addField("Comentários", videoInfo.commentCount, true)
                                             embed.addField("Likes", videoInfo.likeCount, true)
                                             embed.addField("Dislikes", videoInfo.dislikeCount, true)
                                             embed.addField("Gênero", videoInfo.genre)
-                                            embed.setImage(videoInfo.thumbnailUrl)
-                                            embed.setThumbnail(videoInfo.channelThumbnailUrl)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                             embed.setColor("RANDOM")
