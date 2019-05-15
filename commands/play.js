@@ -11,9 +11,9 @@ module.exports = {
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
-        } else if (message.guild.me.hasPermission("CONNECT")) {
+        } else if (!message.guild.me.hasPermission("CONNECT")) {
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para entrar neste canal! Permissão requirida: \`\`CONNECT\`\`.`);
-        } else if (message.guild.me.hasPermission("SPEAK")) {
+        } else if (!message.guild.me.hasPermission("SPEAK")) {
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
