@@ -6,6 +6,7 @@ module.exports = {
             return message.channel.send("Desculpe, eu já estou em um canal de voz.")
         } else {
             message.member.voiceChannel.join();
+            message.channel.send(`Entrando no canal de voz \`\`${message.member.voiceChannel.name}\`\`...`);
         }
     },
     aliases: ["entrar"],
