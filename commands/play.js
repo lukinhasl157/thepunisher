@@ -1,13 +1,14 @@
 const ytdl = require("ytdl-core-discord");
 const Youtube = require("simple-youtube-api");
 const youtube = new Youtube(process.env.google_api_key);
-let fetchVideoInfo = require("youtube-info");
+const fetchVideoInfo = require("youtube-info");
 const Discord = require("discord.js");
+const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
+
 module.exports = {
-    run: async function (bot, message, args) {
-        const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
+    run: async function (_, message, args) {
         const checkUrl = (url) => REGEX_URL.test(url)
-        let embed = new Discord.RichEmbed()
+        const embed = new Discord.RichEmbed()
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
