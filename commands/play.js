@@ -89,7 +89,7 @@ module.exports = {
                                 case "2⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[1].id).then(async function(videoInfo) {
-                                            const stream3 = connection.playOpusStream(await ytdl(search[0].url));
+                                            const stream3 = connection.playOpusStream(await ytdl(search[1].url));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
