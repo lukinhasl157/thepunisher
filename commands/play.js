@@ -11,8 +11,12 @@ module.exports = {
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
+        } else if (message.guild.me.hasPermission("CONNECT")) {
+            return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para entrar neste canal! Permissão requirida: \`\`CONNECT\`\`.`);
+        } else if (message.guild.me.hasPermission("SPEAK")) {
+            return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);
         } else if (args.length === 0) {
-            return message.channel.send("Insira uma URL do youtube!");
+            return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
         } else {
             if (checkUrl(args[0])) {
                 message.member.voiceChannel.join().then(async function(connection) {
@@ -117,7 +121,6 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[2].id).then(async function(videoInfo) {
                                             const stream4 = connection.playOpusStream(await ytdl(search[2].url));
-                                            const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                                             embed.addField("Nome da música:", videoInfo.title, true)
                                             embed.addField("Nome do canal:", videoInfo.owner, true)
                                             embed.addField("Duração da Música", videoInfo.duration)
@@ -143,7 +146,6 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[3].id).then(async function(videoInfo) {
                                             const stream5 = connection.playOpusStream(await ytdl(search[3].url));
-                                            const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                                             embed.addField("Nome da música:", videoInfo.title, true)
                                             embed.addField("Nome do canal:", videoInfo.owner, true)
                                             embed.addField("Duração da Música", videoInfo.duration)
@@ -169,7 +171,6 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[4].id).then(async function(videoInfo) {
                                             const stream6 = connection.playOpusStream(await ytdl(search[4].url));
-                                            const stream2 = connection.playOpusStream(await ytdl(search[0].url));
                                             embed.addField("Nome da música:", videoInfo.title, true)
                                             embed.addField("Nome do canal:", videoInfo.owner, true)
                                             embed.addField("Duração da Música", videoInfo.duration)
