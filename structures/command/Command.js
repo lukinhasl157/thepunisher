@@ -1,4 +1,4 @@
-const CommandError = require('./CommandError.js')
+﻿const CommandError = require('./CommandError.js')
 const CommandRequirements = require('./CommandRequirements.js')
 
 class Command {
@@ -12,7 +12,7 @@ class Command {
     this._run = data.run
   }
 
-  run (bot, message, args) {
+  async run (bot, message, args) {
     try {
       const requirements = new CommandRequirements(this._data)
       await requirements.handle(bot, message, args)
