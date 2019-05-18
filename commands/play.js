@@ -5,6 +5,8 @@ const fetchVideoInfo = require("youtube-info");
 const Discord = require("discord.js");
 const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
 const checkUrl = (url) => REGEX_URL.test(url)
+const queue = new Map();
+const serverQueue = queue.get(message.guild.id);
 
 module.exports = {
     run: async function (_, message, args) {
@@ -12,19 +14,35 @@ module.exports = {
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
-        /*} else if (!message.guild.me.hasPermission("CONNECT")) {
+        } else if (!voiceChannel.permissionsFor(message.client.user).has("CONNECT")) {
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para entrar neste canal! Permissão requirida: \`\`CONNECT\`\`.`);
-        } else if (!message.guild.me.hasPermission("SPEAK")) {
-            return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);*/
+        } else if (!voiceChannel.permissionsFor(message.client.user).has("SPEAK")) {
+            return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
         } else {
             if (checkUrl(args[0])) {
                 message.member.voiceChannel.join().then(async function(connection) {
-                    const stream = connection.playOpusStream(await ytdl(args[0]));
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
-                            if (video) {
+                            if (!serverQueue) {
+                                const queueConstruct = {
+                                    songs: {
+                                        url: [],
+                                        title: [],
+                                        id: [],
+                                        author: []
+                                    }
+                                };
+                                queue.set(message.guild.id, queueConstruct);
+                            } else {
+                                serverQueue.songs.url.push(videoInfo.url);
+                                serverQueue.songs.title.push(videoInfo.title);
+                                serverQueue.songs.id.push(videoInfo.videoId);
+                                serverQueue.songs.author.push(message.author.id);
+                            }
+                            try {
+                                const stream = connection.playOpusStream(await ytdl(serverQueue.get(songs[0].url)));
                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -41,9 +59,11 @@ module.exports = {
                                 stream.on('end', async () => {
                                     await message.member.voiceChannel.leave();
                                     await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                                    serverQueue.songs.shift();
                                 });
-                            } else {
-                                return message.channel.send("A URL que você inseriu está inválida.")
+                            } catch(e) {
+                                message.channel.send("A URL que você inseriu está inválida.");
+                                console.log(e);
                             }
                         });
                     });
@@ -66,7 +86,23 @@ module.exports = {
                                 case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                            const stream2 = connection.playOpusStream(await ytdl(search[0].url));
+                                            if (!serverQueue) {
+                                                const queueConstruct = {
+                                                    songs: {
+                                                        url: [],
+                                                        title: [],
+                                                        id: [],
+                                                        author: []
+                                                    }
+                                                };
+                                                queue.set(message.guild.id, queueConstruct);
+                                            } else {
+                                                serverQueue.songs.url.push(videoInfo.url);
+                                                serverQueue.songs.title.push(videoInfo.title);
+                                                serverQueue.songs.id.push(videoInfo.videoId);
+                                                serverQueue.songs.author.push(message.author.id);
+                                            }
+                                            const stream2 = connection.playOpusStream(await ytdl(serverQueue.get(songs[0].url)));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
@@ -83,6 +119,7 @@ module.exports = {
                                             stream2.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                                                serverQueue.songs.shift();
                                             });
                                         });
                                     });
@@ -90,7 +127,23 @@ module.exports = {
                                 case "2⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[1].id).then(async function(videoInfo) {
-                                            const stream3 = connection.playOpusStream(await ytdl(search[1].url));
+                                            if (!serverQueue) {
+                                                const queueConstruct = {
+                                                    songs: {
+                                                        URL: [],
+                                                        title: [],
+                                                        id: [],
+                                                        author: []
+                                                    }
+                                                };
+                                                queue.set(message.guild.id, queueConstruct);
+                                            } else {
+                                                serverQueue.songs.url.push(videoInfo.url);
+                                                serverQueue.songs.title.push(videoInfo.title);
+                                                serverQueue.songs.id.push(videoInfo.videoId);
+                                                serverQueue.songs.author.push(message.author.id);
+                                            }
+                                            const stream3 = connection.playOpusStream(await ytdl(serverQueue.get(songs[0].url)));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
@@ -107,6 +160,7 @@ module.exports = {
                                             stream3.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                                                serverQueue.songs.shift();
                                             });
                                         });
                                     });
@@ -114,7 +168,23 @@ module.exports = {
                                 case "3⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[2].id).then(async function(videoInfo) {
-                                            const stream4 = connection.playOpusStream(await ytdl(search[2].url));
+                                            if (!serverQueue) {
+                                                const queueConstruct = {
+                                                    songs: {
+                                                        URL: [],
+                                                        title: [],
+                                                        id: [],
+                                                        author: []
+                                                    }
+                                                };
+                                                queue.set(message.guild.id, queueConstruct);
+                                            } else {
+                                                serverQueue.songs.url.push(videoInfo.url);
+                                                serverQueue.songs.title.push(videoInfo.title);
+                                                serverQueue.songs.id.push(videoInfo.videoId);
+                                                serverQueue.songs.author.push(message.author.id);
+                                            }
+                                            const stream4 = connection.playOpusStream(await ytdl(serverQueue.get(songs[0].url)));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
@@ -131,6 +201,7 @@ module.exports = {
                                             stream4.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                                                serverQueue.songs.shift();
                                             });
                                         });
                                     });
@@ -138,7 +209,23 @@ module.exports = {
                                 case "4⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[3].id).then(async function(videoInfo) {
-                                            const stream5 = connection.playOpusStream(await ytdl(search[3].url));
+                                            if (!serverQueue) {
+                                                const queueConstruct = {
+                                                    songs: {
+                                                        URL: [],
+                                                        title: [],
+                                                        id: [],
+                                                        author: []
+                                                    }
+                                                };
+                                                queue.set(message.guild.id, queueConstruct);
+                                            } else {
+                                                serverQueue.songs.url.push(videoInfo.url);
+                                                serverQueue.songs.title.push(videoInfo.title);
+                                                serverQueue.songs.id.push(videoInfo.videoId);
+                                                serverQueue.songs.author.push(message.author.id);
+                                            }
+                                            const stream5 = connection.playOpusStream(await ytdl(serverQueue.get(songs[0].url)));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
@@ -155,6 +242,7 @@ module.exports = {
                                             stream5.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                                                serverQueue.songs.shift();
                                             });
                                         });
                                     });
@@ -162,7 +250,23 @@ module.exports = {
                                 case "5⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[4].id).then(async function(videoInfo) {
-                                            const stream6 = connection.playOpusStream(await ytdl(search[4].url));
+                                            if (!serverQueue) {
+                                                const queueConstruct = {
+                                                    songs: {
+                                                        URL: [],
+                                                        title: [],
+                                                        id: [],
+                                                        author: []
+                                                    }
+                                                };
+                                                queue.set(message.guild.id, queueConstruct);
+                                            } else {
+                                                serverQueue.songs.url.push(videoInfo.url);
+                                                serverQueue.songs.title.push(videoInfo.title);
+                                                serverQueue.songs.id.push(videoInfo.videoId);
+                                                serverQueue.songs.author.push(message.author.id);
+                                            }
+                                            const stream6 = connection.playOpusStream(await ytdl(serverQueue.get(songs[0].url)));
                                             embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                             embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                             embed.addField("📈Visualizações", videoInfo.views, true)
@@ -179,6 +283,7 @@ module.exports = {
                                             stream6.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
+                                                serverQueue.songs.shift();
                                             });
                                         });
                                     });
