@@ -16,8 +16,9 @@ module.exports = {
                 author: []
             }
         };
+        const serverQueue = queue.get(message.guild.id) || {};
         const embed = new Discord.RichEmbed()
-        console.log(queue);
+        console.log(serverQueue);
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
