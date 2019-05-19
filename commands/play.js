@@ -41,7 +41,6 @@ module.exports = {
                                 stream.on('end', async () => {
                                     await message.member.voiceChannel.leave();
                                     await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                    queue.songs.shift();
                                 });
                             } catch(e) {
                                 message.channel.send("A URL que você inseriu está inválida.");
@@ -85,7 +84,6 @@ module.exports = {
                                             stream2.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                                queue.songs.shift();
                                             });
                                         });
                                     });
@@ -110,7 +108,6 @@ module.exports = {
                                             stream3.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                                queue.songs.shift();
                                             });
                                         });
                                     });
@@ -135,7 +132,6 @@ module.exports = {
                                                 stream4.on('end', async () => {
                                                     await message.member.voiceChannel.leave();
                                                     await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                                    queue.songs.shift();
                                                 });
                                             });
                                         });
@@ -160,7 +156,6 @@ module.exports = {
                                             stream5.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                                queue.songs.shift();
                                             });
                                         });
                                     });
@@ -185,7 +180,6 @@ module.exports = {
                                             stream6.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                                queue.songs.shift();
                                             });
                                         });
                                     });
