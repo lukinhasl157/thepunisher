@@ -24,7 +24,7 @@ module.exports = {
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
                             try {
-                                const stream = connection.playOpusStream(await ytdl(queue.get(songs[0].url)));
+                                const stream = connection.playOpusStream(await ytdl(video.url));
                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                 embed.addField("📈Visualizações", videoInfo.views, true)
