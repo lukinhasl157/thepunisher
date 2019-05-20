@@ -6,7 +6,7 @@ module.exports = {
         } else if (message.member.voiceChannel !== message.guild.me.voiceChannel) {
             return message.channel.send("Desculpe, você precisa estar no mesmo canal de voz que eu.");
         } else {
-            message.guild.me.voiceChannel.leave();
+            message.member.voiceChannel.leave();
         }
     },
     aliases: ["parar", "sair"],
