@@ -95,9 +95,9 @@ module.exports = {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                                             if (!queue.get(message.guild.id) || queue.get(message.guild.id) == "") {
                                                 queue.set(message.guild.id, queueConstruct);
-                                                queue.get(message.guild).songs.push(videoInfo.url);
+                                                queue.get(message.guild.id).songs.push(videoInfo.url);
                                                 console.log(serverQueue.songs);
-                                                const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
+                                                const streamQueue = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
                                                 streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
