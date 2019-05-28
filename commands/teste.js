@@ -96,7 +96,7 @@ module.exports = {
                                             if (!queue.get(message.guild.id) || queue.get(message.guild.id) == "") {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 queue.get(message.guild.id).songs.push(videoInfo.url);
-                                                console.log(serverQueue.songs);
+                                                console.log(queue.get(message.guild.id).songs);
                                                 const streamQueue = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
                                                 streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
