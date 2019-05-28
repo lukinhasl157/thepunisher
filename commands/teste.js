@@ -115,7 +115,7 @@ module.exports = {
                                                 if (serverQueue) {
                                                     serverQueue.songs.push(videoInfo.url);
                                                     message.channel.send("A música foi adicionada a fila com sucesso!");
-                                                    console.log(queueConstruct.songs);
+                                                    console.log(serverQueue.songs);
                                                 }
                                             }
                                         });
