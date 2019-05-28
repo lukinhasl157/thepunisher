@@ -112,7 +112,7 @@ module.exports = {
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
                                                 streamQueue.on("end", async (reason) => {
-                                                    if (reason === "stream") {
+                                                    if (reason === "undefined") {
                                                         queue.get(message.guild.id).textChannel.leave();
                                                         queue.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${serverQueue.textChannel.name}\`\``);
