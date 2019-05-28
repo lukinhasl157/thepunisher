@@ -110,7 +110,6 @@ module.exports = {
                                                         console.log(reason);
                                                     }
                                                     serverQueue.songs.shift();
-                                                    connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 });
                                             } else {
                                                 if (serverQueue) {
