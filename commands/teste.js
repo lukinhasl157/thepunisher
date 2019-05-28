@@ -98,7 +98,7 @@ module.exports = {
                                                 queue.get(message.guild.id).songs.push(videoInfo.url);
                                                 console.log(queue.get(message.guild.id).songs);
                                                 const streamQueue = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
-                                                streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
+                                                streamQueue.setVolumeLogarithmic(queue.get(message.guild.id).volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
