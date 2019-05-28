@@ -4,7 +4,6 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
 const db = require("./utils/mongoose.js")();
-const queue = new Map();
 
 // BOT 
 const bot = new Discord.Client();

@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const queue = require("../index.js");
+const queue = new Map();
+const serverQueue = queue.get(message.guil.id)
 module.exports.run = async function(message) {
 
     if (message.author.bot || message.channel.type === "dm")
@@ -19,7 +20,7 @@ module.exports.run = async function(message) {
             }           
             
             Object.defineProperty(message, 'command', { value: command });
-            command.run(this, message, args, queue);
+            command.run(this, message, args, queue, serverQueue);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {
