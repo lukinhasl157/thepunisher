@@ -93,18 +93,16 @@ module.exports = {
                                 case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                            if (queue.get(message.guild.id)) {
+                                            if (queue.get(message.guild.id) || queue.get(message.guild.id).songs.length > 0) {
                                                 queue.get(message.guild.id).songs.push(videoInfo.url);
                                                 message.channel.send("A música foi adicionada a fila com sucesso!");
                                                 console.log(queue.get(message.guild.id).songs);
                                             } else {
-                                                if (!queue.get(message.guild.id)) {
+                                                if (!queue.get(message.guild.id) || queue.get(message.guild.id).songs.length == 0) {
                                                     queue.set(message.guild.id, queueConstruct);
                                                     queue.get(message.guild.id).songs.push(videoInfo.url);
                                                     console.log(queue.get(message.guild.id).songs);
                                                     const streamQueue = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
-                                                    const volume = streamQueue.setVolumeLogarithmic(queue.get(message.guild.id).volume / 5);
-                                                    console.log(volume);
                                                     embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                     embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                     embed.addField("📈Visualizações", videoInfo.views, true)
