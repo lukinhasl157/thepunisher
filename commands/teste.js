@@ -91,12 +91,12 @@ module.exports = {
                                             if (!queue) {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 queueConstruct.songs.url.push(videoInfo.url);
-                                                queueConstruct.songs.tile.push(videoInfo.title);
+                                                queueConstruct.songs.title.push(videoInfo.title);
                                                 queueConstruct.songs.id.push(videoInfo.videoId);
                                                 queueConstruct.songs.author.push(videoInfo.url);
                                             } else {
                                                 queueConstruct.songs.url.push(videoInfo.url);
-                                                queueConstruct.songs.tile.push(videoInfo.title);
+                                                queueConstruct.songs.title.push(videoInfo.title);
                                                 queueConstruct.songs.id.push(videoInfo.videoId);
                                                 queueConstruct.songs.author.push(videoInfo.url);
                                                 const stream2 = connection.playOpusStream(await ytdl(queueConstruct.songs.url[0]));
