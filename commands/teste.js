@@ -93,7 +93,7 @@ module.exports = {
                                 case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                            if (!serverQueue || serverQueue == "") {
+                                            if (!queue.get(message.guild.id) || queue.get(message.guild.id) == "") {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 queue.get(message.guild).songs.push(videoInfo.url);
                                                 console.log(serverQueue.songs);
@@ -114,17 +114,17 @@ module.exports = {
                                                 message.channel.send(embed);
                                                 streamQueue.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
-                                                        serverQueue.textChannel.leave();
+                                                        queue.get(message.guild.id).textChannel.leave();
                                                         queue.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${serverQueue.textChannel.name}\`\``);
                                                     } else {
                                                         console.log(reason);
                                                     }
-                                                    serverQueue.songs.shift();
+                                                    queue.get(message.guild.id).songs.shift();
                                                 });
                                             } else {
-                                                if (serverQueue) {
-                                                    serverQueue.songs.push(videoInfo.url);
+                                                if (queue.get(message.guild.id)) {
+                                                    queue.get(message.guild.id).songs.push(videoInfo.url);
                                                     message.channel.send("A música foi adicionada a fila com sucesso!");
                                                     console.log(serverQueue.songs);
                                                 }
