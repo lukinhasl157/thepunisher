@@ -31,7 +31,7 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
-                            if (!serverQueue) {
+                            if (!serverQueue || serverQueue == undefined) {
                                 queue.set(message.guild.id, queueConstruct);
                             } else {
                                 queueConstruct.songs.url.push(videoInfo.url);
@@ -81,7 +81,7 @@ module.exports = {
                                 case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                            if (!serverQueue) {
+                                            if (!serverQueue || serverQueue == undefined) {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 serverQueue.songs.push(videoInfo.url);
                                                 const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
@@ -101,7 +101,7 @@ module.exports = {
                                                 message.channel.send(embed);
                                                 streamQueue.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
-                                                        queueConstruct.textChannel.leave();
+                                                        serverQueue.textChannel.leave();
                                                         queue.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${serverQueue.textChannel.name}\`\``);
                                                     } else {
