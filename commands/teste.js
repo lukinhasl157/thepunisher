@@ -116,7 +116,7 @@ module.exports = {
                                                 stream2.on('end', async () => {
                                                     await message.member.voiceChannel.leave();
                                                     await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                                    queueConstruct.songs.shift();
+                                                    queueConstruct.songs.url.shift();
                                                 });
                                             }
                                         });
