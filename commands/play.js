@@ -7,7 +7,7 @@ const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$
 const checkUrl = (url) => REGEX_URL.test(url)
 
 module.exports = {
-    run: async function (_, message, args, queue) {
+    run: async function (_, message, args) {
         const embed = new Discord.RichEmbed()
 
         if (!message.member.voiceChannel) {
@@ -176,7 +176,7 @@ module.exports = {
                                             embed.setTimestamp(new Date())
                                             embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                             embed.setColor("#e83127")
-                                            message.channel.send(embed);;
+                                            message.channel.send(embed);
                                             stream6.on('end', async () => {
                                                 await message.member.voiceChannel.leave();
                                                 await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);

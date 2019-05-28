@@ -95,11 +95,11 @@ module.exports = {
                                                 queueConstruct.songs.id.push(videoInfo.videoId);
                                                 queueConstruct.songs.author.push(videoInfo.url);
                                             } else {
-                                                queue.songs.url.push(videoInfo.url);
-                                                queue.songs.title.push(videoInfo.title);
-                                                queue.songs.id.push(videoInfo.videoId);
-                                                queue.songs.author.push(message.author.id);
-                                                const stream2 = connection.playOpusStream(await ytdl(queue.get(songs[0].url)));
+                                                queueConstruct.songs.url.push(videoInfo.url);
+                                                queueConstruct.songs.tile.push(videoInfo.title);
+                                                queueConstruct.songs.id.push(videoInfo.videoId);
+                                                queueConstruct.songs.author.push(videoInfo.url);
+                                                const stream2 = connection.playOpusStream(await ytdl(queueConstruct.songs.url[0]));
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -116,7 +116,7 @@ module.exports = {
                                                 stream2.on('end', async () => {
                                                     await message.member.voiceChannel.leave();
                                                     await message.channel.send(`A Música terminou, saindo do canal \`\`${message.guild.me.voiceChannel.name}\`\``);
-                                                    queue.songs.shift();
+                                                    queueConstruct.songs.shift();
                                                 });
                                             }
                                         });
