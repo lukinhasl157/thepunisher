@@ -112,14 +112,14 @@ module.exports = {
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
                                                 streamQueue.on("end", async (reason) => {
-                                                    if (reason === "Stream is not generating quickly enough.") {
+                                                    if (reason === "stream") {
                                                         queue.get(message.guild.id).textChannel.leave();
                                                         queue.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${serverQueue.textChannel.name}\`\``);
                                                     } else {
+                                                        queue.get(message.guild.id).songs.shift();
                                                         console.log(reason);
                                                     }
-                                                    queue.get(message.guild.id).songs.shift();
                                                 });
                                             } else {
                                                 if (queue.get(message.guild.id) || queue.get(message.guild.id).songs.length > 0) {
