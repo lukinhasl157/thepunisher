@@ -97,7 +97,7 @@ module.exports = {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 queue.get(message.guild.id).songs.push(videoInfo.url);
                                                 console.log(queue.get(message.guild.id).songs);
-                                                const streamQueue = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
+                                                const stream2 = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -111,22 +111,18 @@ module.exports = {
                                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
-                                                streamQueue.on("end", async (reason) => {
-                                                    if (reason !== "stream") {
-                                                        queue.get(message.guild.id).textChannel.leave();
-                                                        queue.delete(message.guild.id);
-                                                        await message.channel.send(`A música terminou, saindo do canal \`\`${serverQueue.textChannel.name}\`\``);
-                                                        console.log(reason);
-                                                    } else {
-                                                        queue.get(message.guild.id).songs.shift();
-                                                        console.log(reason);
-                                                    }
+                                                stream2.on("end", async () => {
+                                                    queue.get(message.guild.id).songs.shift();
                                                 });
                                             } else {
                                                 if (queue.get(message.guild.id) || queue.get(message.guild.id).songs.length > 0) {
                                                     queue.get(message.guild.id).songs.push(videoInfo.url);
+                                                    const stream2 = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
                                                     message.channel.send("A música foi adicionada a fila com sucesso!");
-                                                    console.log(queue.get(message.guild.id).songs);
+                                                    stream2.on("end", async () => {
+                                                        queue.get(message.guild.id).textChannel.leave();
+                                                        await message.channel.send(`A música acabou, saindo do canal \`\`${queue.get(message.guild.id).textChannel.name}...\`\``);
+                                                    });
                                                 }
                                             }
                                         });
