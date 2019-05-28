@@ -74,13 +74,13 @@ module.exports = {
                         await msg.react("5⃣");
 
                         const filter = (r, u) => r.me && u.id === message.author.id;
-                        const collector = msg.createReactionCollector(filter, {max: 1, time: 60 * 1000 });
+                        const collector = msg.createReactionCollector(filter, { max: 1, time: 60 * 1000 });
 
                         collector.on("collect", async (r) => {
                             msg.delete();
                             switch (r.emoji.name) {
                                 case "1⃣":
-                                    serverQueue.textChannel.join().then(async function(connection) {
+                                    message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                                             if (!serverQueue) {
                                                 queue.set(message.guild.id, queueConstruct);
@@ -100,7 +100,7 @@ module.exports = {
                                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
-                                                streamQueue.on("end", (reason) => {
+                                                streamQueue.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         queueConstruct.textChannel.leave();
                                                         queue.delete(message.guild.id);
@@ -109,6 +109,7 @@ module.exports = {
                                                         console.log(reason);
                                                     }
                                                     serverQueue.songs.shift();
+                                                    connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 });
                                             } else {
                                                 if (serverQueue) {
