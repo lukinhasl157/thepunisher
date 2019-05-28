@@ -1,7 +1,6 @@
-const Discord = require('discord.js');
-const queue = new Map();
-const serverQueue = queue.get(message.guil.id)
 module.exports.run = async function(message) {
+    const queue = new Map();
+    const serverQueue = queue.get(message.guild.id);
 
     if (message.author.bot || message.channel.type === "dm")
         return;
