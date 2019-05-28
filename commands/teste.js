@@ -98,7 +98,7 @@ module.exports = {
                                                 message.channel.send("A música foi adicionada a fila com sucesso!");
                                                 console.log(queue.get(message.guild.id).songs);
                                             } else {
-                                                if (queue.get(message.guild.id).songs.length == 0) {
+                                                if (!queue.get(message.guild.id)) {
                                                     queue.set(message.guild.id, queueConstruct);
                                                     queue.get(message.guild.id).songs.push(videoInfo.url);
                                                     console.log(queue.get(message.guild.id).songs);
