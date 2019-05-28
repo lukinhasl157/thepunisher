@@ -31,46 +31,25 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
-                            if (!serverQueue || serverQueue == "") {
-                                try {
-                                    queue.set(message.guild.id, queueConstruct);
-                                    serverQueue.songs.push(videoInfo.url);
-                                    console.log(serverQueue.songs);
-                                    const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
-                                    streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
-                                    embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
-                                    embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                    embed.addField("📈Visualizações", videoInfo.views, true)
-                                    embed.addField("📝Comentários", videoInfo.commentCount, true)
-                                    embed.addField("👍Likes", videoInfo.likeCount, true)
-                                    embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                    embed.addField("⏰Duração da música", videoInfo.duration, true)
-                                    embed.addField("🎭Gênero", videoInfo.genre, true)
-                                    embed.setThumbnail(videoInfo.thumbnailUrl)
-                                    embed.setTimestamp(new Date())
-                                    embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                                    embed.setColor("#e83127")
-                                    message.channel.send(embed);
-                                    streamQueue.on("end", async (reason) => {
-                                        if (reason === "Stream is not generating quickly enough.") {
-                                            serverQueue.textChannel.leave();
-                                            queue.delete(message.guild.id);
-                                            await message.channel.send(`A música terminou, saindo do canal \`\`${serverQueue.textChannel.name}\`\``);
-                                        } else {
-                                            console.log(reason);
-                                        }
-                                        serverQueue.songs.shift();
-                                    });
-                                } catch(e) {
-                                    message.channel.send("A URL que você inseriu está inválida.");
-                                    console.log(e);
-                                }
-                            } else {
-                                if (serverQueue) {
-                                    serverQueue.songs.push(videoInfo.url);
-                                    message.channel.send("A música foi adicionada a fila com sucesso!");
-                                    console.log(serverQueue.songs);
-                                }
+                            try {
+                                const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
+                                streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
+                                embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
+                                embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
+                                embed.addField("📈Visualizações", videoInfo.views, true)
+                                embed.addField("📝Comentários", videoInfo.commentCount, true)
+                                embed.addField("👍Likes", videoInfo.likeCount, true)
+                                embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
+                                embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                embed.addField("🎭Gênero", videoInfo.genre, true)
+                                embed.setThumbnail(videoInfo.thumbnailUrl)
+                                embed.setTimestamp(new Date())
+                                embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                embed.setColor("#e83127")
+                                message.channel.send(embed);
+                            } catch(e) {
+                                message.channel.send("A URL que você inseriu está inválida.");
+                                console.log(e);
                             }
                         });
                     });
@@ -96,7 +75,6 @@ module.exports = {
                                             if (!queue.get(message.guild.id) || queue.get(message.guild.id) == undefined) {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 queue.get(message.guild.id).songs.push(videoInfo.url);
-                                                console.log(queue.get(message.guild.id).songs);
                                                 const stream2 = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
@@ -117,9 +95,9 @@ module.exports = {
                                             } else {
                                                 if (queue.get(message.guild.id) || queue.get(message.guild.id).songs.length > 0) {
                                                     queue.get(message.guild.id).songs.push(videoInfo.url);
-                                                    const stream2 = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
+                                                    const streamQueue = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
                                                     message.channel.send("A música foi adicionada a fila com sucesso!");
-                                                    stream2.on("end", async () => {
+                                                    streamQueue.on("end", async () => {
                                                         queue.get(message.guild.id).textChannel.leave();
                                                         await message.channel.send(`A música acabou, saindo do canal \`\`${queue.get(message.guild.id).textChannel.name}...\`\``);
                                                     });
@@ -135,7 +113,7 @@ module.exports = {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 serverQueue.songs.push(videoInfo.url);
                                                 console.log(serverQueue.songs);
-                                                const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
+                                                const stream3 = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
@@ -150,7 +128,7 @@ module.exports = {
                                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
-                                                streamQueue.on("end", async (reason) => {
+                                                stream3.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         serverQueue.textChannel.leave();
                                                         queue.delete(message.guild.id);
@@ -177,7 +155,7 @@ module.exports = {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 serverQueue.songs.push(videoInfo.url);
                                                 console.log(serverQueue.songs);
-                                                const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
+                                                const stream4 = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
@@ -192,7 +170,7 @@ module.exports = {
                                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
-                                                streamQueue.on("end", async (reason) => {
+                                                stream4.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         serverQueue.textChannel.leave();
                                                         queue.delete(message.guild.id);
@@ -219,7 +197,7 @@ module.exports = {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 serverQueue.songs.push(videoInfo.url);
                                                 console.log(serverQueue.songs);
-                                                const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
+                                                const stream5 = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
@@ -234,7 +212,7 @@ module.exports = {
                                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
-                                                streamQueue.on("end", async (reason) => {
+                                                stream5.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         serverQueue.textChannel.leave();
                                                         queue.delete(message.guild.id);
@@ -261,7 +239,7 @@ module.exports = {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 serverQueue.songs.push(videoInfo.url);
                                                 console.log(serverQueue.songs);
-                                                const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
+                                                const stream6 = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
@@ -276,7 +254,7 @@ module.exports = {
                                                 embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
-                                                streamQueue.on("end", async (reason) => {
+                                                stream6.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         serverQueue.textChannel.leave();
                                                         queue.delete(message.guild.id);
