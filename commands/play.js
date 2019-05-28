@@ -9,6 +9,7 @@ const checkUrl = (url) => REGEX_URL.test(url)
 module.exports = {
     run: async function (_, message, args) {
         const embed = new Discord.RichEmbed()
+        const ids = ["243861783285202947"];
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
@@ -18,6 +19,8 @@ module.exports = {
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);
         } else if (args.length === 0) {
             return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
+        } else if (ids.includes(message.author.id)) {
+            return message.channel.send("Vai tomar no cu diego.");
         } else {
             if (checkUrl(args[0])) {
                 message.member.voiceChannel.join().then(async function(connection) {
