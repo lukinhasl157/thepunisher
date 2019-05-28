@@ -9,7 +9,6 @@ const checkUrl = (url) => REGEX_URL.test(url)
 module.exports = {
     run: async function (_, message, args, queue) {
         const embed = new Discord.RichEmbed()
-        const serverQueue = queue.get(message.guild.id);
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
@@ -96,7 +95,7 @@ module.exports = {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
                                             if (!serverQueue || serverQueue == "") {
                                                 queue.set(message.guild.id, queueConstruct);
-                                                serverQueue.songs.push(videoInfo.url);
+                                                queue.get(message.guild).songs.push(videoInfo.url);
                                                 console.log(serverQueue.songs);
                                                 const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 streamQueue.setVolumeLogarithmic(serverQueue.volume / 5);
