@@ -93,7 +93,7 @@ module.exports = {
                                 case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                            if (queue.get(message.guild.id).songs.length > 1) {
+                                            if (queue.get(message.guild.id)) {
                                                 queue.get(message.guild.id).songs.push(videoInfo.url);
                                                 message.channel.send("A música foi adicionada a fila com sucesso!");
                                                 console.log(queue.get(message.guild.id).songs);
