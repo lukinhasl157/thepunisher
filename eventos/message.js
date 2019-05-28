@@ -1,6 +1,5 @@
 module.exports.run = async function(message) {
     const queue = new Map();
-    const serverQueue = queue.get(message.guild.id);
 
     if (message.author.bot || message.channel.type === "dm")
         return;
@@ -19,7 +18,7 @@ module.exports.run = async function(message) {
             }           
             
             Object.defineProperty(message, 'command', { value: command });
-            command.run(this, message, args, queue, serverQueue);
+            command.run(this, message, args, queue);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {

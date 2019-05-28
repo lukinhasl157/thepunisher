@@ -7,8 +7,9 @@ const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$
 const checkUrl = (url) => REGEX_URL.test(url)
 
 module.exports = {
-    run: async function (_, message, args, queue, serverQueue) {
+    run: async function (_, message, args, queue) {
         const embed = new Discord.RichEmbed()
+        const serverQueue = queue.get(message.guild.id) || {};
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
@@ -31,7 +32,7 @@ module.exports = {
                 message.member.voiceChannel.join().then(async function(connection) {
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
-                            if (!serverQueue || serverQueue == undefined) {
+                            if (!serverQueue || serverQueue == "") {
                                 queue.set(message.guild.id, queueConstruct);
                             } else {
                                 queueConstruct.songs.url.push(videoInfo.url);
@@ -81,7 +82,7 @@ module.exports = {
                                 case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                            if (!serverQueue || serverQueue == undefined) {
+                                            if (!serverQueue || serverQueue == "") {
                                                 queue.set(message.guild.id, queueConstruct);
                                                 serverQueue.songs.push(videoInfo.url);
                                                 const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
