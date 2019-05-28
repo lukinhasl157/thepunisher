@@ -9,7 +9,7 @@ const checkUrl = (url) => REGEX_URL.test(url)
 module.exports = {
     run: async function (_, message, args, queue) {
         const embed = new Discord.RichEmbed()
-        const serverQueue = queue.get(message.guild.id) || {};
+        const serverQueue = queue.get(message.guild.id);
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
