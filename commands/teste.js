@@ -274,6 +274,9 @@ module.exports = {
                                         });
                                     });
                                 break;
+                                case "🇽":
+                                    msg.edit("Seleção de músicas cancelada com sucesso!");
+                                break;
                             } 
                         });
                     });
