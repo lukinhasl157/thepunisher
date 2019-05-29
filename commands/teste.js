@@ -62,6 +62,7 @@ module.exports = {
                         await msg.react("3⃣");
                         await msg.react("4⃣");
                         await msg.react("5⃣");
+                        await msg.react("🇽");
 
                         const filter = (r, u) => r.me && u.id === message.author.id;
                         const collector = msg.createReactionCollector(filter, { max: 1, time: 60 * 1000 });
