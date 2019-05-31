@@ -1,55 +1,28 @@
 {
-  "name": "thepunisher",
-  "version": "1.0.6",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "array-sort": "^1.0.0",
-    "ascii-art": "^1.5.1",
-    "cooldown": "^0.2.0",
-    "cpu-stat": "^2.0.1",
-    "discord.js": "^11.4.2",
-    "dotenv": "^6.2.0",
-    "express": "^4.16.4",
-    "ffmpeg": "0.0.4",
-    "ffmpeg-binaries": "^3.2.2-3",
-    "firebase": "^5.8.2",
-    "flip-text": "^1.1.0",
-    "fs": "0.0.1-security",
-    "gif-search": "^2.0.1",
-    "google": "^2.1.0",
-    "hidden": "^1.1.1",
-    "mathjs": "^5.2.3",
-    "moment": "^2.22.2",
-    "moment-duration-format": "^2.2.2",
-    "mongoose": "^5.5.5",
-    "node-opus": "^0.3.1",
-    "opusscript": "0.0.6",
-    "os": "^0.1.1",
-    "pornhub": "0.0.5",
-    "random-puppy": "^1.1.0",
-    "reverse-string": "0.0.6",
-    "reverse-text": "0.0.1",
-    "simple-youtube-api": "^5.1.1",
-    "snekfetch": "^4.0.4",
-    "table": "^5.1.0",
-    "twemoji": "^11.2.0",
-    "util": "^0.11.0",
-    "youtube-info": "^1.3.2",
-    "ytdl-core": "^0.28.3",
-    "ytdl-core-discord": "^1.0.3",
-    "ytdl-getinfo": "^1.1.0"
-  },
-  "devDependencies": {
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
-  },
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "hello-express",
+  "version": "0.0.1",
+  "description": "A simple Node app built on Express, instantly up and running.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "author": "Lukinhas#6744",
-  "license": "ISC"
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "express": "^4.16.4"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
 }
