@@ -1,5 +1,4 @@
 module.exports.run = async function(message) {
-    const queue = new Map();
 
     if (message.author.bot || message.channel.type === "dm")
         return;
@@ -18,7 +17,7 @@ module.exports.run = async function(message) {
             }           
             
             Object.defineProperty(message, 'command', { value: command });
-            command.run(this, message, args, queue);
+            command.run(this, message, args);
             command.usersCooldown.add(message.author.id);
 
             setTimeout(function() {
