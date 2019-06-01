@@ -6,7 +6,7 @@ const Discord = require("discord.js");
 const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
 const checkUrl = (url) => REGEX_URL.test(url)
 const queue = require("../utils/queue");
-const serverQueue = serverQueue;
+const serverQueue = queue.get(message.guild.id);
 
 module.exports = {
     run: async function (_, message, args, queue) {
