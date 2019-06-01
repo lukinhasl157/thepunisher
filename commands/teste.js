@@ -6,6 +6,7 @@ const Discord = require("discord.js");
 const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
 const checkUrl = (url) => REGEX_URL.test(url)
 const queue = require("../utils/queue");
+const serverQueue = serverQueue;
 
 module.exports = {
     run: async function (_, message, args, queue) {
@@ -74,10 +75,10 @@ module.exports = {
                                 case "1⃣":
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                            if (!queue.get(message.guild.id) || queue.get(message.guild.id) == undefined) {
+                                            if (!serverQueue || serverQueue == undefined) {
                                                 queue.set(message.guild.id, queueConstruct);
-                                                queue.get(message.guild.id).songs.push(videoInfo.url);
-                                                const stream2 = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
+                                                serverQueue.songs.push(videoInfo.url);
+                                                const stream2 = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -92,16 +93,16 @@ module.exports = {
                                                 embed.setColor("#e83127")
                                                 message.channel.send(embed);
                                                 stream2.on("end", async () => {
-                                                    queue.get(message.guild.id).songs.shift();
+                                                    serverQueue.songs.shift();
                                                 });
                                             } else {
-                                                if (queue.get(message.guild.id) || queue.get(message.guild.id).songs.length > 0) {
-                                                    queue.get(message.guild.id).songs.push(videoInfo.url);
-                                                    const streamQueue = connection.playOpusStream(await ytdl(queue.get(message.guild.id).songs[0]));
+                                                if (serverQueue || serverQueue.songs.length > 0) {
+                                                    serverQueue.songs.push(videoInfo.url);
+                                                    const streamQueue = connection.playOpusStream(await ytdl(serverQueue.songs[0]));
                                                     message.channel.send("A música foi adicionada a fila com sucesso!");
                                                     streamQueue.on("end", async () => {
-                                                        queue.get(message.guild.id).textChannel.leave();
-                                                        await message.channel.send(`A música acabou, saindo do canal \`\`${queue.get(message.guild.id).textChannel.name}...\`\``);
+                                                        serverQueue.textChannel.leave();
+                                                        await message.channel.send(`A música acabou, saindo do canal \`\`${serverQueue.textChannel.name}...\`\``);
                                                     });
                                                 }
                                             }
