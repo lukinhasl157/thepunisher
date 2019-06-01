@@ -77,7 +77,7 @@ module.exports = {
                                             musics.set(message.guild.id, queueConstruct);
                                             musics.get(message.guild.id).songs.push(videoInfo.url);
         
-                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                            musics.get(message.guild.id).voiceChannel.join().playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
                                                 if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
                                                 } else {
@@ -125,7 +125,7 @@ module.exports = {
                                             musics.set(message.guild.id, queueConstruct);
                                             musics.get(message.guild.id).songs.push(videoInfo.url);
         
-                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                            musics.get(message.guild.id).voiceChannel.join().playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
                                                 if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
                                                 } else {
@@ -173,7 +173,7 @@ module.exports = {
                                             musics.set(message.guild.id, queueConstruct);
                                             musics.get(message.guild.id).songs.push(videoInfo.url);
         
-                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                            musics.get(message.guild.id).voiceChannel.join().playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
                                                 if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
                                                 } else {
@@ -221,7 +221,7 @@ module.exports = {
                                             musics.set(message.guild.id, queueConstruct);
                                             musics.get(message.guild.id).songs.push(videoInfo.url);
         
-                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                            musics.get(message.guild.id).voiceChannel.join().playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
                                                 if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
                                                 } else {
@@ -269,7 +269,7 @@ module.exports = {
                                             musics.set(message.guild.id, queueConstruct);
                                             musics.get(message.guild.id).songs.push(videoInfo.url);
         
-                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                            musics.get(message.guild.id).voiceChannel.join().playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
                                                 if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
                                                 } else {
@@ -304,7 +304,7 @@ module.exports = {
                                     });
                                 break;
                                 case "🇽":
-                                    message.channel.send("A seleção de música foi cancelada com sucesso!");
+                                    message.channel.send("a seleção de música foi cancelada com sucesso!");
                                 break;
                             } 
                         });
