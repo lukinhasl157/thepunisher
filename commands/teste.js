@@ -9,7 +9,7 @@ const queue = require("../utils/queue");
 const serverQueue = queue.get(message.guild.id);
 
 module.exports = {
-    run: async function (_, message, args, queue) {
+    run: async function (_, message, args) {
         const embed = new Discord.RichEmbed()
 
         if (!message.member.voiceChannel) {
