@@ -5,7 +5,7 @@ const fetchVideoInfo = require("youtube-info");
 const Discord = require("discord.js");
 const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
 const checkUrl = (url) => REGEX_URL.test(url)
-const musics = require("../utils/musics.js");
+const musics = require("../utils/queue.js");
 
 module.exports = {
     run: async function (_, message, args) {
