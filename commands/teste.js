@@ -5,12 +5,12 @@ const fetchVideoInfo = require("youtube-info");
 const Discord = require("discord.js");
 const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
 const checkUrl = (url) => REGEX_URL.test(url)
-const queue = require("../utils/queue");
-const serverQueue = queue.get(message.guild.id);
 
 module.exports = {
     run: async function (_, message, args) {
         const embed = new Discord.RichEmbed()
+        const queue = require("../utils/queue");
+        const serverQueue = queue.get(message.guild.id);
 
         if (!message.member.voiceChannel) {
             return message.channel.send("Por favor, entre em um canal de voz primeiro!");
