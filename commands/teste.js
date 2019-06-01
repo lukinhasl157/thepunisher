@@ -5,7 +5,7 @@ const fetchVideoInfo = require("youtube-info");
 const Discord = require("discord.js");
 const REGEX_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
 const checkUrl = (url) => REGEX_URL.test(url)
-const musics = require("../utils/queue.js");
+const musics = require("../utils/musics.js");
 
 module.exports = {
     run: async function (_, message, args) {
@@ -25,8 +25,8 @@ module.exports = {
                     youtube.getVideo(args[0]).then(async function(video) {
                         fetchVideoInfo(video.id).then(async function(videoInfo) {
                             try {
-                                const streamQueue = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                streamQueue.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
+                                const streammusics = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
+                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -72,7 +72,7 @@ module.exports = {
                                             volume: 5,
                                             playing: true,
                                         };
-                                        queue.set(message.guild.id, queueConstruct);
+                                        musics.set(message.guild.id, queueConstruct);
                                         musics.get(message.guild.id).songs.push(videoInfo.url);
 
                                         connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
@@ -80,7 +80,7 @@ module.exports = {
                                                 musics.get(message.guild.id).songs.shift();
                                             } else {
                                                 musics.get(message.guild.id).voiceChannel.leave();
-                                                queue.delete(message.guild.id);
+                                                musics.delete(message.guild.id);
                                                 await message.channel.send(`A música acabou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}...\`\``);
                                             }
                                         });
@@ -117,11 +117,11 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[1].id).then(async function(videoInfo) {
                                             if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                queue.set(message.guild.id, queueConstruct);
+                                                musics.set(message.guild.id, musicsConstruct);
                                                 musics.get(message.guild.id).songs.push(videoInfo.url);
                                                 console.log(musics.get(message.guild.id).songs);
                                                 const stream3 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streamQueue.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
+                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -138,7 +138,7 @@ module.exports = {
                                                 stream3.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         musics.get(message.guild.id).textChannel.leave();
-                                                        queue.delete(message.guild.id);
+                                                        musics.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
                                                     } else {
                                                         console.log(reason);
@@ -159,11 +159,11 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[2].id).then(async function(videoInfo) {
                                             if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                queue.set(message.guild.id, queueConstruct);
+                                                musics.set(message.guild.id, musicsConstruct);
                                                 musics.get(message.guild.id).songs.push(videoInfo.url);
                                                 console.log(musics.get(message.guild.id).songs);
                                                 const stream4 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streamQueue.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
+                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -180,7 +180,7 @@ module.exports = {
                                                 stream4.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         musics.get(message.guild.id).textChannel.leave();
-                                                        queue.delete(message.guild.id);
+                                                        musics.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
                                                     } else {
                                                         console.log(reason);
@@ -201,11 +201,11 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[3].id).then(async function(videoInfo) {
                                             if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                queue.set(message.guild.id, queueConstruct);
+                                                musics.set(message.guild.id, musicsConstruct);
                                                 musics.get(message.guild.id).songs.push(videoInfo.url);
                                                 console.log(musics.get(message.guild.id).songs);
                                                 const stream5 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streamQueue.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
+                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -222,7 +222,7 @@ module.exports = {
                                                 stream5.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         musics.get(message.guild.id).textChannel.leave();
-                                                        queue.delete(message.guild.id);
+                                                        musics.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
                                                     } else {
                                                         console.log(reason);
@@ -243,11 +243,11 @@ module.exports = {
                                     message.member.voiceChannel.join().then(async function(connection) {
                                         fetchVideoInfo(search[4].id).then(async function(videoInfo) {
                                             if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                queue.set(message.guild.id, queueConstruct);
+                                                musics.set(message.guild.id, musicsConstruct);
                                                 musics.get(message.guild.id).songs.push(videoInfo.url);
                                                 console.log(musics.get(message.guild.id).songs);
                                                 const stream6 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streamQueue.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
+                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
                                                 embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
                                                 embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
                                                 embed.addField("📈Visualizações", videoInfo.views, true)
@@ -264,7 +264,7 @@ module.exports = {
                                                 stream6.on("end", async (reason) => {
                                                     if (reason === "Stream is not generating quickly enough.") {
                                                         musics.get(message.guild.id).textChannel.leave();
-                                                        queue.delete(message.guild.id);
+                                                        musics.delete(message.guild.id);
                                                         await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
                                                     } else {
                                                         console.log(reason);
