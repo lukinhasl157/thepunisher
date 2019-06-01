@@ -60,229 +60,251 @@ module.exports = {
                         const filter = (r, u) => r.me && u.id === message.author.id;
                         const collector = msg.createReactionCollector(filter, { max: 1, time: 60 * 1000 });
 
-                        async function play() {
-                            message.member.voiceChannel.join().then(async function(connection) {
-                                fetchVideoInfo(search[0].id).then(async function(videoInfo) {
-                                    if (!musics.get(message.guild.id) || musics.get(message.guild.id) == undefined) {
-                                        const queueConstruct = {
-                                            textChannel: message.channel,
-                                            voiceChannel: message.member.voiceChannel,
-                                            connection: null,
-                                            songs: [],
-                                            volume: 5,
-                                            playing: true,
-                                        };
-                                        musics.set(message.guild.id, queueConstruct);
-                                        musics.get(message.guild.id).songs.push(videoInfo.url);
-
-                                        connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
-                                            if (reason !== null) {
-                                                musics.get(message.guild.id).songs.shift();
-                                            } else {
-                                                musics.get(message.guild.id).voiceChannel.leave();
-                                                musics.delete(message.guild.id);
-                                                await message.channel.send(`A música acabou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}...\`\``);
-                                            }
-                                        });
-                                        embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
-                                        embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                        embed.addField("📈Visualizações", videoInfo.views, true)
-                                        embed.addField("📝Comentários", videoInfo.commentCount, true)
-                                        embed.addField("👍Likes", videoInfo.likeCount, true)
-                                        embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                        embed.addField("⏰Duração da música", videoInfo.duration, true)
-                                        embed.addField("🎭Gênero", videoInfo.genre, true)
-                                        embed.setThumbnail(videoInfo.thumbnailUrl)
-                                        embed.setTimestamp(new Date())
-                                        embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                                        embed.setColor("#e83127")
-                                        musics.get(message.guild.id).textChannel.send(embed);
-                                    } else {
-                                        if (musics.get(message.guild.id).songs.length > 0) {
-                                            musics.get(message.guild.id).songs.push(videoInfo.url);
-                                            message.channel.send(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`);
-                                        }
-                                    }
-                                });
-                            });
-                        }
-
                         collector.on("collect", async (r) => {
                             msg.delete();
                             switch (r.emoji.name) {
                                 case "1⃣":
-                                    play(search[0]);
+                                    fetchVideoInfo(search[0].id).then(async function(videoInfo) {
+                                        if (!musics.get(message.guild.id) || musics.get(message.guild.id) == undefined) {
+                                            const queueConstruct = {
+                                                textChannel: message.channel,
+                                                voiceChannel: message.member.voiceChannel,
+                                                connection: null,
+                                                songs: [],
+                                                volume: 5,
+                                                playing: true,
+                                            };
+                                            musics.set(message.guild.id, queueConstruct);
+                                            musics.get(message.guild.id).songs.push(videoInfo.url);
+        
+                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                                if (reason !== null) {
+                                                    musics.get(message.guild.id).songs.shift();
+                                                } else {
+                                                    musics.get(message.guild.id).voiceChannel.leave();
+                                                    musics.delete(message.guild.id);
+                                                    await message.channel.send(`A música acabou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}...\`\``);
+                                                }
+                                            });
+                                            embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
+                                            embed.addField("📈Visualizações", videoInfo.views, true)
+                                            embed.addField("📝Comentários", videoInfo.commentCount, true)
+                                            embed.addField("👍Likes", videoInfo.likeCount, true)
+                                            embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
+                                            embed.setTimestamp(new Date())
+                                            embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                            embed.setColor("#e83127")
+                                            musics.get(message.guild.id).textChannel.send(embed);
+                                        } else {
+                                            if (musics.get(message.guild.id).songs.length > 0) {
+                                                musics.get(message.guild.id).songs.push(videoInfo.url);
+                                                embed.setThumbnail(videoInfo.thumbnailUrl)
+                                                embed.setDescription(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`)
+                                                embed.setColor("#e83127")
+                                                musics.get(message.guild.id).textChannel.send(embed);
+                                                console.log(musics.get(message.guild.id).songs);
+                                            }
+                                        }
+                                    });
                                 break;
                                 case "2⃣":
-                                    message.member.voiceChannel.join().then(async function(connection) {
-                                        fetchVideoInfo(search[1].id).then(async function(videoInfo) {
-                                            if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                musics.set(message.guild.id, musicsConstruct);
-                                                musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                console.log(musics.get(message.guild.id).songs);
-                                                const stream3 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
-                                                embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
-                                                embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                                embed.addField("📈Visualizações", videoInfo.views, true)
-                                                embed.addField("📝Comentários", videoInfo.commentCount, true)
-                                                embed.addField("👍Likes", videoInfo.likeCount, true)
-                                                embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                                embed.addField("⏰Duração da música", videoInfo.duration, true)
-                                                embed.addField("🎭Gênero", videoInfo.genre, true)
-                                                embed.setThumbnail(videoInfo.thumbnailUrl)
-                                                embed.setTimestamp(new Date())
-                                                embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                                                embed.setColor("#e83127")
-                                                message.channel.send(embed);
-                                                stream3.on("end", async (reason) => {
-                                                    if (reason === "Stream is not generating quickly enough.") {
-                                                        musics.get(message.guild.id).textChannel.leave();
-                                                        musics.delete(message.guild.id);
-                                                        await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
-                                                    } else {
-                                                        console.log(reason);
-                                                    }
+                                    fetchVideoInfo(search[1].id).then(async function(videoInfo) {
+                                        if (!musics.get(message.guild.id) || musics.get(message.guild.id) == undefined) {
+                                            const queueConstruct = {
+                                                textChannel: message.channel,
+                                                voiceChannel: message.member.voiceChannel,
+                                                connection: null,
+                                                songs: [],
+                                                volume: 5,
+                                                playing: true,
+                                            };
+                                            musics.set(message.guild.id, queueConstruct);
+                                            musics.get(message.guild.id).songs.push(videoInfo.url);
+        
+                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                                if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
-                                                });
-                                            } else {
-                                                if (musics.get(message.guild.id)) {
-                                                    musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                    message.channel.send("A música foi adicionada a fila com sucesso!");
-                                                    console.log(musics.get(message.guild.id).songs);
+                                                } else {
+                                                    musics.get(message.guild.id).voiceChannel.leave();
+                                                    musics.delete(message.guild.id);
+                                                    await message.channel.send(`A música acabou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}...\`\``);
                                                 }
+                                            });
+                                            embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
+                                            embed.addField("📈Visualizações", videoInfo.views, true)
+                                            embed.addField("📝Comentários", videoInfo.commentCount, true)
+                                            embed.addField("👍Likes", videoInfo.likeCount, true)
+                                            embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
+                                            embed.setTimestamp(new Date())
+                                            embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                            embed.setColor("#e83127")
+                                            musics.get(message.guild.id).textChannel.send(embed);
+                                        } else {
+                                            if (musics.get(message.guild.id).songs.length > 0) {
+                                                musics.get(message.guild.id).songs.push(videoInfo.url);
+                                                embed.setThumbnail(videoInfo.thumbnailUrl)
+                                                embed.setDescription(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`)
+                                                embed.setColor("#e83127")
+                                                musics.get(message.guild.id).textChannel.send(embed);
+                                                console.log(musics.get(message.guild.id).songs);
                                             }
-                                        });
+                                        }
                                     });
                                 break;
                                 case "3⃣":
-                                    message.member.voiceChannel.join().then(async function(connection) {
-                                        fetchVideoInfo(search[2].id).then(async function(videoInfo) {
-                                            if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                musics.set(message.guild.id, musicsConstruct);
-                                                musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                console.log(musics.get(message.guild.id).songs);
-                                                const stream4 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
-                                                embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
-                                                embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                                embed.addField("📈Visualizações", videoInfo.views, true)
-                                                embed.addField("📝Comentários", videoInfo.commentCount, true)
-                                                embed.addField("👍Likes", videoInfo.likeCount, true)
-                                                embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                                embed.addField("⏰Duração da música", videoInfo.duration, true)
-                                                embed.addField("🎭Gênero", videoInfo.genre, true)
-                                                embed.setThumbnail(videoInfo.thumbnailUrl)
-                                                embed.setTimestamp(new Date())
-                                                embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                                                embed.setColor("#e83127")
-                                                message.channel.send(embed);
-                                                stream4.on("end", async (reason) => {
-                                                    if (reason === "Stream is not generating quickly enough.") {
-                                                        musics.get(message.guild.id).textChannel.leave();
-                                                        musics.delete(message.guild.id);
-                                                        await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
-                                                    } else {
-                                                        console.log(reason);
-                                                    }
+                                    fetchVideoInfo(search[2].id).then(async function(videoInfo) {
+                                        if (!musics.get(message.guild.id) || musics.get(message.guild.id) == undefined) {
+                                            const queueConstruct = {
+                                                textChannel: message.channel,
+                                                voiceChannel: message.member.voiceChannel,
+                                                connection: null,
+                                                songs: [],
+                                                volume: 5,
+                                                playing: true,
+                                            };
+                                            musics.set(message.guild.id, queueConstruct);
+                                            musics.get(message.guild.id).songs.push(videoInfo.url);
+        
+                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                                if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
-                                                });
-                                            } else {
-                                                if (musics.get(message.guild.id)) {
-                                                    musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                    message.channel.send("A música foi adicionada a fila com sucesso!");
-                                                    console.log(musics.get(message.guild.id).songs);
+                                                } else {
+                                                    musics.get(message.guild.id).voiceChannel.leave();
+                                                    musics.delete(message.guild.id);
+                                                    await message.channel.send(`A música acabou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}...\`\``);
                                                 }
+                                            });
+                                            embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
+                                            embed.addField("📈Visualizações", videoInfo.views, true)
+                                            embed.addField("📝Comentários", videoInfo.commentCount, true)
+                                            embed.addField("👍Likes", videoInfo.likeCount, true)
+                                            embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
+                                            embed.setTimestamp(new Date())
+                                            embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                            embed.setColor("#e83127")
+                                            musics.get(message.guild.id).textChannel.send(embed);
+                                        } else {
+                                            if (musics.get(message.guild.id).songs.length > 0) {
+                                                musics.get(message.guild.id).songs.push(videoInfo.url);
+                                                embed.setThumbnail(videoInfo.thumbnailUrl)
+                                                embed.setDescription(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`)
+                                                embed.setColor("#e83127")
+                                                musics.get(message.guild.id).textChannel.send(embed);
+                                                console.log(musics.get(message.guild.id).songs);
                                             }
-                                        });
+                                        }
                                     });
                                 break;
                                 case "4⃣":
-                                    message.member.voiceChannel.join().then(async function(connection) {
-                                        fetchVideoInfo(search[3].id).then(async function(videoInfo) {
-                                            if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                musics.set(message.guild.id, musicsConstruct);
-                                                musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                console.log(musics.get(message.guild.id).songs);
-                                                const stream5 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
-                                                embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
-                                                embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                                embed.addField("📈Visualizações", videoInfo.views, true)
-                                                embed.addField("📝Comentários", videoInfo.commentCount, true)
-                                                embed.addField("👍Likes", videoInfo.likeCount, true)
-                                                embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                                embed.addField("⏰Duração da música", videoInfo.duration, true)
-                                                embed.addField("🎭Gênero", videoInfo.genre, true)
-                                                embed.setThumbnail(videoInfo.thumbnailUrl)
-                                                embed.setTimestamp(new Date())
-                                                embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                                                embed.setColor("#e83127")
-                                                message.channel.send(embed);
-                                                stream5.on("end", async (reason) => {
-                                                    if (reason === "Stream is not generating quickly enough.") {
-                                                        musics.get(message.guild.id).textChannel.leave();
-                                                        musics.delete(message.guild.id);
-                                                        await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
-                                                    } else {
-                                                        console.log(reason);
-                                                    }
+                                    fetchVideoInfo(search[3].id).then(async function(videoInfo) {
+                                        if (!musics.get(message.guild.id) || musics.get(message.guild.id) == undefined) {
+                                            const queueConstruct = {
+                                                textChannel: message.channel,
+                                                voiceChannel: message.member.voiceChannel,
+                                                connection: null,
+                                                songs: [],
+                                                volume: 5,
+                                                playing: true,
+                                            };
+                                            musics.set(message.guild.id, queueConstruct);
+                                            musics.get(message.guild.id).songs.push(videoInfo.url);
+        
+                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                                if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
-                                                });
-                                            } else {
-                                                if (musics.get(message.guild.id)) {
-                                                    musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                    message.channel.send("A música foi adicionada a fila com sucesso!");
-                                                    console.log(musics.get(message.guild.id).songs);
+                                                } else {
+                                                    musics.get(message.guild.id).voiceChannel.leave();
+                                                    musics.delete(message.guild.id);
+                                                    await message.channel.send(`A música acabou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}...\`\``);
                                                 }
+                                            });
+                                            embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
+                                            embed.addField("📈Visualizações", videoInfo.views, true)
+                                            embed.addField("📝Comentários", videoInfo.commentCount, true)
+                                            embed.addField("👍Likes", videoInfo.likeCount, true)
+                                            embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
+                                            embed.setTimestamp(new Date())
+                                            embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                            embed.setColor("#e83127")
+                                            musics.get(message.guild.id).textChannel.send(embed);
+                                        } else {
+                                            if (musics.get(message.guild.id).songs.length > 0) {
+                                                musics.get(message.guild.id).songs.push(videoInfo.url);
+                                                embed.setThumbnail(videoInfo.thumbnailUrl)
+                                                embed.setDescription(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`)
+                                                embed.setColor("#e83127")
+                                                musics.get(message.guild.id).textChannel.send(embed);
+                                                console.log(musics.get(message.guild.id).songs);
                                             }
-                                        });
+                                        }
                                     });
                                 break;
                                 case "5⃣":
-                                    message.member.voiceChannel.join().then(async function(connection) {
-                                        fetchVideoInfo(search[4].id).then(async function(videoInfo) {
-                                            if (!musics.get(message.guild.id) || musics.get(message.guild.id) == "") {
-                                                musics.set(message.guild.id, musicsConstruct);
-                                                musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                console.log(musics.get(message.guild.id).songs);
-                                                const stream6 = connection.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0]));
-                                                streammusics.setVolumeLogarithmic(musics.get(message.guild.id).volume / 5);
-                                                embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
-                                                embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
-                                                embed.addField("📈Visualizações", videoInfo.views, true)
-                                                embed.addField("📝Comentários", videoInfo.commentCount, true)
-                                                embed.addField("👍Likes", videoInfo.likeCount, true)
-                                                embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
-                                                embed.addField("⏰Duração da música", videoInfo.duration, true)
-                                                embed.addField("🎭Gênero", videoInfo.genre, true)
-                                                embed.setThumbnail(videoInfo.thumbnailUrl)
-                                                embed.setTimestamp(new Date())
-                                                embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
-                                                embed.setColor("#e83127")
-                                                message.channel.send(embed);
-                                                stream6.on("end", async (reason) => {
-                                                    if (reason === "Stream is not generating quickly enough.") {
-                                                        musics.get(message.guild.id).textChannel.leave();
-                                                        musics.delete(message.guild.id);
-                                                        await message.channel.send(`A música terminou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}\`\``);
-                                                    } else {
-                                                        console.log(reason);
-                                                    }
+                                    fetchVideoInfo(search[4].id).then(async function(videoInfo) {
+                                        if (!musics.get(message.guild.id) || musics.get(message.guild.id) == undefined) {
+                                            const queueConstruct = {
+                                                textChannel: message.channel,
+                                                voiceChannel: message.member.voiceChannel,
+                                                connection: null,
+                                                songs: [],
+                                                volume: 5,
+                                                playing: true,
+                                            };
+                                            musics.set(message.guild.id, queueConstruct);
+                                            musics.get(message.guild.id).songs.push(videoInfo.url);
+        
+                                            musics.get(message.guild.id).voiceChannel.playOpusStream(await ytdl(musics.get(message.guild.id).songs[0])).on("end", async (reason) => {
+                                                if (reason !== null) {
                                                     musics.get(message.guild.id).songs.shift();
-                                                });
-                                            } else {
-                                                if (musics.get(message.guild.id)) {
-                                                    musics.get(message.guild.id).songs.push(videoInfo.url);
-                                                    message.channel.send("A música foi adicionada a fila com sucesso!");
-                                                    console.log(musics.get(message.guild.id).songs);
+                                                } else {
+                                                    musics.get(message.guild.id).voiceChannel.leave();
+                                                    musics.delete(message.guild.id);
+                                                    await message.channel.send(`A música acabou, saindo do canal \`\`${musics.get(message.guild.id).textChannel.name}...\`\``);
                                                 }
+                                            });
+                                            embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
+                                            embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
+                                            embed.addField("📈Visualizações", videoInfo.views, true)
+                                            embed.addField("📝Comentários", videoInfo.commentCount, true)
+                                            embed.addField("👍Likes", videoInfo.likeCount, true)
+                                            embed.addField("👎Dislikes", videoInfo.dislikeCount, true)
+                                            embed.addField("⏰Duração da música", videoInfo.duration, true)
+                                            embed.addField("🎭Gênero", videoInfo.genre, true)
+                                            embed.setThumbnail(videoInfo.thumbnailUrl)
+                                            embed.setTimestamp(new Date())
+                                            embed.setFooter(`Musica solicitada por ${message.author.tag}`, message.author.displayAvatarURL)
+                                            embed.setColor("#e83127")
+                                            musics.get(message.guild.id).textChannel.send(embed);
+                                        } else {
+                                            if (musics.get(message.guild.id).songs.length > 0) {
+                                                musics.get(message.guild.id).songs.push(videoInfo.url);
+                                                embed.setThumbnail(videoInfo.thumbnailUrl)
+                                                embed.setDescription(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`)
+                                                embed.setColor("#e83127")
+                                                musics.get(message.guild.id).textChannel.send(embed);
+                                                console.log(musics.get(message.guild.id).songs);
                                             }
-                                        });
+                                        }
                                     });
                                 break;
                                 case "🇽":
-                                    message.channel.send("Seleção de músicas cancelada com sucesso!");
+                                    message.channel.send("A seleção de música foi cancelada com sucesso!");
                                 break;
                             } 
                         });
