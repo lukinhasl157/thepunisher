@@ -50,17 +50,6 @@ module.exports = {
                     });
                 });
             } else {
-                const serverQueue = musics.get(message.guild.id) || {};
-
-                if (!serverQueue.connection) {
-                    serverQueue.connection = await message.member.voiceChannel.join();
-                }
-    
-                if (!serverQueue.songs) {
-                    serverQueue.songs = [];
-                    serverQueue.guildID = message.guild.id;
-                }
-                
                 const search = youtube.searchVideos(args.join(" "), 5);
                 message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${search[0].title}\n[2] - ${search[1].title}\n[3] - ${search[2].title}\n[4] - ${search[3].title}\n[5] - ${search[4].title}`).then(async (msg) => {
                     await msg.react("1⃣");
@@ -74,6 +63,17 @@ module.exports = {
                     const collector = msg.createReactionCollector(filter, { max: 1, time: 60 * 1000 });
 
                     async function allfunc(bot, musics, serverQueue, search) {
+                        const serverQueue = musics.get(message.guild.id) || {};
+
+                        if (!serverQueue.connection) {
+                            serverQueue.connection = await message.member.voiceChannel.join();
+                        }
+            
+                        if (!serverQueue.songs) {
+                            serverQueue.songs = [];
+                            serverQueue.guildID = message.guild.id;
+                        }
+                        
                         serverQueue.songs.push({
                             title: search[0].title,
                             author: message.author,
