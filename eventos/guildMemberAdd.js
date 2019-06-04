@@ -14,13 +14,15 @@ module.exports = {
 		const role = await member.guild.roles.find((r) => r.name === "Captcha Teste");
 		member.addRole(role);
 
-		let category = member.guild.channels.filter((c) => c.type === "category").find((c) => c.name === "captcha");
-		let channel = member.guild.channels.find((ch) => ch.name === `captcha-${member.id}`);
-
-		if (!category) {
+		let categoryy = member.guild.channels.filter((c) => c.type === "category").find((c) => c.name === "captcha");
+		if (!categoryy) {
 			category = await member.guild.createChannel("captcha", "category"); 
+		}
+
+		let channel = member.guild.channels.find((ch) => ch.name === `captcha-${member.id}`);
+		if (!channel) {
 			channel = await member.guild.createChannel(`captcha-${member.id}`, "text");
-			await channel.setParent(category.id);
+			await channel.setParent(categoryy.id);
 		}
 
 		channel.overwritePermissions(role, {
@@ -37,24 +39,25 @@ module.exports = {
 		const collector = msg.createReactionCollector(filter, { max: 1 });
 
 		collector.on("collect", async (r) => {
-			member.guild.createRole({
-				name: "Verificado",
-				color: "GREEN",
-				permissions: [
-					"ADD_REACTIONS",
-					"READ_MESSAGE_HISTORY",
-					"VIEW_CHANNEL",
-					"SEND_MESSAGES",
-					"EMBED_LINKS",
-					"ATTACH_FILES",
-					"EXTERNAL_EMOJIS",
-					"CONNECT",
-					"SPEAK",
-					"CHANGE_NICKNAME"
-				]
-			});
-
-			const roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
+			let roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
+			if (!roleVerified) {
+				roleVerified = await member.guild.createRole({
+					name: "Verificado",
+					color: "GREEN",
+					permissions: [
+						"ADD_REACTIONS",
+						"READ_MESSAGE_HISTORY",
+						"VIEW_CHANNEL",
+						"SEND_MESSAGES",
+						"EMBED_LINKS",
+						"ATTACH_FILES",
+						"EXTERNAL_EMOJIS",
+						"CONNECT",
+						"SPEAK",
+						"CHANGE_NICKNAME"
+					]
+				});
+			}
 			member.guild.channels.forEach(async (channel) => {
 				await channel.overwritePermissions(roleVerified, {
 					ADD_REACTIONS: true,
@@ -69,6 +72,7 @@ module.exports = {
 				});
 			});
 
+			member.remove(role)
 			member.addRole(roleVerified);
 			category.delete();
 			member.send("Você foi verificado com sucesso! Agora você pode interagir no servidor.");		
