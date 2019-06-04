@@ -11,13 +11,13 @@ module.exports = {
 			]
 		});
 		
-		const role = member.guild.roles.find((r) => r.name === "Captcha Teste");
+		const role = await member.guild.roles.find((r) => r.name === "Captcha Teste");
 		member.addRole(role);
 
 		member.guild.createChannel("captcha", "category");
 		member.guild.createChannel(`captcha ${member.id}`, "text");
 		
-		const category = await member.guild.channels.find((c) => c.name === "captcha");
+		const category = await member.guild.channels.filter((c) => c.type === "category");
 		const channel = await member.guild.channels.find((ch) => ch.name === `captcha ${member.id}`);
 		
 		if (!channel.category) {
