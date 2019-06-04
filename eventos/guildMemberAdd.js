@@ -1,19 +1,19 @@
 module.exports = {
 	run: async function(member) {
 
-		member.guild.createRole({
-			name: "Captcha Teste",
-			color: "RED",
-			permissions: [
-				"ADD_REACTIONS",
-				"READ_MESSAGE_HISTORY",
-				"VIEW_CHANNEL"
-			]
-		});
-		
-		const role = await member.guild.roles.find((r) => r.name === "Captcha Teste");
+		let role = member.guild.roles.find((r) => r.name === "Captcha Teste");
+		if (!role) {
+			role = await member.guild.createRole({
+				name: "Captcha Teste",
+				color: "RED",
+				permissions: [
+					"ADD_REACTIONS",
+					"READ_MESSAGE_HISTORY",
+					"VIEW_CHANNEL"
+				]
+			});
+		}
 		member.addRole(role);
-
 
 		let channel = member.guild.channels.find((ch) => ch.name === `captcha-${member.id}`);
 		if (!channel) {
@@ -53,24 +53,28 @@ module.exports = {
 					]
 				});
 			}
-			member.guild.channels.forEach(async (channel) => {
-				await channel.overwritePermissions(roleVerified, {
-					ADD_REACTIONS: true,
-					READ_MESSAGE_HISTORY: true,
-					VIEW_CHANNEL: true,
-					SEND_MESSAGES: true,
-					EMBED_LINKS: true,
-					ATTACH_FILES: true,
-					EXTERNAL_EMOJIS: true,
-					CONNECT: true,
-					SPEAK: true,
-				});
-			});
 
-			member.removeRole(role)
-			member.addRole(roleVerified);
-			category.delete();
-			member.send("Você foi verificado com sucesso! Agora você pode interagir no servidor.");		
+			if (roleVerified) {
+				member.guild.channels.forEach(async (channel) => {
+					await channel.overwritePermissions(roleVerified, {
+						ADD_REACTIONS: true,
+						READ_MESSAGE_HISTORY: true,
+						VIEW_CHANNEL: true,
+						SEND_MESSAGES: true,
+						EMBED_LINKS: true,
+						ATTACH_FILES: true,
+						EXTERNAL_EMOJIS: true,
+						CONNECT: true,
+						SPEAK: true,
+					});
+				});
+
+				member.removeRole(role, "Removendo a role captcha...");
+				role.delete("Excluindo a role captcha...");
+				member.addRole(roleVerified, "Membro verificado com sucesso! Adicionando a role verificado...");
+				channel.delete("Excluindo o canal de captcha...");
+				member.send("Você foi verificado com sucesso! Agora você pode interagir no servidor.");
+			}
 		});
 	}
 }
