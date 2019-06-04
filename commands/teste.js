@@ -38,7 +38,7 @@ module.exports = {
 								name: videos[i].title,
 								id: videos[i].id,
 								author: message.author,
-								url :videos[i].url,
+								url: videos[i].url,
 								channelTitle: videos[i].channel.title,
 								textChannel: message.channel.id
 							});
@@ -96,7 +96,8 @@ module.exports = {
 									
 									data.queue.push({
 										name: choose.title,
-										author: choose.author,
+										author: message.author,
+										id: choose.id,
 										url: choose.url,
 										channelTitle: choose.channel.title,
 										textChannel: message.channel.id
@@ -160,7 +161,8 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, musics, dispatcher){
+			function finish(bot, dispatcher) {
+				const musics = require("../utils/queue.js");
 				try {
 					const fetched = musics.get(dispatcher.guildID);
 					fetched.queue.shift();
