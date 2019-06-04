@@ -31,7 +31,7 @@ module.exports = {
 			ADD_REACTIONS: true
 		});
 
-		let msg = await channel.send(`» Olá **${member.author.username}** | Esta é uma mensagem para nós verificarmos se você é um rôbo, caso não seja um robô clique no emoji \`\`<:correto:505155063963058187>\`\`, ou se você quiser sair do servidor clique no emoji \`\`<:negado:505155029636874250>\`\``);
+		let msg = await channel.send(`» Olá **${member.username}** | Esta é uma mensagem para nós verificarmos se você é um rôbo, caso não seja um robô clique no emoji \`\`<:correto:505155063963058187>\`\`, ou se você quiser sair do servidor clique no emoji \`\`<:negado:505155029636874250>\`\``);
 		await msg.react(":correto:505155063963058187");
 		await msg.react(":negado:505155029636874250");
 
@@ -80,11 +80,11 @@ module.exports = {
 							role.delete();
 							member.addRole(roleVerified);
 							channel.delete();
-							member.send(`» **${member.author.username}** | Você foi verificado com sucesso! Agora você pode interagir no servidor.😜`);
+							member.send(`» **${member.username}** | Você foi verificado com sucesso! Agora você pode interagir no servidor.😜`);
 						}
 				break;
 				case "505155029636874250":
-					member.send(`» **${member.author.username}** | Que pena que não quis se juntar ao nosso servidor, espero que um dia você volte.😜`)
+					member.send(`» **${member.username}** | Que pena que não quis se juntar ao nosso servidor, espero que um dia você volte.😜`)
 					member.kick("O usuário não quis juntar-se ao nosso servidor.")
 				break;
 			}
