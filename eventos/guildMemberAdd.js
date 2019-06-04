@@ -10,16 +10,17 @@ module.exports = {
 				"VIEW_CHANNEL"
 			]
 		});
+		
+		const role = member.guild.roles.find((r) => r.name === "Captcha Teste");
 		member.addRole(role);
 
 		member.guild.createChannel("captcha", "category");
-		member.guild.createChannel(`Captcha ${member.id}`, "text");
+		member.guild.createChannel(`captcha ${member.id}`, "text");
 
 		const category = member.guild.channels.find((c) => c.name === "captcha");
-		const channel = member.guild.channels.find((ch) => ch.name === `Captcha ${member.id}`);
+		const channel = member.guild.channels.find((ch) => ch.name === `captcha ${member.id}`);
 		channel.setParent(category.id);
 
-		const role = member.guild.roles.find((r) => r.name === "Captcha Teste");
 		channel.overwritePermissions(role, {
 			READ_MESSAGE_HISTORY: true,
 			VIEW_CHANNEL: true,
