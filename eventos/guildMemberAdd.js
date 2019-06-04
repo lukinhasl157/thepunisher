@@ -77,7 +77,6 @@ module.exports = {
 							});
 			
 							member.removeRole(role);
-							role.delete();
 							member.addRole(roleVerified);
 							channel.delete();
 							member.send(`» **${member.user.username}** | Você foi verificado com sucesso! Agora você pode interagir no servidor.😜`);
