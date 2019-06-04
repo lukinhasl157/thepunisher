@@ -21,7 +21,7 @@ module.exports = {
 				return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
 			} else {       
 				try {
-					const data = musics.get(message.guild.id) || {};
+					let data = musics.get(message.guild.id) || {};
 
 					if (!data.queue) {
 						data.queue = [];
@@ -161,10 +161,10 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, data, musics, dispatcher) {
+			function finish(bot, musics, dispatcher) {
 				try {
 					const fetched = musics.get(dispatcher.guildID);
-					data.queue.shift();
+					fetched.queue.shift();
 
 					if (fetched.queue.length > 0) {
 						musics.set(dispatcher.guildID, fetched);
