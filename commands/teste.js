@@ -21,7 +21,7 @@ module.exports = {
 				return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
 			} else {       
 				try {
-					let data = musics.get(message.guild.id) || {};
+					const data = musics.get(message.guild.id) || {};
 
 					if (!data.queue) {
 						data.queue = [];
@@ -161,21 +161,21 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, musics, data, dispatcher) {
+			function finish(bot, musics, dispatcher) {
 				try {
-					const fetched = musics.get(data.dispatcher.guildID);
+					const fetched = musics.get(dispatcher.guildID);
 					fetched.queue.shift();
 
 					if (fetched.queue.length > 0) {
-						musics.set(data.dispatcher.guildID, fetched);
+						musics.set(dispatcher.guildID, fetched);
 						console.log("Musica passada =>" + fetched.queue[0].name);
 						play(bot, musics, fetched);
 					} else {
-						const textChannelLeave = bot.guilds.get(data.dispatcher.guildID).channels.get(fetched.queue[0].textChannel);
+						const textChannelLeave = bot.guilds.get(dispatcher.guildID).channels.get(fetched.queue[0].textChannel);
 						textChannelLeave.send("A músicas acabaram e a fila foi limpa.");
 
 						musics.delete(dispatcher.guildID);
-						const voiceChannelLeave = bot.guilds.get(data.dispatcher.guildID).me.voiceChannel;
+						const voiceChannelLeave = bot.guilds.get(dispatcher.guildID).me.voiceChannel;
 						if (voiceChannelLeave) {
 							voiceChannelLeave.leave();
 							console.log("Queue finalizada");
