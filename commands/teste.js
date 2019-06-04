@@ -78,19 +78,19 @@ module.exports = {
 									
 									switch (r.emoji.name) {
 										case "1⃣":
-											choose = song[0];
+											choose = search[0];
 										break;
 										case "2⃣":
-											choose = song[1];
+											choose = search[1];
 										break;
 										case "3⃣":
-											choose = song[2];
+											choose = search[2];
 										break;
 										case "4⃣":
-											choose = song[3];
+											choose = search[3];
 										break;
 										case "5⃣":
-											choose = song[4];
+											choose = search[4];
 										break;
 									}
 									
