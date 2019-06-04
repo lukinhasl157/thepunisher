@@ -40,20 +40,24 @@ module.exports = {
 		const roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
 
 		async function forEachChannels() {
-			member.guild.channels.forEach(async (channel) => {
-				await channel.overwritePermissions(roleVerified, {
-					ADD_REACTIONS: true,
-					READ_MESSAGE_HISTORY: true,
-					VIEW_CHANNEL: true,
-					SEND_MESSAGES: true,
-					EMBED_LINKS: true,
-					ATTACH_FILES: true,
-					EXTERNAL_EMOJIS: true,
-					CONNECT: true,
-					SPEAK: true,
+			try {
+				member.guild.channels.forEach(async (channel) => {
+					await channel.overwritePermissions(roleVerified, {
+						ADD_REACTIONS: true,
+						READ_MESSAGE_HISTORY: true,
+						VIEW_CHANNEL: true,
+						SEND_MESSAGES: true,
+						EMBED_LINKS: true,
+						ATTACH_FILES: true,
+						EXTERNAL_EMOJIS: true,
+						CONNECT: true,
+						SPEAK: true,
+					});
 				});
-			}).catch((e) => console.log(e));
-			
+			} catch(e) {
+				return console.log(e);
+			}
+
 			member.removeRole(roleCaptcha);
 			channel.delete();
 			member.addRole(roleVerified);
