@@ -39,7 +39,7 @@ module.exports = {
 		const collector = msg.createReactionCollector(filter, { max: 1 });
 		const roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
 
-		async function forEachChannels(member, roleVerified, roleCaptcha, channel) {
+		async function forEachChannels(roleVerified, roleCaptcha, channel) {
 			member.guild.channels.forEach(async (channel) => {
 				await channel.overwritePermissions(roleVerified, {
 					ADD_REACTIONS: true,
