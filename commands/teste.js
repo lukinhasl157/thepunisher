@@ -39,6 +39,7 @@ module.exports = {
 								id: videos[i].id,
 								author: message.author,
 								url: videos[i].url,
+								votes: false,
 								channelTitle: videos[i].channel.title,
 								textChannel: message.channel.id
 							});
@@ -100,6 +101,7 @@ module.exports = {
 										id: choose.id,
 										url: choose.url,
 										channelTitle: choose.channel.title,
+										votes: false,
 										textChannel: message.channel.id
 									});
 
