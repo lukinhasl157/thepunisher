@@ -10,7 +10,7 @@ module.exports = {
       return message.channel.send("Você precisa estar no mesmo canal de voz que eu para poder pular de música.");
     } else {
         if (count > 1) {
-            message.channel.send("Uma votação para pular de música foi iniciada, vocês tem \`\`60s\`\` para realizar a votação, caso ninguém vote, a votação será finalizada automaticamente. Para pular de música digite: \`\`skip\`\`, caso não queria pular de música digite \`\`resume\`\``");
+            message.channel.send("Uma votação para pular de música foi iniciada, vocês tem \`\`60s\`\` para realizar a votação, caso ninguém vote, a votação será finalizada automaticamente. Para pular de música digite: \`\`skip\`\`");
             const filter = msg => msg.content.toLowerCase().startsWith("skip");
             const collector = message.channel.createMessageCollector(filter, { max: count, time: 60 * 1000});
 
@@ -18,7 +18,7 @@ module.exports = {
                 if (message.member.voiceChannel !== message.guild.me.voiceChannel) {
                     return message.channel.send("Desculpe, você precisa no mesmo canal de voz que eu para poder participar da votação.");
                 } else {
-                    message.channe.send(`**${message.author.username}** | Votou para pular de música.`)
+                    message.channel.send(`**${message.author.username}** | Votou para pular de música.`)
                 }
             }).on("end", async (collected) => {
                 if (collected.size == count) {
