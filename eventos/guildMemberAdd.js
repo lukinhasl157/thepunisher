@@ -69,10 +69,10 @@ module.exports = {
 					});
 				});
 
-				member.removeRole(role, "Removendo a role captcha...");
-				role.delete("Excluindo a role captcha...");
-				member.addRole(roleVerified, "Membro verificado com sucesso! Adicionando a role verificado...");
-				channel.delete("Excluindo o canal de captcha...");
+				member.removeRole(role);
+				role.delete();
+				member.addRole(roleVerified);
+				channel.delete();
 				member.send("Você foi verificado com sucesso! Agora você pode interagir no servidor.");
 			}
 		});
