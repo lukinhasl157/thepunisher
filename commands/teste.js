@@ -97,7 +97,7 @@ module.exports = {
 									data.queue.push({
 										name: choose.title,
 										author: choose.author,
-										url: chooose.url,
+										url: choose.url,
 										channelTitle: choose.channel.title,
 										textChannel: message.channel.id
 									});
