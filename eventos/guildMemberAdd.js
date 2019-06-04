@@ -14,13 +14,14 @@ module.exports = {
 		const role = await member.guild.roles.find((r) => r.name === "Captcha Teste");
 		member.addRole(role);
 
-		member.guild.createChannel("captcha", "category");
-		member.guild.createChannel(`captcha ${member.id}`, "text");
-		
-		const categoryFind = await member.guild.channels.filter((c) => c.type === "category").find((c) => c.name === "captcha").id;
-		const channel = await member.guild.channels.find((ch) => ch.name === `captcha-${member.id}`);
-		
-		channel.setParent(categoryFind);
+		let category = member.guild.channels.filter((c) => c.type === "category").find((c) => c.name === "captcha");
+		let channel = member.guild.channels.find((ch) => ch.name === `captcha-${member.id}`);
+
+		if (!category) {
+			category = await member.guild.createChannel("captcha", "category"); 
+			channel = await member.guild.createChannel(`captcha-${member.id}`, "text");
+			await channel.setParent(category.id);
+		}
 
 		channel.overwritePermissions(role, {
 			READ_MESSAGE_HISTORY: true,
@@ -30,8 +31,8 @@ module.exports = {
 		});
 
 		let msg = await channel.send("Teste");
-		msg.react("😜");
-		
+		await msg.react("😜");
+
 		const filter = (r, u) => r.emoji.name === "😜" && u.id === member.id;
 		const collector = msg.createReactionCollector(filter, { max: 1 });
 
