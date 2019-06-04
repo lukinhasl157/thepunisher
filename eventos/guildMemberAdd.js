@@ -37,7 +37,7 @@ module.exports = {
 
 		const filter = (r, m) => r.me && m.id === member.id;
 		const collector = msg.createReactionCollector(filter, { max: 1 });
-		const roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
+		let roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
 
 		async function forEachChannels() {
 			try {
