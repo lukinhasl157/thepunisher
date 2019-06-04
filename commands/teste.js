@@ -24,41 +24,41 @@ module.exports = {
 					const data = musics.get(message.guild.id) || {};
 
 					if (!data.queue) {
-							data.queue = [];
-							data.guildID = message.guild.id;
+						data.queue = [];
+						data.guildID = message.guild.id;
 					}
 					const check = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
 
 					if (args[0].match(check)) {
-							const playlist = await yt.getPlaylist(args[0]);
-							const videos = await playlist.getVideos();
+						const playlist = await yt.getPlaylist(args[0]);
+						const videos = await playlist.getVideos();
 
-							for (let i = 0; i < videos.length; i++){
-									data.queue.push({
-											nome:videos[i].title,
-											qr:message.author,
-											url:videos[i].url,
-											canal:videos[i].channel.title,
-											pub:videos[i].publishedAt,
-											anuncio:message.channel.id
-									});
-							}
+						for (let i = 0; i < videos.length; i++){
+							data.queue.push({
+								nome:videos[i].title,
+								qr:message.author,
+								url:videos[i].url,
+								canal:videos[i].channel.title,
+								pub:videos[i].publishedAt,
+								anuncio:message.channel.id
+							});
+						}
 
-							if (!data.connection) {
-									data.connection = await message.member.voiceChannel.join();
-							}
+						if (!data.connection) {
+							data.connection = await message.member.voiceChannel.join();
+						}
 
-							if(!data.dispatcher) {
-									await play(bot,musics,data);
-							} else {
-									message.channel.send(playlist.title+" adicionada a fila!");
-							}
+						if(!data.dispatcher) {
+							await play(bot,musics,data);
+						} else {
+							message.channel.send(playlist.title+" adicionada a fila!");
+						}
 					}
 
 					if (!args[0].match(check)) {
 						const song = await yt.searchVideos(args.join(" "), 5);
 						let escolhida = null;
-						message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${search[0].title}\n[2] - ${search[1].title}\n[3] - ${search[2].title}\n[4] - ${search[3].title}\n[5] - ${search[4].title}`).then(async (msg) => {
+						message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${song[0].title}\n[2] - ${song[1].title}\n[3] - ${song[2].title}\n[4] - ${song[3].title}\n[5] - ${song[4].title}`).then(async (msg) => {
 							await msg.react("1⃣");
 							await msg.react("2⃣");
 							await msg.react("3⃣");
