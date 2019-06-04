@@ -67,7 +67,7 @@ module.exports = {
 				});
 			});
 
-			member.remove(role)
+			member.removeRole(role)
 			member.addRole(roleVerified);
 			category.delete();
 			member.send("Você foi verificado com sucesso! Agora você pode interagir no servidor.");		
