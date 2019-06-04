@@ -14,8 +14,9 @@ module.exports = {
         if (count > 1) {
             message.channel.send("Uma votação para pular de música foi iniciada, vocês tem \`\`60s\`\` para realizar a votação, caso ninguém vote, a votação será finalizada automaticamente. Para pular de música digite: \`\`pular\`\`");
 
-            const filter = (msg, m) => msg.content.toLowerCase().startsWith("pular") && m.id == message.member.voiceChannel.members.map((m) => m.user.id).includes(message.member.id);
+            const filter = (msg, m) => msg.content.toLowerCase().startsWith("pular");
             const collector = message.channel.createMessageCollector(filter, { max: count, time: 60 * 1000});
+            serverQueue.queue[0].votes = true;
 
             collector.on("collect", async (msg) => {
                 if (!message.member.voiceChannel.members.map((m) => m.user.id).includes(message.member.id)) {
@@ -26,13 +27,13 @@ module.exports = {
             });
 
             collector.on("end", async (collected) => {
-                serverQueue.queue[0].votes = false;
                 if (collected.size == count) {
                     serverQueue.dispatcher.end();
                     message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pulada através da votação. Votos: \`\`${count}/${count}\`\``);
                 } else {
                     message.channel.send(`O número de votos foi insuficiente para pular de música, votos: \`\`${collected.size}/${count}\`\``);
                 }
+                serverQueue.queue[0].votes = false;
             });
         } else {
             serverQueue.dispatcher.end();
