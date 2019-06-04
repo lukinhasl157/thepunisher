@@ -1,6 +1,9 @@
 module.exports = {
 	run: async function(member) {
-
+		if (member.guild.id !== "515877819914518529") {
+			return false;
+		}
+		
 		let role = member.guild.roles.find((r) => r.name === "Captcha Teste");
 		if (!role) {
 			role = await member.guild.createRole({
