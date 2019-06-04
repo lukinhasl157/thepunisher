@@ -52,11 +52,12 @@ module.exports = {
 					CONNECT: true,
 					SPEAK: true,
 				});
-			});
+			}).catch((e) => console.log(e));
+			
 			member.removeRole(roleCaptcha);
 			channel.delete();
 			member.addRole(roleVerified);
-			member.send(`» **${member.user.username}** | Você foi verificado com sucesso, agora você pode interagir no servidor.😜`)
+			member.send(`» **${member.user.username}** | Você foi verificado com sucesso, agora você pode interagir no servidor.😜`);
 		}
 
 		collector.on("collect", async (r) => {
