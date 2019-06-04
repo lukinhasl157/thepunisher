@@ -35,12 +35,12 @@ module.exports = {
 
 						for (let i = 0; i < videos.length; i++){
 							data.queue.push({
-								nome:videos[i].title,
-								qr:message.author,
-								url:videos[i].url,
-								canal:videos[i].channel.title,
-								pub:videos[i].publishedAt,
-								anuncio:message.channel.id
+								name: videos[i].title,
+								id: videos[i].id,
+								author: message.author,
+								url :videos[i].url,
+								channelTitle: videos[i].channel.title,
+								textChannel: message.channel.id
 							});
 						}
 
@@ -49,16 +49,21 @@ module.exports = {
 						}
 
 						if(!data.dispatcher) {
-							await play(bot,musics,data);
+							await play(bot, musics, data);
 						} else {
-							message.channel.send(playlist.title+" adicionada a fila!");
+							fetchVideoInfo(playlist.id).then(async function(PlaylistInfo) {
+								embed.setDescription(`A música [${PlaylistInfo.title}](https://www.youtube.com/playlist?list=${PlaylistInfo.id}) foi adicionada a fila com sucesso!`)
+								embed.setThumbnail(PlaylistInfo.thumbnailUrl)
+								embed.setColor("#e83127")
+								message.channel.send(embed);
+							});
 						}
 					}
 
 					if (!args[0].match(check)) {
-						const song = await yt.searchVideos(args.join(" "), 5);
-						let escolhida = null;
-						message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${song[0].title}\n[2] - ${song[1].title}\n[3] - ${song[2].title}\n[4] - ${song[3].title}\n[5] - ${song[4].title}`).then(async (msg) => {
+						const search = await yt.searchVideos(args.join(" "), 5);
+						let choose = null;
+						message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${search[0].title}\n[2] - ${search[1].title}\n[3] - ${search[2].title}\n[4] - ${search[3].title}\n[5] - ${search[4].title}`).then(async (msg) => {
 							await msg.react("1⃣");
 							await msg.react("2⃣");
 							await msg.react("3⃣");
@@ -73,29 +78,28 @@ module.exports = {
 									
 									switch (r.emoji.name) {
 										case "1⃣":
-											escolhida = song[0];
+											choose = song[0];
 										break;
 										case "2⃣":
-											escolhida = song[1];
+											choose = song[1];
 										break;
 										case "3⃣":
-											escolhida = song[2];
+											choose = song[2];
 										break;
 										case "4⃣":
-											escolhida = song[3];
+											choose = song[3];
 										break;
 										case "5⃣":
-											escolhida = song[4];
+											choose = song[4];
 										break;
 									}
 									
 									data.queue.push({
-										nome:escolhida.title,
-										qr:message.author,
-										url:escolhida.url,
-										canal:escolhida.channel.title,
-										pub:escolhida.publishedAt,
-										anuncio:message.channel.id
+										name: choose.title,
+										author: choose.author,
+										url: chooose.url,
+										channelTitle: choose.channel.title,
+										textChannel: message.channel.id
 									});
 
 									if (!data.connection) {
@@ -104,7 +108,12 @@ module.exports = {
 									if (!data.dispatcher) {
 										await play(bot, musics, data);
 									} else {
-										message.channel.send(data.queue.slice(-1)[0].name + " foi adicionado a fila com sucesso!");
+										fetchVideoInfo(data.queue[0].id).then(async function (videoInfo) {
+											embed.setDescription(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`)
+											embed.setThumbnail(videoInfo.thumbnailUrl)
+											embed.setColor("#e83127")
+											message.channel.send(embed);
+										});
 									}
 							});
 						});
@@ -126,14 +135,14 @@ module.exports = {
 
 				data.dispatcher.guildID = data.guildID;
 				
-				data.dispatcher.on('end', async (reason) => {l
+				data.dispatcher.on('end', async (reason) => {
 					console.log('Musica finalizada! razão = '+reason);
 					finish(bot, musics, this);
 						
 				}).on('error', console.error);
 
 				if (data.dispatcher) {
-					fetchVideoInfo(data.queue[0].url).then(async function(videoInfo) {
+					fetchVideoInfo(data.queue[0].id).then(async function(videoInfo) {
 						embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
 						embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
 						embed.addField("📈Visualizações", videoInfo.views, true)
@@ -144,9 +153,9 @@ module.exports = {
 						embed.addField("🎭Gênero", videoInfo.genre, true)
 						embed.setThumbnail(videoInfo.thumbnailUrl)
 						embed.setTimestamp(new Date())
-						embed.setFooter(`Musica solicitada por ${data.queue[0].qr.tag}`, data.queue[0].qr.avatarURL)
+						embed.setFooter(`Musica solicitada por ${data.queue[0].author.tag}`, data.queue[0].author.avatarURL)
 						embed.setColor("#e83127")
-						bot.channels.get(data.queue[0].anuncio).send(embed);
+						bot.channels.get(data.queue[0].textChannel).send(embed);
 					});
 				}
 			}
@@ -158,10 +167,10 @@ module.exports = {
 
 					if (fetched.queue.length > 0) {
 						musics.set(dispatcher.guildID, fetched);
-						console.log("Musica passada =>" + fetched.queue[0].nome);
+						console.log("Musica passada =>" + fetched.queue[0].name);
 						play(bot, musics, fetched);
 					} else {
-						const textChannelLeave = bot.guilds.get(dispatcher.guildID).channels.get(fetched.queue[0].anuncio);
+						const textChannelLeave = bot.guilds.get(dispatcher.guildID).channels.get(fetched.queue[0].textChannel);
 						textChannelLeave.send("A músicas acabaram e a fila foi limpa.");
 
 						musics.delete(dispatcher.guildID);
