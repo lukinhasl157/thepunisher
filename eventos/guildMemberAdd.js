@@ -12,9 +12,13 @@ module.exports = {
 			const collector = msg.createReactionCollector(filter, { max: 1 });
 
 			collector.on("collect", async (r) => {
+				msg.delete();
 				switch (r.emoji.name) {
 					case "😜":
+						const roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
 						member.removeRole(role);
+						member.addRoler(roleVerified);
+						channel.send("Verificado com sucesso!");
 				}
 			});
 		});
