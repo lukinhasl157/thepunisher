@@ -31,7 +31,7 @@ module.exports = {
 			ADD_REACTIONS: true
 		});
 
-		let msg = await channel.send(`» Olá **${member.user.username}** | Esta é uma mensagem para nós verificarmos se você é um rôbo, caso não seja um robô clique no emoji \`\`<:correto:505155063963058187>\`\`, ou se você quiser sair do servidor clique no emoji \`\`<:negado:505155029636874250>\`\``);
+		let msg = await channel.send(`» Olá **${member.user.username}** | Esta é uma mensagem para nós verificarmos se você é um rôbo, caso não seja um robô clique no emoji <:correto:505155063963058187>, ou se você quiser sair do servidor clique no emoji <:negado:505155029636874250>`);
 		await msg.react(":correto:505155063963058187");
 		await msg.react(":negado:505155029636874250");
 
