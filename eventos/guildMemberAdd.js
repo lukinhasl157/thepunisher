@@ -18,7 +18,7 @@ module.exports = {
 		member.guild.createChannel(`captcha ${member.id}`, "text");
 		
 		const categoryFind = await member.guild.channels.filter((c) => c.type === "category").find((c) => c.name === "captcha");
-		const channel = await member.guild.channels.find((ch) => ch.name === `captcha ${member.id}`);
+		const channel = await member.guild.channels.find((ch) => ch.name === `captcha-${member.id}`);
 		
 		if (!channel.category) {
 			channel.setParent(categoryFind.id);
