@@ -48,7 +48,7 @@ module.exports = {
 							data.connection = await message.member.voiceChannel.join();
 						}
 
-						if(!data.dispatcher) {
+						if (!data.dispatcher) {
 							await play(bot, musics, data);
 						} else {
 							fetchVideoInfo(playlist.id).then(async function(PlaylistInfo) {
@@ -161,11 +161,10 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, dispatcher) {
-				const musics = require("../utils/queue.js");
+			function finish(bot, data, musics, dispatcher) {
 				try {
 					const fetched = musics.get(dispatcher.guildID);
-					fetched.queue.shift();
+					data.queue.shift();
 
 					if (fetched.queue.length > 0) {
 						musics.set(dispatcher.guildID, fetched);
