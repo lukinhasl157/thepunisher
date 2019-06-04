@@ -16,8 +16,8 @@ module.exports = {
 
             serverQueue.queue[0].votes = true;
             const filter = msg => msg.content.toLowerCase().startsWith("pular");
-            message.channel.awaitMessages(filter, { max: count, time: 60 * 1000}).then(function (collected) {
-                message.channel.send(`**${message.member.id}** | Votou para pular.`);
+            msg.channel.awaitMessages(filter, { max: count, time: 60 * 1000}).then(function (collected) {
+                message.channel.send(`**${message.author.username}** | Votou para pular.`);
             }).catch(function (collected) {
                 if (collected.size == count) {
                     serverQueue.dispatcher.end();
