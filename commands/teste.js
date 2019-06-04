@@ -6,16 +6,16 @@ const Discord = require("discord.js");
 const musics = require("../utils/queue.js");
 
 module.exports = {
-    run: async function (_, message, args) {
+    run: async function (bot, message, args) {
 			const embed = new Discord.RichEmbed()
 
 			if (!message.member.voiceChannel) {
 				return message.channel.send("Por favor, entre em um canal de voz primeiro!");
 			} else if (message.guild.me.voiceChannel && message.guild.me.voiceChannel !== message.member.voiceChannel) {
 				return message.channel.send("Desculpe, eu já estou tocando uma música em outro canal de voz.")
-			} else if (!message.member.voiceChannel.permissionsFor(message.bot.user).has("CONNECT")) {
+			} else if (!message.member.voiceChannel.permissionsFor(bot.user).has("CONNECT")) {
 				return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para entrar neste canal! Permissão requirida: \`\`CONNECT\`\`.`);
-			} else if (!message.member.voiceChannel.permissionsFor(message.bot.user).has("SPEAK")) {
+			} else if (!message.member.voiceChannel.permissionsFor(bot.user).has("SPEAK")) {
 				return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`\`SPEAK\`\`.`);
 			} else if (args.length === 0) {
 				return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
@@ -178,5 +178,5 @@ module.exports = {
     },
   aliases: ["tocar"],
   category: "Música",
-    description: "Tocar uma música"
+  description: "Tocar uma música"
 }
