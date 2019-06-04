@@ -20,7 +20,9 @@ module.exports = {
                 } else {
                     message.channel.send(`**${message.author.username}** | Votou para pular de música.`)
                 }
-            }).on("end", async (collected) => {
+            });
+
+            collector.on("end", async (collected) => {
                 if (collected.size == count) {
                     serverQueue.dispatcher.end();
                     message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pulada através da votação. Votos: \`\`${count}/${count}\`\``);
