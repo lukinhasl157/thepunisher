@@ -14,7 +14,7 @@ module.exports = {
         if (count > 1) {
             message.channel.send("Uma votação para pular de música foi iniciada, vocês tem \`\`60s\`\` para realizar a votação, caso ninguém vote, a votação será finalizada automaticamente. Para pular de música digite: \`\`pular\`\`");
 
-            serverQueue.songs[0].votes = true;
+            serverQueue.queue[0].votes = true;
             const filter = msg => msg.content.toLowerCase().startsWith("pular");
             message.channel.awaitMessages(filter, { max: count, time: 60 * 1000}).then(function (collected) {
                 message.channel.send(`**${message.member.id}** | Votou para pular.`);
