@@ -14,15 +14,10 @@ module.exports = {
 		const role = await member.guild.roles.find((r) => r.name === "Captcha Teste");
 		member.addRole(role);
 
-		let categoryy = member.guild.channels.filter((c) => c.type === "category").find((c) => c.name === "captcha");
-		if (!categoryy) {
-			category = await member.guild.createChannel("captcha", "category"); 
-		}
 
 		let channel = member.guild.channels.find((ch) => ch.name === `captcha-${member.id}`);
 		if (!channel) {
 			channel = await member.guild.createChannel(`captcha-${member.id}`, "text");
-			await channel.setParent(categoryy.id);
 		}
 
 		channel.overwritePermissions(role, {
