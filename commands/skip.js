@@ -14,26 +14,20 @@ module.exports = {
         if (count > 1) {
             message.channel.send("Uma votação para pular de música foi iniciada, vocês tem \`\`60s\`\` para realizar a votação, caso ninguém vote, a votação será finalizada automaticamente. Para pular de música digite: \`\`pular\`\`");
 
-            const filter = (msg, m) => msg.content.toLowerCase().startsWith("pular");
-            const collector = message.channel.createMessageCollector(filter, { max: count, time: 60 * 1000});
-            serverQueue.queue[0].votes = true;
-
-            collector.on("collect", async (msg) => {
-                if (!message.member.voiceChannel.members.map((m) => m.user.id).includes(message.member.id)) {
-                    return message.channel.send("Desculpe, você não está participando da votação");
-                } else {
-                    message.channel.send(`**${message.author.username}** | Votou para pular de música.`)
-                }
-            });
-
-            collector.on("end", async (collected) => {
+            serverQueue.songs[0].votes = true;
+            const filter = msg => msg.content.toLowerCase().startsWith("pular");
+            message.channel.awaitMessages(filter, { max: count, time: 60 * 1000}).then(function (collected) {
+                message.channel.send(`**${message.member.id}** | Votou para pular.`);
+            }).catch(function (collected) {
                 if (collected.size == count) {
                     serverQueue.dispatcher.end();
-                    message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pulada através da votação. Votos: \`\`${count}/${count}\`\``);
+                    message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pulada com sucesso!`);
                 } else {
-                    message.channel.send(`O número de votos foi insuficiente para pular de música, votos: \`\`${collected.size}/${count}\`\``);
+                    if (collected.size < count) {
+                        message.channel.send(`O número de votos foi insuficiente para pular de música, votos: \`\`${collected.size}/${count}\`\``);
+                        serverQueue.queue[0].votes = false
+                    }
                 }
-                serverQueue.queue[0].votes = false;
             });
         } else {
             serverQueue.dispatcher.end();
