@@ -4,7 +4,7 @@ module.exports = {
 		const role = member.guild.roles.find((r) => r.name === "captchaTeste");
 		member.addRole(role);
 
-		const channel = member.guild.channels.find((r) => r.name === "captchaTeste");
+		const channel = member.guild.channels.find((r) => r.name === "captchateste");
 		channel.send("teste").then(async function(msg) {
 			await msg.react("😜");
 		});
