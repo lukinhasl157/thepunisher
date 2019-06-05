@@ -60,11 +60,9 @@ module.exports = {
 								message.channel.send(embed);
 							});
 						}
-					}
-
-					if (!args[0].match(check)) {
+					} else {
 						const search = await yt.searchVideos(args.join(" "), 5);
-						let choose;
+						let choose = null;
 						message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${search[0].title}\n[2] - ${search[1].title}\n[3] - ${search[2].title}\n[4] - ${search[3].title}\n[5] - ${search[4].title}`).then(async (msg) => {
 							await msg.react("1⃣");
 							await msg.react("2⃣");
@@ -169,19 +167,19 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, musics, serverQueue) {
+			function finish(bot, musics) {
 				try {
-					const fetched = queue.get(serverQueue.dispatcher.guildID);
+					const fetched = queue.get(message.guild.id);
 					fetched.queue.shift();
 
 					if (fetched.queue.length > 0) {
-						musics.set(serverQueue.dispatcher.guildID, fetched);
+						musics.set(message.guild.id, fetched);
 						console.log("Musica passada =>" + fetched.queue[0].name);
 						play(bot, musics, fetched);
 					} else {
-						bot.channels.get(fetched.queue[0].textChannel).send("A músicas acabaram e a fila foi limpa.");
+						message.channel.send("A músicas acabaram e a fila foi limpa.");
 						musics.delete(message.guild.id);
-						const voiceChannelLeave = bot.guilds.get(fetched.guildID).me.voiceChannel;
+						const voiceChannelLeave = message.guild.me.voiceChannel;
 						if (voiceChannelLeave) {
 							voiceChannelLeave.leave();
 							console.log("Queue finalizada");
