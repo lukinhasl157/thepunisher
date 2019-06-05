@@ -1,4 +1,5 @@
 const queue = require("../utils/queue.js");
+const Discord = require("discord.js");
 module.exports = {
   run: async function(bot, message, args) {
 
@@ -10,14 +11,13 @@ module.exports = {
     } else if (serverQueue.dispatcher.resumed) {
       return message.channel.send("Desculpe, a música já está tocando");
     } else {
-      fetchVideoInfo(serverQueue.queue[0].id).then(async function(videoInfo) {
-        serverQueue.dispatcher.resume();
-        message.channel.send(new Discord.RichEmbed()
-          .setDescription(`A música \`\`${serverQueue.queue[0].name}\`\` foi retomada!`)
-          .setColor("#e83127")
-          .setThumbnail(videoInfo.thumbnailUrl)
-        );
-      });
+      const videoInfo = fetchVideoInfo(serverQueue.queue[0].id);
+      serverQueue.dispatcher.resume();
+      message.channel.send(new Discord.RichEmbed()
+        .setDescription(`A música \`\`${serverQueue.queue[0].name}\`\` foi retomada!`)
+        .setColor("#e83127")
+        .setThumbnail(videoInfo.thumbnailUrl)
+      );
     }
   }
 }
