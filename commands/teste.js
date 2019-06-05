@@ -70,6 +70,7 @@ module.exports = {
 							await msg.react("3⃣");
 							await msg.react("4⃣");
 							await msg.react("5⃣");
+							await msg.react("❌");
 
 							const filter = (r, u) => r.me && u.id === message.author.id;
 							const collector = msg.createReactionCollector(filter, {max: 1, time: 60 * 1000 });
@@ -166,19 +167,16 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, musics, dispatcher) {
+			function finish(bot, musics, serverQueue) {
 				try {
-					const fetched = musics.get(message.guild.id);
-					fetched.queue.shift();
+					serverQueue.queue.shift();
 
-					if (fetched.queue.length > 0) {
-						musics.set(message.guild.id, fetched);
-						console.log("Musica passada =>" + fetched.queue[0].name);
+					if (serverQueue.queue.length > 0) {
+						musics.set(message.guild.id, serverQueue);
+						console.log("Musica passada =>" + serverQueue.queue[0].name);
 						play(bot, musics, fetched);
 					} else {
-						const textChannelLeave = bot.guilds.get(message.guild.id).channels.get(fetched.queue[0].textChannel);
-						textChannelLeave.send("A músicas acabaram e a fila foi limpa.");
-
+						message.guild.channels.get(serverQueue.queue[0].textChannel).send("A músicas acabaram e a fila foi limpa.");
 						musics.delete(message.guild.id);
 						const voiceChannelLeave = bot.guilds.get(message.guild.id).me.voiceChannel;
 						if (voiceChannelLeave) {
