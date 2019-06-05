@@ -169,7 +169,7 @@ module.exports = {
 			
 			function finish(bot, musics) {
 				try {
-					const fetched = queue.get(message.guild.id);
+					const fetched = musics.get(message.guild.id);
 					fetched.queue.shift();
 
 					if (fetched.queue.length > 0) {
