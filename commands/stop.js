@@ -1,3 +1,4 @@
+const musics = require("../utils/queue.js");
 module.exports = {
     run: async function (bot, message, args) {
 
@@ -7,6 +8,8 @@ module.exports = {
             return message.channel.send("Desculpe, você precisa estar no mesmo canal de voz que eu.");
         } else {
             message.member.voiceChannel.leave();
+            musics.delete(message.guild.id);
+            message.channel.send(`A música foi finalizada e a foi foi limpa! Saindo do canal \`\`${message.member.voiceChannel.name}...\`\``)
         }
     },
     aliases: ["parar", "sair"],

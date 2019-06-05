@@ -11,7 +11,7 @@ module.exports = {
       return message.channel.send("Desculpe, a música já está tocando");
     } else {
       serverQueue.dispatcher.resume();
-      message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`);
+      message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi retomada!`);
     }
   }
 }
