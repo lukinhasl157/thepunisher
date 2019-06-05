@@ -179,7 +179,7 @@ module.exports = {
 						const textChannelLeave = bot.guilds.get(message.guild.id).channels.get(fetched.queue[0].textChannel);
 						textChannelLeave.send("A músicas acabaram e a fila foi limpa.");
 
-						musics.delete(dispatcher.guildID);
+						musics.delete(message.guild.id);
 						const voiceChannelLeave = bot.guilds.get(message.guild.id).me.voiceChannel;
 						if (voiceChannelLeave) {
 							voiceChannelLeave.leave();
