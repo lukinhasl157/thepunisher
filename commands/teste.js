@@ -177,7 +177,7 @@ module.exports = {
 						console.log("Musica passada =>" + fetched.queue[0].name);
 						play(bot, musics, fetched);
 					} else {
-						message.channel.send("A músicas acabaram e a fila foi limpa.");
+						message.channel.send(`As músicas acabaram e a lista foi limpa! \nSaindo do canal \`\`${message.member.voiceChannel.name}...\`\``);
 						musics.delete(message.guild.id);
 						const voiceChannelLeave = message.guild.me.voiceChannel;
 						if (voiceChannelLeave) {
