@@ -8,7 +8,7 @@ module.exports = {
         } else if (!serverQueue) {
             return message.channel.send("Não há nenhuma música tocando no momento.");
         } else {
-            return message.channel.send(serverQueue.queue.map((musics) => musics.name + musics.author.username).join("\n"));
+            return message.channel.send(`Fila de músicas:\n${serverQueue.queue.map((songs) => `\`\`${songs.name}\`\` adicionada por: ${songs.author.username}`).join("\n")}`);
         }
     }
 }
