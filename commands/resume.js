@@ -1,5 +1,6 @@
 const queue = require("../utils/queue.js");
 const Discord = require("discord.js");
+const fetchVideoInfo = require("youtube-info");
 module.exports = {
   run: async function(bot, message, args) {
 
@@ -11,13 +12,14 @@ module.exports = {
     } else if (serverQueue.dispatcher.resumed) {
       return message.channel.send("Desculpe, a música já está tocando");
     } else {
-      const videoInfo = fetchVideoInfo(serverQueue.queue[0].id);
-      serverQueue.dispatcher.resume();
-      message.channel.send(new Discord.RichEmbed()
-        .setDescription(`A música \`\`${videoInfo.title}\`\` foi retomada!`)
-        .setColor("#e83127")
-        .setThumbnail(videoInfo.thumbnailUrl)
-      );
+      fetchVideoInfo(serverQueue.queue[0].id).then(async function(videoInfo) {
+        serverQueue.dispatcher.resume();
+        message.channel.send(new Discord.RichEmbed()
+          .setDescription(`A música \`\`${videoInfo.title}\`\` foi retomada!`)
+          .setColor("#e83127")
+          .setThumbnail(videoInfo.thumbnailUrl)
+        );
+      });
     }
   }
 }
