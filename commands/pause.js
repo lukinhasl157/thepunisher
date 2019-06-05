@@ -1,4 +1,5 @@
 const queue = require("../utils/queue.js");
+const fetchVideoInfo = require("youtube-info");
 module.exports = {
   run: async function(bot, message, args) {
 
@@ -11,8 +12,13 @@ module.exports = {
       return message.channel.send("Desculpe, a música já esta pausada.");
     } else {
       if (serverQueue.queue[0].author.id == message.author.id) {
-        serverQueue.dispatcher.pause();
-        message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`);
+        fetchVideoInfo(serverQueue.queue[0].id).then(async function(videoInfo) {
+          message.channel.send(new Discord.RichEmbed()
+            .setDescription(`A música \`\`${serverQueue.queue[0].name}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`)
+            .setColor("#e83127")
+            .setThumbnail(videoInfo.thumbnailUrl)
+          );
+        });
       } else {
         return message.channel.send("Desculpe, a música só pode ser pausada pela pessoa que a requisitou.");
       }

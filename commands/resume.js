@@ -10,8 +10,14 @@ module.exports = {
     } else if (serverQueue.dispatcher.resumed) {
       return message.channel.send("Desculpe, a música já está tocando");
     } else {
-      serverQueue.dispatcher.resume();
-      message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi retomada!`);
+      fetchVideoInfo(serverQueue.queue[0].id).then(async function(videoInfo) {
+        serverQueue.dispatcher.resume();
+        message.channel.send(new Discord.RichEmbed()
+          .setDescription(`A música \`\`${serverQueue.queue[0].name}\`\` foi retomada!`)
+          .setColor("#e83127")
+          .setThumbnail(videoInfo.thumbnailUrl)
+        );
+      });
     }
   }
 }
