@@ -10,13 +10,12 @@ module.exports = {
 		} else if (!serverQueue) {
 			return message.channel.send("Não há nenhuma música tocando no momento.");
 		} else {
-			fetchVideoInfo(serverQueue.queue[0].id).then(async function(videoInfo) {
-				message.channel.send(new Discord.RichEmbed()
-					.setDescription(`Tocando agora: [${videoInfo.title}](${videoInfo.url})\nMúsica adicionada por: ${serverQueue.queue[0].author.username}`)
-					.setColor("#e83127")
-					.setThumbnail(videoInfo.thumbnailUrl)
-				);
-			});
+			const videoInfo = fetchVideoInfo(serverQueue.queue[0].id);
+			message.channel.send(new Discord.RichEmbed()
+				.setDescription(`Tocando agora: [${videoInfo.title}](${videoInfo.url})\nMúsica adicionada por: ${serverQueue.queue[0].author.username}`)
+				.setColor("#e83127")
+				.setThumbnail(videoInfo.thumbnailUrl)
+			);
 		}
 	},
 	aliases: ["np", "tocando"],

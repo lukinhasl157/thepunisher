@@ -14,7 +14,7 @@ module.exports = {
       const videoInfo = fetchVideoInfo(serverQueue.queue[0].id);
       serverQueue.dispatcher.resume();
       message.channel.send(new Discord.RichEmbed()
-        .setDescription(`A música \`\`${serverQueue.queue[0].name}\`\` foi retomada!`)
+        .setDescription(`A música \`\`${videoInfo.title}\`\` foi retomada!`)
         .setColor("#e83127")
         .setThumbnail(videoInfo.thumbnailUrl)
       );

@@ -14,8 +14,9 @@ module.exports = {
     } else {
       if (serverQueue.queue[0].author.id == message.author.id) {
         const videoInfo = fetchVideoInfo(serverQueue.queue[0].id);
+        serverQueue.dispatcher.pause();
         message.channel.send(new Discord.RichEmbed()
-          .setDescription(`A música \`\`${serverQueue.queue[0].name}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`)
+          .setDescription(`A música \`\`${videoInfo.title}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`)
           .setColor("#e83127")
           .setThumbnail(videoInfo.thumbnailUrl)
         );
