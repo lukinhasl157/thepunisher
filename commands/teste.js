@@ -21,11 +21,11 @@ module.exports = {
 				return message.channel.send("Insira uma URL do youtube, ou pesquisa uma musica pelo nome");
 			} else {       
 				try {
-					const data = musics.get(message.guild.id) || {};
+					const serverQueue = musics.get(message.guild.id) || {};
 
-					if (!data.queue) {
-						data.queue = [];
-						data.guildID = message.guild.id;
+					if (!serverQueue.queue) {
+						serverQueue.queue = [];
+						serverQueue.guildID = message.guild.id;
 					}
 					const check = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
 
@@ -34,7 +34,7 @@ module.exports = {
 						const videos = await playlist.getVideos();
 
 						for (let i = 0; i < videos.length; i++){
-							data.queue.push({
+							serverQueue.queue.push({
 								name: videos[i].title,
 								id: videos[i].id,
 								author: message.author,
@@ -45,12 +45,12 @@ module.exports = {
 							});
 						}
 
-						if (!data.connection) {
-							data.connection = await message.member.voiceChannel.join();
+						if (!serverQueue.connection) {
+							serverQueue.connection = await message.member.voiceChannel.join();
 						}
 
-						if (!data.dispatcher) {
-							await play(bot, musics, data);
+						if (!serverQueue.dispatcher) {
+							await play(bot, musics, serverQueue);
 						} else {
 							fetchVideoInfo(playlist.id).then(async function(PlaylistInfo) {
 								embed.setDescription(`A música [${PlaylistInfo.title}](https://www.youtube.com/playlist?list=${PlaylistInfo.id}) foi adicionada a fila com sucesso!`)
@@ -95,7 +95,7 @@ module.exports = {
 										break;
 									}
 									
-									data.queue.push({
+									serverQueue.queue.push({
 										name: choose.title,
 										author: message.author,
 										id: choose.id,
@@ -105,13 +105,13 @@ module.exports = {
 										textChannel: message.channel.id
 									});
 
-									if (!data.connection) {
-										data.connection = await message.member.voiceChannel.join();
+									if (!serverQueue.connection) {
+										serverQueue.connection = await message.member.voiceChannel.join();
 									}
-									if (!data.dispatcher) {
-										await play(bot, musics, data);
+									if (!serverQueue.dispatcher) {
+										await play(bot, musics, serverQueue);
 									} else {
-										fetchVideoInfo(data.queue[0].id).then(async function (videoInfo) {
+										fetchVideoInfo(serverQueue.queue.slice(-1)[0].id).then(async function (videoInfo) {
 											embed.setDescription(`A música [${videoInfo.title}](${videoInfo.url}) foi adicionada a fila com sucesso!`)
 											embed.setThumbnail(videoInfo.thumbnailUrl)
 											embed.setColor("#e83127")
@@ -121,7 +121,7 @@ module.exports = {
 							});
 						});
 					}
-					musics.set(message.guild.id, data);
+					musics.set(message.guild.id, serverQueue);
 				} catch(e) {
 					console.log(e);
 					if (e.code && e.code == 403) {
@@ -130,22 +130,27 @@ module.exports = {
 				}
 			}
 			
-			async function play(bot, musics, data){
-				data.dispatcher = await data.connection.playOpusStream(await ytdl(data.queue[0].url));
-				data.dispatcher.on('start', () => {
-					data.dispatcher.player.streamingData.pausedTime = 0;
+			async function play(bot, musics, serverQueue) {
+				if (!serverQueue.dispatcher) {
+					serverQueue.dispatcher = await serverQueue.connection.playOpusStream(await ytdl(serverQueue.queue[0].url));
+				}
+
+				serverQueue.dispatcher.on('start', () => {
+					serverQueue.dispatcher.player.streamingserverQueue.pausedTime = 0;
 				});
 
-				data.dispatcher.guildID = data.guildID;
+				if (!serverQueue.dispatcher.guildID) {
+					serverQueue.dispatcher.guildID = serverQueue.guildID;
+				}
 				
-				data.dispatcher.on('end', async (reason) => {
+				serverQueue.dispatcher.on('end', async (reason) => {
 					console.log('Musica finalizada! razão = '+reason);
 					finish(bot, musics, this);
 						
 				}).on('error', console.error);
 
-				if (data.dispatcher) {
-					fetchVideoInfo(data.queue[0].id).then(async function(videoInfo) {
+				if (serverQueue.dispatcher) {
+					fetchVideoInfo(serverQueue.queue[0].id).then(async function(videoInfo) {
 						embed.addField("📀Música", `[${videoInfo.title}](${videoInfo.url})`)
 						embed.addField("🎧Canal", `[${videoInfo.owner}](https://youtube.com/channel/${videoInfo.channelId})`)
 						embed.addField("📈Visualizações", videoInfo.views, true)
@@ -156,9 +161,9 @@ module.exports = {
 						embed.addField("🎭Gênero", videoInfo.genre, true)
 						embed.setThumbnail(videoInfo.thumbnailUrl)
 						embed.setTimestamp(new Date())
-						embed.setFooter(`Musica solicitada por ${data.queue[0].author.tag}`, data.queue[0].author.avatarURL)
+						embed.setFooter(`Musica solicitada por ${serverQueue.queue[0].author.tag}`, serverQueue.queue[0].author.avatarURL)
 						embed.setColor("#e83127")
-						bot.channels.get(data.queue[0].textChannel).send(embed);
+						bot.channels.get(serverQueue.queue[0].textChannel).send(embed);
 					});
 				}
 			}

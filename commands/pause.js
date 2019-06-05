@@ -14,10 +14,8 @@ module.exports = {
         serverQueue.dispatcher.pause();
         message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`);
       } else {
-        message.channel.send("Desculpe, a música só pode ser pausada pela pessoa que requisitou a música.");
+        return message.channel.send("Desculpe, a música só pode ser pausada pela pessoa que requisitou a música.");
       }
-      serverQueue.dispatcher.pause();
-      message.channel.send(`A música \`\`${serverQueue.queue[0].name}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`);
     }
   }
 }
