@@ -9,7 +9,7 @@ module.exports = {
         } else {
             message.member.voiceChannel.leave();
             musics.delete(message.guild.id);
-            message.channel.send(`A música foi finalizada e a foi foi limpa! Saindo do canal \`\`${message.member.voiceChannel.name}...\`\``)
+            message.channel.send(`A música foi finalizada e a lista foi limpa! \nSaindo do canal \`\`${message.member.voiceChannel.name}...\`\``)
         }
     },
     aliases: ["parar", "sair"],

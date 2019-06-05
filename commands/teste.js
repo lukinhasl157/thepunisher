@@ -167,9 +167,10 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, musics, serverQueue) {
+			function finish(bot, musics) {
 				try {
-					serverQueue.queue.shift();
+					const serverQueue = queue.get(message.guild.id);
+					serverQueue.songs.shift();
 
 					if (serverQueue.queue.length > 0) {
 						musics.set(message.guild.id, serverQueue);
