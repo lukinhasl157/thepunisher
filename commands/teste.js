@@ -179,9 +179,9 @@ module.exports = {
 						console.log("Musica passada =>" + serverQueue.queue[0].name);
 						play(bot, musics, serverQueue);
 					} else {
-						message.guild.channels.get(serverQueue.queue[0].textChannel).send("A músicas acabaram e a fila foi limpa.");
+						bot.guilds.get(serverQueue.guildID).channels.get(serverQueue.queue[0].textChannel).send("A músicas acabaram e a fila foi limpa.");
 						musics.delete(message.guild.id);
-						const voiceChannelLeave = bot.guilds.get(message.guild.id).me.voiceChannel;
+						const voiceChannelLeave = bot.guilds.get(serverQueue.guildID).me.voiceChannel;
 						if (voiceChannelLeave) {
 							voiceChannelLeave.leave();
 							console.log("Queue finalizada");
