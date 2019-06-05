@@ -9,11 +9,12 @@ module.exports = {
       return message.channel.send("Desculpe, não há nenhuma música tocando.")
     } else if (!message.member.voiceChannel || message.member.voiceChannel !== message.guild.me.voiceChannel) {
       return message.channel.send("Você precisa estar no mesmo canal de voz que eu para poder pausar a música");
-    } else if (serverQueue.dispatcher.resumed) {
+    } else if (serverQueue.queue[0].resumed == true) {
       return message.channel.send("Desculpe, a música já está tocando");
     } else {
       fetchVideoInfo(serverQueue.queue[0].id).then(async function(videoInfo) {
         serverQueue.dispatcher.resume();
+        serverQueue.queue[0].resumed = true;
         message.channel.send(new Discord.RichEmbed()
           .setDescription(`A música \`\`${videoInfo.title}\`\` foi retomada!`)
           .setColor("#e83127")

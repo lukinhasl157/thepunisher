@@ -15,6 +15,7 @@ module.exports = {
       if (serverQueue.queue[0].author.id == message.author.id) {
         fetchVideoInfo(serverQueue.queue[0].id).then(function(videoInfo) {
           serverQueue.dispatcher.pause();
+          serverQueue.queue[0].resumed = false;
           message.channel.send(new Discord.RichEmbed()
             .setDescription(`A música \`\`${videoInfo.title}\`\` foi pausada com sucesso! Para retomar a musica digite digite ${process.env.prefix}resume`)
             .setColor("#e83127")

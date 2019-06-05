@@ -39,6 +39,7 @@ module.exports = {
 								id: videos[i].id,
 								author: message.author,
 								url: videos[i].url,
+								resumed: null,
 								votes: false,
 								channelTitle: videos[i].channel.title,
 								textChannel: message.channel.id
@@ -104,6 +105,7 @@ module.exports = {
 										author: message.author,
 										id: choose.id,
 										url: choose.url,
+										resumed: null,
 										channelTitle: choose.channel.title,
 										votes: false,
 										textChannel: message.channel.id
