@@ -177,7 +177,7 @@ module.exports = {
 					if (serverQueue.queue.length > 0) {
 						musics.set(message.guild.id, serverQueue);
 						console.log("Musica passada =>" + serverQueue.queue[0].name);
-						play(bot, musics, fetched);
+						play(bot, musics, serverQueue);
 					} else {
 						message.guild.channels.get(serverQueue.queue[0].textChannel).send("A músicas acabaram e a fila foi limpa.");
 						musics.delete(message.guild.id);
