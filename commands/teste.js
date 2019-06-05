@@ -63,7 +63,7 @@ module.exports = {
 
 					if (!args[0].match(check)) {
 						const search = await yt.searchVideos(args.join(" "), 5);
-						let choose = null;
+						let choose;
 						message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${search[0].title}\n[2] - ${search[1].title}\n[3] - ${search[2].title}\n[4] - ${search[3].title}\n[5] - ${search[4].title}`).then(async (msg) => {
 							await msg.react("1⃣");
 							await msg.react("2⃣");
@@ -92,6 +92,9 @@ module.exports = {
 										break;
 										case "5⃣":
 											choose = search[4];
+										break;
+										case "❌":
+											message.channel.send("A seleção da música foi cancelada com sucesso!");
 										break;
 									}
 									
