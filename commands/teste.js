@@ -63,7 +63,7 @@ module.exports = {
 
 					if (!args[0].match(check)) {
 						const search = await yt.searchVideos(args.join(" "), 5);
-						let choose;
+						let choose = null;
 						message.channel.send(`Você tem \`\`60s\`\` para escolher um número entre 1 a 5 para selecionar a música correspondente a pesquisa\n[1] - ${search[0].title}\n[2] - ${search[1].title}\n[3] - ${search[2].title}\n[4] - ${search[3].title}\n[5] - ${search[4].title}`).then(async (msg) => {
 							await msg.react("1⃣");
 							await msg.react("2⃣");
@@ -134,17 +134,12 @@ module.exports = {
 			}
 			
 			async function play(bot, musics, serverQueue) {
-				if (!serverQueue.dispatcher) {
-					serverQueue.dispatcher = await serverQueue.connection.playOpusStream(await ytdl(serverQueue.queue[0].url));
-				}
+				serverQueue.dispatcher = await serverQueue.connection.playOpusStream(await ytdl(serverQueue.queue[0].url));
 
 				serverQueue.dispatcher.on('start', () => {
 					serverQueue.dispatcher.player.streamingserverQueue.pausedTime = 0;
 				});
-
-				if (!serverQueue.dispatcher.guildID) {
-					serverQueue.dispatcher.guildID = serverQueue.guildID;
-				}
+				serverQueue.dispatcher.guildID = serverQueue.guildID;
 				
 				serverQueue.dispatcher.on('end', async (reason) => {
 					console.log('Musica finalizada! razão = '+reason);
@@ -173,19 +168,19 @@ module.exports = {
 			
 			function finish(bot, musics, dispatcher) {
 				try {
-					const fetched = musics.get(dispatcher.guildID);
+					const fetched = musics.get(message.guild.id);
 					fetched.queue.shift();
 
 					if (fetched.queue.length > 0) {
-						musics.set(dispatcher.guildID, fetched);
+						musics.set(message.guild.id, fetched);
 						console.log("Musica passada =>" + fetched.queue[0].name);
 						play(bot, musics, fetched);
 					} else {
-						const textChannelLeave = bot.guilds.get(dispatcher.guildID).channels.get(fetched.queue[0].textChannel);
+						const textChannelLeave = bot.guilds.get(message.guild.id).channels.get(fetched.queue[0].textChannel);
 						textChannelLeave.send("A músicas acabaram e a fila foi limpa.");
 
-						musics.delete(dispatcher.guildID);
-						const voiceChannelLeave = bot.guilds.get(dispatcher.guildID).me.voiceChannel;
+						musics.delete(message.guild.id);
+						const voiceChannelLeave = bot.guilds.get(message.guild.id).me.voiceChannel;
 						if (voiceChannelLeave) {
 							voiceChannelLeave.leave();
 							console.log("Queue finalizada");
