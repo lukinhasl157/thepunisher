@@ -84,10 +84,10 @@ module.exports = {
 								"CHANGE_NICKNAME"
 							]
 						});
-						forEachChannels();
+						forEachChannels()();
 					} else {
 						if (roleVerified) {
-							forEachChannels();
+							forEachChannels()();
 						}
 					}
 				break;
