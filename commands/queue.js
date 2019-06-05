@@ -8,7 +8,7 @@ module.exports = {
         } else if (!serverQueue) {
             return message.channel.send("Não há nenhuma música tocando no momento.");
         } else {
-            return message.channel.send(serverQueue.queue.map((musics) => musics.name).join("\n"));
+            return message.channel.send(serverQueue.queue.map((musics) => musics.name + musics.author.username).join("\n"));
         }
     }
 }

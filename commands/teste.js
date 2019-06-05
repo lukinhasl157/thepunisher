@@ -169,19 +169,19 @@ module.exports = {
 				}
 			}
 			
-			function finish(bot, musics) {
+			function finish(bot, musics, serverQueue) {
 				try {
-					const serverQueue = musics.get(message.guild.id);
-					serverQueue.queue.shift();
+					const fetched = queue.get(serverQueue.dispatcher.guildID);
+					fetched.queue.shift();
 
-					if (serverQueue.queue.length > 0) {
-						musics.set(message.guild.id, serverQueue);
-						console.log("Musica passada =>" + serverQueue.queue[0].name);
-						play(bot, musics, serverQueue);
+					if (fetched.queue.length > 0) {
+						musics.set(serverQueue.dispatcher.guildID, fetched);
+						console.log("Musica passada =>" + fetched.queue[0].name);
+						play(bot, musics, fetched);
 					} else {
-						bot.guilds.get(serverQueue.guildID).channels.get(serverQueue.queue[0].textChannel).send("A músicas acabaram e a fila foi limpa.");
+						bot.channels.get(fetched.queue[0].textChannel).send("A músicas acabaram e a fila foi limpa.");
 						musics.delete(message.guild.id);
-						const voiceChannelLeave = bot.guilds.get(serverQueue.guildID).me.voiceChannel;
+						const voiceChannelLeave = bot.guilds.get(fetched.guildID).me.voiceChannel;
 						if (voiceChannelLeave) {
 							voiceChannelLeave.leave();
 							console.log("Queue finalizada");
