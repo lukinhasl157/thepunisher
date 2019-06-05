@@ -136,7 +136,7 @@ module.exports = {
 			async function play(bot, musics, serverQueue){
 				serverQueue.dispatcher = await serverQueue.connection.playOpusStream(await ytdl(serverQueue.queue[0].url));
 				serverQueue.dispatcher.on('start', () => {
-					serverQueue.dispatcher.player.streamingserverQueue.pausedTime = 0;
+					serverQueue.dispatcher.player.streamingData.pausedTime = 0;
 				});
 
 				serverQueue.dispatcher.guildID = serverQueue.guildID;
