@@ -39,24 +39,20 @@ module.exports = {
 		const collector = msg.createReactionCollector(filter, { max: 1 });
 		let roleVerified = member.guild.roles.find((r) => r.name === "Verificado");
 
-		async function forEachChannels() {
-			try {
-				member.guild.channels.forEach(async (channel) => {
-					await channel.overwritePermissions(roleVerified, {
-						ADD_REACTIONS: true,
-						READ_MESSAGE_HISTORY: true,
-						VIEW_CHANNEL: true,
-						SEND_MESSAGES: true,
-						EMBED_LINKS: true,
-						ATTACH_FILES: true,
-						EXTERNAL_EMOJIS: true,
-						CONNECT: true,
-						SPEAK: true,
-					});
+		const forEachChannels = function(roleVerified, roleCaptcha) {
+			member.guild.channels.forEach(async (channel) => {
+				await channel.overwritePermissions(roleVerified, {
+					ADD_REACTIONS: true,
+					READ_MESSAGE_HISTORY: true,
+					VIEW_CHANNEL: true,
+					SEND_MESSAGES: true,
+					EMBED_LINKS: true,
+					ATTACH_FILES: true,
+					EXTERNAL_EMOJIS: true,
+					CONNECT: true,
+					SPEAK: true,
 				});
-			} catch(e) {
-				return console.log(e);
-			}
+			});
 
 			member.removeRole(roleCaptcha);
 			channel.delete();
@@ -84,10 +80,10 @@ module.exports = {
 								"CHANGE_NICKNAME"
 							]
 						});
-						forEachChannels()();
+						forEachChannels(roleVerified, roleCaptcha);
 					} else {
 						if (roleVerified) {
-							forEachChannels()();
+							forEachChannels(roleVerified, roleCaptcha);
 						}
 					}
 				break;
