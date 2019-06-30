@@ -9,6 +9,6 @@ module.exports = {
 		}
 	},
 	aliases: ["falar", "dizer"],
-	category: "Entretenimento",
+	category: "Entreterimento",
 	description: "Dizer uma mensagem pelo bot"
 }

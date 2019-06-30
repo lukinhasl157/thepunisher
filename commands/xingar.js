@@ -13,14 +13,13 @@ module.exports = {
 			const collector = msg.channel.createMessageCollector(filter, {max: 1, time: 30000});
 				collector.on("collect", async (m) => {
 					message.author.send(`**${message.author.username}**, seu foi xingamento enviado com sucesso.`);
-					const porra = await message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: \`\`${m.content}.\`\``);
-					await porra.react(":velhodoinfarto:517877465750700033");
+					message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: \`\`${m.content}.\`\``);
 				});
 			});
 		}
 	},
 	aliases: [],
-	category: "Entretenimento",
+	category: "Entreterimento",
 	description: "Xingar um usuário."
 }
 

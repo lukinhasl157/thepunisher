@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const config = require("../config.json");
 
 module.exports = {
     run: async function (bot, message, args) {
@@ -48,23 +49,21 @@ module.exports = {
                     .setDescription(opcoes.description)
                     .setTitle(nome)
                     .setColor(opcoes.color)
-                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => process.env.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '))
+                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => config.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '))
                 );
             } 
         });
 
-        } catch(err) {
+    } catch(e) {
         message.channel.send(`Erro: » **${message.author.username}**, ative sua **DM** para que eu possa enviar meus comandos.`);
         message.react(":negado:505155029636874250");
-        console.log(err);
+        console.log(e);
     }       
     
-
-        return this.name;
     },
-        aliases: ['h', 'ajuda'],
-        category: "Informações", 
-        description: "Informações do bot"
+    aliases: ['h', 'ajuda'],
+    category: "Informações", 
+    description: "Informações do bot"
 }
 
 

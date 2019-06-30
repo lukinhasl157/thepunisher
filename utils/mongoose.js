@@ -1,8 +1,8 @@
-let mongo = () => {
+const mongo = () => {
     const mongoose = require("mongoose");
-    mongoose.connect("mongodb://localhost/Cluster0", { useNewUrlParser: true });
     const db = mongoose.connection;
-    db.on("error", console.error.bind(console, "Erro ao conectar a database!"));
-    db.once("open", () => console.log("Sucesso ao conectar a mongoDB"));
+    mongoose.connect(process.env.MONGOOSE_URL, { useNewUrlParser: true });
+    db.on("error", console.error.bind(console, "Ocorreu um erro ao conectar a database."));
+    db.once("open", () => console.log("A conexão com a MongoDB foi realizada com sucesso!"))
 }
 module.exports = mongo;

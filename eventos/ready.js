@@ -1,7 +1,7 @@
-module.exports.run = function() {
+﻿module.exports.run = function() {
     const status = [
         `para ${this.users.size} usuários.`,
-        `Está com dúvidas? Digite ${process.env.prefix}help para receber todas as minhas informações!`,
+        `Está com dúvidas? Digite ${config.prefix}help para receber todas as minhas informações!`,
       ];
       
         const setStatus = () => {
@@ -10,6 +10,7 @@ module.exports.run = function() {
         }
       
     setInterval(() => setStatus(), 60 * 1000);
+    const db = require("../utils/mongoose")();
     console.log("Bot iniciado com sucesso!");
     console.log('Status carregado com sucesso!');    
 }

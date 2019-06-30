@@ -3,7 +3,6 @@ require('dotenv').config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
-const db = require("./utils/mongoose.js")();
 
 // BOT 
 const bot = new Discord.Client();
@@ -27,9 +26,8 @@ Object.defineProperties(bot, {
   }
 });
 
-// Zuando o Lukas
-if (!config.path_commands) throw new Error("CARALHO LUKAS QUAL PASTA TA OS COMANDOS?");
-if (!config.path_events) throw new Error("CARALHO LUKAS QUAL PASTA TA OS EVENTOS?");
+if (!config.path_commands) throw new Error("Não encontrei a pasta commands");
+if (!config.path_events) throw new Error("Não econtrei a pasta eventos.");
 // GET COMMANDS
 fs.readdir(config.path_commands, (err, arquivos) => {
   try {
@@ -80,4 +78,4 @@ fs.readdir(config.path_events, (err, arquivos) => {
 
 });
 
-bot.login(process.env.token);
+bot.login(process.env.TOKEN);

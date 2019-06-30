@@ -1,37 +1,52 @@
+const Guilds = require("../utils/model.js");
 module.exports.run = async function(message) {
 
-    if (message.author.bot || message.channel.type === "dm")
-        return;
-        
-    if (message.content.toLowerCase().startsWith(process.env.prefix)) {
+    const server = await Guilds.findOne({ _id: message.guild.id });
+    if (!server) {
+        const prefixDefault = message.content.toLowerCase().startsWith(process.env.PREFIX);
+        if (!prefixDefault) {
+            return;
+        } else {
+            message.channel.send("O servidor foi adicionado na database. Digite o comando novamente.");
+            const newConfig = new Guilds({
+                _id: message.guild.id,
+                prefix: process.env.PREFIX
+            });
+            return newConfig.save();
+        }
+    } else {
+        if (!message.content.toLowerCase().startsWith(server.prefix)) {
+            return;
+        } else {
+            const args = message.content.slice(server.prefix.length).split(' ');
+            const nome = args.shift().toLowerCase();
+            const command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
+            if (command) {
 
-        const args = message.content.slice(process.env.prefix.length).split(' ');
-        const nome = args.shift().toLowerCase();
-        const command = this.commands.find((cmd, n) => (cmd.aliases && cmd.aliases.includes(nome)) || n === nome);
-        
-        if (command) {
+                if (command.usersCooldown.has(message.author.id)) {
+                    const m = await message.channel.send("Aguarde \`\`3s\`\` para usar outro comando novamente.");
+                    return m.delete(60 * 1000);
+                }           
 
-            if (command.usersCooldown.has(message.author.id)) {
-                let m = await message.channel.send("Desse jeito você vai fuder meu processador, aguarde ``3s.``");
-                return m.delete(60000);
-            }           
-            
-            Object.defineProperty(message, 'command', { value: command });
-            command.run(this, message, args);
-            command.usersCooldown.add(message.author.id);
+                Object.defineProperty(message, 'command', { value: command });
+                command.run({
+                    bot: this,
+                    message,
+                    Guilds,
+                    args,
+                });
+                command.usersCooldown.add(message.author.id);
 
-            setTimeout(function() {
-                command.usersCooldown.delete(message.author.id);
-            }, command.cooldown);
+                setTimeout(function() {
+                    command.usersCooldown.delete(message.author.id);
+                }, command.cooldown);
+            }
         }
     }
 
-    if (!message.command) {
-        if (message.content.includes(`<@${this.user.id}>`)) {
-            message.channel.send(`<a:mention:500823853971537951> Olá, ${message.author} meu desenvolvedor tem demencia e ainda não fez essa parte.`)
-            .then((msg) => {
-                msg.delete(60 * 1000);
-            });
-        }
+    const botMention = message.guild ? message.guild.me.toString() : this.user.toString()
+    if (!message.command && (message.content.startsWith(botMention))) {
+      message.channel.send(`<a:caralho:531498188386074624> Olá, ${message.author} está afim de escutar alguma música? digite \`\`${process.env.PREFIX}play\`\` nome da música`)
+       .then(m => m.delete(60000))
     } 
 }

@@ -5,7 +5,7 @@ moment.locale("pt-BR");
 module.exports = {
   run: (bot, message, args) => {
   
-    const member = message.mentions.members.first() || message.member || message.guild.members.get(args[0]) || message.guild.members.find(m => m.user.username.toLowerCase().startsWith(args.join(" ")));
+    const member = message.mentions.members.first() || message.member || message.guild.members.get(args[0]);
     const administrator = member.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
     const status = {
       "online": "<:online:529179015865434132> Disponível",
@@ -32,7 +32,7 @@ module.exports = {
       .setThumbnail(member.user.displayAvatarURL)
       .addField("» 👤 Usuário:", member.user.tag, true)
       .addField("» 🗂 ID:", member.user.id, true)
-      .addField("» 🏷 Apelido:", member.user.nickname? member.user.nickname : "Sem apelido", true)
+      .addField("» 🏷 Apelido:", member.user.nickname ? member.user.nickname : "Sem apelido", true)
       .addField("» 🚦 Status:", status[member.user.presence.status], true)
       .addField("» 📆 Entrou em:", moment(member.joinedAt).format("LL"), true)
       .addField("» 📆 Dias no Discord:", moment().diff(member.user.createdAt, "days"), true)

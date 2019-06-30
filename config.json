@@ -1,5 +1,4 @@
 {
     "path_commands": "./commands",
-    "path_events": "./eventos",
-    "owner": "289209067963154433"
+    "path_events": "./eventos"
 }

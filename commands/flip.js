@@ -9,6 +9,6 @@ module.exports = {
     }
 },
 	aliases: ["girar"],
-	category: "Entretenimento",
+	category: "Entreterimento",
 	description: "Girar os argumentos de ponta cabeça."
 }
