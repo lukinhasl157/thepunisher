@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 module.exports = {
-	run: async function (bot, message, args) {
+	run: async function ({ bot, message }) {
 
     const msg = await message.channel.send("Calculando a latência...");
    	  setTimeout(() => {

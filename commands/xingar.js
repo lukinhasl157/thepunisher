@@ -1,5 +1,5 @@
 module.exports = {
-	run: async function (bot, message, args) {
+	run: async function ({ message, args }) {
 
 		const member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		if (!member) {
@@ -19,7 +19,7 @@ module.exports = {
 		}
 	},
 	aliases: [],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Xingar um usuário."
 }
 

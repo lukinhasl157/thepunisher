@@ -1,13 +1,14 @@
 module.exports = {
-	run: (bot, message, args) => {
+	run: ({ message, args }) => {
 
-	const reverse = args.join(" ").split("").reverse().join("");
-	const string = "Tá troll? Coloca uma mensagem.";
-	const stringReverse = string.split("").reverse().join("");
+		function reverseStr(String) {
+			return String.split("").reverse().join("");
+		}
+
 		if (args.lenght === 0) {
-			return message.channel.send(stringReverse);
+			return message.channel.send("Insira uma frase para ser revertido.");
 		} else {
-			message.channel.send(reverse);
+			return message.channel.send(reverseStr(args.join(" ")));
 		}
 	},
 	aliases: ["reverter", "inverter"],

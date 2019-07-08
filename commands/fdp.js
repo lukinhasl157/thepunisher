@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 module.exports = {
-	run: (bot, message, args) => {
+	run: ({ message, args }) => {
 
 		const member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		if (!member) {

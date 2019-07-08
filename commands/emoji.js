@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 module.exports = {
-  run: (bot, message, args) => {
+  run: ({ message, args }) => {
 
   function sendEmoji () {
     const emojiSlice = args[0].slice(-19, -1);

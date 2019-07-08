@@ -1,5 +1,5 @@
 module.exports = {
-    run: (bot, message, args) => {
+    run: async function({ message, args }) {
 
         try {
 

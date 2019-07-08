@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 module.exports = {
-	run: async (bot, message, args) => {
+	run: async ({ message }) => {
 		const emojisAnimated = message.guild.emojis.filter((e) => e.animated).map((e) => e.toString()).join(" ");
 		const emojis = message.guild.emojis.filter((e) => !e.animated).map((e) => e.toString()).join(" ")
 

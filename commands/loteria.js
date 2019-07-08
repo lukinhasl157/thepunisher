@@ -1,5 +1,5 @@
 module.exports = {
-	run: async function (bot, message, args) {
+	run: async function ({ bot, message }) {
 
 		const serverMap = bot.map.get(message.guild.id);
 
@@ -9,13 +9,13 @@ module.exports = {
 			const eventConstruct = { lotery: { participants: [], ingame: null } };
 			bot.map.set(message.guild.id, eventConstruct);
 
-			message.channel.send("O evento loteria irá começar em \`\`30s\`\`, para participar do evento digite \`\`t.loteriajoin\`\`");
+			message.channel.send("O evento loteria irá começar em \`\`30s\`\`, para participar do evento digite \`t.loteriajoin\`");
 			setTimeout(async function() {
 				if (eventConstruct.lotery.participants.length < 2) {
 					bot.map.delete(message.guild.id);
-					return message.channel.send(`O evento loteria foi cancelado, número de participantes foi insuciente ${eventConstruct.lotery.participants.length}/2`);
+					return message.channel.send(`O evento loteria foi cancelado, número de participantes foi insuciente \`${eventConstruct.lotery.participants.length}/2\``);
 				} else {
-					message.channel.send(`Evento loteria iniciado com \`\`${eventConstruct.lotery.participants.length}\`\` participantes, um número aleátorio foi gerado entre \`\`0 e 50.\`\``);
+					message.channel.send(`Evento loteria iniciado com \`${eventConstruct.lotery.participants.length}\` participantes, um número aleátorio foi gerado entre \`0 e 50.\``);
 					const numberGenerator = Math.floor(Math.random() * 50);
 					eventConstruct.lotery.ingame = true;
 					const filter = msg => msg.content == numberGenerator && eventConstruct.lotery.participants.includes(msg.author.id);

@@ -1,5 +1,5 @@
 module.exports = {
-  run: (bot, message, args) => {
+  run: ({ message }) => {
 
     const everyone = message.guild.roles.find(r => r.name === "@everyone");
     if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {

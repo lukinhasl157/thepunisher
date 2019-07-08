@@ -1,5 +1,5 @@
 module.exports = {
-  run: async function (bot, message, args) {
+  run: async function ({ message, args }) {
 
     const deleteCount = parseInt(args[0], 10);
     const fetched = await message.channel.fetchMessages({limit: deleteCount});
@@ -10,10 +10,9 @@ module.exports = {
     } else if (!deleteCount || deleteCount < 2 || deleteCount > 100) {
       return message.channel.send(`**${message.author.username}** |  Por favor, forneça um número entre 2 e 100 para o número de mensagens a serem excluídas`);
     } else {
-      message.channel.bulkDelete(fetched).then((msg) => {
-        msg.delete();
-      });
-      message.channel.send(`**${message.author.username}** | O chat foi limpo com sucesso! <a:sucessogif:499614074129350666> | ${deleteCount} mensagens foram excluídas.`).then(msg => msg.delete(10000));
+      message.channel.bulkDelete(fetched);
+      const msg = await message.channel.send(`**${message.author.username}** | O chat foi limpo com sucesso! <a:sucessogif:499614074129350666> | ${deleteCount} mensagens foram excluídas.`);
+      msg.delete();
     }
   },
     aliases: ["limpar"],

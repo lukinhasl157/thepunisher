@@ -2,9 +2,8 @@ const Discord = require("discord.js");
 const config = require("../config.json");
 
 module.exports = {
-    run: async function (bot, message, args) {
+    run: async function ({ bot, message, Guilds}) {
         
-    try {
         // criando um Object com todas categorias
         const categorias = bot.commands.reduce((o, comando, nome) => {
             if (!o[comando.category]) o[comando.category] = {};
@@ -28,38 +27,37 @@ module.exports = {
              (`${opcoes[nome].emoji ? opcoes[nome].emoji : ''} **${nome}** ${opcoes[nome].description ? opcoes[nome].description : ''}`) :
              nome));
     
-        // enviando msg no privado
-        const msg = await message.author.send(embed);
-        message.channel.send(`» **${message.author.username}**, olhe seu privado! Mandei meus comandos lá! 📨`);
-        message.react(":correto:505155063963058187");
-        for (const x in opcoes) 
-        if (opcoes[x].emoji) await msg.react(opcoes[x].emoji);
-    
-         // msg avisando q foi enviado no pv
-    
-        const filter = (r, u) => r.me && (u.id === message.author.id)
-        const collect = msg.createReactionCollector(filter, { time: 120000 });
+        try {
+            const msg = await message.author.send(embed);
+            message.channel.send(`» **${message.author.username}**, olhe seu privado! Mandei meus comandos lá! 📨`);
+            message.react(":correto:505155063963058187");
 
-        collect.on("collect", async ({emoji}) => {
-            
-            let categoria = Object.entries(opcoes).find(([nome, opt]) => opt.emoji === emoji.name);
-            if (categoria) {
-                let [nome, opcoes] = categoria;
-                await msg.edit(new Discord.RichEmbed()
-                    .setDescription(opcoes.description)
-                    .setTitle(nome)
-                    .setColor(opcoes.color)
-                    .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => config.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '))
-                );
-            } 
-        });
-
-    } catch(e) {
-        message.channel.send(`Erro: » **${message.author.username}**, ative sua **DM** para que eu possa enviar meus comandos.`);
-        message.react(":negado:505155029636874250");
-        console.log(e);
-    }       
+            for (const x in opcoes) {
+                if (opcoes[x].emoji) {
+                    await msg.react(opcoes[x].emoji);
+                }
+            }
     
+            const filter = (r, u) => r.me && (u.id === message.author.id)
+            const collect = msg.createReactionCollector(filter, { time: 120000 });
+
+            collect.on("collect", async ({emoji}) => {
+                const server = await Guilds.findOne({ _id: message.guild.id });
+                let categoria = Object.entries(opcoes).find(([nome, opt]) => opt.emoji === emoji.name);
+                if (categoria) {
+                    let [nome, opcoes] = categoria;
+                    await msg.edit(new Discord.RichEmbed()
+                        .setDescription(opcoes.description)
+                        .setTitle(nome)
+                        .setColor(opcoes.color)
+                        .addField('Comandos', Object.entries(categorias[nome]).map(([name, command]) => server.prefix + name + (command.description ? ' ' + command.description : '')).join('\n '))
+                    );
+                } 
+            });
+        } catch(_) {
+            message.channel.send(`Erro: » **${message.author.username}**, ative sua **DM** para que eu possa enviar meus comandos.`);
+            return message.react(":negado:505155029636874250");
+        }
     },
     aliases: ['h', 'ajuda'],
     category: "Informações", 

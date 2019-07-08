@@ -1,6 +1,6 @@
 const flip = require("flip-text");
 module.exports = {
-	run: (bot, message, args) => {
+	run: ({ message, args }) => {
 
     if (args.length === 0) {
     	return message.channel.send(flip("Ta troll? Coloca uma msg."));
@@ -9,6 +9,6 @@ module.exports = {
     }
 },
 	aliases: ["girar"],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Girar os argumentos de ponta cabeça."
 }

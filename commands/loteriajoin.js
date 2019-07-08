@@ -1,5 +1,5 @@
 module.exports = {
-	run: async function (bot, message, args) {
+	run: async function ({ bot, message }) {
 
 		const serverMap = bot.map.get(message.guild.id);
 
@@ -15,6 +15,6 @@ module.exports = {
 		}
 	},
 	aliases: ["lotery"],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Inicia o evento loteria gerando um número aleátorio entre 0 e 50"
 }

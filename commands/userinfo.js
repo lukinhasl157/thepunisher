@@ -3,7 +3,7 @@ const moment = require("moment");
 moment.locale("pt-BR"); 
 
 module.exports = {
-  run: (bot, message, args) => {
+  run: ({ message, args }) => {
   
     const member = message.mentions.members.first() || message.member || message.guild.members.get(args[0]);
     const administrator = member.hasPermission("ADMINISTRATOR")? "Sim" : "Não";
@@ -38,7 +38,7 @@ module.exports = {
       .addField("» 📆 Dias no Discord:", moment().diff(member.user.createdAt, "days"), true)
       .addField("» 📆 Conta criada em:", moment(member.user.createdAt).format("LL"), true)
       .addField("» 📆 Dias no servidor:", moment().diff(member.joinedAt, "days"), true)
-      .addField("» 👾 Total de Cargos:", member.roles.size? member.roles.size : "Sem cargos.", true)
+      .addField("» 👾 Total de Cargos:", member.roles.size? member.roles.size.toLocaleString() : "Sem cargos.", true)
       .addField("» 🛡 Administrador:", administrator, true)
       .addField("» 🎮 Jogando:", member.user.presence.game ? gamePresence[member.user.presence.game] || member.user.presence.game : "O usuário não está jogando nada no momento.", false)
       .setColor(member.displayColor)

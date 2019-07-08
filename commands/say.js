@@ -1,5 +1,5 @@
 module.exports = {
-	run: (bot, message, args) => {
+	run: ({ message, args }) => {
 
 		if (args.length === 0) {
 			return message.channel.send("Digite uma mensagem.");
@@ -9,6 +9,6 @@ module.exports = {
 		}
 	},
 	aliases: ["falar", "dizer"],
-	category: "Entreterimento",
+	category: "Entretenimento",
 	description: "Dizer uma mensagem pelo bot"
 }

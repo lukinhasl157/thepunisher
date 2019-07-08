@@ -1,5 +1,5 @@
 module.exports = {
-  run: async (bot, message, args) => {
+  run: async ({ message }) => {
     const msg = await message.author.send("Deseja criar um ticket? Digite \`\`sim\`\` para criar e \`\`não\`\` para cancelar.");
     const filter = m => m.author.id == message.author.id;
     const collector = await msg.channel.createMessageCollector(filter, { max: 1 });

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 module.exports = {
-    run: async function (bot, message, args) {
+    run: async function ({ message, args }) {
 
         let channel = message.guild.channels.find(c => c.name === "✅❌sugestões");
         if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {

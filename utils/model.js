@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-
 const Guild = new Schema({
     _id: {
         type: String
@@ -12,10 +11,19 @@ const Guild = new Schema({
         type: Map,
         default: {
             guildMemberAdd: {
-                status: false, message: "None", channel: "none"
+                welcome: {
+                    status: false, message: "None", channel: "none"
+                },
+                antiBot: {
+                    status: false
+                }
             },
             guildMemberRemove: {
                 status: false, message: "None", channel: "None"
+            },
+            filterWords: {
+                status: false,
+                words: []
             }
         }
     }

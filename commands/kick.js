@@ -1,5 +1,5 @@
 module.exports = {
-  run: async function (bot, message, args) {
+  run: async function ({ message, args }) {
     
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     const reason = args.slice(1).join(" ");
@@ -20,11 +20,11 @@ module.exports = {
             switch (r.emoji.id) {
               case "505155063963058187":
                 if (!message.guild.me.hasPermission("KICK_MEMBERS")) {
-                  return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`BAN_MEMBERS\`\` para executar este comando.`);
+                  return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`KICK_MEMBERS\`\` para executar este comando.`);
                 } else if (!message.member.hasPermission("KICK_MEMBERS")) {
                   return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão necessária: \`\`BAN_MEMBERS\`\`.`);
                 } else if (member.user.id == message.guild.ownerID) {
-                  return message.channel.send(`» **${message.author.username}** | Desculpe, você não pode banir o dono do servidor.`);
+                  return message.channel.send(`» **${message.author.username}** | Desculpe, você não pode expulsar o dono do servidor.`);
                 } else if (message.guild.me.highestRole.position <= member.highestRole.position) {
                   return message.channel.send(`» **${message.author.username}** | Desculpe, o meu cargo é menor ou igual ao usuário a ser expulso.`);
                 } else if (member.highestRole.position >= message.member.highestRole.position) {

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 module.exports = {
-    run: async function (bot, message, args) {
+    run: async function ({ message, args}) {
 
       if (!message.guild.me.hasPermission("MANAGE_GUILD")) {
         return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`MANAGE_GUILD\`\` para executar este comando.`);

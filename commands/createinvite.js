@@ -1,5 +1,5 @@
 module.exports = {
-    run: async function (bot, message, args) {
+    run: async function ({ message }) {
 
         if (!message.guild.me.hasPermission("CREATE_INSTANT_INVITE")) {
             return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`CREATE_INSTANT_INVITE\`\` para executar este comando.`)

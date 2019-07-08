@@ -1,5 +1,5 @@
 module.exports = {
-  run: (bot, message, args) => {
+  run: ({ message, args }) => {
     const commands = args.slice(0).join(" ");
 
     if (message.author.id !== '289209067963154433') {

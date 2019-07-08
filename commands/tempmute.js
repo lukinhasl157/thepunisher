@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const ms = require("ms");
 module.exports = {
-  run: async function (bot, message, args) {
+  run: async function ({ message, args }) {
 
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find((r) => r.name === "The Punisher | 🔇 Muted");

@@ -3,7 +3,7 @@ const moment = require("moment");
 moment.locale("pt-BR");
 
 module.exports = {
-    run: async function (bot, message, args) {
+    run: async function ({ message }) {
 
     const verificationGuild = {
         "0": "Nenhum (sem restrições)",
@@ -18,21 +18,19 @@ module.exports = {
     const offline = message.guild.members.filter((m) => m.presence.status == "offline").size;
     const bots = message.guild.members.filter((b) => b.user.bot).size;
     const allMembers = message.guild.memberCount;
-    const textChannels = message.guild.channels.filter((t) => t.type === "text").size;
-    const voiceChannels = message.guild.channels.filter((v) => v.type === "voice").size;
 		const roles = message.guild.roles.filter((r) => r.id !== message.guild.id);
 
     let embed = new Discord.RichEmbed()
 			embed.setAuthor(`» ${message.guild.name}`, `${message.guild.iconURL}`)
 			embed.setColor("#FF0000")
 			embed.addField(':crown: » Dono:', `<@${message.guild.ownerID}>`, true)
-			embed.addField(":joy: » Total de Emojis:", `${message.guild.emojis.size}`, true)
+			embed.addField(":joy: » Total de Emojis:", `${message.guild.emojis.size.toLocaleString()}`, true)
 			embed.addField(":file_cabinet: » ID do servidor:", message.guild.id, true)
-			embed.addField(`<:canal:513884866455273494> » Total de canais: [${textChannels+voiceChannels}]`, `<:text:535162253604028417> Texto: ${textChannels}\n<:voice:535162220057985033> Voz: ${voiceChannels}`, true)
+			embed.addField(`<:canal:513884866455273494> » Total de canais: [${message.guild.channels.size.toLocaleString()}]`, `<:text:535162253604028417> Texto: ${message.guild.channels.filter((ch) => ch.type == "text").size.toLocaleString()}\n<:voice:535162220057985033> Voz: ${message.guild.channels.filter((ch) => ch.type == "voice").size.toLocaleString()}`, true)
 			embed.addField(":zzz: » Canal afk", `${message.guild.afkChannel ? message.guild.afkChannel.name : "Nenhum canal afk."}`, true) 
 			embed.addField("<:world:500147421641310229> » Região:", message.guild.region.toString().replace("brazil", ":flag_br: Brasil"), true)
 			embed.addField("<:fast:500147391945768981> » Tempo afk", `${message.guild.afkTimeout} segundos`, true)
-			embed.addField(`<:user:500109138953633792> » Membros: [${allMembers}]`, `<:online:535161741873643531> Online: ${online}\n<:ausente:535161866415112192> Ausente: ${ausente}\n <:ocupado:535161952075251742> Ocupado: ${ocupado}\n <:offline:535161911956996104> Offline: ${offline}\n<:bots:535162824301740042> Bots: ${bots}`, false)
+			embed.addField(`<:user:500109138953633792> » Membros: [${allMembers.toLocaleString()}]`, `<:online:535161741873643531> Online: ${online.toLocaleString()}\n<:ausente:535161866415112192> Ausente: ${ausente.toLocaleString()}\n <:ocupado:535161952075251742> Ocupado: ${ocupado.toLocaleString()}\n <:offline:535161911956996104> Offline: ${offline.toLocaleString()}\n<:bots:535162824301740042> Bots: ${bots.toLocaleString()}`, false)
 			embed.addField(`🛡 » Nivel de verificação:`, verificationGuild[message.guild.verificationLevel], false)
 
 			if (embed.fields[10].value.length > 1024) {

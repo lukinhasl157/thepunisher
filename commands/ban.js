@@ -1,5 +1,5 @@
 module.exports = {
-	run: async function (bot, message, args) {
+	run: async function ({ message, args }) {
 		//gif ban the punisher https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif
 		const member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		const reason = args.slice(1).join(" ");

@@ -12,6 +12,9 @@ Object.defineProperties(bot, {
   "commands": {
     value: new Discord.Collection()
   },
+  "map": {
+    value: new Map()
+  },
   "config": {
     value: config
   },

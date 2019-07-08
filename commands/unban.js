@@ -1,5 +1,5 @@
 module.exports = {
-  run: async function (bot, message, args) {
+  run: async function ({ message, args }) {
 
     const bans = await message.guild.fetchBans();
     const user = args[0];

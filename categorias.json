@@ -19,19 +19,14 @@
         "emoji": "📜",
         "color": 15916562
     },
-    "Entreterimento": {
+    "Entretenimento": {
         "description": "Comandos de entretenimento.",
         "emoji": "🎲",
         "color": 15916562
     },
-        "Desenvolvedor": {
+    "Desenvolvedores": {
         "description": "Comandos exclusivos para densenvolvedores.",
         "emoji": "📟",
-        "color": 15916562
-    },
-    "Música": {
-        "description": "Comandos de música",
-        "emoji": "🎧",
         "color": 15916562
     }
 }
