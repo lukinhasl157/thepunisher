@@ -1,84 +1,43 @@
-// MODULES
+'use strict';
 require('dotenv').config();
-const Discord = require("discord.js");
-const fs = require("fs");
-const config = require("./config.json");
+const { Client, Message, Collection } = require('discord.js');
+const { loadListeners } = require('./src/handlers/listenerHandler');
+const { loadCommands } = require('./src/handlers/commandHandler');
+const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
 
-// BOT 
-const bot = new Discord.Client();
+bot.commands = new Collection();
+bot.map = new Map();
 
-// Definindo variaveis dentro do bot
-Object.defineProperties(bot, {
-  "commands": {
-    value: new Discord.Collection()
-  },
-  "map": {
-    value: new Map()
-  },
-  "config": {
-    value: config
-  },
-  "categories": {
-    get: function () {
-      return bot.commands.reduce((o, comando, nome) => {
-        if (!o.get(comando.category)) o.set(comando.category, new Discord.Collection());
-        o.get(comando.category).set(nome, comando);
-        return o;
-      }, new Discord.Collection());
-    }
-  }
+bot.login().catch((e) => {
+  console.error(e);
+  process.exit(1);
 });
 
-if (!config.path_commands) throw new Error("Não encontrei a pasta commands");
-if (!config.path_events) throw new Error("Não econtrei a pasta eventos.");
-// GET COMMANDS
-fs.readdir(config.path_commands, (err, arquivos) => {
-  try {
-    if (err) console.log(err);
+bot
+  .on('shardReconnecting', () => console.log('Client is reconnecting...'))
+  .on('warn', (warn) => console.log(warn))
+  .on('shardDisconnected', () => {
+    console.log('Client is disconnecting...');
+    process.exit(1);
+  })
+  .on('invalidated', () => {
+    console.log('The client\'s session is now invalidated.');
+    process.exit(1);
+  });
 
-    let arquivosJS = arquivos.filter(arquivo => arquivo.split(".").pop() === "js");
+process
+  .on('uncaughtException', (error) => {
+    const msg = error.stack.replace(new RegExp(`${__dirname}/`, 'g'), './');
+    console.error('Uncaught Exception:', msg);
+    process.exit(1);
+  })
+  .on('unhandledRejection', (error) => console.error('Uncaught Promise Error:', error));
 
-    if (arquivosJS.length === 0) {
-      return console.log("Não existe nenhum arquivo js na pasta commands");
-    }
+// eslint-disable-next-line func-names
+Message.prototype.reply = function(content) {
+  if (this.author) return this.channel.send(`» **${this.author.tag}** | ${content}`);
+  return this.channel.send(content);
+};
 
-    arquivosJS.forEach((arquivo) => {
-      let comando = require(`${config.path_commands}/${arquivo}`);
-      comando.usersCooldown = new Set();
-      if (!comando.category) comando.category = "general";
-      if (!comando.cooldown) comando.cooldown = 3000 // 3s
-
-      bot.commands.set(arquivo.replace(/.js/g, ''), comando);
-    });
-    console.log('-'.repeat(80))
-    console.log(bot.categories.map((c, i) => `Categoria ${i} com ${c.size} comandos`).join('\n'));
-    console.log('-'.repeat(80));
-  } catch (Err) {
-    console.error(Err);
-  }
-});
-// GET EVENTOS
-fs.readdir(config.path_events, (err, arquivos) => {
-  try {
-    if (err) console.log(err);
-    // filtrando arquivos com final js
-    let arquivosJS = arquivos.filter(f => f.split(".").pop() === "js");
-
-    if (arquivosJS.length === 0) {
-      return console.log("Não existe nenhum arquivo js na pasta eventos");
-    }
-
-    arquivosJS.forEach((arquivo) => {
-      let evento = require(`${config.path_events}/${arquivo}`);
-      console.log(`${arquivo} carregado com sucesso!`);
-      bot.on(arquivo.replace(/.js/g, ''), evento.run);
-    });
-    console.log('-'.repeat(80))
-
-  } catch (Err) {
-    console.error(Err);
-  }
-
-});
-
-bot.login(process.env.TOKEN);
+loadCommands('./src/commands', bot);
+loadListeners('./src/listeners', bot);

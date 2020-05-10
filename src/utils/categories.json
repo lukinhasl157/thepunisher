@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Moderação",
+        "description": "Comandos de moderação.",
+        "emoji": "🔰",
+        "color": 15916563
+    },
+    {
+        "name": "Utilidades",
+        "description": "Comandos de utilidades.",
+        "emoji": "🛠",
+        "color": 15916561
+    },
+    {
+        "name": "Informações",
+        "description": "Comandos sobre informações do bot.",
+        "emoji": "📜",
+        "color": 15916562
+    },
+    {
+        "name": "Entretenimento",
+        "description": "Comandos de entretenimento.",
+        "emoji": "🎲",
+        "color": 15916562
+    },
+    {
+        "name": "Desenvolvedores",
+        "description": "Comandos exclusivos para densenvolvedores.",
+        "emoji": "📟",
+        "color": 15916562
+    }
+]

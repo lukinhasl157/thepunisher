@@ -1,20 +1,31 @@
 {
-  "name": "ThePunisher",
+  "name": "the-punisher",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-	"start": "index.js",
+    "start": "index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "canvas": "^2.6.0",
+    "discord.js": "git+https://github.com/discordjs/discord.js.git#master",
     "dotenv": "^8.0.0",
+    "eslint": "^6.1.0",
+    "ffmpeg-static": "^4.2.1",
     "flip-text": "^1.1.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.6.2"
+    "mongoose": "^5.6.2",
+    "ms": "^2.1.2",
+    "node-opus": "^0.3.2",
+    "os": "^0.1.1",
+    "simple-youtube-api": "^5.2.1",
+    "youtube-grabber-js": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint-plugin-promise": "^4.2.1"
   }
 }
