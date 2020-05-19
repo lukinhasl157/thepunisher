@@ -1,11 +1,17 @@
 'use strict';
-require('dotenv').config();
+require('dotenv/config');
 const { Client, Message, Collection } = require('discord.js');
 const { loadListeners } = require('./src/handlers/listenerHandler');
 const { loadCommands } = require('./src/handlers/commandHandler');
 const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
 
-bot.commands = new Collection();
+class CommandStore extends Collection {
+  fetch(str) {
+    return this.find((c) => c.name.toLowerCase() === str.toLowerCase() || c.aliases.includes(str.toLowerCase()));
+  }
+}
+
+bot.commands = new CommandStore();
 bot.map = new Map();
 
 bot.login().catch((e) => {

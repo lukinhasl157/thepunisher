@@ -2,10 +2,13 @@
 const { MessageEmbed } = require('discord.js');
 const { inspect } = require('util');
 
-const value = (l, c) => `\`\`\`${l}\n${String(c).slice(0, 1000) + (c.length >= 1000 ? '...' : '')}\n\`\`\``.replace(process.env.DISCORD_TOKEN, () => '*'.repeat(process.env.DISCRD_TOKEN.length)),
-  devs = ['289209067963154433', '385132696135008259', '281561868844269569'];
+const value = (l, c) => `\`\`\`${l}\n${String(c).slice(0, 1000) + (c.length >= 1000 ? '...' : '')}\n\`\`\``.replace(process.env.DISCORD_TOKEN, () => '*'.repeat(process.env.DISCRD_TOKEN.length));
+
 module.exports = {
-  run: ({ message, bot, args, server, Guilds, staff }) => {
+  // eslint-disable-next-line no-unused-vars
+  run: ({ message, bot, args, server, Guilds, staff, t }) => {
+    const devs = staff.roles.get('developers');
+
     if (!devs.includes(message.author.id)) {
       return message.channel.send(`**${message.author.username}** | Este comando é exclusivo para desenvolvedores do bot.`);
     } else if (args.length === 0) {

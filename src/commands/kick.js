@@ -18,16 +18,16 @@ module.exports = {
       collector.on('collect', async (r) => {
         msg.delete();
         switch (r.emoji.id) {
-          case '505155063963058187':
-            if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
+          case '505155063963058187': {
+            if (!message.guild.me.permissions.has('KICK_MEMBERS')) {
               return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`KICK_MEMBERS\`\` para executar este comando.`);
-            } else if (message.member.id === message.guild.ownerID) {
+            } else if (message.member.user.equals(message.guild.owner.user)) {
               await member.send(`» **${member.user.username}** | Você foi expulso por **${message.author.username}**. \n» Motivo: \`\`${reason}\`\`.`).catch(() => false);
               await member.kick(reason);
               message.channel.send(`» O usuário **${member.user.tag} ID:** \`\`${member.user.id}\`\` | Foi expulso com sucesso. <:correto:604266535262879746>`);
-            } else if (!message.member.hasPermission('KICK_MEMBERS')) {
+            } else if (!message.member.permission.has('KICK_MEMBERS')) {
               return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão necessária: \`\`BAN_MEMBERS\`\`.`);
-            } else if (member.user.id === message.guild.ownerID) {
+            } else if (member.user.equals(message.guild.owner.user)) {
               return message.channel.send(`» **${message.author.username}** | Desculpe, você não pode expulsar o dono do servidor.`);
             } else if (message.guild.me.roles.highest.position <= member.roles.highest.positionn) {
               return message.channel.send(`» **${message.author.username}** | Desculpe, o meu cargo é menor ou igual ao usuário a ser expulso.`);
@@ -39,9 +39,11 @@ module.exports = {
               message.channel.send(`» O usuário **${member.user.tag} ID:** \`\`${member.user.id}\`\` | Foi expulso com sucesso. <:correto:604266535262879746>`);
             }
             break;
-          case '505155029636874250':
+          }
+          case '505155029636874250': {
             message.channel.send(`» A acão para expulsar o usuário **${member.user.tag}** ID: \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:604266617379225620>`);
             break;
+          }
         }
       });
     }

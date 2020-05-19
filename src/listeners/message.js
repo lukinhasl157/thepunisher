@@ -1,10 +1,11 @@
-/* eslint-disable strict */
+'use strict';
 const Guilds = require('../database/guild');
 const Staff = require('../database/staff');
+const { MessageEmbed } = require('discord.js');
 const cooldown = new Set();
+
 module.exports = {
-  // eslint-disable-next-line func-names
-  run: async function(message) {
+  run: async (message) => {
     if (message.author.bot || message.channel.type === 'DM') return;
 
     const server = await Guilds.findOne({ _id: message.guild.id }).catch(console.error),
@@ -28,7 +29,7 @@ module.exports = {
     if (message.content.toLowerCase().startsWith(prefix)) {
       const args = message.content.slice(prefix.length).split(' '),
         name = args.shift().toLowerCase(),
-        command = this.commands.get(name) || this.commands.find((cmd) => cmd.aliases.includes(name)),
+        command = message.client.commands.get(name) || message.client.commands.find((cmd) => cmd.aliases.includes(name)),
         blackListChannels = server && server.events.get('message').commands.channels;
 
       if (command) {
@@ -41,11 +42,12 @@ module.exports = {
         } else {
           Object.defineProperty(message, 'command', { value: command });
           command.run({
-            bot: this,
+            bot: message.client,
             message,
             server,
             staff,
             args,
+            MessageEmbed,
           });
           cooldown.add(message.author.id);
           setTimeout(() => {
@@ -54,7 +56,7 @@ module.exports = {
         }
       }
     }
-    const botMention = message.guild ? message.guild.me.toString() : this.user.toString();
+    const botMention = message.guild ? message.guild.me.toString() : message.client.user.toString();
 
     if (!message.command) {
       const dbMembers = server.members;
@@ -92,7 +94,7 @@ module.exports = {
           result = message.content.match(regexInvite);
 
         if (result && result.length >= 5 && message.guild.me.permissions.has('MANAGE_MESSAGES') && !message.member.permissions.has('ADMINISTRATOR')) {
-          const fetchInvite = await this.fetchInvite(result[5]).catch(() => null);
+          const fetchInvite = await message.client.fetchInvite(result[5]).catch(() => null);
           if (!fetchInvite || (fetchInvite.guild && fetchInvite.guild.id === message.guild.id)) return;
           message.delete();
           const msg = await message.channel.send('Você não pode enviar convite de outros servidores.');
