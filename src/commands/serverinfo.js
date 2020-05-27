@@ -18,7 +18,18 @@ module.exports = {
       offline = message.guild.members.cache.filter((m) => m.presence.status === 'offline').size,
       bots = message.guild.members.cache.filter((b) => b.user.bot).size,
       allMembers = message.guild.memberCount,
-      roles = message.guild.roles.cache.filter((r) => r.id !== message.guild.id);
+      roles = message.guild.roles.cache.filter((r) => r.id !== message.guild.id)
+        .sort((a, b) => b.position - a.position)
+        .map((i) => i.toString());
+
+    let rolesText;
+    if (roles.size === 0) {
+      rolesText = 'Nenhum cargo foi criado neste servidor.';
+    } else if (roles.size > 10) {
+      rolesText = `${roles.slice(0, 10).join(', ')} e mais ${roles.size - 10} cargos...`;
+    } else {
+      rolesText = roles.join(', ');
+    }
 
     message.channel.send(new MessageEmbed()
       .setAuthor(`» ${message.guild.name}`, message.guild.iconURL())
@@ -30,7 +41,7 @@ module.exports = {
       .addField('<:world:500147421641310229> » Região:', message.guild.region.toString().replace('brazil', ':flag_br: Brasil'), true)
       .addField(`<:user:500109138953633792> » Membros: [${allMembers.toLocaleString()}]`, `<:online:535161741873643531> Online: ${online.toLocaleString()}\n<:ausente:535161866415112192> Ausente: ${ausente.toLocaleString()}\n <:ocupado:535161952075251742> Ocupado: ${ocupado.toLocaleString()}\n <:offline:535161911956996104> Offline: ${offline.toLocaleString()}\n<:bots:535162824301740042> Bots: ${bots.toLocaleString()}`, false)
       .addField(`🛡 » Nivel de verificação:`, verificationGuild[message.guild.verificationLevel], false)
-      .addField(`:beginner: » Total de cargos: [${roles.size}]`, roles.size > 10 ? `${roles.sort((a, b) => b.position - a.position).map((i) => i.toString()).slice(0, 10).join(', ')} e mais ${roles.size - 10} cargos...` : roles.sort((a, b) => b.position - a.position).join(', ') || 'Nenhum cargo foi criado neste servidor.', false)
+      .addField(`:beginner: » Total de cargos: [${roles.size}]`, rolesText, false)
       .setThumbnail(message.guild.iconURL({ size: 2048 }))
       .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
     );

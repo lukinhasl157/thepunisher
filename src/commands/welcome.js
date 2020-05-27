@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  run: async ({ message, args, server }) => {
+  run: ({ message, args, server }) => {
     const status = server.events.get('guildMemberAdd').welcome.status,
       type = args[0];
 

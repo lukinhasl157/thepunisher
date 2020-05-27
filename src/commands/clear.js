@@ -2,7 +2,7 @@
 module.exports = {
   run: async ({ message, args }) => {
     const deleteCount = parseInt(args[0]),
-      fetched = await message.channel.messages.fetch({ limit: deleteCount + 1});
+      fetched = await message.channel.messages.fetch({ limit: deleteCount + 1 });
 
     if (!message.guild.me.permissions.has('MANAGE_MESSAGES')) {
       return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`MANAGE_MESSAGES\` para executar este comando.`);

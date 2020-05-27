@@ -16,7 +16,6 @@ const loadCommands = (path, bot) => {
     } else if (!command.aliases) {
       console.log(`O comando ${commandName} não possui aliases.`);
     }
-
     bot.commands.set(commandName, command);
   }
   console.log(`Comandos carregados: ${jsFiles.length}`);

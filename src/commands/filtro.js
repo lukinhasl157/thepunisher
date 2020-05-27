@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  run: async ({ message, server, args }) => {
+  run: ({ message, server, args }) => {
     const type = args[0],
       filterStatus = server.events.get('message').filterWords.status,
       filterWords = server.events.get('message').filterWords.words;

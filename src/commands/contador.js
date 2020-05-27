@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  run: async ({ bot, message, args, server }) => {
+  run: ({ bot, message, args, server }) => {
     const status = server.events.get('guildMemberAdd').count.status,
       type = args[0];
 
