@@ -29,7 +29,7 @@ module.exports = {
       );
     }
   },
-  name: __filename.replace(`${__dirname}\\`, ''),
+  name: 'unmute',
   aliases: ['desmute', 'desmutar'],
   category: 'Moderação',
   description: 'Desmutar um usuário.',

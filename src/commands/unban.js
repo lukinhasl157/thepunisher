@@ -20,7 +20,7 @@ module.exports = {
       message.channel.send(`O usuário <@${user}> foi desbanido com sucesso! <a:sucessogif:499614074129350666>`);
     }
   },
-  name: __filename.replace(`${__dirname}\\`, ''),
+  name: 'unban',
   aliases: ['desbanir', 'perdoar', 'pardon'],
   category: 'Moderação',
   description: 'Desbanir um usuário.',
