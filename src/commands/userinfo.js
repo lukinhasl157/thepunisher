@@ -31,10 +31,10 @@ module.exports = {
         .map((i) => i.toString());
 
     let rolesText;
-    if (roles.size === 0) {
+    if (roles.length === 0) {
       rolesText = 'O usuário não possui nenhum cargo.';
-    } else if (roles.size > 10) {
-      rolesText = `${roles.slice(0, 10).join(', ')} e mais ${roles.size - 10} cargos...`;
+    } else if (roles.length > 10) {
+      rolesText = `${roles.slice(0, 10).join(', ')} e mais ${roles.length - 10} cargos...`;
     } else {
       rolesText = roles.join(', ');
     }
@@ -55,7 +55,7 @@ module.exports = {
       .addField('» 🎮 Jogando:', !member.user.presence.activity || !member.user.presence.activity.name ? 'O usuário não está jogando nada no momento.' : gamePresence[member.user.presence.activity.name] || member.user.presence.activity.name.replace('Custom Status', 'Status personalizado.'), false)
       .addField('» Detalhes:', !member.user.presence.activity || !member.user.presence.activity.details ? 'Nenhum detalhe de jogo.' : member.user.presence.activity.details, true)
       .addField(!member.user.presence.activity ? '» Status do jogo:' : '» Mensagem de status:', !member.user.presence.activity || !member.user.presence.activity.state ? 'Nenhum status.' : member.user.presence.activity.state, true)
-      .addField(`» Cargos [${roles.size}]`, rolesText, false)
+      .addField(`» Cargos [${roles.length}]`, rolesText, false)
       .setColor(member.displayColor)
       .setTimestamp(new Date())
       .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL())

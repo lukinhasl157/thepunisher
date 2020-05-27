@@ -23,10 +23,10 @@ module.exports = {
         .map((i) => i.toString());
 
     let rolesText;
-    if (roles.size === 0) {
+    if (roles.length === 0) {
       rolesText = 'Nenhum cargo foi criado neste servidor.';
-    } else if (roles.size > 10) {
-      rolesText = `${roles.slice(0, 10).join(', ')} e mais ${roles.size - 10} cargos...`;
+    } else if (roles.length > 10) {
+      rolesText = `${roles.slice(0, 10).join(', ')} e mais ${roles.length - 10} cargos...`;
     } else {
       rolesText = roles.join(', ');
     }
@@ -41,7 +41,7 @@ module.exports = {
       .addField('<:world:500147421641310229> » Região:', message.guild.region.toString().replace('brazil', ':flag_br: Brasil'), true)
       .addField(`<:user:500109138953633792> » Membros: [${allMembers.toLocaleString()}]`, `<:online:535161741873643531> Online: ${online.toLocaleString()}\n<:ausente:535161866415112192> Ausente: ${ausente.toLocaleString()}\n <:ocupado:535161952075251742> Ocupado: ${ocupado.toLocaleString()}\n <:offline:535161911956996104> Offline: ${offline.toLocaleString()}\n<:bots:535162824301740042> Bots: ${bots.toLocaleString()}`, false)
       .addField(`🛡 » Nivel de verificação:`, verificationGuild[message.guild.verificationLevel], false)
-      .addField(`:beginner: » Total de cargos: [${roles.size}]`, rolesText, false)
+      .addField(`:beginner: » Total de cargos: [${roles.length}]`, rolesText, false)
       .setThumbnail(message.guild.iconURL({ size: 2048 }))
       .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
     );
