@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 const { mongooseConnection } = require('../database/mongoose');
 module.exports = {
   // eslint-disable-next-line func-names

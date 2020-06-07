@@ -10,7 +10,7 @@ module.exports = {
       return message.channel.send(`**${message.author.username}** | Por favor, insira um nome para este emoji.`);
     } else {
       const emoji = await message.guild.emojis.create(url, emojiName).catch(console.error);
-	  
+
       message.channel.send(`Emoji ${emoji.toString()} foi adicionado com sucesso!`);
     }
   },

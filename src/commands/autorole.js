@@ -1,8 +1,8 @@
 'use strict';
 const { MessageEmbed } = require('discord.js');
 module.exports = {
-  run: async ({ message, args, server }) => {
-    const  { roles, status } = server.events.get('guildMemberAdd').autoRole,
+  run: ({ message, args, server }) => {
+    const { roles, status } = server.events.get('guildMemberAdd').autoRole,
       type = args[0];
 
     if (!message.member.hasPermission('ADMINISTRATOR')) {

@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 module.exports = {
   run: async ({ message, args }) => {
-    let channel = message.guild.channels.find(c => c.name === 'sugestões');
+    let channel = message.guild.channels.find((c) => c.name === 'sugestões');
 
     if (!args.length) {
       return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`);
@@ -14,7 +14,7 @@ module.exports = {
         permissionOverwrites: [{
           id: message.guild.id,
           deny: ['SEND_MESSAGES'],
-          allow: ['ADD_REACTIONS', 'VIEW_CHANNEL']
+          allow: ['ADD_REACTIONS', 'VIEW_CHANNEL'],
         }],
       });
       await message.channel.send(`» **${message.author.username}** | Não encontrei um canal de \`\`sugestões\`\`, então criei um canal automaticamente.`);

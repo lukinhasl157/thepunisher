@@ -4,7 +4,7 @@ module.exports = {
     const msg = await message.author.send('Deseja criar um ticket? Digite \`sim\` para criar e \`não\` para cancelar.');
     const filter = (m) => m.author.id === message.author.id;
     const collector = await msg.channel.createMessageCollector(filter, { max: 1 });
-    /*tirar reação do autor msg.reactions.first().users.remove(message.author.id) */ 
+    /* Tirar reação do autor msg.reactions.first().users.remove(message.author.id) */
 
     collector.on('collect', async (msg) => {
       switch (msg.content.toLowerCase().split(' ')[0]) {

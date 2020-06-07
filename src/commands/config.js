@@ -1,7 +1,7 @@
 'use strict';
 const { MessageEmbed } = require('discord.js');
 module.exports = {
-  run: async ({ message, server }) => {
+  run: ({ message, server }) => {
     const blackListCommands = server.events.get('message').commands.channels,
       antiBot = server.events.get('guildMemberAdd').antiBot.status,
       inviteBlock = server.events.get('message').inviteBlock.status,

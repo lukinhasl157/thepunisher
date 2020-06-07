@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  run: async ({ message, server, args }) => {
+  run: ({ message, server, args }) => {
     const status = server.events.get('guildMemberAdd').antiBot.status,
       type = args[0];
 

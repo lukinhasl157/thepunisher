@@ -30,6 +30,7 @@ module.exports = {
       return message.channel.send(`**${message.author.username}** | Por favor insira um motivo para mutar este usuário.`);
     } else {
       if (!role) {
+        // eslint-disable-next-line require-atomic-updates
         role = await message.guild.createRole({
           name: 'The Punisher | 🔇 Muted',
           color: '#ff0000',
