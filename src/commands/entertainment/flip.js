@@ -3,7 +3,7 @@ const flip = require('flip-text');
 module.exports = {
   run: ({ message, args }) => {
     if (args.length === 0) {
-      return message.channel.send(flip('Ta troll? Coloca uma msg.'));
+      return message.replyError(flip('Ta troll? Coloca uma msg.'));
     }
     return message.channel.send(flip(args.join(' ')));
   },

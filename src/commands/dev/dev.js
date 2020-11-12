@@ -10,38 +10,38 @@ module.exports = {
       }
 
       if (!message.author.equals(bot.users.get(ownerID.toString()))) {
-        return message.channel.send('Este comando só pode ser executando pelo dono do bot.');
+        return message.replyError('Este comando só pode ser executando pelo dono do bot.');
       }
 
       if (!bot.users.find((i) => i.id === dev.id)) {
-        return message.channel.send('Não econtrei este usuário em meus servidores.');
+        return message.replyError('Não econtrei este usuário em meus servidores.');
       }
 
       if (!devIDSArray.includes(dev.id)) {
-        return message.channel.send('Este usuário não está na minha lista de desenvolvedores.');
+        return message.replyError('Este usuário não está na minha lista de desenvolvedores.');
       }
 
-      return message.channel.send(`O desenvolvedor \`${dev.tag}\` foi removido da lista com sucesso!`);
+      return message.replyError(`O desenvolvedor \`${dev.tag}\` foi removido da lista com sucesso!`);
     }
 
     if (args[0] === 'list') {
-      return message.channel.send(devIDSArray.map((i) => `\`${bot.users.get(i).tag}\``).join(', '));
+      return message.reply(devIDSArray.map((i) => `\`${bot.users.get(i).tag}\``).join(', '));
     }
 
     if (!dev) {
-      return message.channel.send('Mencione o usuário que deseja setar como desenvolvedor.');
+      return message.replyError('Mencione o usuário que deseja setar como desenvolvedor.');
     }
 
     if (!message.author.equals(bot.users.get(ownerID.toString()))) {
-      return message.channel.send('Este comando só pode ser executando pelo dono do bot.');
+      return message.replyError('Este comando só pode ser executando pelo dono do bot.');
     }
 
     if (devIDSArray.includes(dev.id)) {
-      return message.channel.send('Este usuário já está setado como desenvolvedor.');
+      return message.replyError('Este usuário já está setado como desenvolvedor.');
     }
 
     process.env.devIDs += `, ${dev.id}`;
-    return message.channel.send(`O usuário \`${dev.tag}\` foi setado como desenvolvedor.`);
+    return message.reply(`O usuário \`${dev.tag}\` foi setado como desenvolvedor.`);
   },
   name: 'dev',
   onlyDevs: true,
