@@ -1,7 +1,7 @@
-require('dotenv/config');
 const { Client, Message, Collection } = require('discord.js');
 const listenerHandler = require('./src/handlers/listenerHandler');
 const commandHandler = require('./src/handlers/commandHandler');
+const { connectMongoose } = require('./src/database/mongoose');
 
 async function start() {
   const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
@@ -23,6 +23,8 @@ async function start() {
       process.exit(1);
     });
 
+  await connectMongoose();
+
   return bot.login(process.env.DISCORD_TOKEN).catch((e) => {
     console.error(e);
     process.exit(1);
@@ -38,8 +40,13 @@ process
   .on('unhandledRejection', (error) => console.error('Uncaught Promise Error:', error));
 
 Message.prototype.reply = function reply(content, ...args) {
-  if (this.author) return this.channel.send(`» **${this.author.tag}** | ${content}`, ...args);
-  return this.channel.send(content);
+  if (this.author) return this.channel.send(`» **${this.author.tag}**, ${content}`, ...args);
+  return this.channel.send(content, ...args);
+};
+
+Message.prototype.replyError = function replyError(content, ...args) {
+  if (this.author) return this.channel.send(`Erro: » **${this.author.tag}**, ${content}`, ...args);
+  return this.channel.send(content, ...args);
 };
 
 start();
