@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 const { MessageEmbed } = require('discord.js');
 
 const isId = (id) => /(?:<@&?)?([0-9]{16,19})(?:>)?/.test(id);

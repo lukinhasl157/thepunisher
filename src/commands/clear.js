@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 /* eslint-disable radix */
 module.exports = {
   run: async ({ message, args }) => {
@@ -18,8 +17,8 @@ module.exports = {
     }
     message.delete();
     message.channel.bulkDelete(fetched, true);
-    const msg = await message.channel.send(`**${message.author.username}** | O chat foi limpo com sucesso! \`${deleteCount}\` mensagens excluídas.`);
-    msg.delete({ timeout: 30 * 1000 });
+    return message.channel.send(`**${message.author.username}** | O chat foi limpo com sucesso! \`${deleteCount}\` mensagens excluídas.`)
+      .then((msg) => msg.delete({ timeout: 30 * 1000 }));
   },
   name: 'clear',
   aliases: ['limpar'],

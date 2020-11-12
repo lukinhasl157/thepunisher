@@ -1,16 +1,17 @@
 module.exports = {
-  // eslint-disable-next-line consistent-return
   run: async ({ message, args }) => {
     // Gif ban the punisher https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     const reason = args.slice(1).join(' ');
 
     if (!member) {
-      return message.reply('Por favor, insira o id ou mencione o usuário que deseja banir.');
+      message.reply('Por favor, insira o id ou mencione o usuário que deseja banir.');
+      return;
     }
 
     if (!reason) {
-      return message.reply('Por favor, insira um motivo para banir este usuário.');
+      message.reply('Por favor, insira um motivo para banir este usuário.');
+      return;
     }
 
     const msg = await message.reply(`Você tem certeza de banir o usuário ${member} pelo motivo: \`${reason}\` ? Se **SIM**, clique no emoji <:correto:604266535262879746> para bani-lo. Se **NÃO** clique no emoji <:negado:604266617379225620> para cancelar esta ação.`);
