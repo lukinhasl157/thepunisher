@@ -5,6 +5,6 @@ module.exports = async (member) => {
 
   if (guild.members.has(member.id)) {
     guild.members.remove(member.id);
-    return guild.save();
+    guild.save();
   }
 };

@@ -1,9 +1,9 @@
-require('./src/utils/prototypes');
+require('./utils/prototypes');
 
 const { Client, Collection } = require('discord.js');
-const listenerHandler = require('./src/handlers/listenerHandler');
-const commandHandler = require('./src/handlers/commandHandler');
-const { connectMongoose } = require('./src/database/mongoose');
+const listenerHandler = require('./handlers/listenerHandler');
+const commandHandler = require('./handlers/commandHandler');
+const { connectMongoose } = require('./database/mongoose');
 
 async function start() {
   const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
