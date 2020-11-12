@@ -4,19 +4,19 @@ module.exports = {
     const emojiName = args.join('-');
 
     if (!url) {
-      return message.channel.send(`**${message.author.username}** | Por favor, insira o link do emoji que deseja adicionar.`);
+      return message.reply('Por favor, insira o link do emoji que deseja adicionar.');
     }
 
     if (!emojiName) {
-      return message.channel.send(`**${message.author.username}** | Por favor, insira um nome para este emoji.`);
+      return message.reply('Por favor, insira um nome para este emoji.');
     }
 
     try {
       const emoji = await message.guild.emojis.create(url, emojiName);
-      return message.channel.send(`Emoji ${emoji.toString()} foi adicionado com sucesso!`);
+      return message.reply(`Emoji ${emoji.toString()} foi adicionado com sucesso!`);
     } catch (error) {
       console.error(error);
-      return message.channel.send('Não consegui adicionar...');
+      return message.replyError('Não consegui adicionar o emoji.');
     }
   },
   botPermissions: ['MANAGE_EMOJIS'],

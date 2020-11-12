@@ -1,13 +1,21 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 const { resolve } = require('path');
-const { readdirSync } = require('fs');
+const { readdirSync, statSync } = require('fs');
 
 function readCommands(path = resolve(__dirname, '..', 'commands')) {
   return readdirSync(path)
-    .filter((i) => i.endsWith('.js'))
-    .map((filename) => {
-      const command = require(resolve(path, filename));
+    .reduce((commands, filename) => {
+      const fullpath = resolve(path, filename);
+
+      if (!fullpath.endsWith('.js')) {
+        if (statSync(fullpath).isDirectory()) {
+          commands.push(...readCommands(fullpath));
+        }
+        return commands;
+      }
+
+      const command = require(fullpath);
 
       if (!command.name) {
         command.name = filename.replace('.js', '');
@@ -32,8 +40,10 @@ function readCommands(path = resolve(__dirname, '..', 'commands')) {
       command.name = command.name.toLowerCase();
       command.aliases = command.aliases.map((alias) => alias.toLowerCase());
 
-      return command;
-    });
+      commands.push(command);
+
+      return commands;
+    }, []);
 }
 
 function loadAliases(commands) {
