@@ -56,5 +56,7 @@ module.exports = {
     }
   },
   name: 'comandos',
+  description: 'Bloquea executação de comandos em um canal.',
+  category: 'Moderação',
   aliases: [],
 };

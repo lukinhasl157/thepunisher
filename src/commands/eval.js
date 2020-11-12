@@ -36,6 +36,6 @@ module.exports = {
   },
   name: 'eval',
   aliases: ['evaluate', 'code'],
-  category: 'Normais',
+  category: 'Desenvolvedores',
   description: 'Executar um código',
 };

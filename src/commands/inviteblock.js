@@ -25,5 +25,7 @@ module.exports = {
     return message.channel.send('opcão invalida.');
   },
   name: 'inviteblock',
+  description: 'Bloquea convites de outros servidores.',
+  category: 'Moderação',
   aliases: [],
 };

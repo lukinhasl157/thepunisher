@@ -1,35 +1,33 @@
 require('dotenv/config');
 const { Client, Message, Collection } = require('discord.js');
-const { loadListeners } = require('./src/handlers/listenerHandler');
-const { loadCommands } = require('./src/handlers/commandHandler');
+const listenerHandler = require('./src/handlers/listenerHandler');
+const commandHandler = require('./src/handlers/commandHandler');
 
-const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
+async function start() {
+  const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
 
-class CommandStore extends Collection {
-  fetch(str) {
-    return this.find((c) => c.name.toLowerCase() === str.toLowerCase() || c.aliases.includes(str.toLowerCase()));
-  }
-}
+  bot.commands = new Collection(commandHandler.readCommands().map((cmd) => [cmd.name, cmd]));
+  bot.aliases = commandHandler.loadAliases(bot.commands);
 
-bot.commands = new CommandStore();
-bot.map = new Map();
+  listenerHandler.loadListeners((name, handler) => bot.on(name, handler));
 
-bot.login().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+  bot
+    .on('shardReconnecting', () => console.log('Client is reconnecting...'))
+    .on('warn', (warn) => console.log(warn))
+    .on('shardDisconnected', () => {
+      console.log('Client is disconnecting...');
+      process.exit(1);
+    })
+    .on('invalidated', () => {
+      console.log('The client\'s session is now invalidated.');
+      process.exit(1);
+    });
 
-bot
-  .on('shardReconnecting', () => console.log('Client is reconnecting...'))
-  .on('warn', (warn) => console.log(warn))
-  .on('shardDisconnected', () => {
-    console.log('Client is disconnecting...');
-    process.exit(1);
-  })
-  .on('invalidated', () => {
-    console.log('The client\'s session is now invalidated.');
+  return bot.login(process.env.DISCORD_TOKEN).catch((e) => {
+    console.error(e);
     process.exit(1);
   });
+}
 
 process
   .on('uncaughtException', (error) => {
@@ -39,11 +37,9 @@ process
   })
   .on('unhandledRejection', (error) => console.error('Uncaught Promise Error:', error));
 
-// eslint-disable-next-line func-names
-Message.prototype.reply = function (content) {
+Message.prototype.reply = function reply(content) {
   if (this.author) return this.channel.send(`» **${this.author.tag}** | ${content}`);
   return this.channel.send(content);
 };
 
-loadCommands('./src/commands', bot);
-loadListeners('./src/listeners', bot);
+start();

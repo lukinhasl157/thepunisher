@@ -100,5 +100,7 @@ module.exports = {
     }
   },
   name: 'filtro',
+  category: 'Moderação',
+  description: 'Filtro de palavras',
   aliases: ['filter'],
 };

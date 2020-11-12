@@ -71,5 +71,7 @@ module.exports = {
     }
   },
   name: 'contador',
+  category: 'Moderação',
+  description: 'Mostra um contador de membros no topico do canal',
   aliases: ['count'],
 };

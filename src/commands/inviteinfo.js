@@ -32,7 +32,7 @@ module.exports = {
       .setTimestamp());
   },
   name: 'inviteinfo',
-  aliases: ['convite', 'div', 'convites'],
+  aliases: [],
   category: 'Moderação',
   description: 'Mostrar as informações sobre o invite',
 };

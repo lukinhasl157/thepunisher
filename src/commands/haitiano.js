@@ -41,5 +41,7 @@ module.exports = {
     return message.channel.send('Haitiano...');
   },
   name: 'haitiano',
+  category: 'Entretenimento',
+  description: 'Haitiano...',
   aliases: ['aitiano'],
 };

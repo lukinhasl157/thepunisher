@@ -9,5 +9,7 @@ module.exports = {
     });
   },
   name: 'level',
+  category: 'Entretenimento',
+  description: 'Mostra seu Status',
   aliases: [],
 };

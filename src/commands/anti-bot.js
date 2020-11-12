@@ -43,5 +43,7 @@ module.exports = {
     }
   },
   name: 'anti-bot',
+  category: 'Moderação',
+  description: 'Expulsa bots ao entrar no servidor.',
   aliases: [],
 };

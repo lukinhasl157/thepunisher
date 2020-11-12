@@ -96,5 +96,7 @@ module.exports = {
     }
   },
   name: 'autorole',
+  category: 'Moderação',
+  description: 'Adiciona cargo aos novos membros do servidor.',
   aliases: ['autocargo'],
 };

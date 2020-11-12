@@ -23,5 +23,7 @@ module.exports = {
       .setThumbnail('https://cdn.discordapp.com/attachments/534942836605452290/604937235808256003/base-de-dados_1.png'));
   },
   name: 'config',
+  category: 'Moderação',
+  description: 'mostra todas as configurações de modulos do servidor.',
   aliases: [],
 };
