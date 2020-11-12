@@ -31,7 +31,6 @@ function readCommands(path = resolve(__dirname, '..', 'commands')) {
 
       command.name = command.name.toLowerCase();
       command.aliases = command.aliases.map((alias) => alias.toLowerCase());
-      command.filename = filename;
 
       return command;
     });

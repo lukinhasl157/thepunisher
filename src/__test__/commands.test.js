@@ -5,6 +5,14 @@ const categories = require('../utils/categories.json');
 describe('Command Tests', () => {
   const commands = CommandHandler.readCommands();
 
+  test('test if command obj has unknown props', () => {
+    const commandProps = ['description', 'aliases', 'name', 'run', 'category', 'botPermissions', 'userPermissions'];
+    expect(commands
+      .map((c) => [c.name, Object.getOwnPropertyNames(c)
+        .filter((p) => !commandProps.includes(p))])
+      .filter((c) => c[1].length)).toEqual([]);
+  });
+
   test('test if have any commands without a handler', () => {
     expect(commands.filter((c) => !c.run).map((c) => c.name)).toEqual([]);
   });
