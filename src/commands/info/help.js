@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const options = require('../utils/categories.json');
+const options = require('../../utils/categories.json');
 
 module.exports = {
   run: async ({ bot, message, server }) => {
