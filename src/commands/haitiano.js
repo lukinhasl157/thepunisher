@@ -1,4 +1,5 @@
 const { createReadStream } = require('fs');
+const path = require('path')
 
 module.exports = {
   run: async ({ message }) => {
@@ -34,7 +35,7 @@ module.exports = {
     }
 
     const connection = await memberConnection.join();
-    const dispatcher = await connection.play(createReadStream('../../Haitiano.wav'), { volume: 1.0 });
+    const dispatcher = await connection.play(createReadStream(path.resolve('..', 'assets', 'Haitiano.wav'), { volume: 1.0 });
 
     dispatcher.on('finish', () => memberConnection.leave());
     return message.channel.send('Haitiano...');
