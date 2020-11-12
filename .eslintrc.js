@@ -3,6 +3,7 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
+    jest: true,
   },
   extends: [
     'airbnb-base',
@@ -15,7 +16,7 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
-    "no-param-reassign": "off",
-    "no-console": "off"
+    'no-param-reassign': 'off',
+    'no-console': 'off',
   },
 };
