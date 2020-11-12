@@ -1,23 +1,48 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 const { resolve } = require('path');
 const { readdirSync } = require('fs');
 
-const loadCommands = (path, bot) => {
-  const jsFiles = readdirSync(path, { withFileTypes: true })
-    .filter((i) => i.name.endsWith('.js'));
+function readCommands(path = resolve(__dirname, '..', 'commands')) {
+  return readdirSync(path)
+    .filter((i) => i.endsWith('.js'))
+    .map((filename) => {
+      const command = require(resolve(path, filename));
 
-  for (const file of jsFiles) {
-    const fullpath = resolve(path, file.name);
-    const commandName = file.name.replace('.js', '');
-    const command = require(fullpath);
+      if (!command.name) {
+        command.name = filename.replace('.js', '');
+      }
 
-    if (!command.name || command.name.length === 0) {
-      console.log(`O comando ${commandName} não possui um nome.`);
-    } else if (!command.aliases) {
-      console.log(`O comando ${commandName} não possui aliases.`);
+      if (!Array.isArray(command.aliases)) {
+        command.aliases = [];
+      }
+
+      command.name = command.name.toLowerCase();
+      command.aliases = command.aliases.map((alias) => alias.toLowerCase());
+      command.filename = filename;
+
+      return command;
+    });
+}
+
+function loadAliases(commands) {
+  const addAlias = (alias, aliases, commandName) => {
+    const conflict = aliases.get(alias);
+    if (conflict) {
+      throw new Error(`Alias '${alias}' of '${commandName}' already exists on '${conflict}`);
     }
-    bot.commands.set(commandName, command);
-  }
-  console.log(`Comandos carregados: ${jsFiles.length}`);
-};
+    aliases.set(alias, commandName);
+  };
 
-module.exports = { loadCommands };
+  return commands.reduce((aliases, command) => {
+    addAlias(command.name, aliases, command.name);
+    command.aliases.forEach((alias) => addAlias(alias, aliases, command.name));
+    return aliases;
+  }, new Map());
+}
+
+function findCommand(query, commands, aliases) {
+  return commands.get(aliases.get(query.toLowerCase()));
+}
+
+module.exports = { readCommands, loadAliases, findCommand };

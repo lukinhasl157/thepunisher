@@ -1,0 +1,39 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+const CommandHandler = require('../handlers/commandHandler');
+const categories = require('../utils/categories.json');
+
+describe('Command Tests', () => {
+  const commands = CommandHandler.readCommands();
+
+  test('test if have any commands without a handler', () => {
+    expect(commands.filter((c) => !c.run).map((c) => c.name)).toEqual([]);
+  });
+
+  test('test if have any commands without a description', () => {
+    expect(commands.filter((c) => !c.description).map((c) => c.name)).toEqual([]);
+  });
+
+  test('test if have any commands with an invalid aliases', () => {
+    expect(
+      commands.filter((c) => c.aliases.some((alias) => typeof alias !== 'string')),
+    ).toEqual([]);
+  });
+
+  test('test if have any commands without a category or invalid category', () => {
+    const categoryNames = categories.map((c) => c.name);
+    expect(
+      commands
+        .filter((c) => !c.category || !categoryNames.includes(c))
+        .map((c) => c.name),
+    ).toEqual([]);
+  });
+
+  it('should have no duplicate names or aliases', () => {
+    const aliases = commands
+      .reduce((arr, command) => [...arr, command.name, ...(command.aliases || [])], []);
+
+    const dupes = aliases.filter((v, i, arr) => arr.indexOf(v) !== i);
+    expect(dupes).toEqual([]);
+  });
+});
