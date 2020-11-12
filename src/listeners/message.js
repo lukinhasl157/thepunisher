@@ -35,15 +35,29 @@ module.exports = async function onMessage(message) {
     const blackListChannels = server && server.events.get('message').commands.channels;
 
     if (command) {
+      if (cooldown.has(message.author.id)) {
+        const msg = await message.reply('Aguarde `3s` para usar outro comando novamente.');
+        msg.delete({ timeout: 60 * 1000 });
+        return;
+      }
+
       if (server && blackListChannels.length > 0 && blackListChannels.includes(message.channel.id) && message.guild.me.permissions.has('MANAGE_MESSAGES')) {
         const msg = await message.reply('Você não pode executar comandos neste canal.');
         msg.delete({ timeout: 10 * 1000 });
         return;
       }
 
-      if (cooldown.has(message.author.id)) {
-        const msg = await message.reply('Aguarde `3s` para usar outro comando novamente.');
-        msg.delete({ timeout: 60 * 1000 });
+      const botPerms = command.botPermissions.filter((p) => !message.guild.me.permissions.has(p))
+        .map((p) => `\`${p}\``);
+      if (!botPerms.length) {
+        message.reply(`Desculpe, eu preciso da permissão ${botPerms.join(', ')} para executar este comando.`);
+        return;
+      }
+
+      const userPerms = command.userPermissions.filter((p) => !message.member.permissions.has(p))
+        .map((p) => `\`${p}\``);
+      if (!userPerms.length) {
+        message.reply(`Desculpe, você precisa da permissão ${userPerms.join(', ')} para executar este comando.`);
         return;
       }
 

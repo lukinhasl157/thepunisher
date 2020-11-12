@@ -17,6 +17,18 @@ function readCommands(path = resolve(__dirname, '..', 'commands')) {
         command.aliases = [];
       }
 
+      if (!command.botPermissions) {
+        command.botPermissions = [];
+      }
+
+      if (!command.userPermissions) {
+        command.userPermissions = [];
+      }
+
+      if (!Array.isArray(command.aliases)) {
+        command.aliases = [];
+      }
+
       command.name = command.name.toLowerCase();
       command.aliases = command.aliases.map((alias) => alias.toLowerCase());
       command.filename = filename;

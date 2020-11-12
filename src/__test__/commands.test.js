@@ -1,3 +1,4 @@
+const { Permissions } = require('discord.js');
 const CommandHandler = require('../handlers/commandHandler');
 const categories = require('../utils/categories.json');
 
@@ -20,6 +21,27 @@ describe('Command Tests', () => {
 
     const dupes = aliases.filter((v, i, arr) => arr.indexOf(v) !== i);
     expect(dupes).toEqual([]);
+  });
+
+  const invalidatePermissions = (perms) => perms.filter((p) => !Permissions.FLAGS[p]);
+  it('should have no invalid bot permissions', () => {
+    expect(commands.reduce((p, v) => {
+      const perms = invalidatePermissions(v.botPermissions);
+      if (perms.length) {
+        p.push([v.name, perms]);
+      }
+      return p;
+    }, []));
+  });
+
+  it('should have no invalid bot permissions', () => {
+    expect(commands.reduce((p, v) => {
+      const perms = invalidatePermissions(v.botPermissions);
+      if (perms.length) {
+        p.push([v.name, perms]);
+      }
+      return p;
+    }, []));
   });
 
   test('test if have any commands without a description', () => {
