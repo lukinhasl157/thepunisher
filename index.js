@@ -1,4 +1,6 @@
-const { Client, Message, Collection } = require('discord.js');
+require('./src/utils/prototypes');
+
+const { Client, Collection } = require('discord.js');
 const listenerHandler = require('./src/handlers/listenerHandler');
 const commandHandler = require('./src/handlers/commandHandler');
 const { connectMongoose } = require('./src/database/mongoose');
@@ -38,15 +40,5 @@ process
     process.exit(1);
   })
   .on('unhandledRejection', (error) => console.error('Uncaught Promise Error:', error));
-
-Message.prototype.reply = function reply(content, ...args) {
-  if (this.author) return this.channel.send(`» **${this.author.tag}**, ${content}`, ...args);
-  return this.channel.send(content, ...args);
-};
-
-Message.prototype.replyError = function replyError(content, ...args) {
-  if (this.author) return this.channel.send(`Erro: » **${this.author.tag}**, ${content}`, ...args);
-  return this.channel.send(content, ...args);
-};
 
 start();
