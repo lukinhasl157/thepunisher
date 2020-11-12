@@ -2,12 +2,14 @@ module.exports = {
   run: async ({ message, args }) => {
     const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
     if (!member) {
-      return message.channel.send(`**${message.author.username}**, | Por favor, insira o id ou mencione o usuário que deseja xingar.`);
+      message.replyError('Por favor, insira o id ou mencione o usuário que deseja xingar.');
+      return;
     }
     try {
       message.author.send(`**${message.author.username}** | Como deseja xingar o usuário **${member.user.tag}** ? (Após \`30s\` esta mensagem será apagada.)`);
     } catch (e) {
-      return message.reply('Desculpe, sua DM está desativada e não posso enviar mensagens.');
+      message.replyError('Desculpe, sua DM está desativada e não posso enviar mensagens.');
+      return;
     }
 
     const msg = await message.channel.send(`${message.author.username} | Por favor, olhe sua **DM**`);

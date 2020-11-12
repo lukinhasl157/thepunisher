@@ -3,7 +3,7 @@ const options = require('../../utils/categories.json');
 
 module.exports = {
   run: async ({
-    bot, message, server, prefix,
+    bot, message, prefix,
   }) => {
     try {
       const msg = await message.member.send(new MessageEmbed()

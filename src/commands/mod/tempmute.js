@@ -18,21 +18,25 @@ module.exports = {
       .setFooter(`Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL);
 
     if (!member) {
-      return message.channel.send(`**${message.author.username}** | Por favor insira o id ou mencione o usuário que deseja mutar.`);
+      message.replyError('Por favor insira o id ou mencione o usuário que deseja mutar.');
+      return;
     }
 
     if (!time) {
-      return message.channel.send(`**${message.author.username}** | Por favor insira um tempo para mutar este usuário. Exemplo: t.tempute @usuário 30s motivo`);
+      message.replyError('Por favor insira um tempo para mutar este usuário. Exemplo: t.tempute @usuário 30s motivo');
+      return;
     }
 
     if (
       Number.isNaN(parseInt(time))
       || parseInt(time) === 0 || parseInt(time) >= 86400000 || parseInt(time) < 300000) {
-      return message.channel.send(`**${message.author.username}** | O tempo está errado.`);
+      message.replyError('O tempo está errado.');
+      return;
     }
 
     if (!reason || !args || !args.length) {
-      return message.channel.send(`**${message.author.username}** | Por favor insira um motivo para mutar este usuário.`);
+      message.replyError('Por favor insira um motivo para mutar este usuário.');
+      return;
     }
 
     if (!role) {

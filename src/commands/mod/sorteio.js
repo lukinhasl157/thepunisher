@@ -8,9 +8,11 @@ module.exports = {
     const winn = Number(winners.replace('w', ''));
 
     if (args.length === 0) {
-      return message.channel.send(`Utilize: \`${server.prefix}sorteio <tempo> <ganhadores> <item>\`, exemplo: \`${server.prefix}sorteio 24h 5w discord nitro\``);
+      message.replyError(`Utilize: \`${server.prefix}sorteio <tempo> <ganhadores> <item>\`, exemplo: \`${server.prefix}sorteio 24h 5w discord nitro\``);
+      return;
     } if (ms(args[0]) > ms('1d')) {
-      return message.channel.send('O tempo de sorteio não pode passar de 1 dia.');
+      message.replyError('O tempo de sorteio não pode passar de 1 dia.');
+      return;
     }
     const msg = await message.channel.send(new MessageEmbed()
       .setTitle(text.join(' '))

@@ -4,7 +4,7 @@ module.exports = {
       return message.channel.send('Digite uma mensagem.');
     }
     message.delete();
-    message.channel.send(args.join(' '));
+    return message.channel.send(args.join(' '));
   },
   name: 'say',
   aliases: ['falar', 'dizer'],

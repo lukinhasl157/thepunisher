@@ -5,7 +5,8 @@ moment.locale('pt-BR');
 
 module.exports = {
   run: ({ message, args }) => {
-    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+    const member = message.mentions.members.first()
+    || message.guild.members.cache.get(args[0]) || message.member;
     const status = {
       online: '<:online:535161741873643531> Disponível',
       offline: '<:offline:535161911956996104> Invisível',

@@ -13,19 +13,16 @@ module.exports = {
         }
         server.events.get('guildMemberAdd').welcome.status = true;
         server.save();
-        message.channel.send('O welcome foi ativado com sucesso!');
-
-        break;
+        return message.channel.send('O welcome foi ativado com sucesso!');
       }
+
       case 'off': {
         if (!status) {
           return message.channel.send('O welcome já está desativado.');
         }
         server.events.get('guildMemberAdd').welcome.status = false;
         server.save();
-        message.channel.send('O welcome foi desativado com sucesso!');
-
-        break;
+        return message.channel.send('O welcome foi desativado com sucesso!');
       }
       case 'canal': {
         const channel = message.mentions.channels.first();
@@ -39,10 +36,9 @@ module.exports = {
           return message.channel.send('Antes de setar o canal coloque uma mensagem de welcome. Exemplo: welcome mensagem bem-vindo {member} ao servidor {server}');
         }
         server.events.get('guildMemberAdd').welcome.channel = channel.id;
-        message.channel.send(`A mensagem de welcome foi setada no canal ${channel}`);
         server.save();
 
-        break;
+        return message.channel.send(`A mensagem de welcome foi setada no canal ${channel}`);
       }
       case 'mensagem': {
         const msg = args.slice(1).join(' ');
@@ -52,18 +48,18 @@ module.exports = {
           return message.channel.send('Parametros inválidos insira o nome do servidor e o nome do membro na mensagem. Exemplo: welcome mensagem bem-vindo {member} ao servidor {server}');
         }
         server.events.get('guildMemberAdd').welcome.message = msg;
-        message.channel.send('A mensagem de welcome foi setada com sucesso!');
         server.save();
-
-        break;
+        return message.channel.send('A mensagem de welcome foi setada com sucesso!');
       }
       case 'reset': {
         server.events.get('guildMemberAdd').welcome.message = 'None';
         server.events.get('guildMemberAdd').welcome.channel = 'None';
-        message.channel.send('As configurações do welcome foram resetadas com sucesso!');
         server.save();
-        break;
+        return message.reply('As configurações do welcome foram resetadas com sucesso!');
       }
+
+      default:
+        return message.replyError('Opção invalida.');
     }
   },
   name: 'welcome',

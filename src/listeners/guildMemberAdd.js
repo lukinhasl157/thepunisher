@@ -23,13 +23,8 @@ module.exports = async (member) => {
       const regex = /(\{blue|green\})+/;
       const type = msg.match(regex);
 
-      if (type && type.length) {
-        switch (type[0].replace(/(\{)?(\})?/g, '')) {
-          case 'blue': {
-            msg = msg.replace(/{blue}/g, members.map((i) => blue[i]).join(''));
-            break;
-          }
-        }
+      if (type && type.length && type[0].replace(/(\{)?(\})?/g, '') === 'blue') {
+        msg = msg.replace(/{blue}/g, members.map((i) => blue[i]).join(''));
       }
       channel.setTopic(msg);
     }

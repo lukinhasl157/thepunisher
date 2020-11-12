@@ -1,3 +1,5 @@
+const reverseStr = (str) => str.split('').reverse().join('');
+
 module.exports = {
   run: ({ message, args }) => {
     if (args.lenght === 0) {
@@ -10,5 +12,3 @@ module.exports = {
   category: 'Entretenimento',
   description: 'Reverter os argumentos.',
 };
-
-const reverseStr = (str) => str.split('').reverse().join('');
