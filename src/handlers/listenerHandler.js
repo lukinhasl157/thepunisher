@@ -1,18 +1,17 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+
 const { resolve } = require('path');
 const { readdirSync } = require('fs');
 
-const loadListeners = (path, bot) => {
-  const jsFiles = readdirSync(path, { withFileTypes: true })
-    .filter((i) => i.name.endsWith('.js'));
-
-  for (const file of jsFiles) {
-    const fullpath = resolve(path, file.name);
-    const listenerName = file.name.replace('.js', '');
-    const listener = require(fullpath);
-
-    bot.on(listenerName, listener.run);
-  }
-  console.log(`Eventos carregados: ${jsFiles.length}`);
-};
+function loadListeners(path = resolve(__dirname, '..', 'listeners'), handler = () => null) {
+  return readdirSync(path)
+    .filter((i) => i.endsWith('.js'))
+    .forEach((filename) => {
+      const listener = require(resolve(path, filename));
+      const listenerName = filename.replace('.js', '');
+      handler(listener, listenerName);
+    });
+}
 
 module.exports = { loadListeners };

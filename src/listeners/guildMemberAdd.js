@@ -1,4 +1,4 @@
-const { blue } = require('../utils/emojis.json');
+const { EMOJIS: { blue } } = require('../utils/constants');
 const Guilds = require('../database/guild');
 
 module.exports = {
