@@ -1,12 +1,13 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, DMChannel } = require('discord.js');
 const Guilds = require('../database/guild');
 const Staff = require('../database/staff');
+const CommandHandler = require('../handlers/commandHandler');
 
 const cooldown = new Set();
 
 module.exports = {
   run: async (message) => {
-    if (message.author.bot || message.channel.type === 'DM') return;
+    if (message.author.bot || !(message.channel.type instanceof DMChannel)) return;
 
     const server = await Guilds.findOne({ _id: message.guild.id }).catch(console.error);
     const staff = await Staff.findOne({ projectName: 'The Punisher' }).catch(console.error);
@@ -28,20 +29,28 @@ module.exports = {
 
     if (message.content.toLowerCase().startsWith(prefix)) {
       const args = message.content.slice(prefix.length).split(' ');
-      const name = args.shift().toLowerCase();
-      const command = message.client.commands.get(name) || message.client.commands.find((cmd) => cmd.aliases.includes(name));
+      const name = args.shift();
+      console.log(this.commands);
+      const command = CommandHandler.findCommand(name, this.commands, this.aliases);
       const blackListChannels = server && server.events.get('message').commands.channels;
 
       if (command) {
-        if (cooldown.has(message.author.id)) {
-          const msg = await message.reply('Aguarde \`3s\` para usar outro comando novamente.');
-          return msg.delete({ timeout: 60 * 1000 });
-        } if (server && blackListChannels.length > 0 && blackListChannels.includes(message.channel.id) && message.guild.me.permissions.has('MANAGE_MESSAGES')) {
+        if (server && blackListChannels.length > 0 && blackListChannels.includes(message.channel.id) && message.guild.me.permissions.has('MANAGE_MESSAGES')) {
           const msg = await message.reply('Você não pode executar comandos neste canal.');
-          return msg.delete({ timeout: 10 * 1000 });
+          msg.delete({ timeout: 10 * 1000 });
+          return;
         }
+
+        if (cooldown.has(message.author.id)) {
+          const msg = await message.reply('Aguarde `3s` para usar outro comando novamente.');
+          msg.delete({ timeout: 60 * 1000 });
+          return;
+        }
+
         Object.defineProperty(message, 'command', { value: command });
+
         command.run({
+          command,
           bot: message.client,
           message,
           server,
@@ -49,7 +58,9 @@ module.exports = {
           args,
           MessageEmbed,
         });
+
         cooldown.add(message.author.id);
+
         setTimeout(() => {
           cooldown.delete(message.author.id);
         }, 3000);
@@ -81,12 +92,15 @@ module.exports = {
 
       if (message.content.startsWith(botMention)) {
         const msg = await message.channel.send(`<a:caralho:531498188386074624> Olá, ${message.author} está com duvidas? digite \`${!server.prefix ? 'm.' : server.prefix}help\``);
-        return msg.delete({ timeout: 60 * 1000 }).catch(console.error);
-      } if (server && server.events.get('message').filterWords.status && message.guild.me.permissions.has('MANAGE_MESSAGES')) {
+        msg.delete({ timeout: 60 * 1000 }).catch(console.error);
+        return;
+      }
+
+      if (server && server.events.get('message').filterWords.status && message.guild.me.permissions.has('MANAGE_MESSAGES')) {
         if (server.filterWords.words.some((w) => message.content.toLowerCase().includes(w))) {
           message.delete();
           const msg = await message.channel.send('Esta palavra foi bloqueada.');
-          return msg.delete({ timeout: 10 * 1000 }).catch(console.error);
+          msg.delete({ timeout: 10 * 1000 }).catch(console.error);
         }
       } else if (server && server.events.get('message').inviteBlock.status) {
         const regexInvite = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/([a-zA-Z\-_]+)/i;
@@ -94,10 +108,12 @@ module.exports = {
 
         if (result && result.length >= 5 && message.guild.me.permissions.has('MANAGE_MESSAGES') && !message.member.permissions.has('ADMINISTRATOR')) {
           const fetchInvite = await message.client.fetchInvite(result[5]).catch(() => null);
-          if (!fetchInvite || (fetchInvite.guild && fetchInvite.guild.id === message.guild.id)) return;
+          if (!fetchInvite || (fetchInvite.guild && fetchInvite.guild.id === message.guild.id)) {
+            return;
+          }
           message.delete();
           const msg = await message.channel.send('Você não pode enviar convite de outros servidores.');
-          return msg.delete({ timeout: 60 * 1000 }).catch(console.error);
+          msg.delete({ timeout: 60 * 1000 }).catch(console.error);
         }
       }
     }
