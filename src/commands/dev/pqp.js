@@ -1,6 +1,6 @@
 module.exports = {
   run: async ({ message }) => {
-    const msg = await message.author.send('Deseja criar um ticket? Digite \`sim\` para criar e \`não\` para cancelar.');
+    const msg = await message.author.send('Deseja criar um ticket? Digite `sim` para criar e `não` para cancelar.');
     const filter = (m) => m.author.id === message.author.id;
     const collector = await msg.channel.createMessageCollector(filter, { max: 1 });
     /* Tirar reação do autor msg.reactions.first().users.remove(message.author.id) */
@@ -35,6 +35,7 @@ module.exports = {
     });
   },
   name: 'pqp',
+  onlyDevs: true,
   description: 'comando em teste',
   category: 'Desenvolvedores',
   aliases: [],

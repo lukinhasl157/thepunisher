@@ -8,13 +8,10 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     message, bot, args, server, Guilds, staff, t,
   }) => {
-    const devs = staff.roles.get('developers');
-
-    if (!devs.includes(message.author.id)) {
-      return message.channel.send(`**${message.author.username}** | Este comando é exclusivo para desenvolvedores do bot.`);
-    } if (args.length === 0) {
+    if (args.length === 0) {
       return message.channel.send(`**${message.author.username}** | Insira um código.`);
     }
+
     const code = args.join(' ').replace(/^```(js|javascript ?\n)?|```$/g, '');
     const embed = new MessageEmbed();
     try {
@@ -35,6 +32,7 @@ module.exports = {
     return message.channel.send(embed);
   },
   name: 'eval',
+  onlyDevs: true,
   aliases: ['evaluate', 'code'],
   category: 'Desenvolvedores',
   description: 'Executar um código',

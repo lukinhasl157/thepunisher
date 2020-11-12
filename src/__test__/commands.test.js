@@ -6,7 +6,7 @@ describe('Command Tests', () => {
   const commands = CommandHandler.readCommands();
 
   test('test if command obj has unknown props', () => {
-    const commandProps = ['description', 'aliases', 'name', 'run', 'category', 'botPermissions', 'userPermissions'];
+    const commandProps = ['description', 'onlyDevs', 'aliases', 'name', 'run', 'category', 'botPermissions', 'userPermissions'];
     expect(commands
       .map((c) => [c.name, Object.getOwnPropertyNames(c)
         .filter((p) => !commandProps.includes(p))])

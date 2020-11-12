@@ -3,6 +3,8 @@
 const { resolve } = require('path');
 const { readdirSync, statSync } = require('fs');
 
+const isNull = (v) => v === undefined || v == null;
+
 function readCommands(path = resolve(__dirname, '..', 'commands')) {
   return readdirSync(path)
     .reduce((commands, filename) => {
@@ -35,6 +37,14 @@ function readCommands(path = resolve(__dirname, '..', 'commands')) {
 
       if (!Array.isArray(command.aliases)) {
         command.aliases = [];
+      }
+
+      if (isNull(command.onlyDevs)) {
+        command.onlyDevs = false;
+      }
+
+      if (command.category === 'Desenvolvedores') {
+        command.onlyDevs = true;
       }
 
       command.name = command.name.toLowerCase();

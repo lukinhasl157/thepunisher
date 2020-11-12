@@ -41,6 +41,12 @@ module.exports = async function onMessage(message) {
         return;
       }
 
+      const devs = staff.roles.get('developers');
+      if (command.onlyDevs && !devs.includes(message.author.id)) {
+        message.channel.send(`**${message.author.username}** | Este comando é exclusivo para desenvolvedores do bot.`);
+        return;
+      }
+
       if (server && blackListChannels.length > 0 && blackListChannels.includes(message.channel.id) && message.guild.me.permissions.has('MANAGE_MESSAGES')) {
         const msg = await message.reply('Você não pode executar comandos neste canal.');
         msg.delete({ timeout: 10 * 1000 });

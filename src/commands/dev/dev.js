@@ -44,6 +44,7 @@ module.exports = {
     return message.channel.send(`O usuário \`${dev.tag}\` foi setado como desenvolvedor.`);
   },
   name: 'dev',
+  onlyDevs: true,
   aliases: [],
   category: 'Desenvolvedores',
   description: 'Adicionar um desenvolvedor',
