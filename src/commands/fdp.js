@@ -1,5 +1,5 @@
-const path = require("path")
-const { Attachment } = require('discord.js')
+const path = require('path');
+const { Attachment } = require('discord.js');
 
 module.exports = {
   run: ({ message, args }) => {
@@ -7,7 +7,7 @@ module.exports = {
     if (!member) {
       return message.channel.send(`» **${message.author.username}** | Por favor, insira o id, nome ou mencione o usuário que deseja xingar.`);
     }
-    const file = new Attachment(path.resolve(__dirname, '..', 'assets', 'filhodaputa.gif'), 'filhodaputa.gif')
+    const file = new Attachment(path.resolve(__dirname, '..', 'assets', 'filhodaputa.gif'), 'filhodaputa.gif');
     return message.channel.send(`${member}, o usuário **${message.author.username}** xingou você de:`, file);
   },
   name: 'fdp',
