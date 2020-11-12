@@ -1,14 +1,14 @@
-'use strict';
 const Discord = require('discord.js');
+
 module.exports = {
   run: async ({ message, args }) => {
     let channel = message.guild.channels.find((c) => c.name === 'sugestões');
 
     if (!args.length) {
       return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`);
-    } else if (!channel && !message.guild.me.permissions.has('MANAGE_CHANNELS')) {
+    } if (!channel && !message.guild.me.permissions.has('MANAGE_CHANNELS')) {
       return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`MANAGE_CHANNELS\`\` para executar este comando.`);
-    } else if (!channel) {
+    } if (!channel) {
       channel = await message.guild.channels.create('sugestões', {
         type: 'text',
         permissionOverwrites: [{

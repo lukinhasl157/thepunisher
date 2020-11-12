@@ -1,4 +1,3 @@
-'use strict';
 const { connection, connect } = require('mongoose');
 
 const mongooseConnection = () => {

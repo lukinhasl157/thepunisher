@@ -1,5 +1,5 @@
-'use strict';
 const { Schema, model } = require('mongoose');
+
 const Staff = new Schema({
   projectName: {
     type: String,
@@ -18,4 +18,5 @@ const Staff = new Schema({
     },
   },
 });
+
 module.exports = model('Staff', Staff);

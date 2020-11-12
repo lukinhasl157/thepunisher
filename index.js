@@ -1,8 +1,8 @@
-'use strict';
 require('dotenv/config');
 const { Client, Message, Collection } = require('discord.js');
 const { loadListeners } = require('./src/handlers/listenerHandler');
 const { loadCommands } = require('./src/handlers/commandHandler');
+
 const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
 
 class CommandStore extends Collection {
@@ -40,7 +40,7 @@ process
   .on('unhandledRejection', (error) => console.error('Uncaught Promise Error:', error));
 
 // eslint-disable-next-line func-names
-Message.prototype.reply = function(content) {
+Message.prototype.reply = function (content) {
   if (this.author) return this.channel.send(`» **${this.author.tag}** | ${content}`);
   return this.channel.send(content);
 };

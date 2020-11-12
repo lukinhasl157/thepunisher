@@ -1,4 +1,3 @@
-'use strict';
 const { resolve } = require('path');
 const { readdirSync } = require('fs');
 
@@ -22,4 +21,3 @@ const loadCommands = (path, bot) => {
 };
 
 module.exports = { loadCommands };
-

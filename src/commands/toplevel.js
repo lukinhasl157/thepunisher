@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   name: 'toplevel',
   aliases: [],
@@ -12,6 +11,7 @@ module.exports = {
         .map(([memberID, member], i) => {
           const username = message.guild.members.cache.get(memberID).user.tag;
           return `${i + 1}º - ${username}, level: ${member.level} xp: ${member.xp}`;
-        }));
+        }),
+    );
   },
 };

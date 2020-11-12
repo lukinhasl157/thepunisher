@@ -1,5 +1,5 @@
-'use strict';
 const Guilds = require('../database/guild');
+
 module.exports = {
   run: (guild) => {
     console.log(`Adicionando o servidor ${guild.name} (${guild.id}) na database...`);

@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   run: async ({ bot, message }) => {
     const msg = await message.channel.send('Calculando a latência...');

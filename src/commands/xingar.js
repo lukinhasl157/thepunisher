@@ -1,30 +1,27 @@
-'use strict';
 module.exports = {
   run: async ({ message, args }) => {
     const member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if (!member) {
       return message.channel.send(`**${message.author.username}**, | Por favor, insira o id ou mencione o usuário que deseja xingar.`);
-    } else {
-      try {
-        message.author.send(`**${message.author.username}** | Como deseja xingar o usuário **${member.user.tag}** ? (Após \`30s\` esta mensagem será apagada.)`);
-      } catch (e) {
-        return message.reply('Desculpe, sua DM está desativada e não posso enviar mensagens.');
-      }
-
-      const msg = await message.channel.send(`${message.author.username} | Por favor, olhe sua **DM**`);
-      msg.delete({ timeout: 30 * 1000 });
-      const filter = (m) => m.author.equals(message.author),
-        collector = message.channel.createMessageCollector(filter, { max: 1, time: 30 * 1000 });
-
-      collector.on('collect', (m) => {
-        message.author.send(`**${message.author.username}**, seu foi xingamento enviado com sucesso.`);
-        message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: \`${m.content}.\``);
-      });
     }
+    try {
+      message.author.send(`**${message.author.username}** | Como deseja xingar o usuário **${member.user.tag}** ? (Após \`30s\` esta mensagem será apagada.)`);
+    } catch (e) {
+      return message.reply('Desculpe, sua DM está desativada e não posso enviar mensagens.');
+    }
+
+    const msg = await message.channel.send(`${message.author.username} | Por favor, olhe sua **DM**`);
+    msg.delete({ timeout: 30 * 1000 });
+    const filter = (m) => m.author.equals(message.author);
+    const collector = message.channel.createMessageCollector(filter, { max: 1, time: 30 * 1000 });
+
+    collector.on('collect', (m) => {
+      message.author.send(`**${message.author.username}**, seu foi xingamento enviado com sucesso.`);
+      message.channel.send(`${member}, o usuário **${message.author.username}**, xingou você de: \`${m.content}.\``);
+    });
   },
   name: 'xingar',
   aliases: [],
   category: 'Entretenimento',
   description: 'Xingar um usuário.',
 };
-

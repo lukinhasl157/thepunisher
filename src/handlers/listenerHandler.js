@@ -1,4 +1,3 @@
-'use strict';
 const { resolve } = require('path');
 const { readdirSync } = require('fs');
 

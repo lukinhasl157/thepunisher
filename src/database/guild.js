@@ -1,5 +1,5 @@
-'use strict';
 const { Schema, model } = require('mongoose');
+
 const Guild = new Schema({
   _id: {
     type: String,
@@ -54,4 +54,5 @@ const Guild = new Schema({
     },
   },
 });
+
 module.exports = model('Guilds', Guild);

@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   run: async ({ message }) => {
     const msg = await message.author.send('Deseja criar um ticket? Digite \`sim\` para criar e \`não\` para cancelar.');
@@ -13,9 +12,9 @@ module.exports = {
           break;
         }
         case 'sim': {
-          const msg2 = await message.author.send('Você tem \`60s\` para enviar o ticket.'),
-            filter2 = (m) => m.author.id === message.author.id,
-            collector2 = await msg2.channel.createMessageCollector(filter2, { max: 1, time: 60 * 1000 });
+          const msg2 = await message.author.send('Você tem \`60s\` para enviar o ticket.');
+          const filter2 = (m) => m.author.id === message.author.id;
+          const collector2 = await msg2.channel.createMessageCollector(filter2, { max: 1, time: 60 * 1000 });
 
           collector2.on('collect', async (msg2) => {
             message.author.send('Ticket enviado com sucesso!');

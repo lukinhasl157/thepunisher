@@ -1,13 +1,12 @@
-'use strict';
-const { blue } = require('../utils/emojis.json'),
-  Guilds = require('../database/guild');
+const { blue } = require('../utils/emojis.json');
+const Guilds = require('../database/guild');
 
 module.exports = {
   run: async (member) => {
     const db = await Guilds.findOne({ _id: member.guild.id });
     if (!db) return;
-    const events = db.events.get('guildMemberAdd'),
-      guild = member.guild;
+    const events = db.events.get('guildMemberAdd');
+    const { guild } = member;
 
     if (db && events.antiBot.status && member.user.bot && guild.me.permissions.has('KICK_MEMBERS')) {
       member.kick('O modo antiBots está ativado.').catch(() => null);
@@ -21,9 +20,9 @@ module.exports = {
       const channel = guild.channels.get(events.count.channel);
       let msg = events.count.message;
       if (channel && msg) {
-        const members = guild.memberCount.toString().split(''),
-          regex = /(\{blue|green\})+/,
-          type = msg.match(regex);
+        const members = guild.memberCount.toString().split('');
+        const regex = /(\{blue|green\})+/;
+        const type = msg.match(regex);
 
         if (type && type.length) {
           switch (type[0].replace(/(\{)?(\})?/g, '')) {

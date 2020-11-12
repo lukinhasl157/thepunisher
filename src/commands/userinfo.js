@@ -1,34 +1,34 @@
-'use strict';
-const { MessageEmbed } = require('discord.js'),
-  moment = require('moment');
+const { MessageEmbed } = require('discord.js');
+const moment = require('moment');
+
 moment.locale('pt-BR');
 
 module.exports = {
   run: ({ message, args }) => {
-    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member,
-      status = {
-        online: '<:online:535161741873643531> Disponível',
-        offline: '<:offline:535161911956996104> Invisível',
-        idle: '<:ausente:535161866415112192> Ausente',
-        dnd: '<:ocupado:535161952075251742> Não perturbar',
-      },
-      gamePresence = {
-        'Visual Studio Code': '<:vsc:536600505099616267> Visual Studio Code',
-        Youtube: '<:Youtube:536605153759985665> Youtube',
-        Spotify: '<:Spotify:536607195949694977> Spotify',
-        'Sublime Text': '<:SublimeText:536606178323726387> Sublime Text',
-        'Counter-Strike Global Offensive': '<:CSGO:536606981192941568> Counter-Strike: Global Offensive',
-        Netflix: '<:Netflix:536605205916155904> Netflix',
-        'Adobe Photoshop': '<:AdobePhotoshop:536607935909068800> Adobe Photoshop',
-        'Adobe Illustrator': '<:Adobe_Illustrator:536607785581019163> Adobe Illustrator',
-        'League of Legends': '<:LeagueOfLegends:536606575947808779> League of Legends',
-        'World of Warcraft': '<:WoW:536608041056075786> World of Warcraft',
-        Fortnite: '<:fortnite:537665269464825866> Fortnite',
-        "PLAYERUNKNOWN'S BATTLEGROUNDS": "<:PUBG:537667392029982744> PLAYERUNKNOWN'S BATTLEGROUNDS",
-      },
-      roles = member.roles.cache.filter((r) => r.id !== message.guild.id)
-        .sort((a, b) => b.position - a.position)
-        .map((i) => i.toString());
+    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+    const status = {
+      online: '<:online:535161741873643531> Disponível',
+      offline: '<:offline:535161911956996104> Invisível',
+      idle: '<:ausente:535161866415112192> Ausente',
+      dnd: '<:ocupado:535161952075251742> Não perturbar',
+    };
+    const gamePresence = {
+      'Visual Studio Code': '<:vsc:536600505099616267> Visual Studio Code',
+      Youtube: '<:Youtube:536605153759985665> Youtube',
+      Spotify: '<:Spotify:536607195949694977> Spotify',
+      'Sublime Text': '<:SublimeText:536606178323726387> Sublime Text',
+      'Counter-Strike Global Offensive': '<:CSGO:536606981192941568> Counter-Strike: Global Offensive',
+      Netflix: '<:Netflix:536605205916155904> Netflix',
+      'Adobe Photoshop': '<:AdobePhotoshop:536607935909068800> Adobe Photoshop',
+      'Adobe Illustrator': '<:Adobe_Illustrator:536607785581019163> Adobe Illustrator',
+      'League of Legends': '<:LeagueOfLegends:536606575947808779> League of Legends',
+      'World of Warcraft': '<:WoW:536608041056075786> World of Warcraft',
+      Fortnite: '<:fortnite:537665269464825866> Fortnite',
+      "PLAYERUNKNOWN'S BATTLEGROUNDS": "<:PUBG:537667392029982744> PLAYERUNKNOWN'S BATTLEGROUNDS",
+    };
+    const roles = member.roles.cache.filter((r) => r.id !== message.guild.id)
+      .sort((a, b) => b.position - a.position)
+      .map((i) => i.toString());
 
     let rolesText;
     if (roles.length === 0) {
@@ -58,8 +58,7 @@ module.exports = {
       .addField(`» Cargos [${roles.length}]`, rolesText, false)
       .setColor(member.displayColor)
       .setTimestamp(new Date())
-      .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL())
-    );
+      .setFooter(`» Comando solicitado por: ${message.author.tag}`, message.author.displayAvatarURL()));
   },
   name: 'userinfo',
   aliases: ['perfil', 'info', 'ui'],
