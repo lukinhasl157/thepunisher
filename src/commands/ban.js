@@ -29,14 +29,6 @@ module.exports = {
     collector.on('collect', async (r) => {
       msg.delete();
       if (r.emoji.id === ACCEPT_EMOJI_ID) {
-        if (!message.guild.me.permissions.has('BAN_MEMBERS')) {
-          return message.reply('Desculpe, eu preciso da permissão `BAN_MEMBERS` para executar este comando.');
-        }
-
-        if (!message.member.permissions.has('BAN_MEMBERS')) {
-          return message.reply('Desculpe, você precisa da permissão `BAN_MEMBERS` para executar este comando.');
-        }
-
         if (message.member.user.equals(message.guild.owner)) {
           await member.send(`» **${member.user.username}** | Você foi banido por **${message.author.username}**. \n» Motivo: \`${reason}\`.`).catch(() => null);
           await member.ban(reason);
@@ -63,6 +55,8 @@ module.exports = {
       return message.reply(`» A acão de banimento do usuário **${member.user.tag}** ID: \`${member.user.id}\` | Foi cancelada. <:negado:604266617379225620>`);
     });
   },
+  userPermissions: ['BAN_MEMBERS'],
+  botPermissions: ['BAN_MEMBERS'],
   name: 'ban',
   aliases: ['banir', 'punir'],
   category: 'Moderação',

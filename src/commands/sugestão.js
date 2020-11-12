@@ -6,9 +6,9 @@ module.exports = {
 
     if (!args.length) {
       return message.channel.send(`» **${message.author.username}** | Por favor, insira uma sugestão!`);
-    } if (!channel && !message.guild.me.permissions.has('MANAGE_CHANNELS')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`MANAGE_CHANNELS\`\` para executar este comando.`);
-    } if (!channel) {
+    }
+
+    if (!channel) {
       channel = await message.guild.channels.create('sugestões', {
         type: 'text',
         permissionOverwrites: [{
@@ -34,6 +34,8 @@ module.exports = {
       await message.channel.send(`» **${message.author.username}** | Sua sugestao foi enviada com sucesso!`);
     }
   },
+  userPermissions: ['MANAGE_GUILD'],
+  botPermissions: ['MANAGE_CHANNELS'],
   name: 'sugestão',
   aliases: ['sugestao'],
   category: 'Utilidades',

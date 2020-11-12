@@ -50,14 +50,14 @@ module.exports = async function onMessage(message) {
       const botPerms = command.botPermissions.filter((p) => !message.guild.me.permissions.has(p))
         .map((p) => `\`${p}\``);
       if (!botPerms.length) {
-        message.reply(`Desculpe, eu preciso da permissão ${botPerms.join(', ')} para executar este comando.`);
+        message.replyError(`desculpe, eu preciso da permissão ${botPerms.join(', ')} para executar este comando.`);
         return;
       }
 
       const userPerms = command.userPermissions.filter((p) => !message.member.permissions.has(p))
         .map((p) => `\`${p}\``);
       if (!userPerms.length) {
-        message.reply(`Desculpe, você precisa da permissão ${userPerms.join(', ')} para executar este comando.`);
+        message.replyError(`desculpe, você precisa da permissão ${userPerms.join(', ')} para executar este comando.`);
         return;
       }
 

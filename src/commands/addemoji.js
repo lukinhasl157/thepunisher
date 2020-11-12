@@ -19,6 +19,8 @@ module.exports = {
       return message.channel.send('Não consegui adicionar...');
     }
   },
+  botPermissions: ['MANAGE_EMOJIS'],
+  userPermissions: ['MANAGE_EMOJIS'],
   name: 'addemoji',
   aliases: ['adicionaremoji', 'emojiadd', 'emoji'],
   category: 'Utilidades',

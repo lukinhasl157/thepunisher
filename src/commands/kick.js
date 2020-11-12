@@ -26,16 +26,10 @@ module.exports = {
     collector.on('collect', async (r) => {
       msg.delete();
       if (r.emoji.id === '505155063963058187') {
-        if (!message.guild.me.permissions.has('KICK_MEMBERS')) {
-          return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`KICK_MEMBERS\`\` para executar este comando.`);
-        }
         if (message.member.user.equals(message.guild.owner.user)) {
           await member.send(`» **${member.user.username}** | Você foi expulso por **${message.author.username}**. \n» Motivo: \`\`${reason}\`\`.`).catch(() => false);
           await member.kick(reason);
           return message.channel.send(`» O usuário **${member.user.tag} ID:** \`\`${member.user.id}\`\` | Foi expulso com sucesso. <:correto:604266535262879746>`);
-        }
-        if (!message.member.permission.has('KICK_MEMBERS')) {
-          return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão necessária: \`\`BAN_MEMBERS\`\`.`);
         }
         if (member.user.equals(message.guild.owner.user)) {
           return message.channel.send(`» **${message.author.username}** | Desculpe, você não pode expulsar o dono do servidor.`);
@@ -56,6 +50,8 @@ module.exports = {
       return message.channel.send(`» A acão para expulsar o usuário **${member.user.tag}** ID: \`\`${member.user.id}\`\` | Foi cancelada com sucesso. <:negado:604266617379225620>`);
     });
   },
+  userPermissions: ['KICK_MEMBERS'],
+  botPermissions: ['KICK_MEMBERS'],
   name: 'kick',
   aliases: ['expulsar', 'kickar'],
   category: 'Moderação',

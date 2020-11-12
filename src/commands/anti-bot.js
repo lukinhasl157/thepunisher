@@ -3,10 +3,6 @@ module.exports = {
     const { status } = server.events.get('guildMemberAdd').antiBot;
     const type = args[0];
 
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, você precisa da permissão \`ADMINISTRATOR\` para executar este comando.`);
-    }
-
     if (args.length === 0) {
       return message.channel.send(`O modo **ANTI-BOT** está \`${status ? 'ativado' : 'desativado'}\``);
     }
@@ -42,6 +38,8 @@ module.exports = {
         return message.channel.send('opção invalida!');
     }
   },
+  userPermissions: ['ADMINISTRATOR'],
+  botPermissions: ['BAN_MEMBERS'],
   name: 'anti-bot',
   category: 'Moderação',
   description: 'Expulsa bots ao entrar no servidor.',

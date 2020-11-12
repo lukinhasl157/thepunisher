@@ -4,10 +4,6 @@ module.exports = {
     const filterStatus = server.events.get('message').filterWords.status;
     const filterWords = server.events.get('message').filterWords.words;
 
-    if (!message.member.permissions.has('ADMINISTRATOR')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, você precisa da permissão \`ADMINISTRATOR\` para executar este comando.`);
-    }
-
     if (args.length === 0) {
       return message.channel.send(`O filtro está \`${filterStatus ? 'ativado' : 'desativado'}\``);
     }
@@ -99,6 +95,8 @@ module.exports = {
         return message.channel.send('Opção invalida.');
     }
   },
+  botPermissions: ['MANAGE_MESSAGES'],
+  userPermissions: ['ADMINISTRATOR'],
   name: 'filtro',
   category: 'Moderação',
   description: 'Filtro de palavras',

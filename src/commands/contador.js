@@ -5,11 +5,7 @@ module.exports = {
     const { status } = server.events.get('guildMemberAdd').count;
     const type = args[0];
 
-    if (!message.member.permissions.has('ADMINISTRATOR')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe você precisa da permissão \`ADMINISTRADOR\` para executar este comando.`);
-    } if (!message.guild.me.permissions.has('MANAGE_CHANNELS')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`GERENCIAR_CANAIS\` para executar este comando.`);
-    } if (args.length === 0) {
+    if (args.length === 0) {
       return message.channel.send(`O contador está ${status ? 'ativado' : 'desativado'}`);
     }
 
@@ -70,6 +66,8 @@ module.exports = {
         return message.channel.send('opção invalida.');
     }
   },
+  botPermissions: ['MANAGE_CHANNELS'],
+  userPermissions: ['ADMINISTRATOR'],
   name: 'contador',
   category: 'Moderação',
   description: 'Mostra um contador de membros no topico do canal',

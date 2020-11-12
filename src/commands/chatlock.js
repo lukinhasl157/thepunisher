@@ -1,21 +1,14 @@
 module.exports = {
   run: ({ message }) => {
     const everyone = message.guild.roles.find((r) => r.name === '@everyone');
-
-    if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão **MANAGE_CHANNELS** para executar este comando.`);
-    }
-
-    if (!message.member.hasPermission('MANAGE_CHANNELS')) {
-      return message.channel.send(`**${message.author.username}** | Desculpe, você não permissão para executar este comando! Permissão requirida: **MANAGE_CHANNELS**`);
-    }
-
     message.channel.overwritePermissions(everyone, {
       SEND_MESSAGES: false,
     });
 
     return message.channel.send(`» O canal ${message.channel} foi **DESATIVADO.** :lock: por **${message.author.username}**. Para reativar o chat utilize t.unlock`);
   },
+  botPermissions: ['MANAGE_CHANNELS'],
+  userPermissions: ['MANAGE_CHANNELS'],
   name: 'chatlock',
   aliases: ['chlock', 'lock'],
   category: 'Moderação',

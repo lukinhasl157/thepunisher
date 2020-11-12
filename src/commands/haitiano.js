@@ -26,20 +26,13 @@ module.exports = {
       return message.channel.send('Desculpe, eu já estou tocando uma música em outro canal de voz.');
     }
 
-    if (!memberConnection.permissionsFor(message.guild.me).has('CONNECT')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para entrar neste canal! Permissão requirida: \`CONNECT\`.`);
-    }
-
-    if (!memberConnection.permissionsFor(message.guild.me).has('SPEAK')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu não tenho permissão para trasmitir áudio neste canal! Permissão requirida: \`SPEAK\`.`);
-    }
-
     const connection = await memberConnection.join();
     const dispatcher = await connection.play(createReadStream(path.resolve('..', 'assets', 'Haitiano.wav')), { volume: 1.0 });
 
     dispatcher.on('finish', () => memberConnection.leave());
     return message.channel.send('Haitiano...');
   },
+  botPermissions: ['CONNECT', 'SPEAK'],
   name: 'haitiano',
   category: 'Entretenimento',
   description: 'Haitiano...',

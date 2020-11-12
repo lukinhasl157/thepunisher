@@ -4,14 +4,6 @@ module.exports = {
     const deleteCount = parseInt(args[0]);
     const fetched = await message.channel.messages.fetch({ limit: deleteCount + 1 });
 
-    if (!message.guild.me.permissions.has('MANAGE_MESSAGES')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`MANAGE_MESSAGES\` para executar este comando.`);
-    }
-
-    if (!message.member.permissions.has('MANAGE_MESSAGES')) {
-      return message.channel.send(`**${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão requirida: **MANAGE_MESSAGES**.`);
-    }
-
     if (!deleteCount || deleteCount < 2 || deleteCount > 100 || Number.isNaN(deleteCount)) {
       return message.channel.send(`**${message.author.username}** |  Por favor, forneça um número entre 2 e 100 de mensagens a serem excluídas`);
     }
@@ -20,6 +12,8 @@ module.exports = {
     return message.channel.send(`**${message.author.username}** | O chat foi limpo com sucesso! \`${deleteCount}\` mensagens excluídas.`)
       .then((msg) => msg.delete({ timeout: 30 * 1000 }));
   },
+  botPermissions: ['MANAGE_MESSAGES'],
+  userPermissions: ['MANAGE_MESSAGES'],
   name: 'clear',
   aliases: ['limpar'],
   category: 'Moderação',
