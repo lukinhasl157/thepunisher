@@ -1,6 +1,6 @@
 module.exports = {
   run: async ({ message, args }) => {
-    const member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
     const reason = args.slice(1).join(' ');
 
     if (!member) {

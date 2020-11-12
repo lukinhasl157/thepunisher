@@ -6,7 +6,7 @@ const commandHandler = require('./handlers/commandHandler');
 const { connectMongoose } = require('./database/mongoose');
 
 async function start() {
-  const bot = new Client({ fetchAllMembers: true, disabledEvents: ['TYPING_START'] });
+  const bot = new Client({ disabledEvents: ['TYPING_START'] });
 
   bot.commands = new Collection(commandHandler.readCommands().map((cmd) => [cmd.name, cmd]));
   bot.aliases = commandHandler.loadAliases(bot.commands);

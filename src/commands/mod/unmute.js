@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
   run: ({ message, args }) => {
     const role = message.guild.roles.find((r) => r.name === 'The Punisher | 🔇 Muted');
-    const member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
     const reason = args.slice(1).join(' ');
 
     if (!message.guild.me.hasPermission('MUTE_MEMBERS')) {

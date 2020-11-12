@@ -76,6 +76,7 @@ module.exports = async function onMessage(message) {
         server,
         staff,
         args,
+        prefix,
         MessageEmbed,
       });
 
@@ -100,7 +101,7 @@ module.exports = async function onMessage(message) {
       });
       await server.save().catch(console.error);
     } else {
-      const dbMember = dbMembers.get(message.author.id);
+      const dbMember = dbmembers.cache.get(message.author.id);
       dbMember.xp += 10;
 
       if (dbMember.xp > dbMember.level * 500) {

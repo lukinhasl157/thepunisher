@@ -4,13 +4,17 @@ module.exports = {
   run: async ({ message }) => {
     const invites = await message.guild.fetchInvites();
     if (invites.size === 0) {
-      return message.channel.send('Nenhum convite foi criado.');
+      return message.replyError('Nenhum convite foi criado.');
     }
-    const arr = invites.array();
-    const newarr = arr.sort((a, b) => b.uses - a.uses);
+
+    const parsed = invites
+      .array()
+      .sort((a, b) => b.uses - a.uses)
+      .map((i, _, arr) => `${arr.indexOf(i) + 1}º - ${i.code} ${i.inviter.tag} (${i.uses})`)
+      .join('\n');
 
     return message.channel.send(new MessageEmbed()
-      .setDescription(newarr.map((i) => `${newarr.indexOf(i) + 1}º - ${i.inviter.tag} (${i.uses})`).join('\n'))
+      .setDescription(parsed)
       .setColor('RANDOM')
       .setThumbnail(message.guild.iconURL()));
   },

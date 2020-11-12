@@ -1,5 +1,5 @@
 module.exports = function run() {
-  this.user.setActivity(`${this.users.size.toLocaleString()} usuários.`,
+  this.user.setActivity(`${this.users.cache.size.toLocaleString()} usuários.`,
     {
       url: 'https://twitch.tv/alanzoka', type: 'STREAMING',
     });

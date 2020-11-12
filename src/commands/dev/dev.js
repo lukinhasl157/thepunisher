@@ -4,16 +4,16 @@ module.exports = {
     const dev = message.mentions.users.first();
     const devIDSArray = devIDS.split(',');
 
+    if (!message.author.equals(bot.users.cache.get(ownerID.toString()))) {
+      return message.replyError('Este comando só pode ser executando pelo dono do bot.');
+    }
+
     if (args[0] === 'remove') {
       if (!dev) {
         return message.channel.send('Mencione o usuário que deseja setar como desenvolvedor.');
       }
 
-      if (!message.author.equals(bot.users.get(ownerID.toString()))) {
-        return message.replyError('Este comando só pode ser executando pelo dono do bot.');
-      }
-
-      if (!bot.users.find((i) => i.id === dev.id)) {
+      if (!bot.users.cache.find((i) => i.id === dev.id)) {
         return message.replyError('Não econtrei este usuário em meus servidores.');
       }
 
@@ -25,15 +25,11 @@ module.exports = {
     }
 
     if (args[0] === 'list') {
-      return message.reply(devIDSArray.map((i) => `\`${bot.users.get(i).tag}\``).join(', '));
+      return message.reply(devIDSArray.map((i) => `\`${bot.users.cache.get(i).tag}\``).join(', '));
     }
 
     if (!dev) {
       return message.replyError('Mencione o usuário que deseja setar como desenvolvedor.');
-    }
-
-    if (!message.author.equals(bot.users.get(ownerID.toString()))) {
-      return message.replyError('Este comando só pode ser executando pelo dono do bot.');
     }
 
     if (devIDSArray.includes(dev.id)) {

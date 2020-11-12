@@ -4,7 +4,7 @@ const ms = require('ms');
 
 module.exports = {
   run: async ({ message, args }) => {
-    const member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
     const time = Number(ms(args[1]));
     const reason = args.slice(2).join(' ');
     let role = message.guild.roles.find((r) => r.name === 'The Punisher | 🔇 Muted');

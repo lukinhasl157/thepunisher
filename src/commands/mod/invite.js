@@ -2,13 +2,11 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
   run: async ({ bot, message, args }) => {
-    const user = message.mentions.users.first() || message.author || bot.users.get(args[0]);
+    const user = message.mentions.users.first() || message.author || bot.users.cache.get(args[0]);
     const invites = await message.guild.fetchInvites();
     const invitesUser = invites.find((i) => i.inviter.id === user.id);
 
-    if (!message.guild.me.hasPermission('MANAGE_GUILD')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`\`MANAGE_GUILD\`\` para executar este comando.`);
-    } if (!invitesUser) {
+    if (!invitesUser) {
       return message.channel.send('Você não possui nenhuma URL de convite.');
     }
 
@@ -16,10 +14,11 @@ module.exports = {
       .setThumbnail(user.displayAvatarURL)
       .addField('» Membros recrutados: ', `\`\`\`js\n(${invitesUser.uses}) - Membros\`\`\``)
       .addField('» URL de convite:', invitesUser.url)
-      .setColor(message.guild.members.get(invitesUser.inviter.id).displayColor)
+      .setColor(message.guild.members.cache.get(invitesUser.inviter.id).displayColor)
       .setFooter(user.tag, user.displayAvatarURL)
       .setTimestamp(new Date()));
   },
+  botPermissions: ['MANAGE_GUILD'],
   name: 'invite',
   aliases: ['convite', 'div', 'convites'],
   category: 'Moderação',

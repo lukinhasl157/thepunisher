@@ -58,10 +58,11 @@ describe('Command Tests', () => {
 
   test('test if have any commands without a category or invalid category', () => {
     const categoryNames = categories.map((c) => c.name);
+
     expect(
       commands
-        .filter((c) => !c.category || !categoryNames.includes(c))
-        .map((c) => c.name),
+        .filter((c) => !c.category || !categoryNames.includes(c.category))
+        .map((c) => [c.name, c.category]),
     ).toEqual([]);
   });
 });

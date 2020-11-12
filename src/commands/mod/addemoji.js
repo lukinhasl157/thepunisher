@@ -23,6 +23,6 @@ module.exports = {
   userPermissions: ['MANAGE_EMOJIS'],
   name: 'addemoji',
   aliases: ['adicionaremoji', 'emojiadd', 'emoji'],
-  category: 'Utilidades',
+  category: 'Moderação',
   description: 'Adicionar um emoji ao servidor.',
 };

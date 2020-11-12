@@ -1,7 +1,7 @@
 module.exports = {
   run: async ({ message, args }) => {
     // Gif ban the punisher https://media.giphy.com/media/1Xe14KOTgtL86EGBXU/giphy.gif
-    const member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
     const reason = args.slice(1).join(' ');
 
     if (!member) {

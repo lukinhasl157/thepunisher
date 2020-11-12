@@ -27,7 +27,7 @@ module.exports = {
       .addField('» 🔊 Tipo:', invite.channel.type ? invite.channel.type.toString().replace('voice', 'Voz').replace('text', 'Texto') : 'O convite não foi criado em nenhum tipo de canal.', true)
       .addField('» 📨 URL do convite:', invite.url, true)
       .addField('» 📩 Usos:', invite.maxUses ? `${invite.uses}/${invite.maxUses}` : 'Sem limite de usos.', true)
-      .setColor(message.guild.members.get(invite.inviter.id).displayColor)
+      .setColor(message.guild.members.cache.get(invite.inviter.id).displayColor)
       .setThumbnail(invite.inviter.avatarURL)
       .setTimestamp());
   },
