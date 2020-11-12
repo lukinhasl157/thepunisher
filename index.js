@@ -37,8 +37,8 @@ process
   })
   .on('unhandledRejection', (error) => console.error('Uncaught Promise Error:', error));
 
-Message.prototype.reply = function reply(content) {
-  if (this.author) return this.channel.send(`» **${this.author.tag}** | ${content}`);
+Message.prototype.reply = function reply(content, ...args) {
+  if (this.author) return this.channel.send(`» **${this.author.tag}** | ${content}`, ...args);
   return this.channel.send(content);
 };
 

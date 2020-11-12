@@ -8,5 +8,7 @@ module.exports = {
     message.channel.send(`Estou online há ${days > 0 ? `${days} dia(s), ` : ''}${hours > 0 ? `${hours} hora(s), ` : ''}${minutes > 0 ? `${minutes} minuto(s), ` : ''}${seconds > 0 ? `${seconds} segundo(s)` : ''}`);
   },
   name: 'uptime',
+  description: 'mostra o tempo que o bot ta online',
+  category: 'Informações',
   aliases: [],
 };

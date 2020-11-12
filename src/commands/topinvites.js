@@ -15,5 +15,7 @@ module.exports = {
       .setThumbnail(message.guild.iconURL()));
   },
   name: 'topinvites',
+  category: 'Utilidades',
+  description: 'mostra um rank dos convites mais usados',
   aliases: [],
 };

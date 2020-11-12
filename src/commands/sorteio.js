@@ -43,5 +43,7 @@ module.exports = {
     });
   },
   name: 'sorteio',
+  category: 'Moderação',
+  description: 'faz um sorteio',
   aliases: [],
 };

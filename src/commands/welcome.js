@@ -67,5 +67,7 @@ module.exports = {
     }
   },
   name: 'welcome',
+  category: 'Moderação',
+  description: 'Administra o modulo Welcome.',
   aliases: [],
 };

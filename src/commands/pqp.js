@@ -35,5 +35,7 @@ module.exports = {
     });
   },
   name: 'pqp',
+  description: 'comando em teste',
+  category: 'Desenvolvedores',
   aliases: [],
 };

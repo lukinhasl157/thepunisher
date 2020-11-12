@@ -14,5 +14,7 @@ module.exports = {
     return server.save();
   },
   name: 'setprefix',
+  description: 'seta um prefix pro servidor',
+  category: 'Moderação',
   aliases: ['changeprefix'],
 };
