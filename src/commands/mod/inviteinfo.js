@@ -3,11 +3,11 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
   run: async ({ message, args }) => {
     if (!message.guild.me.hasPermission('MANAGE_GUILD')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, eu preciso da permissão \`MANAGE_GUILD\` para executar este comando.`);
+      return message.replyError('Desculpe, eu preciso da permissão `MANAGE_GUILD` para executar este comando.');
     }
 
     if (args.length === 0) {
-      return message.channel.send('Insira o código de invite, caso não saiba o seu código de convite ou queira saber quantos membros você recrutou, digite `t.invite`');
+      return message.replyError('Insira o código de invite, caso não saiba o seu código de convite ou queira saber quantos membros você recrutou, digite `t.invite`');
     }
 
     const invites = await message.guild.fetchInvites();
@@ -15,7 +15,7 @@ module.exports = {
     const invite = invites.get(inviteArgs);
 
     if (!invite) {
-      return message.channel.send(`O convite \`${inviteArgs}\` é inválido ou inexistente.`);
+      return message.replyError(`O convite \`${inviteArgs}\` é inválido ou inexistente.`);
     }
 
     return message.channel.send(new MessageEmbed()

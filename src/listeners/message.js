@@ -43,7 +43,7 @@ module.exports = async function onMessage(message) {
 
       const devs = staff.roles.get('developers');
       if (command.onlyDevs && !devs.includes(message.author.id)) {
-        message.channel.send(`**${message.author.username}** | Este comando é exclusivo para desenvolvedores do bot.`);
+        message.replyError('Este comando é exclusivo para desenvolvedores do bot.');
         return;
       }
 

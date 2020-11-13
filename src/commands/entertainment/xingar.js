@@ -12,7 +12,7 @@ module.exports = {
       return;
     }
 
-    const msg = await message.channel.send(`${message.author.username} | Por favor, olhe sua **DM**`);
+    const msg = await message.reply('Por favor, olhe sua **DM**');
     msg.delete({ timeout: 30 * 1000 });
     const filter = (m) => m.author.equals(message.author);
     const collector = message.channel.createMessageCollector(filter, { max: 1, time: 30 * 1000 });

@@ -7,25 +7,25 @@ module.exports = {
 
     if (args[0] === 'join') {
       if (!serverMap) {
-        message.channel.send(`Não há nenhum evento loteria ocorrendo no momento, para iniciar o evento digite \`${server.prefix}loteria\``);
+        message.replyError(`Não há nenhum evento loteria ocorrendo no momento, para iniciar o evento digite \`${server.prefix}loteria\``);
         return;
       }
 
       if (serverMap.lotery.participants.includes(message.author.id)) {
-        message.channel.send('Você já está participando do evento loteria.');
+        message.replyError('Você já está participando do evento loteria.');
         return;
       }
 
       if (serverMap.lotery.ingame) {
-        message.channel.send('Desculpe, o evento loteria já começou');
+        message.replyError('Desculpe, o evento loteria já começou');
         return;
       }
       serverMap.lotery.participants.push(message.author.id);
-      message.channel.send(`» **${message.author.username}** | Entrou no evento loteria \`${serverMap.lotery.participants.length}/2\``);
+      message.reply(`» **${message.author.username}** | Entrou no evento loteria \`${serverMap.lotery.participants.length}/2\``);
       return;
     }
     if (serverMap) {
-      message.channel.send('O evento loteria já começou');
+      message.replyError('O evento loteria já começou');
       return;
     }
     const eventConstruct = { lotery: { participants: [], ingame: null } };
@@ -36,7 +36,7 @@ module.exports = {
     bot.setTimeout(async () => {
       if (eventConstruct.lotery.participants.length < 2) {
         bot.map.delete(message.guild.id);
-        message.channel.send(`O evento loteria foi cancelado, número de participantes foi insuciente \`${eventConstruct.lotery.participants.length}/2\``);
+        message.replyError(`O evento loteria foi cancelado, número de participantes foi insuciente \`${eventConstruct.lotery.participants.length}/2\``);
         return;
       }
       message.channel.send(`Evento loteria iniciado com \`${eventConstruct.lotery.participants.length}\` participantes, um número aleátorio foi gerado entre \`0 e ${maxNumber}.\``);

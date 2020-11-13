@@ -4,52 +4,52 @@ module.exports = {
     const type = args[0];
 
     if (args.length === 0) {
-      return message.channel.send(`O welcome está ${status ? 'ativado' : 'desativado'}`);
+      return message.reply(`O welcome está ${status ? 'ativado' : 'desativado'}`);
     }
     switch (type) {
       case 'on': {
         if (status) {
-          return message.channel.send('O welcome já está ativado.');
+          return message.replyError('O welcome já está ativado.');
         }
         server.events.get('guildMemberAdd').welcome.status = true;
         server.save();
-        return message.channel.send('O welcome foi ativado com sucesso!');
+        return message.reply('O welcome foi ativado com sucesso!');
       }
 
       case 'off': {
         if (!status) {
-          return message.channel.send('O welcome já está desativado.');
+          return message.replyError('O welcome já está desativado.');
         }
         server.events.get('guildMemberAdd').welcome.status = false;
         server.save();
-        return message.channel.send('O welcome foi desativado com sucesso!');
+        return message.reply('O welcome foi desativado com sucesso!');
       }
       case 'canal': {
         const channel = message.mentions.channels.first();
         const channels = message.guild.channels.filter((ch) => ch.type === 'text').map((ch) => ch);
 
         if (!channel) {
-          return message.channel.send('Parametros inválidos insira um canal para enviar a mensagem de welcome, exemplo: welcome canal #canal');
+          return message.replyError('Parametros inválidos insira um canal para enviar a mensagem de welcome, exemplo: welcome canal #canal');
         } if (!channels.includes(channel)) {
-          return message.channel.send('Este canal não existe.');
+          return message.replyError('Este canal não existe.');
         } if (server.events.get('guildMemberAdd').welcome.message === 'None') {
-          return message.channel.send('Antes de setar o canal coloque uma mensagem de welcome. Exemplo: welcome mensagem bem-vindo {member} ao servidor {server}');
+          return message.replyError('Antes de setar o canal coloque uma mensagem de welcome. Exemplo: welcome mensagem bem-vindo {member} ao servidor {server}');
         }
         server.events.get('guildMemberAdd').welcome.channel = channel.id;
         server.save();
 
-        return message.channel.send(`A mensagem de welcome foi setada no canal ${channel}`);
+        return message.reply(`A mensagem de welcome foi setada no canal ${channel}`);
       }
       case 'mensagem': {
         const msg = args.slice(1).join(' ');
         const variables = ['{member}', '{server}'];
 
         if (!variables.some((m) => msg.includes(m)) || !msg) {
-          return message.channel.send('Parametros inválidos insira o nome do servidor e o nome do membro na mensagem. Exemplo: welcome mensagem bem-vindo {member} ao servidor {server}');
+          return message.replyError('Parametros inválidos insira o nome do servidor e o nome do membro na mensagem. Exemplo: welcome mensagem bem-vindo {member} ao servidor {server}');
         }
         server.events.get('guildMemberAdd').welcome.message = msg;
         server.save();
-        return message.channel.send('A mensagem de welcome foi setada com sucesso!');
+        return message.reply('A mensagem de welcome foi setada com sucesso!');
       }
       case 'reset': {
         server.events.get('guildMemberAdd').welcome.message = 'None';

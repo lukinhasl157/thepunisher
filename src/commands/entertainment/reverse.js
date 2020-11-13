@@ -3,7 +3,7 @@ const reverseStr = (str) => str.split('').reverse().join('');
 module.exports = {
   run: ({ message, args }) => {
     if (args.lenght === 0) {
-      return message.channel.send('Insira uma frase.');
+      return message.replyError('Insira uma frase.');
     }
     return message.channel.send(reverseStr(args.join(' ')));
   },

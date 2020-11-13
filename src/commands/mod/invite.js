@@ -7,7 +7,7 @@ module.exports = {
     const invitesUser = invites.find((i) => i.inviter.id === user.id);
 
     if (!invitesUser) {
-      return message.channel.send('Você não possui nenhuma URL de convite.');
+      return message.replyError('Você não possui nenhuma URL de convite.');
     }
 
     return message.channel.send(new MessageEmbed()

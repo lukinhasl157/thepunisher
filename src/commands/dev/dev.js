@@ -10,7 +10,7 @@ module.exports = {
 
     if (args[0] === 'remove') {
       if (!dev) {
-        return message.channel.send('Mencione o usuário que deseja setar como desenvolvedor.');
+        return message.replyError('Mencione o usuário que deseja setar como desenvolvedor.');
       }
 
       if (!bot.users.cache.find((i) => i.id === dev.id)) {

@@ -6,7 +6,7 @@ module.exports = {
       SEND_MESSAGES: true,
     });
 
-    return message.channel.send(`» O canal ${message.channel} foi **ATIVADO.** :unlock: por **${message.author.username}**.`);
+    return message.reply(`O canal ${message.channel} foi **ATIVADO.** :unlock: por **${message.author.username}**.`);
   },
   botPermissions: ['MANAGE_CHANNELS'],
   userPermissions: ['MANAGE_CHANNELS'],

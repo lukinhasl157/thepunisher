@@ -4,38 +4,38 @@ module.exports = {
     const type = args[0];
 
     if (args.length === 0) {
-      return message.channel.send(`O modo **ANTI-BOT** está \`${status ? 'ativado' : 'desativado'}\``);
+      return message.reply(`O modo **ANTI-BOT** está \`${status ? 'ativado' : 'desativado'}\``);
     }
 
     if (message.author.id !== message.guild.ownerID) {
-      return message.channel.send('Este comando só pode ser executado pelo dono do servidor.');
+      return message.replyError('Este comando só pode ser executado pelo dono do servidor.');
     }
 
     switch (type) {
       case 'on': {
         if (status) {
-          return message.channel.send('O modo **ANTI-BOT** já está `ativado`');
+          return message.reply('O modo **ANTI-BOT** já está `ativado`');
         }
 
         server.events.get('guildMemberAdd').antiBot.status = true;
         server.save();
 
-        return message.channel.send('O modo **ANTI-BOT** foi `ativado` com sucesso.');
+        return message.reply('O modo **ANTI-BOT** foi `ativado` com sucesso.');
       }
 
       case 'off': {
         if (!status) {
-          return message.channel.send('O modo **ANTI-BOT** já está `desativado`');
+          return message.reply('O modo **ANTI-BOT** já está `desativado`');
         }
 
         server.events.get('guildMemberAdd').antiBot.status = false;
         server.save();
 
-        return message.channel.send('O modo **ANTI-BOT** foi `desativado` com sucesso.');
+        return message.reply('O modo **ANTI-BOT** foi `desativado` com sucesso.');
       }
 
       default:
-        return message.channel.send('opção invalida!');
+        return message.replyError('opção invalida!');
     }
   },
   userPermissions: ['ADMINISTRATOR'],

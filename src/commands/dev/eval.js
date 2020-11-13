@@ -9,7 +9,7 @@ module.exports = {
     message, bot, args, server, Guilds, staff, t,
   }) => {
     if (args.length === 0) {
-      return message.channel.send(`**${message.author.username}** | Insira um código.`);
+      return message.replyError(`**${message.author.username}** | Insira um código.`);
     }
 
     const code = args.join(' ').replace(/^```(js|javascript ?\n)?|```$/g, '');

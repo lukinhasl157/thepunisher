@@ -1,7 +1,7 @@
 module.exports = {
   run: ({ message, args }) => {
     if (args.length === 0) {
-      return message.channel.send('Digite uma mensagem.');
+      return message.replyError('Digite uma mensagem.');
     }
     message.delete();
     return message.channel.send(args.join(' '));

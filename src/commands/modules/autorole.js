@@ -7,36 +7,32 @@ module.exports = {
     const { roles, status } = server.events.get('guildMemberAdd').autoRole;
     const type = args[0];
 
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
-      return message.channel.send(`» **${message.author.username}** | Desculpe, você não tem permissão para executar este comando! Permissão requirida: \`ADMINISTRADOR\`.`);
-    }
-
     if (args.length === 0) {
-      return message.channel.send(`O autoRole está ${status ? 'ativado' : 'desativado'}`);
+      return message.reply(`O autoRole está ${status ? 'ativado' : 'desativado'}`);
     }
 
     switch (type) {
       case 'on': {
         if (status) {
-          return message.channel.send('O autoRole já está ativado.');
+          return message.reply('O autoRole já está ativado.');
         }
         server.events.get('guildMemberAdd').autoRole.status = true;
         server.save();
-        return message.channel.send('O autoRole foi ativado com sucesso!');
+        return message.reply('O autoRole foi ativado com sucesso!');
       }
 
       case 'off': {
         if (!status) {
-          return message.channel.send('O autoRole já está desativado.');
+          return message.reply('O autoRole já está desativado.');
         }
         server.events.get('guildMemberAdd').autoRole.status = false;
         server.save();
-        return message.channel.send('O autoRole foi desativado com sucesso!');
+        return message.reply('O autoRole foi desativado com sucesso!');
       }
 
       case 'list': {
         if (roles.length === 0) {
-          return message.channel.send(`Nenhum cargo foi adicionado a lista, caso queira adicionar algum cargo a lista digite: \`${server.prefix}autorole add @cargo\``);
+          return message.replyError(`Nenhum cargo foi adicionado a lista, caso queira adicionar algum cargo a lista digite: \`${server.prefix}autorole add @cargo\``);
         }
 
         return message.channel.send(new MessageEmbed()
@@ -67,7 +63,7 @@ module.exports = {
       case 'reset': {
         server.events.get('guildMemberAdd').autoRole.roles = [];
         server.save();
-        return message.channel.send('A lista de cargos foi resetada com sucesso!');
+        return message.reply('A lista de cargos foi resetada com sucesso!');
       }
 
       case 'add': {
@@ -79,22 +75,23 @@ module.exports = {
         }, [[], []]);
 
         if (nonAddedRoles.length) {
-          message.channel.send(`Os cargos seguites não foram adicionados pois já estavam incluídos: ${nonAddedRoles.map((r) => `\`${(message.guild.roles.get(r) && message.guild.roles.get(r).name) || 'desconhecido'}\``)}`);
+          message.replyError(`Os cargos seguites não foram adicionados pois já estavam incluídos: ${nonAddedRoles.map((r) => `\`${(message.guild.roles.get(r) && message.guild.roles.get(r).name) || 'desconhecido'}\``)}`);
         }
 
         if (!roles.length) {
-          return message.channel.send('Insira o ID ou mencione um ou mais cargo.');
+          return message.replyError('Insira o ID ou mencione um ou mais cargo.');
         }
 
         roles.push(rolesList);
         server.save();
-        return message.channel.send(`Os cargos seguintes foram adicionados: ${rolesList.map((r) => `\`${message.guild.roles.get(r).name}\``)}. Para ver todos os cargos digite \`${server.prefix}autorole list\``);
+        return message.reply(`Os cargos seguintes foram adicionados: ${rolesList.map((r) => `\`${message.guild.roles.get(r).name}\``)}. Para ver todos os cargos digite \`${server.prefix}autorole list\``);
       }
 
       default:
-        return message.channel.send('Opção invalida!');
+        return message.replyError('Opção invalida!');
     }
   },
+  userPermissions: ['ADMINISTRATOR'],
   name: 'autorole',
   category: 'Moderação',
   description: 'Adiciona cargo aos novos membros do servidor.',

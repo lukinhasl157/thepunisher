@@ -16,7 +16,7 @@ module.exports = {
     }
 
     await message.guild.members.unban(user, reason);
-    return message.channel.send(`O usuário <@${user}> foi desbanido com sucesso! <a:sucessogif:499614074129350666>`);
+    return message.reply(`O usuário <@${user}> foi desbanido com sucesso! <a:sucessogif:499614074129350666>`);
   },
   userPermissions: ['BAN_MEMBERS'],
   botPermissions: ['BAN_MEMBERS'],
